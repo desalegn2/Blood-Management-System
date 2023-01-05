@@ -1,32 +1,54 @@
 @extends('donor.sidebar')
 @section('content')
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+
+    </style>
 </head>
 
 <body>
-    @foreach($advert as $adv)
-    <div class="card-deck">
-        <div class="card">
-            <img src="{{asset('uploads/registers/'.$adv->image)}}" class="card-img-top" alt="..." style="width:800px; height:400px">
-            <div class="card-body">
-                <h5 class="card-title">{{$adv->title}}</h5>
-                <p class="card-text">{{$adv->description}}</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">{{ $adv->created_at}}</small>
+    <h1>Hello, world!</h1>
+
+    <div class="container mt-5">
+        @foreach($advert as $adv)
+        <div class="card mt-5">
+            <div class="row mt-5">
+                <div class="col-md-4 mt-5 ml-5">
+                    <img class="img-fluid" src="{{asset('uploads/registers/'.$adv->image)}}" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <h3 class="card-title mt-2">{{$adv->title}}</h3>
+                    <p class="card-text mb-4">{{$adv->description}}</p>
+                    <button class="mb-4" href="" style="float: right;">share </button>
+
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fparse.com" target="_blank" rel="noopener">
+                        <img class="YOUR_FB_CSS_STYLING_CLASS" src="{{asset('assets/imgs/fb2.png')}}" width="30px" height="30px" alt="Share on Facebook">
+                    </a>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">{{ $adv->created_at}}</small>
+                    <a href="" style="float: right;">Read more</a>
+                </div>
             </div>
         </div>
-
+        @endforeach
 
     </div>
-    @endforeach
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

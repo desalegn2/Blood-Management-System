@@ -18,8 +18,7 @@
         /* =============== Globals ============== */
         * {
             font-family: "Ubuntu", sans-serif;
-            margin: 0;
-            padding: 0;
+            left: 0;
             box-sizing: border-box;
         }
 
@@ -44,7 +43,7 @@
         /* =============== Navigation ================ */
         .navigation {
             position: fixed;
-            width: 180px;
+            width: 160px;
             height: 100%;
             background: var(--blue);
             border-left: 0px solid var(--blue);
@@ -126,7 +125,7 @@
         .main {
             position: absolute;
             width: calc(100% - 150px);
-            left: 200px;
+            left: 100px;
             min-height: 50vh;
             background: var(--white);
             transition: 0.5s;
