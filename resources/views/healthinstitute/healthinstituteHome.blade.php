@@ -540,11 +540,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="finddonor">
                         <span class="icon">
                             <ion-icon name="person-add-outline"></ion-icon>
                         </span>
-                        <span class="title"> Add</span>
+                        <span class="title"> Find Donor</span>
                     </a>
                 </li>
 

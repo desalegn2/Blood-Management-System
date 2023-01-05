@@ -284,7 +284,7 @@
       width: 100%;
       padding: 20px;
       display: grid;
-      grid-template-columns: 4fr 0fr;
+      grid-template-columns: 2fr 1fr;
       grid-gap: 30px;
       /* margin-top: 10px; */
     }
@@ -520,6 +520,180 @@
         left: initial;
       }
     }
+
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body,
+    div,
+    form,
+    input,
+    select,
+    p {
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+    }
+
+    h1 {
+      margin: 0;
+      font-weight: 400;
+    }
+
+    h3 {
+      margin: 12px 0;
+      color: #8ebf42;
+    }
+
+    .main-block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+    }
+
+    form {
+      width: 100%;
+      padding: 20px;
+    }
+
+    fieldset {
+      border: none;
+      border-top: 1px solid #8ebf42;
+    }
+
+    .account-details,
+    .personal-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .account-details>div,
+    .personal-details>div>div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .account-details>div,
+    .personal-details>div,
+    input,
+    label {
+      width: 100%;
+    }
+
+    label {
+      padding: 0 5px;
+      text-align: right;
+      vertical-align: middle;
+    }
+
+    input {
+      padding: 5px;
+      vertical-align: middle;
+    }
+
+    .checkbox {
+      margin-bottom: 10px;
+    }
+
+    select,
+    .children,
+    .gender,
+    .bdate-block {
+      width: calc(100% + 26px);
+      padding: 5px 0;
+    }
+
+    select {
+      background: transparent;
+    }
+
+    .gender input {
+      width: auto;
+    }
+
+    .gender label {
+      padding: 0 5px 0 0;
+    }
+
+    .bdate-block {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .birthdate select.day {
+      width: 35px;
+    }
+
+    .birthdate select.mounth {
+      width: calc(100% - 94px);
+    }
+
+    .birthdate input {
+      width: 38px;
+      vertical-align: unset;
+    }
+
+    .checkbox input,
+    .children input {
+      width: auto;
+      margin: -2px 10px 0 0;
+    }
+
+    .checkbox a {
+      color: #8ebf42;
+    }
+
+    .checkbox a:hover {
+      color: #82b534;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px 0;
+      margin: 10px auto;
+      border-radius: 5px;
+      border: none;
+      background: #8ebf42;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    button:hover {
+      background: #82b534;
+    }
+
+    @media (min-width: 568px) {
+
+      .account-details>div,
+      .personal-details>div {
+        width: 50%;
+      }
+
+      label {
+        width: 40%;
+      }
+
+      input {
+        width: 60%;
+      }
+
+      select,
+      .children,
+      .gender,
+      .bdate-block {
+        width: calc(60% + 16px);
+      }
+    }
   </style>
 
 </head>
@@ -544,6 +718,22 @@
               <ion-icon name="home-outline"></ion-icon>
             </span>
             <span class="title">Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="blog">
+            <span class="icon">
+              <ion-icon name="dice-sharp"></ion-icon>
+            </span>
+            <span class="title">Blogs</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <span class="icon">
+              <ion-icon name="dice-sharp"></ion-icon>
+            </span>
+            <span class="title">Blood Bank</span>
           </a>
         </li>
         <li>
@@ -683,7 +873,7 @@
           @foreach($advert as $adv)
           <div class="card-deck">
             <div class="card">
-              <img src="{{asset('uploads/registers/'.$adv->image)}}" class="card-img-top" alt="..." style="width:200px; height:200px">
+              <img src="{{asset('uploads/registers/'.$adv->image)}}" class="card-img-top" alt="..." style="width:800px; height:400px">
               <div class="card-body">
                 <h5 class="card-title">{{$adv->title}}</h5>
                 <p class="card-text">{{$adv->description}}</p>

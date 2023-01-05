@@ -68,6 +68,7 @@ Route::middleware(['auth', 'user-role:donor'])->group(function () {
     Route::get('donor/view', [donorController::class, 'view']);
     Route::post('/donor/comment', [donorController::class, 'comments']);
 
+    Route::get('donor/blog', [donorController::class, 'viewblog']);
     // Route::view('donor/viewseeker', 'donor.viewSeekers');
     // Route::get('donor/viewseeker', [donorViewseeker::class, 'viewS']);
     // Route::get('/donor/viewdetail/{id}', [donorViewseeker::class, 'viewdetail']);
@@ -208,4 +209,7 @@ Route::middleware(['auth', 'user-role:healthinstitute'])->group(function () {
     Route::view('/healthinstitute/hospitalrequest', 'healthinstitute.bloodRequestform');
 
     Route::get('/healthinstitute/request/{id}', [hospitalRequestController::class, 'viewrequest']);
+
+    Route::view('/healthinstitute/finddonor', 'healthinstitute.findDonor');
+    Route::post('/healthinstitute/search', [hospitalRequestController::class, 'search']);
 });

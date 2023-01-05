@@ -859,7 +859,7 @@
 
 
         </div>
-
+        @include('sweetalert::alert')
         <!-- =========== Scripts =========  -->
         <script>
             // add hovered class to selected list item

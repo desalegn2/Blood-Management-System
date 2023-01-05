@@ -18,6 +18,12 @@ class donorController extends Controller
         $advert = advertises::all();
         return view('donor.donorHome', ['advert' => $advert]);
     }
+
+    function viewblog()
+    {
+        $advert = advertises::all();
+        return view('donor.blog', ['advert' => $advert]);
+    }
     function register(Request $req)
     {
         $var = new donorRequestModel;
@@ -48,7 +54,6 @@ class donorController extends Controller
         $stat = donorRequestModel::where('user_id', '=', $id)->get(['status']);
 
         if ($stat == 'Approved') {
-
             $var = new reservationModel;
             $var->user_id = $req->user_id;
             $var->name = $req->firstname;

@@ -8,6 +8,7 @@ use App\Models\technicianOrderModel;
 use Illuminate\Support\Facades\Notification;
 
 use App\Notifications\orderTechnician;
+use App\Models\donorRequestModel;
 
 class hospitalRequestController extends Controller
 {
@@ -24,7 +25,7 @@ class hospitalRequestController extends Controller
         $var->reason = $req->reason;
         $var->save();
 
-        return redirect('healthinstitute/hospitalrequest');
+        return redirect('healthinstitute/hospitalrequest')->with('success', 'Task Added Successfully!');
     }
     function viewHospitalRequest(Request $req)
     {
@@ -74,5 +75,15 @@ class hospitalRequestController extends Controller
         } else {
             echo ('Status  is empity you donot send request');
         }
+    }
+    public function search(Request $request)
+    {
+        //$var= new donorRequestModel;
+        $blood = $request->bloodtype;
+        $city = $request->city;
+        $data = donorRequestModel::where('bloodtype', $blood)->Where('city', $city)->get();
+        return view('healthinstitute.donor',  ['data' => $data]);
+        //echo($dat->name);
+        //echo($dat->email);
     }
 }

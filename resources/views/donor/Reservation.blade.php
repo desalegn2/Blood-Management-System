@@ -792,7 +792,7 @@
                 </div>
             </div>
             <div class="main-block">
-                <form action=" {{url('/nurse/reservation',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
+                <form action=" {{url('/donor/reservation',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <h1>Send Reservation Form</h1>
                     <fieldset>
