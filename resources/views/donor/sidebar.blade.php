@@ -45,7 +45,7 @@
             position: fixed;
             width: 160px;
             height: 100%;
-            background: var(--blue);
+            background: #FF7B54;
             border-left: 0px solid var(--blue);
             transition: 0.5s;
             overflow: hidden;
@@ -199,7 +199,7 @@
 
 
         /* ====================== Responsive Design ========================== */
-        @media (max-width: 991px) {
+        @media (max-width: 500px) {
             .navigation {
                 left: -300px;
             }
@@ -279,6 +279,7 @@
 <body>
     <!-- =============== Navigation ================ -->
     <div class="container">
+
         <div class="navigation">
             <ul>
                 <li>
@@ -307,11 +308,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="seeker">
                         <span class="icon">
                             <ion-icon name="dice-sharp"></ion-icon>
                         </span>
-                        <span class="title">Blood Bank</span>
+                        <span class="title">Blood Bank Info</span>
                     </a>
                 </li>
                 <li>
@@ -391,7 +392,11 @@
                 </div>
             </div>
             @yield('content')
+            <div>
+                @include('donor.footer2')
+            </div>
         </div>
+
     </div>
 
     <!-- =========== Scripts =========  -->

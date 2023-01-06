@@ -729,7 +729,7 @@
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="seeker">
             <span class="icon">
               <ion-icon name="dice-sharp"></ion-icon>
             </span>

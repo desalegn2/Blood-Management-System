@@ -23,9 +23,9 @@
 
     <div class="container mt-5">
         @foreach($advert as $adv)
-        <div class="card mt-5">
+        <div class=" mt-5">
             <div class="row mt-5">
-                <div class="col-md-4 mt-5 ml-5">
+                <div class="col-md-4 ml-5">
                     <img class="img-fluid" src="{{asset('uploads/registers/'.$adv->image)}}" alt="...">
                 </div>
                 <div class="col-md-8">
@@ -43,8 +43,8 @@
                 </div>
             </div>
         </div>
-        @endforeach
 
+        @endforeach
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

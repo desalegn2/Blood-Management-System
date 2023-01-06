@@ -69,13 +69,13 @@ Route::middleware(['auth', 'user-role:donor'])->group(function () {
     Route::post('/donor/comment', [donorController::class, 'comments']);
 
     Route::get('donor/blog', [donorController::class, 'viewblog']);
-    // Route::view('donor/viewseeker', 'donor.viewSeekers');
-    // Route::get('donor/viewseeker', [donorViewseeker::class, 'viewS']);
+    //Route::view('donor/viewseeker', 'donor.viewSeekers');
+    // Route::get('donor/views', [donorViewseeker::class, 'viewS']);
     // Route::get('/donor/viewdetail/{id}', [donorViewseeker::class, 'viewdetail']);
     // Route::get('donor/searchseeker', [donorViewseeker::class, 'search']);
     // Route::view('donor/seekerpost', 'user.seekerspost');
-    // Route::view('donor/seeker', 'seeker.seekerHome');
-
+    // Route::view('donor/seeker', 'donor.viewseeker');
+    Route::get('donor/seeker', [donorViewseeker::class, 'viewS']);
     // Route::view('donor/history', 'donor.history');
     //Route::get('/donor/history/{{id}}', [donorController::class, 'history']);
 });

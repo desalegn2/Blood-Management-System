@@ -901,14 +901,13 @@
 
                     <div class="row people">
                         @foreach ($views as $view)
-                        <div class="col-md-6 col-lg-4 item">
+                        <div class="col-md-6 col-lg-6 item">
                             <div class="box"><img class="rounded-circle" src="{{asset('uploads/registers/'.$view->photo)}}">
                                 <h3 class="name">{{$view->name}}</h3>
                                 <p class="title">{{$view->email}}</p>
                                 <p class="description">{{$view->phone}}</p>
                                 <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
                                 <div class="social"><a href="{{url('donor/viewdetail', $view->id)}}">View Detail</a></div>
-
                             </div>
                         </div>
                         @endforeach
