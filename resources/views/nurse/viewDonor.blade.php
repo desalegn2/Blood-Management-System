@@ -1,3 +1,6 @@
+@extends('nurse.sidebar')
+@section('content')
+
 <!DOCTYPE html>
 <html>
 
@@ -224,3 +227,4 @@
 </body>
 
 </html>
+@endsection

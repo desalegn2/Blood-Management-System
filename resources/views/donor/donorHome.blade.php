@@ -243,7 +243,7 @@
       position: relative;
       background: var(--white);
       padding: 30px;
-      border-radius: 20px;
+      border-radius: 10px;
       display: flex;
       justify-content: space-between;
       cursor: pointer;
@@ -264,7 +264,7 @@
     }
 
     .cardBox .card .iconBx {
-      font-size: 3.5rem;
+      font-size: 1.5rem;
       color: var(--black2);
     }
 
@@ -728,8 +728,9 @@
             <span class="title">Blogs</span>
           </a>
         </li>
+
         <li>
-          <a href="seeker">
+          <a href="">
             <span class="icon">
               <ion-icon name="dice-sharp"></ion-icon>
             </span>
@@ -754,7 +755,7 @@
           </a>
         </li> -->
         <li>
-          <a href="view">
+          <a href="seeker">
             <span class="icon">
               <ion-icon name="people-circle-sharp"></ion-icon>
             </span>

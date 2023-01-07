@@ -28,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         // var_dump(auth()->user()->role);
-        return redirect(route('login'));
+
     }
 
     public function dashboard()
@@ -39,7 +39,7 @@ class HomeController extends Controller
 
     public function donorHome()
     {
-        return view('donor.donorHome');
+        return view('donor.home');
     }
     public function nurseHome()
     {

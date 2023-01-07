@@ -88,13 +88,10 @@ class donorController extends Controller
     }
     function view()
     {
-        $data = User::join('hospitalpost', 'hospitalpost.user_id', '=', 'users.id')
+        $views = User::join('hospitalpost', 'hospitalpost.user_id', '=', 'users.id')
             ->get(['hospitalpost.id', 'hospitalpost.phone', 'hospitalpost.email', 'hospitalpost.purpose', 'hospitalpost.photo', 'hospitalpost.created_at', 'users.name']);
         //$views = hospitalPosts::all();
-
-        $comments = hospitalPosts::join('comment', 'comment.post_id', '=', 'hospitalpost.id')
-            ->get(['comment.commentorname', 'comment.email', 'comment.comment']);
-        return view('donor.viewP', compact('data', 'comments'));
+        return view('donor.viewseeker', compact('views'));
     }
 
     function comments(Request $com)
@@ -107,5 +104,15 @@ class donorController extends Controller
         $var->comment = $com->message;
         $var->save();
         return redirect('donor/view');
+    }
+    function aa()
+    {
+        $numberof_message = User::where('role', 1)->count();
+
+
+        // $numberof_message = User::where('role', '0')->count();
+        // dd($numberof_message);
+        return view('donor.sidebar')->with('numberof_message', $numberof_message);
+        // return view('admin.navbar', ['numberof_message' => $numberof_message]);
     }
 }

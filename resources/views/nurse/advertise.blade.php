@@ -1,3 +1,6 @@
+@extends('nurse.sidebar')
+@section('content')
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,14 +15,17 @@
     <form action="advertise" method="post" enctype="multipart/form-data">
         @csrf
         <label for="title">Title:</label><br>
-        <input type="text" id="" name="title" value=""><br>
+        <input type="text" id="" name="title" value="" required><br>
         <label for="lname">image:</label><br>
-        <input type="file" id="" name="image" value=""><br><br>
+        <input type="file" id="" name="image" value="" required><br><br>
         <label for="lname">Description:</label><br>
-        <textarea id="w3review" name="discription" rows="4" cols="50"></textarea><br>
+        <textarea id="w3review" name="discription" rows="4" cols="50" required>
+
+        </textarea><br>
 
         <input type="submit" value="Submit">
     </form>
 </body>
 
 </html>
+@endsection

@@ -10,12 +10,7 @@
 
 <body>
     <h6>view</h6>
-
-
     <p>Your Request is {{$data->status}}</p>
-
-
-
 </body>
 
 </html>

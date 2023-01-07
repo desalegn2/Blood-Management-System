@@ -13,7 +13,7 @@ class donorViewseeker extends Controller
     function viewS()
     {
         $views = donorview::all();
-        return view('donor.viewseeker', ['views' => $views]);
+        // return view('donor.viewseeker', ['views' => $views]);
     }
 
     function search(Request $request)

@@ -240,7 +240,6 @@
                 <p class="pull-left"> Copyright © Footer E-commerce Plugin 2014. All right reserved. </p>
 
             </div>
-
         </div>
         <!--/.footer-bottom-->
     </footer>

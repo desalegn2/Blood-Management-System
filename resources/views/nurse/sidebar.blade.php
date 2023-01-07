@@ -284,7 +284,7 @@
             <ul>
                 <li>
                 <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <a>
                         {{ Auth::user()->name }}
                     </a>
 
@@ -299,79 +299,69 @@
                         <span class="title">Home</span>
                     </a>
                 </li>
-                <li>
-                    <a href="blog">
-                        <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
-                        </span>
-                        <span class="title">Blogs</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
-                        </span>
-                        <span class="title">Events</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
-                        </span>
-                        <span class="title">News</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
-                        </span>
-                        <span class="title">Blood Bank Info</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/donor/history',Auth::user()->id)}}">
-                        <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
-                        </span>
-                        <span class="title">History</span>
-                    </a>
-                </li>
 
-                <!-- <li>
-          <a href="viewseeker">
-            <span class="icon">
-              <ion-icon name="people-circle-sharp"></ion-icon>
-            </span>
-            <span class="title">View Seeker</span>
-          </a>
-        </li> -->
                 <li>
-                    <a href="seeker">
+                    <a href="newhome">
+                        <span class="icon">
+                            <ion-icon name="dice-sharp"></ion-icon>
+                        </span>
+                        <span class="title">hom</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon">
+                            <ion-icon name="dice-sharp"></ion-icon>
+                        </span>
+                        <span class="title">Add Advertise</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon">
+                            <ion-icon name="dice-sharp"></ion-icon>
+                        </span>
+                        <span class="title">Add Events</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon">
+                            <ion-icon name="dice-sharp"></ion-icon>
+                        </span>
+                        <span class="title">Add News</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon">
+                            <ion-icon name="dice-sharp"></ion-icon>
+                        </span>
+                        <span class="title">Manage Donor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon">
+                            <ion-icon name="dice-sharp"></ion-icon>
+                        </span>
+                        <span class="title">Approved Donor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
                         <span class="icon">
                             <ion-icon name="people-circle-sharp"></ion-icon>
                         </span>
-                        <span class="title">View Seeker</span>
+                        <span class="title">Manage Reservation</span>
                     </a>
                 </li>
-
                 <li>
-                    <a href="donorregister">
+                    <a href="">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="lock-closed-outline"></ion-icon>
                         </span>
-                        <span class="title">Registor</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="reservation">
-                        <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
-                        </span>
-                        <span class="title">Reservation</span>
+                        <span class="title">Password</span>
                     </a>
                 </li>
 
@@ -410,7 +400,7 @@
 
             @yield('content')
             <div>
-                @include('donor.footer2')
+                @include('nurse.footer')
             </div>
         </div>
 

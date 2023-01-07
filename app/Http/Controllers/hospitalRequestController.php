@@ -69,7 +69,7 @@ class hospitalRequestController extends Controller
             ->exists();
 
         if ($isExist) {
-            $data = hospitalRequestModel::where('user_id', "=", $id)->first();
+            $data = hospitalRequestModel::where('user_id', "=", $id)->orderBy('created_at', 'desc')->first();
             //$data = hospitalRequestModel::where('user_id', 'LIKE', '%' . $id . '%')->get();
             return view('healthinstitute.viewRequest', compact('data'));
         } else {

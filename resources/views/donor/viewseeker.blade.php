@@ -134,11 +134,21 @@
 </head>
 
 <body>
-    <section class="team">
+    <section class="team" style="margin: 0;
+            padding: 0;  padding: 60px 0;
+            overflow: hidden;">
         <div class="container">
             <div class="section-title">
-                <h2>name</h2>
-                <div class="underline"></div>
+                <h2 style="font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            position: relative;
+            color: tomato; margin-top: 20px;">name</h2>
+                <div class="underline" style="width: 150px;
+            height: 1px;
+            background-color: black;
+            margin: auto;"></div>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. !</p>
             </div>
             <div class="row">
@@ -159,19 +169,53 @@
                             <h2 style="font-weight: 700;
             margin-bottom: 5px;
             font-size: 20px;
-            color: red;">{{$view->name}}</h2>
-                            <span>{{$view->email}}</span>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum a at ipsum ab magnam omnis pariatur provident nisi corrupti molestias, qui blanditiis ratione obcaecati perferendis enim ullam expedita delectus iure.</p>
+            color: red;">From:{{$view->name}}</h2>
+                            <h4>{{ $view->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</h4>
+                            <small class="text-muted">{{ $view->created_at}}</small>
+                            <span style="display: block;
+            font-size: 15px;
+            padding-bottom: 10px;
+            position: relative;
+            font-weight: 500;">{{$view->email}}</span>
+                            <h5>Patiant Name:</h5>
+                            <h5>Patiant phone:</h5>
+                            <h5>Patiant Name:</h5>
+                            <h5>Patiant Name:</h5>
+                            <h5>Patiant Name:</h5>
+                            <h5>Patiant Name:</h5>
+                            <p style="margin: 10px 0 0 0;
+            font-size: 14px;">Reason :Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum a at ipsum ab magnam omnis pariatur provident nisi corrupti molestias, qui blanditiis ratione obcaecati perferendis enim ullam expedita delectus iure.</p>
 
-                            <div class="social">
-                                <a href=""><i class="bi bi-facebook"></i></a>
-                                <a href=""><i class="bi bi-whatsapp"></i></a>
-                                <a href=""><i class="bi bi-youtube"></i></a>
+                            <div class="social" style="margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;">
+                                <a href="" style="display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: white;">
+                                    <i class="bi bi-facebook" style="color: tomato;
+            font-size: 16px;
+            margin: 0 2px;"></i></a>
+                                <a href="" style="display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: white;">
+                                    <i class="bi bi-telegram" style="color: tomato;
+            font-size: 16px;
+            margin: 0 2px;"></i></a>
+
                             </div>
                             <div class="card-footer">
-                                <small class="text-muted">{{ $view->created_at}}</small>
-                                <a href="" style="float: right;">Read more</a>
+
+                                <button class="text-muted">send sms</button>
+                                <button href="" style="float: right;">contact</button>
                             </div>
+
                         </div>
 
                     </div>

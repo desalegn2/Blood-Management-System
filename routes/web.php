@@ -58,14 +58,16 @@ All Normal Users Routes List
 Route::middleware(['auth', 'user-role:donor'])->group(function () {
 
     Route::get('/donor/home', [HomeController::class, 'donorHome'])->name('donor.home');
-    Route::get('/donor/home', [donorController::class, 'getAdvertise'])->name('donor.home');
+    //Route::get('/donor/home', [donorController::class, 'getAdvertise'])->name('donor.home');
+    // Route::view('donor/newhome', 'donor.home');
     Route::post('donor/donorregister', [donorController::class, 'register']);
     Route::view('donor/donorregister', 'donor.Register');
     Route::view('donor/reservation', 'donor.Reservation');
     Route::post('/donor/reservation/{id}', [donorController::class, 'reservation']);
     Route::get('/donor/history/{id}', [donorController::class, 'history']);
     Route::view('donor/view', 'donor.viewP');
-    Route::get('donor/view', [donorController::class, 'view']);
+    Route::get('donor/seeker', [donorController::class, 'view']);
+    // Route::get('donor/seeker', [donorViewseeker::class, 'viewS']);
     Route::post('/donor/comment', [donorController::class, 'comments']);
 
     Route::get('donor/blog', [donorController::class, 'viewblog']);
@@ -75,7 +77,7 @@ Route::middleware(['auth', 'user-role:donor'])->group(function () {
     // Route::get('donor/searchseeker', [donorViewseeker::class, 'search']);
     // Route::view('donor/seekerpost', 'user.seekerspost');
     // Route::view('donor/seeker', 'donor.viewseeker');
-    Route::get('donor/seeker', [donorViewseeker::class, 'viewS']);
+
     // Route::view('donor/history', 'donor.history');
     //Route::get('/donor/history/{{id}}', [donorController::class, 'history']);
 });
@@ -150,6 +152,7 @@ Route::middleware(['auth', 'user-role:admin'])->group(function () {
 
 Route::middleware(['auth', 'user-role:nurse'])->group(function () {
     Route::get('/nurse/home', [HomeController::class, 'nurseHome'])->name('nurse.home');
+    Route::view('/nurse/newhome', 'nurse.home');
     Route::view('/nurse/profile', 'nurse.profile');
     Route::view('/nurse/insert', 'nurse.insertProfile');
     Route::post('/nurse/insertprofiles', [nurseController::class, 'insertprofile']);
