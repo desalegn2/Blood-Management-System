@@ -1,3 +1,5 @@
+@extends('technitian.sidebar')
+@section('content')
 <!DOCTYPE html>
 <html>
 
@@ -116,3 +118,4 @@
 </body>
 
 </html>
+@endsection

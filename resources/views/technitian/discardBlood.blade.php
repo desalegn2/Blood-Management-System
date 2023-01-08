@@ -1,3 +1,5 @@
+@extends('technitian.sidebar')
+@section('content')
 <!DOCTYPE html>
 <html>
 
@@ -13,6 +15,7 @@
             padding-left: 20px;
             height: 550px;
             width: 95%;
+            margin-bottom: 50px;
         }
 
         .form {
@@ -113,3 +116,4 @@
 </body>
 
 </html>
+@endsection

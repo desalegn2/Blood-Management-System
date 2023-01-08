@@ -1,3 +1,5 @@
+@extends('healthinstitute.sidebar')
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,8 +11,11 @@
 </head>
 
 <body>
-    <h6>view</h6>
-    <p>Your Request is {{$data->status}}</p>
+    <div>
+
+        <p>Your Request is {{$data->status}}</p>
+    </div>
 </body>
 
 </html>
+@endsection

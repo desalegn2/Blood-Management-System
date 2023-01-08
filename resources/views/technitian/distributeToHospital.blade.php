@@ -1,3 +1,5 @@
+@extends('technitian.sidebar')
+@section('content')
 <!DOCTYPE html>
 <html>
 
@@ -12,9 +14,6 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-
-
-    <!--[if !IE]><!-->
     <style>
         * {
             margin: 0;
@@ -169,7 +168,7 @@
 
         /* From separet style ----------- */
     </style>
-    <!--<![endif]-->
+
 
 </head>
 
@@ -218,3 +217,4 @@
 </body>
 
 </html>
+@endsection

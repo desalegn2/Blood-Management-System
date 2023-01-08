@@ -152,7 +152,7 @@ Route::middleware(['auth', 'user-role:admin'])->group(function () {
 
 Route::middleware(['auth', 'user-role:nurse'])->group(function () {
     Route::get('/nurse/home', [HomeController::class, 'nurseHome'])->name('nurse.home');
-    Route::view('/nurse/newhome', 'nurse.home');
+    // Route::view('/nurse/newhome', 'nurse.home');
     Route::view('/nurse/profile', 'nurse.profile');
     Route::view('/nurse/insert', 'nurse.insertProfile');
     Route::post('/nurse/insertprofiles', [nurseController::class, 'insertprofile']);

@@ -294,74 +294,58 @@
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
-                        <span class="title">Home</span>
+                        <span class="title">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('/nurse/advertise')}}">
+                    <a href="finddonor">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="person-add-outline"></ion-icon>
                         </span>
-                        <span class="title">Add Advertise</span>
+                        <span class="title"> Find Donor</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="hospitalrequest">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="egg-outline"></ion-icon>
                         </span>
-                        <span class="title">Add Events</span>
+                        <span class="title">Blood Request</span>
                     </a>
                 </li>
+
                 <li>
-                    <a href="">
+                    <a href="post">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="people-sharp"></ion-icon>
                         </span>
-                        <span class="title">Add News</span>
+                        <span class="title">Post Seekers</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('/nurse/display')}}">
+                    <a href="{{url('/healthinstitute/request',Auth::user()->id)}}">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="people-sharp"></ion-icon>
                         </span>
-                        <span class="title">Manage Donor</span>
+                        <span class="title">view Request</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('/nurse/listofapproved')}}">
+                    <a href="profile">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
-                        </span>
-                        <span class="title">Approved Donor</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/nurse/reservation')}}">
-                        <span class="icon">
-                            <ion-icon name="people-circle-sharp"></ion-icon>
-                        </span>
-                        <span class="title">Manage Reservation</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/nurse/profile',Auth::user()->id)}}">
-                        <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="people-sharp"></ion-icon>
                         </span>
                         <span class="title">Profile</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="#">
                         <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
+                            <ion-icon name="settings-outline"></ion-icon>
                         </span>
-                        <span class="title">Password</span>
+                        <span class="title">Settings</span>
                     </a>
                 </li>
-
                 </li>
 
                 <li>
@@ -380,8 +364,6 @@
                 </li>
             </ul>
         </div>
-
-
         <!-- ========================= Main ==================== -->
         <div class="main">
             <div class="topbar">
@@ -397,7 +379,7 @@
 
             @yield('content')
             <div>
-                @include('nurse.footer')
+                @include('healthinstitute.footer')
             </div>
         </div>
 

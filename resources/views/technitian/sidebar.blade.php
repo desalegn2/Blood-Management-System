@@ -70,10 +70,10 @@
             border-bottom-left-radius: 30px;
         }
 
-        .navigation ul li:hover,
+        /* .navigation ul li:hover,
         .navigation ul li.hovered {
             background-color: var(--white);
-        }
+        } */
 
         .navigation ul li:nth-child(1) {
             margin-bottom: 40px;
@@ -89,10 +89,10 @@
             color: var(--white);
         }
 
-        .navigation ul li:hover a,
+        /* .navigation ul li:hover a,
         .navigation ul li.hovered a {
             color: var(--blue);
-        }
+        } */
 
         .navigation ul li a .icon {
             position: relative;
@@ -294,74 +294,50 @@
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
-                        <span class="title">Home</span>
+                        <span class="title">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('/nurse/advertise')}}">
+                    <a href="discardblood">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="bag-remove-outline"></ion-icon>
                         </span>
-                        <span class="title">Add Advertise</span>
+                        <span class="title">Discard Blood</span>
                     </a>
                 </li>
+
                 <li>
-                    <a href="">
+                    <a href="distributetohospital">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="swap-horizontal-outline"></ion-icon>
                         </span>
-                        <span class="title">Add Events</span>
+                        <span class="title">Distribute</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="viewstoredblood">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="lock-closed-outline"></ion-icon>
                         </span>
-                        <span class="title">Add News</span>
+                        <span class="title">Manage Stored Blood</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('/nurse/display')}}">
+                    <a href="profile">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
-                        </span>
-                        <span class="title">Manage Donor</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/nurse/listofapproved')}}">
-                        <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
-                        </span>
-                        <span class="title">Approved Donor</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/nurse/reservation')}}">
-                        <span class="icon">
-                            <ion-icon name="people-circle-sharp"></ion-icon>
-                        </span>
-                        <span class="title">Manage Reservation</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/nurse/profile',Auth::user()->id)}}">
-                        <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="people-sharp"></ion-icon>
                         </span>
                         <span class="title">Profile</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="#">
                         <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
+                            <ion-icon name="settings-outline"></ion-icon>
                         </span>
-                        <span class="title">Password</span>
+                        <span class="title">Settings</span>
                     </a>
                 </li>
-
                 </li>
 
                 <li>
@@ -380,24 +356,17 @@
                 </li>
             </ul>
         </div>
-
-
         <!-- ========================= Main ==================== -->
         <div class="main">
             <div class="topbar">
                 <div class="toggle">
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
-
-
-                <div class="user">
-                    <img src="assets/imgs/customer01.jpg" alt="">
-                </div>
             </div>
 
             @yield('content')
             <div>
-                @include('nurse.footer')
+                @include('technitian.footer')
             </div>
         </div>
 

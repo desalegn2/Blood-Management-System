@@ -154,8 +154,8 @@
             <div class="carousel-item active">
                 <img class="d-block w-100" src="{{asset('assets/imgs/c.jpg')}}" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Slider One Item</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+                    <h5 style="color: black;">Slider One Item</h5>
+                    <p style="color: green;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
                 </div>
             </div>
             <div class="carousel-item">
@@ -187,7 +187,6 @@
     <div class="container">
         <div class="intro">
             <h2 class="text-center">Service </h2>
-            <h3 class="text-center" href="">Home</h3>
         </div>
 
         <div class="row people">
@@ -252,19 +251,11 @@
                     <a href="mailto:">Send Reservation</a>
                 </div>
             </div>
-
-
         </div>
-
-
     </div>
 
-    <h1>Hello, world!</h1>
 
     <div class="container mt-5">
-
-
-
         <div class=" mt-5">
             <div class="row mt-5 mb-5">
                 <div class="col-md-4 ml-5">
@@ -288,14 +279,10 @@
     </div>
     <!-- <center>Event</center> -->
     <div class="container">
-
         <div class="intro">
             <h2 class="text-center">Event </h2>
-            <h3 class="text-center" href="">Home</h3>
         </div>
-
         <div class="row people">
-
             <div class="col-md-6 col-lg-4 item">
                 <div class="box"><img class="" src="{{asset('assets/imgs/2.jpg')}}">
                     <h3 class="name">Provision of Red Blood Cell</h3>
@@ -331,8 +318,6 @@
 
 
     <div class="container mt-5">
-
-
         <div class=" mt-5">
             <div class="row mt-5 mb-5">
                 <div class="card col-md-8 ml-5">
@@ -361,7 +346,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
 </body>
 
 </html>

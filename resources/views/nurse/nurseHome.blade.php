@@ -1,3 +1,6 @@
+@extends('nurse.sidebar')
+@section('content')
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,199 +34,6 @@
         body {
             min-height: 100vh;
             overflow-x: hidden;
-        }
-
-        .container {
-            position: relative;
-            width: 100%;
-        }
-
-        /* =============== Navigation ================ */
-        .navigation {
-            position: fixed;
-            width: 250px;
-            height: 100%;
-            background: var(--blue);
-            border-left: 10px solid var(--blue);
-            transition: 0.5s;
-            overflow: hidden;
-        }
-
-        .navigation.active {
-            width: 50px;
-        }
-
-        .navigation ul {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-        }
-
-        .navigation ul li {
-            position: relative;
-            width: 100%;
-            list-style: none;
-            border-top-left-radius: 30px;
-            border-bottom-left-radius: 30px;
-        }
-
-        .navigation ul li:hover,
-        .navigation ul li.hovered {
-            background-color: var(--white);
-        }
-
-        .navigation ul li:nth-child(1) {
-            margin-bottom: 40px;
-            pointer-events: none;
-        }
-
-        .navigation ul li a {
-            position: relative;
-            display: block;
-            width: 100%;
-            display: flex;
-            text-decoration: none;
-            color: var(--white);
-        }
-
-        .navigation ul li:hover a,
-        .navigation ul li.hovered a {
-            color: var(--blue);
-        }
-
-        .navigation ul li a .icon {
-            position: relative;
-            display: block;
-            min-width: 60px;
-            height: 60px;
-            line-height: 75px;
-            text-align: center;
-        }
-
-        .navigation ul li a .icon ion-icon {
-            font-size: 1.75rem;
-        }
-
-        .navigation ul li a .title {
-            position: relative;
-            display: block;
-            padding: 0 10px;
-            height: 60px;
-            line-height: 60px;
-            text-align: start;
-            white-space: nowrap;
-        }
-
-        /* --------- curve outside ---------- */
-        .navigation ul li:hover a::before,
-        .navigation ul li.hovered a::before {
-            content: "";
-            position: absolute;
-            right: 0;
-            top: -50px;
-            width: 50px;
-            height: 50px;
-            background-color: transparent;
-            border-radius: 50%;
-            box-shadow: 35px 35px 0 10px var(--white);
-            pointer-events: none;
-        }
-
-        .navigation ul li:hover a::after,
-        .navigation ul li.hovered a::after {
-            content: "";
-            position: absolute;
-            right: 0;
-            bottom: -50px;
-            width: 50px;
-            height: 50px;
-            background-color: transparent;
-            border-radius: 50%;
-            box-shadow: 35px -35px 0 10px var(--white);
-            pointer-events: none;
-        }
-
-        /* ===================== Main ===================== */
-        .main {
-            position: absolute;
-            width: calc(100% - 300px);
-            left: 300px;
-            min-height: 100vh;
-            background: var(--FF8E9E);
-            transition: 0.5s;
-        }
-
-        .main.active {
-            width: calc(100% - 80px);
-            left: 80px;
-        }
-
-        .topbar {
-            width: 100%;
-            height: 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 10px;
-        }
-
-        .toggle {
-            position: relative;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2.5rem;
-            cursor: pointer;
-        }
-
-        .search {
-            position: relative;
-            width: 400px;
-            margin: 0 10px;
-        }
-
-        .search label {
-            position: relative;
-            width: 100%;
-        }
-
-        .search label input {
-            width: 100%;
-            height: 40px;
-            border-radius: 40px;
-            padding: 5px 20px;
-            padding-left: 35px;
-            font-size: 18px;
-            outline: none;
-            border: 1px solid var(--black2);
-        }
-
-        .search label ion-icon {
-            position: absolute;
-            top: 0;
-            left: 10px;
-            font-size: 1.2rem;
-        }
-
-        .user {
-            position: relative;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .user img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
         /* ======================= Cards ====================== */
@@ -265,7 +75,6 @@
             color: var(--black2);
         }
 
-        /*
         .cardBox .card:hover {
             background: var(--blue);
         }
@@ -275,7 +84,7 @@
         .cardBox .card:hover .iconBx {
             color: var(--white);
         }
-*/
+
         /* ================== Order Details List ============== */
         .details {
             position: relative;
@@ -336,10 +145,10 @@
             border-bottom: none;
         }
 
-        /* .details .recentOrders table tbody tr:hover {
+        .details .recentOrders table tbody tr:hover {
             background: var(--blue);
             color: var(--white);
-        } */
+        }
 
         .details .recentOrders table tr td {
             padding: 10px;
@@ -436,7 +245,7 @@
         }
 
         .recentCustomers table tr:hover {
-
+            background: var(--blue);
             color: var(--white);
         }
 
@@ -519,224 +328,220 @@
             }
         }
     </style>
-
 </head>
 
-<body style="background-color: #FF8E9E;">
-    <!-- =============== Navigation ================ -->
-    <div class="container">
-        <div class="navigation">
-            <ul>
-                <li>
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <!-- {{ Auth::user()->name }} -->
-                    </a>
-
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="home-outline"></ion-icon>
-                        </span>
-                        <span class="title">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="advertise">
-                        <span class="icon">
-                            <ion-icon name="desktop-outline"></ion-icon>
-                        </span>
-                        <span class="title">Advertise</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="display">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">Donors</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="listofapproved">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">Approved Donors</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="reservation">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">Manage Reservation</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                        <span class="title">Password</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/nurse/profile',Auth::user()->id)}}">
-                        <span class=" icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                        <span class="title">Profile</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+<body>
 
 
-                        <span class="icon">
-                            <ion-icon name="log-out-outline"></ion-icon>
-                        </span>
+    <!-- ======================= Cards ================== -->
+    <div class="cardBox">
+        <div class="card">
+            <div>
+                <div class="numbers">1,504</div>
+                <div class="cardName">Daily Views</div>
+            </div>
 
-                        <span class="title">Logout</span>
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                </li>
-            </ul>
+            <div class="iconBx">
+                <ion-icon name="eye-outline"></ion-icon>
+            </div>
         </div>
 
-
-        <!-- ========================= Main ==================== -->
-        <div class="main">
-            <div class="topbar">
-                <div class="toggle">
-                    <ion-icon name="menu-outline"></ion-icon>
-                </div>
-
-                <div class="search">
-                    <label>
-                        <input type="text" placeholder="Search here">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
-                </div>
-
-
-                {{ Auth::user()->name }}
-
-                <div class="user">
-
-                    <img src="{{asset('assets/imgs/customer01.jpg')}}" alt="">
-                </div>
-
-
+        <div class="card">
+            <div>
+                <div class="numbers">80</div>
+                <div class="cardName">Sales</div>
             </div>
 
+            <div class="iconBx">
+                <ion-icon name="cart-outline"></ion-icon>
+            </div>
+        </div>
 
-            <!-- ======================= Cards ================== -->
-            <div class="cardBox">
-                <div class="card">
-                    <div>
-                        <div class="numbers"></div>
-                        <div class="cardName">Daily Views</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div>
-                        <div class="numbers">80</div>
-                        <div class="cardName">Sales</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="cart-outline"></ion-icon>
-                    </div>
-                </div>
-
-
-
+        <div class="card">
+            <div>
+                <div class="numbers">284</div>
+                <div class="cardName">Comments</div>
             </div>
 
-            <!-- ================ Order Details List ================= -->
-            <div class="details">
-                <div class="recentOrders">
-                    <div class="cardHeader">
-                        <h2>Donor List</h2>
+            <div class="iconBx">
+                <ion-icon name="chatbubbles-outline"></ion-icon>
+            </div>
+        </div>
 
-                    </div>
+        <div class="card">
+            <div>
+                <div class="numbers">$7,842</div>
+                <div class="cardName">Earning</div>
+            </div>
 
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>photo</th>
-                                <th>First Name</th>
-                                <th>Phone</th>
-                                <th>Status</th>
-
-                                <th>Operation</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($display1 as $dis)
-                            <tr>
-                                <td><img src="{{asset('uploads/registers/'.$dis->photo)}}" width="80" height="80"></td>
-                                <td>{{$dis->name}}</td>
-                                <td>{{$dis->phone}}</td>
-                                <td>{{$dis->status}}</td>
-
-                                <td>
-                                    <a class="btn btn-success" href="{{url('nurse/viewdetail', $dis->id)}}">View</a>
-                                    <a class="btn btn-danger" href=" {{url('nurse/delete', $dis->id)}}">Delete</a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
-                </div>
-
-                <!-- ================= New Customers ================ -->
-
+            <div class="iconBx">
+                <ion-icon name="cash-outline"></ion-icon>
             </div>
         </div>
     </div>
 
-    <!-- =========== Scripts =========  -->
-    <script>
-        // add hovered class to selected list item
-        let list = document.querySelectorAll(".navigation li");
+    <!-- ================ Order Details List ================= -->
+    <div class="details">
+        <div class="recentOrders">
+            <div class="cardHeader">
+                <h2>Manage Reservation</h2>
+                <a href="#" class="btn">View All</a>
+            </div>
 
-        function activeLink() {
-            list.forEach((item) => {
-                item.classList.remove("hovered");
-            });
-            this.classList.add("hovered");
-        }
+            <table>
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Price</td>
+                        <td>Payment</td>
+                        <td>Status</td>
+                    </tr>
+                </thead>
 
-        list.forEach((item) => item.addEventListener("mouseover", activeLink));
+                <tbody>
+                    <tr>
+                        <td>Star Refrigerator</td>
+                        <td>$1200</td>
+                        <td>Paid</td>
+                        <td><span class="status delivered">Delivered</span></td>
+                    </tr>
 
-        // Menu Toggle
-        let toggle = document.querySelector(".toggle");
-        let navigation = document.querySelector(".navigation");
-        let main = document.querySelector(".main");
+                    <tr>
+                        <td>Dell Laptop</td>
+                        <td>$110</td>
+                        <td>Due</td>
+                        <td><span class="status pending">Pending</span></td>
+                    </tr>
 
-        toggle.onclick = function() {
-            navigation.classList.toggle("active");
-            main.classList.toggle("active");
-        };
-    </script>
+                    <tr>
+                        <td>Apple Watch</td>
+                        <td>$1200</td>
+                        <td>Paid</td>
+                        <td><span class="status return">Return</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>Addidas Shoes</td>
+                        <td>$620</td>
+                        <td>Due</td>
+                        <td><span class="status inProgress">In Progress</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>Star Refrigerator</td>
+                        <td>$1200</td>
+                        <td>Paid</td>
+                        <td><span class="status delivered">Delivered</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>Dell Laptop</td>
+                        <td>$110</td>
+                        <td>Due</td>
+                        <td><span class="status pending">Pending</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>Apple Watch</td>
+                        <td>$1200</td>
+                        <td>Paid</td>
+                        <td><span class="status return">Return</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>Addidas Shoes</td>
+                        <td>$620</td>
+                        <td>Due</td>
+                        <td><span class="status inProgress">In Progress</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ================= New Customers ================ -->
+        <div class="recentCustomers">
+            <div class="cardHeader">
+                <h2>Recent Donor Joined</h2>
+            </div>
+
+            <table>
+                <tr>
+                    <td width="60px">
+                        <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
+                    </td>
+                    <td>
+                        <h4>David <br> <span>Italy</span></h4>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="60px">
+                        <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
+                    </td>
+                    <td>
+                        <h4>Amit <br> <span>India</span></h4>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="60px">
+                        <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
+                    </td>
+                    <td>
+                        <h4>David <br> <span>Italy</span></h4>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="60px">
+                        <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
+                    </td>
+                    <td>
+                        <h4>Amit <br> <span>India</span></h4>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="60px">
+                        <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
+                    </td>
+                    <td>
+                        <h4>David <br> <span>Italy</span></h4>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="60px">
+                        <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
+                    </td>
+                    <td>
+                        <h4>Amit <br> <span>India</span></h4>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="60px">
+                        <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
+                    </td>
+                    <td>
+                        <h4>David <br> <span>Italy</span></h4>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="60px">
+                        <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
+                    </td>
+                    <td>
+                        <h4>Amit <br> <span>India</span></h4>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+
 
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -744,3 +549,4 @@
 </body>
 
 </html>
+@endsection

@@ -1,3 +1,6 @@
+@extends('nurse.sidebar')
+@section('content')
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,7 +76,7 @@
     </Style>
 </head>
 
-<body style="background-color: #FF8E9E;">
+<body>
 
     <div class="container">
         <div class="main-body">
@@ -209,3 +212,4 @@
 </body>
 
 </html>
+@endsection
