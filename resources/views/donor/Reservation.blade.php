@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
+    <title>BBBMS</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -248,56 +248,41 @@
 <body>
 
     <!-- ======================= Cards ================== -->
-    <div class="cardBox">
-        <div class="card">
-            <div>
-                <div class="numbers">1,504</div>
-                <div class="cardName">Daily Views</div>
+    <div class="container mt-5">
+        <div class=" mt-5">
+            <div class="row mt-5 mb-5">
+                <div class="col-md-4 ml-5">
+                    <img class="img-fluid" src="{{asset('assets/imgs/c.jpg')}}" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <h3 class="card-title mt-2">Send Reservation</h3>
+                    <h6>
+                        Thank you for your consideration to donate blood and/or platelets for Bahir Dar Blood Bank Center. Your support is vital to continue patient care in Bahir Dar Hospitals.
+                    </h6>
+
+                    <h3>Steps to send Reservation</h3>
+                    <ul>
+                        <li> Log in</li>
+                        <li>Click “Register”</li>
+                        <li> Fill Registration Form and send Your health information</li>
+                        <li>Click History and view your request status </li>
+                        <li> If status Apprived, send reservation!</li>
+                    </ul>
+                    <a href="" style="float: right;">Read more</a>
+                </div>
+
             </div>
 
-            <div class="iconBx">
-                <ion-icon name="eye-outline"></ion-icon>
-            </div>
         </div>
 
-        <div class="card">
-            <div>
-                <div class="numbers">80</div>
-                <div class="cardName">Sales</div>
-            </div>
-
-            <div class="iconBx">
-                <ion-icon name="cart-outline"></ion-icon>
-            </div>
-        </div>
-        <div class="card">
-            <div>
-                <div class="numbers">80</div>
-                <div class="cardName">Sales</div>
-            </div>
-
-            <div class="iconBx">
-                <ion-icon name="cart-outline"></ion-icon>
-            </div>
-        </div>
-        <div class="card">
-            <div>
-                <div class="numbers">80</div>
-                <div class="cardName">Sales</div>
-            </div>
-
-            <div class="iconBx">
-                <ion-icon name="cart-outline"></ion-icon>
-            </div>
-        </div>
     </div>
     <div class="main-block">
         <form action=" {{url('/donor/reservation',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
             @csrf
-            <h1>Send Reservation Form</h1>
+
             <fieldset>
                 <legend>
-                    <h3>Fill This Form</h3>
+                    <!-- <h3>Fill This Form</h3> -->
                 </legend>
                 <div class="account-details">
                     <input type="hidden" name="user_id" value="{{Auth::user()->id}}" required>
@@ -344,15 +329,14 @@
                 </legend>
                 <div class="terms-mailing">
                     <div class="checkbox">
-                        <input type="checkbox" name=""><span>I accept the <a href="https://www.w3docs.com/privacy-policy">Privacy Policy for W3Docs.</a></span>
+                        <input type="checkbox" name="" required><span>I agree to the information</a></span>
                     </div>
-                    <div class="checkbox">
-                        <input type="checkbox" name=""><span>I want to recelve personallzed offers by your site</span>
-                    </div>
+                </div>
             </fieldset>
             <button type="submit" href="">Submit</button>
         </form>
     </div>
+    @include('sweetalert::alert')
 </body>
 
 </html>

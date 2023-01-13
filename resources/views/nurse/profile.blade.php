@@ -80,18 +80,8 @@
 
     <div class="container">
         <div class="main-body">
-
-            <!-- Breadcrumb -->
-            <nav aria-label="breadcrumb" class="main-breadcrumb">
-
-                <h1><b>
-                        <p>If You have not aprofile Insert</p>
-                    </b></h1>
-                <a href="{{ url('/nurse/insert') }}">insert</a>
-            </nav>
             <br> <br> <br>
 
-            <!-- /Breadcrumb -->
             @foreach ($data as $dataprofil)
 
             <div class="row gutters-sm">

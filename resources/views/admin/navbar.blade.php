@@ -5,7 +5,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home</a>
+            <a href="home" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Contact</a>
@@ -68,7 +68,7 @@
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                <i class="far fa-bell"></i>{{$numberof_message}}
+                <i class="far fa-bell"></i>
                 <span class="badge badge-warning navbar-badge"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -76,7 +76,7 @@
                 <div class="dropdown-divider"></div>
 
                 <a href="viewnewusers" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i>{{$numberof_message}}
+                    <i class="fas fa-envelope mr-2"></i>
                     <span class="float-right text-muted text-sm">3 mins</span>
                 </a>
 

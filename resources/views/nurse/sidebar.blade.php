@@ -290,7 +290,7 @@
                 </li>
 
                 <li>
-                    <a href="home">
+                    <a href="{{url('/nurse/home')}}">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>

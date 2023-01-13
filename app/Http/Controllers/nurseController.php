@@ -12,12 +12,6 @@ use App\Models\reservationModel;
 
 class nurseController extends Controller
 {
-    // function fetch()
-    // {
-    //     $hospitalname = HIprofile::all();
-    //     return view('nurse.profile', ['hospitalname' => $hospitalname]);
-    // }
-
     function insertprofile(Request $req)
     {
         $var = new nurseprofile;
@@ -91,9 +85,16 @@ class nurseController extends Controller
     }
     function Profile($id)
     {
-        $get_id = $id;
-        $data = nurseprofile::all()->where('user_id', '=', $get_id);
-        return view('nurse.profile', ['data' => $data]);
+        $isExist = nurseprofile::select("*")
+            ->where("user_id", $id)
+            ->exists();
+        if ($isExist) {
+            $data = nurseprofile::all()->where('user_id', '=', $id);
+            //return view('nurse.profile', ['data' => $data]);
+            return view('nurse.profile', ['data' => $data]);
+        } else {
+            return redirect('nurse/insert');
+        }
     }
 
     function manageReservation()

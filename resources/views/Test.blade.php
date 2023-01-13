@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Document</title>
+    <title>BBBMS</title>
 
     <style>
         .carousel-item {
@@ -118,7 +118,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">BBMS</a>
+            <a class="navbar-brand" href="#">BBBMS</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -135,7 +135,7 @@
                         <a class="nav-link" href="{{ route('login') }}"><b>Login</b></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}"><b>Register</b></a>
+                        <a class="nav-link" href="{{ route('register') }}"><b>Create Account</b></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><b>Contact</b></a>

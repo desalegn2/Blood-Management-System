@@ -237,7 +237,7 @@
 
         <div class="footer-bottom">
             <div class="container">
-                <p class="pull-left"> Copyright © Footer E-commerce Plugin 2014. All right reserved. </p>
+                <p class="pull-left"> Copyright © BBMS At 2022-2023. All right reserved. </p>
 
             </div>
 

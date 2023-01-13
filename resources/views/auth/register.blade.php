@@ -20,10 +20,10 @@
     <div class="register-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="" class="h1"><b>Fill</b>To Register</a>
+                <a href="">Create Account</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Register a new membership</p>
+                <!-- <p class="login-box-msg">Register a new membership</p> -->
 
                 <form action="{{ route('register') }}" method="post" enctype=" multipart/form-data">
                     @csrf

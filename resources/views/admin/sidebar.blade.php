@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-        <img src="{{asset('backend/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Blood Bank</span>
+    <a href="" class="brand-link">
+        <img src="{{asset('backend/dist/img/AdminLTELogo.png')}}" alt="BBBMS" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">BBBMS</span>
     </a>
 
     <!-- Sidebar -->
@@ -10,14 +10,14 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{asset('backend/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+                <img src="{{asset('backend/dist/img/use')}}" class="img-circle elevation-2" alt="Admin Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">adminname</a>
+                <a href="#" class="d-block">admin name</a>
             </div>
         </div>
 
-        <!-- SidebarSearch Form -->
+        <!-- SidebarSearch Form 
         <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
                 <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
@@ -27,7 +27,7 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -70,12 +70,12 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="user" class="nav-link active">
                                 <i class="fa fa-user-times" aria-hidden="true"></i>
                                 <p>Block User</p>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a href="viewdonor" class="nav-link active">
                                 <i class="fa fa-user" aria-hidden="true"></i>
@@ -95,6 +95,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="addadmin" class="nav-link">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <p>Add Admin</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="viewhi" class="nav-link">
                                 <i class="fa fa-h-square" aria-hidden="true"></i>
                                 <p>Manage Health Institute</p>
@@ -104,12 +110,7 @@
                 </li>
 
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                        <p>Donor</p>
-                    </a>
-                </li>
+
                 <li class="nav-item">
                     <a href="hospitalrequest" class="nav-link">
                         <i class="nav-icon far fa-circle text-warning"></i>

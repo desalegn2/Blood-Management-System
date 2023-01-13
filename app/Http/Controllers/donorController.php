@@ -47,40 +47,48 @@ class donorController extends Controller
             $var->photo =  $filename;
         }
         $var->save();
-        return redirect('donor/home');
+
+        return redirect('donor/home')->with('success', 'Task Added Successfully!');
     }
     function reservation(Request $req, int $id)
     {
-        $stat = donorRequestModel::where('user_id', '=', $id)->get(['status']);
+        $isExist = donorRequestModel::select("*")
+            ->where("user_id", $id)
+            ->exists();
+        if ($isExist) {
+            $stats = donorRequestModel::where('user_id', '=', $id)->orderBy('created_at', 'desc')->first();
+            $stat = $stats->status;
+            if ($stat == 'Approved') {
+                $var = new reservationModel;
+                $var->user_id = $req->user_id;
+                $var->name = $req->firstname;
+                $var->lastname = $req->lastname;
+                $var->phone = $req->phone;
+                $var->gender = $req->gender;
+                $var->email = $req->email;
+                $var->reservationdate = $req->reservationdate;
+                $var->center = $req->center;
+                $var->save();
+                return redirect('donor/home')->with('success', 'Task Added Successfully!');
+            } else if ($stat == 'Disapproved') {
+                dd("you are not approved your");
+            } else if ($stat == 'in progress') {
+                return redirect('donor/reservation')->with('warning', 'Reservation not sent please wait untill approved');
+            }
+        } else {
 
-        if ($stat == 'Approved') {
-            $var = new reservationModel;
-            $var->user_id = $req->user_id;
-            $var->name = $req->firstname;
-            $var->lastname = $req->lastname;
-            $var->phone = $req->phone;
-            $var->gender = $req->gender;
-            $var->email = $req->email;
-            $var->reservationdate = $req->reservationdate;
-            $var->center = $req->center;
-            $var->save();
-            return redirect('donor/home');
-        } else if ($stat == 'Dispproved') {
-            dd("you are not approved");
-        } else if ($stat == 'inprogress') {
-            dd("pleas wait until approved");
-        } else
-            dd("pleas registor as donor");
+            return redirect('donor/reservation')->with('warning', 'first register');
+        }
     }
     function history($id)
     {
         $isExist = donorRequestModel::select("*")
             ->where("user_id", $id)
             ->exists();
-
         if ($isExist) {
-
-            $stat = donorRequestModel::where('user_id', $id)->get(['status']);
+            $stats = donorRequestModel::where('user_id', '=', $id)->orderBy('created_at', 'desc')->get(['status'])->first();
+            //$stat = donorRequestModel::where('user_id', $id)->get(['status']);
+            $stat = $stats->status;
             return view('donor.history', ['stat' => $stat]);
         } else {
             echo ('history  is empity you donot send request');

@@ -105,15 +105,7 @@
             /* margin-top: 10px; */
         }
 
-        .details .recentOrders {
-            position: relative;
-            display: grid;
-            min-height: 500px;
-            background: var(--white);
-            padding: 20px;
-            box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-            border-radius: 20px;
-        }
+
 
         .details .cardHeader {
             display: flex;
@@ -175,7 +167,7 @@
             text-align: center;
         }
 
-        .status.delivered {
+        .status.notexpire {
             padding: 2px 4px;
             background: #8de02c;
             color: var(--white);
@@ -184,7 +176,7 @@
             font-weight: 500;
         }
 
-        .status.pending {
+        .status.expire {
             padding: 2px 4px;
             background: #e9b10a;
             color: var(--white);
@@ -352,7 +344,7 @@
         </div>
     </div>
     <hr>
-    <!-- ======================= Cards ================== -->
+    <!-- ======================= Cards ================== 
     <div class="cardBox">
         <div class="card">
             <div>
@@ -398,81 +390,40 @@
             </div>
         </div>
     </div>
-
+-->
     <!-- ================ Order Details List ================= -->
     <div class="details">
         <div class="recentOrders">
             <div class="cardHeader">
-                <h2>Manage Reservation</h2>
+                <h2>Blood Storage</h2>
                 <a href="#" class="btn">View All</a>
             </div>
 
             <table>
                 <thead>
                     <tr>
-                        <td>Name</td>
-                        <td>Price</td>
-                        <td>Payment</td>
+                        <td>Blood Group</td>
+                        <td>Volume</td>
+                        <td>Duration</td>
                         <td>Status</td>
                     </tr>
                 </thead>
-
                 <tbody>
                     <tr>
-                        <td>Star Refrigerator</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status delivered">Delivered</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Dell Laptop</td>
-                        <td>$110</td>
-                        <td>Due</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Apple Watch</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status return">Return</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Addidas Shoes</td>
-                        <td>$620</td>
-                        <td>Due</td>
-                        <td><span class="status inProgress">In Progress</span></td>
-                    </tr>
-
                     <tr>
                         <td>Star Refrigerator</td>
                         <td>$1200</td>
                         <td>Paid</td>
-                        <td><span class="status delivered">Delivered</span></td>
+                        <td><span class="status notexpire">not axpired</span></td>
                     </tr>
-
                     <tr>
                         <td>Dell Laptop</td>
                         <td>$110</td>
                         <td>Due</td>
-                        <td><span class="status pending">Pending</span></td>
+                        <td><span class="status expire">expired</span></td>
                     </tr>
 
-                    <tr>
-                        <td>Apple Watch</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status return">Return</span></td>
-                    </tr>
 
-                    <tr>
-                        <td>Addidas Shoes</td>
-                        <td>$620</td>
-                        <td>Due</td>
-                        <td><span class="status inProgress">In Progress</span></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -480,7 +431,7 @@
         <!-- ================= New Customers ================ -->
         <div class="recentCustomers">
             <div class="cardHeader">
-                <h2>Recent Donor Joined</h2>
+                <h2>Recent Record</h2>
             </div>
 
             <table>

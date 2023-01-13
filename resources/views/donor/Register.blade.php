@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
+    <title>BBBMS</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -245,56 +245,56 @@
 
 <body>
     <!-- ======================= Cards ================== -->
-    <div class="cardBox">
-        <div class="card">
-            <div>
-                <div class="numbers">1,504</div>
-                <div class="cardName">Daily Views</div>
-            </div>
+    <div class="container mt-5">
+        <div class=" mt-5">
+            <div class="row mt-5 mb-5">
+                <div class="card col-md-8 ml-5">
 
-            <div class="iconBx">
-                <ion-icon name="eye-outline"></ion-icon>
-            </div>
-        </div>
+                    <h3 class="card-title mt-2">WHO CAN DONATE?</h3>
+                    <h4>Name of Office: Bahir Dar Voluntary Blood Services Program</h4>
+                    <h5>Basic requirement of a potential blood donor: </h5>
+                    <ul>
+                        <li> Weight: At least 110 lbs (50 kg)</li>
+                        <li> Blood volume collected will depend mainly on you body weight.</li>
+                        <li>Pulse rate: Between 60 and 100 beats/minute with regular rhythm.</li>
+                        <li> Blood pressure: Between 90 and 160 systolic and 60 and 100 diastolic.</li>
+                        <li>Hemoglobin: At least 125 g/L</li>
+                    </ul>
+                    <h2>Health:</h2>
+                    <p class="card-text mb-4">You must be in good health at the time you donate.
 
-        <div class="card">
-            <div>
-                <div class="numbers">80</div>
-                <div class="cardName">Sales</div>
-            </div>
+                        You cannot donate if you have a cold, flu, sore throat, cold sore, stomach bug or any other infection.
 
-            <div class="iconBx">
-                <ion-icon name="cart-outline"></ion-icon>
-            </div>
-        </div>
-        <div class="card">
-            <div>
-                <div class="numbers">80</div>
-                <div class="cardName">Sales</div>
-            </div>
+                        If you have recently had a tattoo or body piercing you cannot donate for 6 months from the date of the procedure. If the body piercing was performed by a registered health professional and any inflammation has settled completely, you can donate blood after 12 hours.
 
-            <div class="iconBx">
-                <ion-icon name="cart-outline"></ion-icon>
-            </div>
-        </div>
-        <div class="card">
-            <div>
-                <div class="numbers">80</div>
-                <div class="cardName">Sales</div>
-            </div>
+                        If you have visited the dentist for a minor procedure you must wait 24 hours before donating; for major work wait a month.
 
-            <div class="iconBx">
-                <ion-icon name="cart-outline"></ion-icon>
+                        You must not donate blood If you do not meet the minimum haemoglobin level for blood donation
+
+                        <br> <b>* A test will be administered at the donation site.</b>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img class="img-fluid" style="width:236px; height:400px" src="{{asset('assets/imgs/c.jpg')}}" alt="...">
+                    <!-- <h3 class="card-title mt-2">Title</h3>
+                    <p class="card-text mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates corrupti possimus quae quidem itaque voluptatum, delectus quo soluta voluptate sequi dignissimos eos sint neque! Possimus cumque magnam excepturi necessitatibus obcaecati?</p>
+                    <button class="mb-4" href="" style="float: right;">share </button>
+
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fparse.com" target="_blank" rel="noopener">
+                        <img class="YOUR_FB_CSS_STYLING_CLASS" src="{{asset('assets/imgs/fb2.png')}}" width="30px" height="30px" alt="Share on Facebook">
+                    </a> -->
+                </div>
+
             </div>
         </div>
     </div>
     <div class="main-block">
         <form action="donorregister" method="post" enctype="multipart/form-data">
             @csrf
-            <h1>Blood Request Form</h1>
+
             <fieldset>
                 <legend>
-                    <h3>Fill This Form</h3>
+                    <h3>Fill This Form To Register For Donate Blood</h3>
                 </legend>
                 <div class="account-details">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required>
@@ -365,7 +365,7 @@
                 </legend>
                 <div class="terms-mailing">
                     <div class="checkbox">
-                        <input type="checkbox" name=""><span>I accept the <a href="https://www.w3docs.com/privacy-policy">Privacy Policy for W3Docs.</a></span>
+                        <input type="checkbox" name="" required><span>I agree to the information</a></span>
                     </div>
                     <div class="checkbox">
                         <input type="checkbox" name=""><span>I want to recelve personallzed offers by your site</span>

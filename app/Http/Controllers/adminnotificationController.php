@@ -9,10 +9,9 @@ use App\Notifications\sendNotification;
 
 class adminnotificationController extends Controller
 {
-    public function sendnotification(Request $request)
+    public function sendnotification(Request $id)
     {
-        $user = User::find($request);
-
+        $user = User::find($id);
         $details = [
             // 'greeting' => $request->greeting,
             // 'body' => $request->body,

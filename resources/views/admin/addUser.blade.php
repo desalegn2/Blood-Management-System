@@ -84,6 +84,7 @@
                             <option value="3">Nurse</option>
                             <option value="4">Technician</option>
                             <option value="5">HI</option>
+
                         </select>
 
                         <div class="input-group-append">

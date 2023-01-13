@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
+    <title>BBBMS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
@@ -292,7 +292,7 @@
                 </li>
 
                 <li>
-                    <a href="home">
+                    <a href="{{url('/donor/home')}}">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -300,7 +300,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="blog">
+                    <a href="{{url('/donor/blog')}}">
                         <span class="icon">
                             <ion-icon name="dice-sharp"></ion-icon>
                         </span>
@@ -349,7 +349,7 @@
           </a>
         </li> -->
                 <li>
-                    <a href="seeker">
+                    <a href="{{url('/donor/seeker')}}">
                         <span class="icon">
                             <ion-icon name="people-circle-sharp"></ion-icon>
                         </span>
@@ -358,7 +358,7 @@
                 </li>
 
                 <li>
-                    <a href="donorregister">
+                    <a href="{{url('/donor/donorregister')}}">
                         <span class="icon">
                             <ion-icon name="dice-sharp"></ion-icon>
                         </span>
@@ -367,7 +367,7 @@
                 </li>
 
                 <li>
-                    <a href="reservation">
+                    <a href="{{url('/donor/reservation')}}">
                         <span class="icon">
                             <ion-icon name="dice-sharp"></ion-icon>
                         </span>

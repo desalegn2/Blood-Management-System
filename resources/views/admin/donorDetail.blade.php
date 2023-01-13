@@ -27,6 +27,7 @@
                         <th>Fisrtname</th>
                         <th>Email</th>
                         <th>Action</th>
+                        <th>Block</th>
                     </thead>
                     <tbody>
                         @foreach($members as $member)
@@ -36,7 +37,17 @@
                             <td>
                                 <!-- <a href="#edit{{$member->id}}" data-bs-toggle="modal" class="btn btn-success"><i class='fa fa-edit'></i> Edit</a> -->
                                 <a href="#delete{{$member->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</a>
-                                <a href="#block{{$member->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i>Block</a>
+                            </td>
+                            <td>
+                                <form action="{{ url('admin.block', $member->id) }}" method="POST">
+
+                                    @csrf
+                                    @if($member->isBlocked == 1)
+                                    <button type="submit" class="btn btn-success show_block_confirm" data-name={{ $member->isBlocked == 1 ? 'Unblock' : 'Block' }} title='Block'>{{ $member->isBlocked == 1 ? 'Unblock' : 'Block' }}</button>
+                                    @else
+                                    <button type="submit" class="btn btn-warning show_block_confirm" data-name={{ $member->isBlocked == 1 ? 'Unblock' : 'Block' }} title='Block'>{{ $member->isBlocked == 1 ? 'Unblock' : 'Block' }}</button>
+                                    @endif
+                                </form>
                                 @include('admin.action')
                             </td>
                         </tr>

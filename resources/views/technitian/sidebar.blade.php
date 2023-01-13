@@ -323,7 +323,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="profile">
+                    <a href="">
                         <span class="icon">
                             <ion-icon name="people-sharp"></ion-icon>
                         </span>
@@ -331,11 +331,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="addbloods">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
-                        <span class="title">Settings</span>
+                        <span class="title">Registor Blood</span>
                     </a>
                 </li>
                 </li>

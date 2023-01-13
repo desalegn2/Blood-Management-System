@@ -153,7 +153,6 @@ class AdminController extends Controller
     {
         $numberof_message = User::count();
 
-
         // $numberof_message = User::where('role', '0')->count();
         // dd($numberof_message);
         return view('admin.navbar')->with('numberof_message', $numberof_message);
@@ -262,9 +261,7 @@ class AdminController extends Controller
             $msg = 'User blocked successfully';
         else
             $msg = 'User unblocked successfully';
-
-
-
-        return redirect('admin/user')->with('success', $msg);;
+        // return redirect()->previous();
+        return redirect()->back();
     }
 }
