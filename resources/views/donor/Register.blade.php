@@ -251,6 +251,7 @@
                 <div class="card col-md-8 ml-5">
 
                     <h3 class="card-title mt-2">WHO CAN DONATE?</h3>
+                    <h4>Register to be a blood donor, give blood and save lives.</h4>
                     <h4>Name of Office: Bahir Dar Voluntary Blood Services Program</h4>
                     <h5>Basic requirement of a potential blood donor: </h5>
                     <ul>
@@ -367,9 +368,7 @@
                     <div class="checkbox">
                         <input type="checkbox" name="" required><span>I agree to the information</a></span>
                     </div>
-                    <div class="checkbox">
-                        <input type="checkbox" name=""><span>I want to recelve personallzed offers by your site</span>
-                    </div>
+                </div>
             </fieldset>
             <button type="submit" href="">Submit</button>
         </form>

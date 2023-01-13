@@ -119,8 +119,8 @@
 
     <div class="main-block">
         <div>
-            <h1>Registration Stastus</h1>
-            <h3>Your Registration are {{$stat}}</h3>
+            <h1>Reservation Stastus</h1>
+            <h3>Your Reservation are {{$stat}}</h3>
 
         </div>
     </div>

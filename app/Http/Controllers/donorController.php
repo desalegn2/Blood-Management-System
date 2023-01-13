@@ -9,6 +9,7 @@ use App\Models\reservationModel;
 use App\Models\commentModel;
 use App\Models\User;
 use App\Models\hospitalPosts;
+use App\Models\donorProfile;
 
 class donorController extends Controller
 {
@@ -71,7 +72,7 @@ class donorController extends Controller
                 $var->save();
                 return redirect('donor/home')->with('success', 'Task Added Successfully!');
             } else if ($stat == 'Disapproved') {
-                dd("you are not approved your");
+                return redirect('donor/reservation')->with('warning', 'Reservation not sent your you cannot donate now');
             } else if ($stat == 'in progress') {
                 return redirect('donor/reservation')->with('warning', 'Reservation not sent please wait untill approved');
             }
@@ -89,11 +90,37 @@ class donorController extends Controller
             $stats = donorRequestModel::where('user_id', '=', $id)->orderBy('created_at', 'desc')->get(['status'])->first();
             //$stat = donorRequestModel::where('user_id', $id)->get(['status']);
             $stat = $stats->status;
-            return view('donor.history', ['stat' => $stat]);
+            return view('donor.history', compact('stat'));
         } else {
-            echo ('history  is empity you donot send request');
+            return redirect('donor/home')->with('warning', 'first register');
         }
     }
+
+    function reservationHistory($id)
+    {
+        $isExist = reservationModel::select("*")
+            ->where("user_id", $id)
+            ->exists();
+        if ($isExist) {
+            $stats = reservationModel::where('user_id', '=', $id)->orderBy('created_at', 'desc')->get(['status'])->first();
+            //$stat = donorRequestModel::where('user_id', $id)->get(['status']);
+            $stat = $stats->status;
+            //  $date=$stats->appointmentdate;
+            if ($stat == 'Accepted') {
+                return view('donor.reservationHistory', compact('stat'));
+            } else if ($stat == 'Disapproved') {
+                $res = reservationModel::where('user_id', '=', $id)->orderBy('created_at', 'desc')->get(['appointmentdate'])->first();
+                $stat = $res->appointmentdate;
+                //dd($stat);
+                return view('donor.reservationHistory', compact('stat'));
+            } else if ($stat == 'in progress') {
+                return view('donor.reservationHistory', compact('stat'));
+            }
+        } else {
+            return redirect('donor/home')->with('warning', 'Reservation empity send reservation');
+        }
+    }
+
     function view()
     {
         $views = User::join('hospitalpost', 'hospitalpost.user_id', '=', 'users.id')
@@ -122,5 +149,62 @@ class donorController extends Controller
         // dd($numberof_message);
         return view('donor.sidebar')->with('numberof_message', $numberof_message);
         // return view('admin.navbar', ['numberof_message' => $numberof_message]);
+    }
+
+    function insertprofile(Request $req)
+    {
+        $var = new donorProfile;
+        $var->user_id = $req->user_id;
+        $var->donorname = $req->firstname;
+        $var->donorlastname = $req->lastname;
+        $var->email = $req->email;
+        $var->phone = $req->phone;
+
+        if ($req->hasfile('photo')) {
+            $file = $req->file('photo');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('uploads/registers', $filename);
+            $var->donorphoto =  $filename;
+        }
+        $var->save();
+        return redirect('donor/home')->with('success', 'Your Profile are inserted !');
+    }
+
+    function Profile($id)
+    {
+        $isExist = donorProfile::select("*")
+            ->where("user_id", $id)
+            ->exists();
+        if ($isExist) {
+            $data = donorProfile::all()->where('user_id', '=', $id);
+            //return view('nurse.profile', ['data' => $data]);
+            return view('donor.profile', ['data' => $data]);
+        } else {
+            return redirect('donor/insert');
+        }
+    }
+    function updateProfile(Request $req, int $id)
+    {
+
+        donorProfile::where("user_id", $id)
+            ->update(["donorlastname" => $req->donorlastname, "phone" => $req->phone]);
+        return redirect('donor/home');
+    }
+
+    function updatephoto(Request $req, int $id)
+    {
+
+        $var = donorProfile::all()->where('user_id', '=', $id);
+        if ($req->hasfile('photo')) {
+            $file = $req->file('photo');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('uploads/registers', $filename);
+            $var->donorphoto = $filename;
+        }
+        donorProfile::where("user_id", $id)
+            ->update(["donorphoto" => $filename]);
+        return redirect('donor/home');
     }
 }

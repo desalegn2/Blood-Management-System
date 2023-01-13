@@ -7,10 +7,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {!! Form::model($accepts, [ 'method' => 'patch','url' => ['admin.updatedonor', $accept->id] ]) !!}
+                {!! Form::model($accepts, [ 'method' => 'patch','url' => ['nurse.changereservation', $accept->id] ]) !!}
                 <div class="mb-3">
-                    {!! Form::label('firstname', 'Change Date') !!}
-                    {!! Form::date('firstname', $accept->reservationdate, ['class' => 'form-control']) !!}
+                    {!! Form::label('changedate', 'Change Date') !!}
+                    {!! Form::date('changedate', $accept->reservationdate, ['class' => 'form-control']) !!}
                 </div>
             </div>
             <div class="modal-footer">

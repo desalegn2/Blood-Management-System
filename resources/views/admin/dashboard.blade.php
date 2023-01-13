@@ -164,18 +164,24 @@
                         <!-- /.info-box -->
                     </div>
 
-                    <!-- ./col -->
+
                 </div>
-                <!-- /.row -->
+
             </div>
         </div>
-        <!-- /.card -->
-
-
 
     </section>
     <div>
         Totol donor
+    </div>
+    <div>
+        Totol nurse
+    </div>
+    <div>
+        Totol Tech
+    </div>
+    <div>
+        Totol HI
     </div>
 </div>
 

@@ -177,12 +177,12 @@
             padding-bottom: 10px;
             position: relative;
             font-weight: 500;">{{$view->email}}</span>
-                            <h5>Patiant Name:</h5>
-                            <h5>Patiant phone:</h5>
-                            <h5>Patiant Name:</h5>
-                            <h5>Patiant Name:</h5>
-                            <h5>Patiant Name:</h5>
-                            <h5>Patiant Name:</h5>
+                            <h5>Patiant Name:{{$view->name}}</h5>
+                            <h5>Patiant phone:{{$view->email}}</h5>
+                            <h5>Patiant Name:{{$view->email}}</h5>
+                            <h5>Patiant Name:{{$view->email}}</h5>
+                            <h5>Patiant Name:{{$view->email}}</h5>
+                            <h5>Patiant Name:{{$view->email}}</h5>
                             <p style="margin: 10px 0 0 0;
             font-size: 14px;">Reason :Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum a at ipsum ab magnam omnis pariatur provident nisi corrupti molestias, qui blanditiis ratione obcaecati perferendis enim ullam expedita delectus iure.</p>
 

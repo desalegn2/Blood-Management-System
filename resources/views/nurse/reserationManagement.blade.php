@@ -214,6 +214,7 @@
             </tbody>
         </table>
     </div>
+    @include('sweetalert::alert')
 </body>
 
 </html>

@@ -283,8 +283,8 @@
         <div class="navigation">
             <ul>
                 <li>
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                <li class="">
+                    <a href="{{url('/donor/profile',Auth::user()->id)}}">
                         {{ Auth::user()->name }}
                     </a>
 
@@ -299,6 +299,7 @@
                         <span class="title">Home</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="{{url('/donor/blog')}}">
                         <span class="icon">
@@ -308,12 +309,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <!-- <a href="">
                         <span class="icon">
                             <ion-icon name="dice-sharp"></ion-icon>
                         </span>
                         <span class="title">Events</span>
-                    </a>
+                    </a> -->
                 </li>
                 <li>
                     <a href="">
@@ -336,7 +337,7 @@
                         <span class="icon">
                             <ion-icon name="dice-sharp"></ion-icon>
                         </span>
-                        <span class="title">History</span>
+                        <span class="title">Registration status</span>
                     </a>
                 </li>
 
@@ -372,6 +373,14 @@
                             <ion-icon name="dice-sharp"></ion-icon>
                         </span>
                         <span class="title">Reservation</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('/donor/reservationhistory',Auth::user()->id)}}">
+                        <span class="icon">
+                            <ion-icon name="dice-sharp"></ion-icon>
+                        </span>
+                        <span class="title">Reservation status</span>
                     </a>
                 </li>
 

@@ -9,6 +9,7 @@ use App\Models\approvedViewModel;
 use App\Models\User;
 use App\Models\advertises;
 use App\Models\reservationModel;
+use App\Models\donorRequestModel;
 
 class nurseController extends Controller
 {
@@ -79,9 +80,11 @@ class nurseController extends Controller
     }
     function displayA()
     {
-
+        //$stats = donorRequestModel::all()->orderBy('created_at', 'desc')->take(4);
+        $date = \Carbon\Carbon::today()->subDays(1);
+        $stats = donorRequestModel::where('created_at', '>=', $date)->get();
         $display1 = approvedViewModel::all()->where('status', '=', 'Approved');
-        return view('nurse.nurseHome', compact('display1'));
+        return view('nurse.nurseHome', compact('display1', 'stats'));
     }
     function Profile($id)
     {
@@ -123,5 +126,13 @@ class nurseController extends Controller
         $res->status = "Disapproved";
         $res->save();
         return redirect()->back();
+    }
+    function changeReservation(Request $req, $id)
+    {
+        $res = reservationModel::find($id);
+        $var = $req->changedate;
+        $res->appointmentdate = $var;
+        $res->save();
+        return redirect()->back()->with('success', 'Task Added Successfully!');
     }
 }

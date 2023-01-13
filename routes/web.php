@@ -65,6 +65,14 @@ Route::middleware(['auth', 'user-role:donor'])->group(function () {
     Route::view('donor/reservation', 'donor.Reservation');
     Route::post('/donor/reservation/{id}', [donorController::class, 'reservation']);
     Route::get('/donor/history/{id}', [donorController::class, 'history']);
+    Route::get('/donor/reservationhistory/{id}', [donorController::class, 'reservationHistory']);
+
+    Route::view('/donor/insert', 'donor.profileInsert');
+    Route::post('/donor/insertprofiles', [donorController::class, 'insertprofile']);
+    Route::get('/donor/profile/{id}', [donorController::class, 'Profile']);
+    Route::post('/donor/updateprofile/{id}', [donorController::class, 'updateProfile']);
+    Route::post('/donor/updatephoto/{id}', [donorController::class, 'updatephoto']);
+
     Route::view('donor/view', 'donor.viewP');
     Route::get('donor/seeker', [donorController::class, 'view']);
     // Route::get('donor/seeker', [donorViewseeker::class, 'viewS']);
@@ -172,11 +180,13 @@ Route::middleware(['auth', 'user-role:nurse'])->group(function () {
 
     Route::get('/nurse/listofapproved', [nurseController::class, 'displayapproved']);
     Route::get('/nurse/home', [nurseController::class, 'displayA'])->name('nurse.home');
+
     Route::view('/nurse/reservation', 'nurse.reserationManagement');
     Route::get('/nurse/reservation', [nurseController::class, 'manageReservation']);
     Route::delete('/nurse/deletereservation/{id}', [nurseController::class, 'deleteRes']);
     Route::get('/nurse/accept/{id}', [nurseController::class, 'accept']);
     Route::get('/nurse/notaccept/{id}', [nurseController::class, 'notAccept']);
+    Route::patch('/nurse.changereservation/{id}', [nurseController::class, 'changeReservation']);
 });
 Route::middleware(['auth', 'user-role:technitian'])->group(function () {
     Route::get('/technitian/home', [HomeController::class, 'technitanHome'])->name('technitian.home');
