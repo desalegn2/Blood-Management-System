@@ -169,20 +169,17 @@
                             <h2 style="font-weight: 700;
             margin-bottom: 5px;
             font-size: 20px;
-            color: red;">From:{{$view->name}}</h2>
+            color: red;">From:{{$view->name}} </h2>
                             <h4>{{ $view->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</h4>
                             <small class="text-muted">{{ $view->created_at}}</small>
                             <span style="display: block;
             font-size: 15px;
             padding-bottom: 10px;
             position: relative;
-            font-weight: 500;">{{$view->email}}</span>
-                            <h5>Patiant Name:{{$view->name}}</h5>
-                            <h5>Patiant phone:{{$view->email}}</h5>
-                            <h5>Patiant Name:{{$view->email}}</h5>
-                            <h5>Patiant Name:{{$view->email}}</h5>
-                            <h5>Patiant Name:{{$view->email}}</h5>
-                            <h5>Patiant Name:{{$view->email}}</h5>
+            font-weight: 500;">Patiant name:{{$view->patientname}} {{$view->lastname}}</span>
+
+                            <h5>Patiant email:{{$view->email}}</h5>
+                            <h5>Patiant phone:{{$view->phone}}</h5>
                             <p style="margin: 10px 0 0 0;
             font-size: 14px;">Reason :Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum a at ipsum ab magnam omnis pariatur provident nisi corrupti molestias, qui blanditiis ratione obcaecati perferendis enim ullam expedita delectus iure.</p>
 

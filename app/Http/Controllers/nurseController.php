@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\advertises;
 use App\Models\reservationModel;
 use App\Models\donorRequestModel;
+use Illuminate\Support\Facades\Hash;
 
 class nurseController extends Controller
 {
@@ -56,6 +57,25 @@ class nurseController extends Controller
             ->update(["nursephoto" => $filename]);
         return redirect('nurse/home');
     }
+    function changepassword(Request $req)
+    {
+        # Validation
+        $req->validate([
+            'oldpassword' => ['required', 'string', 'min:8'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        $currentPasswordStatus = Hash::check($req->oldpassword, auth()->user()->password);
+        if ($currentPasswordStatus) {
+
+            User::findOrFail(auth()->user()->id)->update([
+                'password' => Hash::make($req->password)
+            ]);
+            return redirect()->back()->with('success', 'password changed Successfully!');
+        } else {
+            return redirect()->back()->with('warnig', 'password not match with old!');
+        }
+    }
+
     function advertise(Request $req)
     {
         $var = new advertises;

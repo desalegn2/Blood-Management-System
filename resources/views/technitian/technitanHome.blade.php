@@ -10,6 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
     <!-- ======= Styles ====== -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
     <style>
         /* =========== Google Fonts ============ */
@@ -344,59 +350,273 @@
         </div>
     </div>
     <hr>
-    <!-- ======================= Cards ================== 
-    <div class="cardBox">
-        <div class="card">
-            <div>
-                <div class="numbers">1,504</div>
-                <div class="cardName">Daily Views</div>
+    <!-- ======================= Cards ================== -->
+
+    <div class="grey-bg container-fluid">
+        <section id="minimal-statistics">
+
+            <div class="row">
+                <div class="col-12 mt-3 mb-1">
+                    <h4 class="text-uppercase">Total Blood Stored</h4>
+                    <p></p>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #850000;">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <a href="#">
+                                            <h3>{{$aminus}}</h3>
+                                            <span>A-</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #850000;">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <h3>{{$aplus}}</h3>
+                                        <span>A+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #850000;">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <h3>{{$bminus}}</h3>
+                                        <span>B-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #850000;">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <h3>{{$bplus}}</h3>
+                                        <span>B+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="iconBx">
-                <ion-icon name="eye-outline"></ion-icon>
-            </div>
-        </div>
+            <div class="row">
 
-        <div class="card">
-            <div>
-                <div class="numbers">80</div>
-                <div class="cardName">Sales</div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #850000;">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <h3 class="danger">{{$abminus}}</h3>
+                                        <span>AB-</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #850000;">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <h3 class="success">{{$abplus}}</h3>
+                                        <span>AB+</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #850000;">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <h3 class="warning">{{$ominus}}</h3>
+                                        <span>O-</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #850000;">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <h3 class="primary">{{$oplus}}</h3>
+                                        <span>O+</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="iconBx">
-                <ion-icon name="cart-outline"></ion-icon>
-            </div>
-        </div>
 
-        <div class="card">
-            <div>
-                <div class="numbers">284</div>
-                <div class="cardName">Comments</div>
-            </div>
+        </section>
 
-            <div class="iconBx">
-                <ion-icon name="chatbubbles-outline"></ion-icon>
-            </div>
-        </div>
+        <!-- <section id="stats-subtitle">
 
-        <div class="card">
-            <div>
-                <div class="numbers">$7,842</div>
-                <div class="cardName">Earning</div>
+            <div class="row">
+                <div class="col-12 mt-3 mb-1">
+                    <h4 class="text-uppercase">Statistics With Subtitle</h4>
+                    <p>Statistics on minimal cards with Title &amp; Sub Title.</p>
+                </div>
             </div>
 
-            <div class="iconBx">
-                <ion-icon name="cash-outline"></ion-icon>
+            <div class="row">
+                <div class="col-xl-6 col-md-12">
+                    <div class="card overflow-hidden">
+                        <div class="card-content">
+                            <div class="card-body cleartfix">
+                                <div class="media align-items-stretch">
+                                    <div class="align-self-center">
+                                        <i class="icon-pencil primary font-large-2 mr-2"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4>Total Posts</h4>
+                                        <span>Monthly blog posts</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h1>18,000</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-md-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body cleartfix">
+                                <div class="media align-items-stretch">
+                                    <div class="align-self-center">
+                                        <i class="icon-speech warning font-large-2 mr-2"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4>Total Comments</h4>
+                                        <span>Monthly blog comments</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h1>84,695</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+
+            <div class="row">
+                <div class="col-xl-6 col-md-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body cleartfix">
+                                <div class="media align-items-stretch">
+                                    <div class="align-self-center">
+                                        <h1 class="mr-2">$76,456.00</h1>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4>Total Sales</h4>
+                                        <span>Monthly Sales Amount</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="icon-heart danger font-large-2"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-md-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body cleartfix">
+                                <div class="media align-items-stretch">
+                                    <div class="align-self-center">
+                                        <h1 class="mr-2">$36,000.00</h1>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4>Total Cost</h4>
+                                        <span>Monthly Cost</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="icon-wallet success font-large-2"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
     </div>
--->
+
     <!-- ================ Order Details List ================= -->
     <div class="details">
         <div class="recentOrders">
             <div class="cardHeader">
                 <h2>Blood Storage</h2>
-                <a href="#" class="btn">View All</a>
+                <a href="{{url('technitian/viewstoredblood')}}" class="btn">View All</a>
             </div>
 
             <table>
@@ -409,29 +629,23 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($bloods as $blood)
                     <tr>
-                    <tr>
-                        <td>Star Refrigerator</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status notexpire">not axpired</span></td>
+                        <td>{{$blood->bloodgroup}}</td>
+                        <td>{{$blood->volume}}</td>
+                        <td scope="row">{{ $blood->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
+                        <td>{{$blood->status}}</td>
                     </tr>
-                    <tr>
-                        <td>Dell Laptop</td>
-                        <td>$110</td>
-                        <td>Due</td>
-                        <td><span class="status expire">expired</span></td>
-                    </tr>
-
-
+                    @endforeach
                 </tbody>
             </table>
+            {{$bloods->links()}}
         </div>
 
         <!-- ================= New Customers ================ -->
         <div class="recentCustomers">
             <div class="cardHeader">
-                <h2>Recent Record</h2>
+                <h4>Handling, Storage & Returns of PRBCS</h4>
             </div>
 
             <table>

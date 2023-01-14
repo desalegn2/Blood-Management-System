@@ -17,13 +17,13 @@
                 </div>
 
                 <div class="mb-3">
-                    {!! Form::label('unitdiscarded ', 'Volume') !!}
-                    {!! Form::text('unitdiscarded ', $bloods->volume, ['class' => 'form-control']) !!}
+                    {!! Form::label('bloodgroup', 'Unit Discarded') !!}
+                    {!! Form::text('volume', $bloods->volume, ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="mb-3">
                     {!! Form::label('Reason', 'Reason of Discard') !!}
-                    {!! Form::textarea('centerid', '', ['class' => 'form-control']) !!}
+                    {!! Form::textarea('reason', '', ['class' => 'form-control']) !!}
                 </div>
             </div>
 

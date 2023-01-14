@@ -290,7 +290,7 @@
                 </li>
 
                 <li>
-                    <a href="home">
+                    <a href="{{url('/healthinstitute/home')}}">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -298,7 +298,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="finddonor">
+                    <a href="{{url('/healthinstitute/finddonor')}}">
                         <span class="icon">
                             <ion-icon name="person-add-outline"></ion-icon>
                         </span>
@@ -306,7 +306,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="hospitalrequest">
+                    <a href="{{url('/healthinstitute/hospitalrequest')}}">
                         <span class="icon">
                             <ion-icon name="egg-outline"></ion-icon>
                         </span>
@@ -315,7 +315,7 @@
                 </li>
 
                 <li>
-                    <a href="post">
+                    <a href="{{url('/healthinstitute/post')}}">
                         <span class="icon">
                             <ion-icon name="people-sharp"></ion-icon>
                         </span>
@@ -331,21 +331,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="profile">
+                    <a href="{{url('/healthinstitute/mypost',Auth::user()->id)}}">
                         <span class="icon">
                             <ion-icon name="people-sharp"></ion-icon>
                         </span>
-                        <span class="title">Profile</span>
+                        <span class="title">My Post</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="settings-outline"></ion-icon>
-                        </span>
-                        <span class="title">Settings</span>
-                    </a>
-                </li>
+
                 </li>
 
                 <li>

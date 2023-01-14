@@ -12,7 +12,7 @@ class hospitalPosts extends Model
     public $table = "hospitalpost";
     protected $fillable = [
         'user_id',
-        'name',
+        'patientname',
         'lastname',
         'email',
         'phone',

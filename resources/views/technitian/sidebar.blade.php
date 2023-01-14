@@ -283,14 +283,14 @@
         <div class="navigation">
             <ul>
                 <li>
-                <li class="nav-item dropdown">
+                <li href="#">
                     <a>
                         {{ Auth::user()->name }}
                     </a>
                 </li>
 
                 <li>
-                    <a href="home">
+                    <a href="{{url('/technitian/home')}}">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -298,7 +298,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="discardblood">
+                    <a href="{{url('/technitian/discardblood')}}">
                         <span class="icon">
                             <ion-icon name="bag-remove-outline"></ion-icon>
                         </span>
@@ -307,11 +307,11 @@
                 </li>
 
                 <li>
-                    <a href="distributetohospital">
+                    <a href="{{url('/technitian/distributetohospital')}}">
                         <span class="icon">
                             <ion-icon name="swap-horizontal-outline"></ion-icon>
                         </span>
-                        <span class="title">Distribute</span>
+                        <span class="title">Blood Request</span>
                     </a>
                 </li>
                 <li>
@@ -323,21 +323,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{url('/technitian/handling')}}">
                         <span class="icon">
-                            <ion-icon name="people-sharp"></ion-icon>
+                            <ion-icon name="bag-handle-outline"></ion-icon></ion-icon>
                         </span>
-                        <span class="title">Profile</span>
+                        <span class="title">Handling</span>
                     </a>
                 </li>
-                <li>
-                    <a href="addbloods">
-                        <span class="icon">
-                            <ion-icon name="settings-outline"></ion-icon>
-                        </span>
-                        <span class="title">Registor Blood</span>
-                    </a>
-                </li>
+
                 </li>
 
                 <li>

@@ -167,6 +167,7 @@ Route::middleware(['auth', 'user-role:nurse'])->group(function () {
     Route::post('/nurse/updateprofile/{id}', [nurseController::class, 'updateProfile']);
     Route::post('/nurse/updatephoto/{id}', [nurseController::class, 'updatephoto']);
     Route::get('/nurse/profile/{id}', [nurseController::class, 'Profile']);
+    Route::post('/nurse/changepassword', [nurseController::class, 'changepassword']);
 
     Route::view('/nurse/advertise', 'nurse.advertise');
     Route::post('/nurse/advertise', [nurseController::class, 'advertise']);
@@ -191,32 +192,35 @@ Route::middleware(['auth', 'user-role:nurse'])->group(function () {
 Route::middleware(['auth', 'user-role:technitian'])->group(function () {
     Route::get('/technitian/home', [HomeController::class, 'technitanHome'])->name('technitian.home');
     Route::view('/technitian/addbloods', 'technitian.addBlood');
-    Route::post('/technitian/addbloods', [addBloodController::class, 'addblood']);
+    Route::post('/technitian/addbloods', [techController::class, 'addblood']);
 
-    Route::get('/technitian/home', [viewBloodStore::class, 'viewblood'])->name('technitian.home');
+    Route::get('/technitian/home', [techController::class, 'viewblood'])->name('technitian.home');
     Route::get('/technitian/viewstoredblood', [techController::class, 'view']);
     Route::view('technitian/discardblood', 'technitian.discardBlood');
-    Route::post('/technitian/discardblood', [discardBloodControlle::class, 'discardblood']);
+    Route::post('/technitian/discardblood', [techController::class, 'discardblood']);
     Route::view('technitian/distributeblood', 'technitian.distributeBlood');
-    Route::get('/technitian/distributetohospital', [discardBloodControlle::class, 'distribute']);
+    Route::get('/technitian/distributetohospital', [techController::class, 'distribute']);
     // Route::get('/technitian/setexpaired', [discardBloodControlle::class, 'distribute']);
     Route::get('/technitian/read/{id}', [techController::class, 'read']);
     Route::get('/technitian/discard2/{id}', [techController::class, 'discard']);
     //  Route::view('technitian/distributetohospital', 'technitian.distributeToHospital');
     // Route::view('technitian/savedistribute', 'technitian.distributeBlood');
     Route::post('/technitian/filldiscard', [techController::class, 'filldiscard']);
-    Route::post('/technitian/savedistribute', [discardBloodControlle::class, 'saveddistribute']);
+    Route::post('/technitian/savedistribute', [techController::class, 'saveddistribute']);
     //Route::get('/technitian/notification', [HomeController::class, 'sendOfferNotification']);
+
+    Route::get('/technitian/handling', [techController::class, 'handling']);
 });
 
 Route::middleware(['auth', 'user-role:healthinstitute'])->group(function () {
     Route::get('/healthinstitute/home', [HomeController::class, 'healthinstituteHome'])->name('healthinstitute.home');
+    Route::get('/healthinstitute/home', [hospitalRequestController::class, 'viewblood'])->name('technitian.home');
     Route::view('/healthinstitute/seekerRegister', 'healthinstitute.postSeeker');
     Route::view('/healthinstitute/profile', 'healthinstitute.profile');
     Route::post('/healthinstitute/profile', [healthinstituteController::class, 'profile']);
     Route::post('/healthinstitute/seekerRegister', [bloodRequestController::class, 'bloodrequest']);
     Route::view('/healthinstitute/post', 'healthinstitute.hospitalPost');
-    Route::post('/healthinstitute/post', [bloodRequestController::class, 'postSeeker']);
+    Route::post('/healthinstitute/post', [hospitalRequestController::class, 'postSeeker']);
     Route::post('/healthinstitute/hospitalrequest', [hospitalRequestController::class, 'hospitalreq']);
 
     Route::view('/healthinstitute/hospitalrequest', 'healthinstitute.bloodRequestform');
@@ -225,4 +229,8 @@ Route::middleware(['auth', 'user-role:healthinstitute'])->group(function () {
 
     Route::view('/healthinstitute/finddonor', 'healthinstitute.findDonor');
     Route::post('/healthinstitute/search', [hospitalRequestController::class, 'search']);
+
+    // Route::view('/healthinstitute/mypost', 'healthinstitute.mypost');
+    Route::get('/healthinstitute/mypost/{id}', [hospitalRequestController::class, 'mypost']);
+    Route::delete('/healthinstitute/deletepost/{id}', [hospitalRequestController::class, 'deletepost']);
 });

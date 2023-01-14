@@ -174,7 +174,7 @@
 
 </head>
 
-<body style="background-color: #FF8E9E;">
+<body>
 
     <div id="page-wrap">
         <a class="btn btn-success" href="{{url('nurse/home')}}">Home</a>

@@ -85,6 +85,7 @@
             @foreach ($data as $dataprofil)
 
             <div class="row gutters-sm">
+
                 <div class="col-md-4 mb-3">
                     <form action=" {{url('/nurse/updatephoto',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -96,7 +97,8 @@
                                     <div class="mt-3">
                                         <h4> {{$dataprofil->nursename}}</h4>
                                         <p class="text-secondary mb-1">Full Stack Developer</p>
-                                        <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class='fa fa-edit'></i>Change Password</button>
 
                                     </div>
                                 </div>
@@ -104,7 +106,7 @@
 
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Photo</h6>
+                                        <h6 class="mb-0">Change Photo</h6>
 
                                     </div>
 
@@ -197,8 +199,41 @@
             </div>
         </div>
     </div>
+    <!-- change password Modal -->
+    <div class="modal fade" id="addnew" tabindex="-1" aria-labelledby="addnewModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addnewModalLabel">Change password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {!! Form::open(['url' => 'nurse/changepassword']) !!}
+                    <div class="mb-3">
+                        {!! Form::label('oldpassword', 'Old Password') !!}
+                        {{ Form::password('password', array('name' => 'oldpassword', "class" => "form-control" ,"placeholder" =>"enter new password")) }}
 
+                    </div>
+                    <div class="mb-3">
+                        {!! Form::label('newpassword', 'New Password') !!}
+                        {{ Form::password('password', array('name' => 'password', "class" => "form-control", "placeholder" =>"enter new password")) }}
 
+                    </div>
+                    <div class="mb-3">
+                        {!! Form::label('confirmnewpassword', ' Confirm New Password') !!}
+                        {{ Form::password('password', array('name' => 'password_confirmation', "class" => "form-control", "placeholder" =>"confirm new password")) }}
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Change</button>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    @include('sweetalert::alert')
 </body>
 
 </html>

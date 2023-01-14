@@ -124,7 +124,7 @@ class donorController extends Controller
     function view()
     {
         $views = User::join('hospitalpost', 'hospitalpost.user_id', '=', 'users.id')
-            ->get(['hospitalpost.id', 'hospitalpost.phone', 'hospitalpost.email', 'hospitalpost.purpose', 'hospitalpost.photo', 'hospitalpost.created_at', 'users.name']);
+            ->get(['hospitalpost.*', 'users.*']);
         //$views = hospitalPosts::all();
         return view('donor.viewseeker', compact('views'));
     }

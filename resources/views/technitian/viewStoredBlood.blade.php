@@ -179,12 +179,12 @@
 
     <div id="page-wrap">
 
-        <h1>Responsive Table</h1>
+        <h1> Shelf Life</h1>
+
+        <p>PACKED RED BLOOD CELLS (PRBCS) are stored in a Blood Bank refrigerator at a temp of 1-6ºC until issue. The shelf life is 42 days from the date of collection The expiration date is located on the unit(s).</p>
+
         <a class="btn btn-success" href="{{url('technitian/home')}}">Home</a>
-        <p>Go to <a href="">Non-Responsive Table</a></p>
-
-        <p>This is the exact same table, only has @media queries applied to is so that when the screen is too narrow, it reformats (via only CSS) to make each row a bit like it's own table. This makes for much more repetition and vertical space needed, but it fits within the horizontal space, so only natural vertical scrolling is needed to explore the data.</p>
-
+        <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add</button>
         <table>
             <thead>
                 <tr>
@@ -212,6 +212,41 @@
         </table>
 
     </div>
+    <!-- Add Modal -->
+    <div class="modal fade" id="addnew" tabindex="-1" aria-labelledby="addnewModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addnewModalLabel">Register Blood</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {!! Form::open(['url' => 'technitian/addbloods']) !!}
+                    <div class="mb-3">
+                        {!! Form::hidden('user_id', Auth::user()->id, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="mb-3">
+                        {!! Form::label('bloodtype', 'Blood Type') !!}
+                        {!! Form::text('bloodtype', '', ['class' => 'form-control', 'placeholder' => 'Input blood type', 'required']) !!}
+                    </div>
+                    <div class="mb-3">
+                        {!! Form::label('volume', 'Volume') !!}
+                        {!! Form::text('volume', '', ['class' => 'form-control', 'placeholder' => 'Input volume', 'required']) !!}
+                    </div>
+                    <div class="mb-3">
+                        {!! Form::label('donationtype', 'Donation Type') !!}
+                        {!! Form::text('donationtype', '', ['class' => 'form-control', 'placeholder' => 'Input donation type', 'required']) !!}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+
     @include('sweetalert::alert')
 </body>
 

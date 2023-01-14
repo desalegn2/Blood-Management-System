@@ -73,30 +73,24 @@
         <div>
             <form action="discardblood" method="post">
                 @csrf
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
                 <ul class="form">
                     <li>
                         <label> Blood Group <span class="required"> </span></label>
                         <select name="bloodtype" class="field" required>
                             <option value="A+">A+</option>
                             <option value="A-">A-</option>
+                            <option value="B-">B-</option>
                             <option value="B+">B+</option>
                             <option value="AB+">AB+</option>
                             <option value="AB-">AB-</option>
                             <option value="O+">O+</option>
-                            <option value="O-">O+</option>
+                            <option value="O-">O-</option>
                         </select>
                     </li>
                     <li>
                         <label>Unit Discarded <span class="required"></span></label>
                         <input type="text" name="unitdiscard" placeholder=" Unit Discarded" class="field" required />
-                    </li>
-                    <li>
-                        <label> Discard Date <span class="required"> </span></label>
-                        <input type="date" name="date" class="field" required />
-                    </li>
-                    <li>
-                        <label>Center Id<span class="required"></span></label>
-                        <input type="text" name="centerid" placeholder=" Center Id" class="field" required />
                     </li>
                     <li>
                         <label> Reason </label>
@@ -111,6 +105,7 @@
             </form>
         </div>
     </div>
+    @include('sweetalert::alert')
     <script type="text/javascript">
     </script>
 </body>
