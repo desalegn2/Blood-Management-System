@@ -413,7 +413,7 @@
 
 
                 <div class="user">
-                    <img src="assets/imgs/customer01.jpg" alt="">
+                    <img src="{{asset('uploads/registers/'. Auth::user()->photo )}}" alt="">
                 </div>
             </div>
 

@@ -183,9 +183,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                        <h3> Lorem Ipsum </h3>
+                        <h3> Feedback </h3>
                         <ul>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
+                            <li> <a href="feedback"> Give Back </a> </li>
                             <li> <a href="#"> Lorem Ipsum </a> </li>
                             <li> <a href="#"> Lorem Ipsum </a> </li>
                             <li> <a href="#"> Lorem Ipsum </a> </li>

@@ -11,9 +11,70 @@ use App\Models\distributeBloodModel;
 use App\Models\donorRequestModel;
 use App\Models\adminsend;
 use App\Models\hospitalRequestModel;
+use App\Http\Requests\CreateaccountRequest;
+use Illuminate\Support\Facades\Hash;
+use App\Models\aaa;
+use App\Models\feedbackModel;
 
 class AdminController extends Controller
 {
+    public function imgup()
+    {
+
+        //$members = User::where('role', '1')->get();
+        return view('admin.imageup');
+    }
+
+    public function imgups(Request $req)
+    {
+        if ($req->hasfile('image')) {
+            $file = $req->file('image');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('uploads/registers', $filename);
+        }
+        aaa::create([
+            'imgage' => $req->hasfile('image') ? $filename : '0.png'
+        ]);
+        return view('admin.imageup');
+    }
+
+    function register(CreateaccountRequest $req)
+    {
+        try {
+
+            // $password = $req->password;
+            // $pass = bcrypt($password);
+            if ($req->hasfile('photo')) {
+                $file = $req->file('photo');
+                $extention = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extention;
+                $file->move('uploads/registers', $filename);
+            }
+            User::create([
+                'photo' => $req->hasfile('photo') ? $filename : '0.png',
+                'name' => $req->name,
+                'email' => $req->email,
+                'password' => Hash::make($req->password),
+                'role' => $req->role,
+            ]);
+            return redirect('admin/add')->with('success', 'Task Added Successfully!');
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Something went wrong in AdminController.register',
+                'error' => $e->getMessage()
+            ], 400);
+        }
+    }
+    function feedbacks()
+
+    {
+        $feedback = User::join('feedbacks', 'feedbacks.user_id', '=', 'users.id')
+            ->get(['feedbacks.*', 'users.*']);
+        //$feedback = feedbackModel::all();
+        return view('admin.feedback', ['feedback' => $feedback]);
+    }
+
     function read($id)
     {
         $donors = hospitalRequestModel::find($id);
@@ -202,24 +263,6 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('numberof_message', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
 
-    function register(Request $req)
-    {
-        try {
-            $password = $req->password; // password is form field
-
-            $pass = bcrypt($password);
-            $var = new User;
-            $var->name = $req->name;
-            $var->email = $req->email;
-            $var->password = $pass;
-            $var->role = $req->role;
-            $var->save();
-            return redirect('admin/add')->with('success', 'Task Added Successfully!');
-        } catch (\Exception $e) {
-
-            return redirect('admin/add')->with('success', $e->getMessage());
-        }
-    }
     function send(Request $req)
     {
         try {

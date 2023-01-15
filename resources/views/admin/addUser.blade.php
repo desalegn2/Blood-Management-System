@@ -20,56 +20,67 @@
     <div class="register-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="" class="h1"><b>Fill</b>To Register User</a>
+                <a href="" class="h1"><b>Fill</b>To Create Account For User</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Add a new membership</p>
-
-                <form action="add" method="post">
+                <form action="add" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="text" name="name" class="form-control" placeholder="Full name">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
-                                @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="email" name="email" class="form-control" placeholder="Email" required>
+                    <div style="color: red;">
+                        @error('name')
+                        <strong>{{ $message }}</strong>
+                        @enderror
+                    </div>
+                    <div class=" input-group mb-3">
+                        <input type="email" name="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
                             </div>
                         </div>
                     </div>
+                    <div style="color: red;">
+                        @error('email')
+                        <strong>{{ $message }}</strong>
+                        @enderror
+                    </div>
+
 
                     <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="Password" required>
+                        <input type="file" name="photo" class="form-control">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="color: red;">
+                        @error('photo')
+                        <strong>{{ $message }}</strong>
+                        @enderror
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" name="password" class="form-control" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
-
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
                             </div>
                         </div>
                     </div>
+                    <div style="color: red;">
+                        @error('password')
+                        <strong>{{ $message }}</strong>
+                        @enderror
+                    </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="password_confirmation" class="form-control" placeholder="Retype password" required>
+                        <input type="password" name="password_confirmation" class="form-control" placeholder="Retype password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -79,7 +90,7 @@
 
                     <div class="input-group mb-3">
                         Choose Your type
-                        <select name="role" class="form-control" required>
+                        <select name="role" class="form-control">
                             <option value="">choose usertype</option>
                             <option value="3">Nurse</option>
                             <option value="4">Technician</option>
@@ -90,13 +101,13 @@
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
-                                @error('usertype')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
                             </div>
                         </div>
+                    </div>
+                    <div style="color: red;">
+                        @error('role')
+                        <strong>{{ $message }}</strong>
+                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-8">

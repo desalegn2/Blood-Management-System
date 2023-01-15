@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Auth\LoginRequest;
 
 class LoginController extends Controller
 {
@@ -41,7 +42,7 @@ class LoginController extends Controller
     }
 
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         $input = $request->all();
 
@@ -51,6 +52,7 @@ class LoginController extends Controller
         ]);
 
         if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
+
             if (auth()->user()->role == 'null') {
                 return redirect('login');
             }
@@ -93,7 +95,7 @@ class LoginController extends Controller
             }
         } else {
             return redirect()->route('login')
-                ->with('error', 'Email-Address And Password Are Wrong.');
+                ->with('warning', 'Email-Address And Password Are Wrong.');
         }
     }
 }

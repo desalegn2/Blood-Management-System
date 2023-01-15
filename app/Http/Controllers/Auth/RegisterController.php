@@ -55,6 +55,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'photo' => 'required',
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -71,23 +72,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        Redirect::setIntendedUrl(url()->previous());
         // if ($data->hasfile('photo')) {
-        //     $file = $data['photo'];
+        //     $file = $data->file('photo');
         //     $extention = $file->getClientOriginalExtension();
         //     $filename = time() . '.' . $extention;
         //     $file->move('uploads/registers', $filename);
         // }
-        Redirect::setIntendedUrl(url()->previous());
-
         return User::create([
-
+            //'photo' => $data->hasfile('photo') ? $filename : '0.png',
+            'photo' => $data['photo'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => $data['role'],
         ]);
-
-
         return redirect()->intended(RouteServiceProvider::HOME)->with('data', 'Please Wait Untill You Are Approved By Admin Of System');
     }
 }

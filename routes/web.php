@@ -79,6 +79,8 @@ Route::middleware(['auth', 'user-role:donor'])->group(function () {
     Route::post('/donor/comment', [donorController::class, 'comments']);
 
     Route::get('donor/blog', [donorController::class, 'viewblog']);
+    Route::get('donor/feedback', [donorController::class, 'feedbacks']);
+    Route::post('/donor/givefeedbak', [donorController::class, 'givefeedbacks']);
     //Route::view('donor/viewseeker', 'donor.viewSeekers');
     // Route::get('donor/views', [donorViewseeker::class, 'viewS']);
     // Route::get('/donor/viewdetail/{id}', [donorViewseeker::class, 'viewdetail']);
@@ -106,6 +108,9 @@ Route::middleware(['auth', 'user-role:admin'])->group(function () {
     Route::post('/ admin.block/{id}', [AdminController::class, 'blocks']);
     //Route::view('/admin/aa', 'admin.navbar');
     //users  Notification1
+    Route::get('admin/feedback', [AdminController::class, 'feedbacks']);
+    Route::get('/admin/img', [AdminController::class, 'imgup']);
+    Route::post('/admin/imgs', [AdminController::class, 'imgups']);
     Route::view('/admin/add', 'admin.addUser');
     Route::post('/admin/add', [AdminController::class, 'register']);
 

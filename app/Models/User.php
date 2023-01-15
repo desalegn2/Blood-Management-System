@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'photo',
         'usertype',
         'readat',
     ];
@@ -55,6 +56,11 @@ class User extends Authenticatable
     {
         //return $this->hasMany('App\hospitalPosts');
         return $this->hasMany(hospitalPosts::class);
+    }
+    public function feedbak()
+    {
+        //return $this->hasMany('App\hospitalPosts');
+        return $this->hasMany(feedbackModel::class);
     }
     public function hi()
     {

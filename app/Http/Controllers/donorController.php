@@ -10,6 +10,7 @@ use App\Models\commentModel;
 use App\Models\User;
 use App\Models\hospitalPosts;
 use App\Models\donorProfile;
+use App\Models\feedbackModel;
 
 class donorController extends Controller
 {
@@ -51,6 +52,7 @@ class donorController extends Controller
 
         return redirect('donor/home')->with('success', 'Task Added Successfully!');
     }
+
     function reservation(Request $req, int $id)
     {
         $isExist = donorRequestModel::select("*")
@@ -147,13 +149,13 @@ class donorController extends Controller
 
         // $numberof_message = User::where('role', '0')->count();
         // dd($numberof_message);
-        return view('donor.sidebar')->with('numberof_message', $numberof_message);
+        // return view('donor.sidebar')->with('numberof_message', $numberof_message);
         // return view('admin.navbar', ['numberof_message' => $numberof_message]);
     }
 
     function insertprofile(Request $req)
     {
-        $var = new donorProfile;
+        $var = new User;
         $var->user_id = $req->user_id;
         $var->donorname = $req->firstname;
         $var->donorlastname = $req->lastname;
@@ -173,38 +175,52 @@ class donorController extends Controller
 
     function Profile($id)
     {
-        $isExist = donorProfile::select("*")
-            ->where("user_id", $id)
+        $isExist = User::select("*")
+            ->where("id", $id)
             ->exists();
         if ($isExist) {
-            $data = donorProfile::all()->where('user_id', '=', $id);
+            $data = User::all()->where('id', '=', $id);
             //return view('nurse.profile', ['data' => $data]);
             return view('donor.profile', ['data' => $data]);
-        } else {
-            return redirect('donor/insert');
         }
     }
     function updateProfile(Request $req, int $id)
     {
 
-        donorProfile::where("user_id", $id)
-            ->update(["donorlastname" => $req->donorlastname, "phone" => $req->phone]);
+        User::where("id", $id)
+            ->update(["name" => $req->name, "email" => $req->email, "phone" => $req->phone]);
         return redirect('donor/home');
     }
 
     function updatephoto(Request $req, int $id)
     {
 
-        $var = donorProfile::all()->where('user_id', '=', $id);
+        $var = User::all()->where('id', '=', $id);
         if ($req->hasfile('photo')) {
             $file = $req->file('photo');
             $extention = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extention;
             $file->move('uploads/registers', $filename);
-            $var->donorphoto = $filename;
+            $var->photo = $filename;
         }
-        donorProfile::where("user_id", $id)
-            ->update(["donorphoto" => $filename]);
+        User::where("id", $id)
+            ->update(["photo" => $filename]);
         return redirect('donor/home');
+    }
+    function feedbacks()
+    {
+        return view('donor.feedback');
+    }
+    function givefeedbacks(Request $req)
+
+    {
+        $var = new feedbackModel;
+        $var->name = $req->name;
+        $var->user_id = $req->user_id;
+        $var->email = $req->email;
+        $var->address = $req->address;
+        $var->feedback = $req->feedback;
+        $var->save();
+        return view('donor.feedback');
     }
 }

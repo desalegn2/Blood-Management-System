@@ -8,7 +8,10 @@
             <a href="home" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
+            <a href="feedback" class="nav-link">feedback</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="img" class="nav-link">uploadimage</a>
         </li>
     </ul>
 

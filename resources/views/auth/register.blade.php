@@ -28,49 +28,64 @@
                 <form action="{{ route('register') }}" method="post" enctype=" multipart/form-data">
                     @csrf
                     <input type="hidden" name="role" class="form-control" value="1" required>
+                    <input type="hidden" name="photo" class="form-control" value="0.png" required>
                     <div class="input-group mb-3">
                         <input type="text" name="name" class="form-control" placeholder="Full name">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
-                                @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
                             </div>
                         </div>
                     </div>
+                    <div style="color: red;">
+                        @error('name')
+                        <strong>{{ $message }}</strong>
+                        @enderror
+                    </div>
                     <div class="input-group mb-3">
-                        <input type="email" name="email" class="form-control" placeholder="Email" required>
+                        <input type="email" name="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+
                             </div>
                         </div>
                     </div>
+                    <div style="color: red;">
+                        @error('email')
+                        <strong>{{ $message }}</strong>
+                        @enderror
+                    </div>
+
+                    <!-- <div class="input-group mb-3">
+                        <input type="file" name="photo" class="form-control">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="color: red;">
+                        @error('photo')
+                        <strong>{{ $message }}</strong>
+                        @enderror
+                    </div> -->
 
                     <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="Password" required>
+                        <input type="password" name="password" class="form-control" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
-
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
                             </div>
                         </div>
                     </div>
+                    <div style="color: red;">
+                        @error('password')
+                        <strong>{{ $message }}</strong>
+                        @enderror
+                    </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="password_confirmation" class="form-control" placeholder="Retype password" required>
+                        <input type="password" name="password_confirmation" class="form-control" placeholder="Retype password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -82,7 +97,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
+                                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
                                 <label for="agreeTerms">
                                     I agree to the <a href="#">terms</a>
                                 </label>
