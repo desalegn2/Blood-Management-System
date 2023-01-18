@@ -99,8 +99,9 @@ All Admin Routes List
 --------------------------------------------*/
 Route::middleware(['auth', 'user-role:admin'])->group(function () {
 
+
     Route::get('/admin/home', [HomeController::class, 'dashboard'])->name('admin.home');
-    Route::get('/admin/send/{id}', [adminnotificationController::class, 'sendnotification']);
+    //  Route::get('/admin/send/{id}', [adminnotificationController::class, 'sendnotification']);
     Route::get('/admin/home', [AdminController::class, 'bloodavailability'])->name('admin.home');
     Route::get('/admin/aa', [AdminController::class, 'aa']);
     Route::view('/admin/user', 'admin.block_user');
@@ -176,6 +177,9 @@ Route::middleware(['auth', 'user-role:nurse'])->group(function () {
 
     Route::view('/nurse/enroll', 'nurse.registerDonor');
     Route::post('/nurse/enrolldonor', [nurseController::class, 'enrollDonor']);
+    Route::get('/nurse/notify', [nurseController::class, 'notifys']);
+    Route::get('/nurse/send/{id}', [nurseController::class, 'sendnotification']);
+
     Route::view('/nurse/advertise', 'nurse.advertise');
     Route::post('/nurse/advertise', [nurseController::class, 'advertise']);
     Route::get('/nurse/display', [donorReq::class, 'display']);

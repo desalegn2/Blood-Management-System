@@ -327,8 +327,8 @@
                     <div><label>Image</label><input type="file" name="photo" required></div>
                     <div>
                         <label>Gendor</label>
-                        <div>Male <input type="radio" name="gender" required></div>
-                        <div>Female<input type="radio" name="gender" required></div>
+                        <div>Male <input type="radio" value="male" name="gender" required></div>
+                        <div>Female<input type="radio" value="female" name="gender" required></div>
                     </div>
                 </div>
             </fieldset>

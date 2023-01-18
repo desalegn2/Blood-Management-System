@@ -307,7 +307,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="notify">
                         <span class="icon">
                             <ion-icon name="dice-sharp"></ion-icon>
                         </span>

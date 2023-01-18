@@ -10781,35 +10781,35 @@ body:not(.layout-fixed).layout-navbar-fixed.text-sm .wrapper .main-sidebar .side
 }
 
 .layout-navbar-fixed .wrapper .sidebar-light-primary .brand-link:not([class*="navbar"]) {
-  background-color: #fff;
+  background-color: #FF8B13;
 }
 
 .layout-navbar-fixed .wrapper .sidebar-dark-secondary .brand-link:not([class*="navbar"]) {
-  background-color: #343a40;
+  background-color: #FF8B13;
 }
 
 .layout-navbar-fixed .wrapper .sidebar-light-secondary .brand-link:not([class*="navbar"]) {
-  background-color: #fff;
+  background-color: #FF8B13;
 }
 
 .layout-navbar-fixed .wrapper .sidebar-dark-success .brand-link:not([class*="navbar"]) {
-  background-color: #343a40;
+  background-color: #FF8B13;
 }
 
 .layout-navbar-fixed .wrapper .sidebar-light-success .brand-link:not([class*="navbar"]) {
-  background-color: #fff;
+  background-color: #FF8B13;
 }
 
 .layout-navbar-fixed .wrapper .sidebar-dark-info .brand-link:not([class*="navbar"]) {
-  background-color: #343a40;
+  background-color: #FF8B13;
 }
 
 .layout-navbar-fixed .wrapper .sidebar-light-info .brand-link:not([class*="navbar"]) {
-  background-color: #fff;
+  background-color: #FF8B13;
 }
 
 .layout-navbar-fixed .wrapper .sidebar-dark-warning .brand-link:not([class*="navbar"]) {
-  background-color: #343a40;
+  background-color: #FF8B13;
 }
 
 .layout-navbar-fixed .wrapper .sidebar-light-warning .brand-link:not([class*="navbar"]) {
@@ -10821,31 +10821,31 @@ body:not(.layout-fixed).layout-navbar-fixed.text-sm .wrapper .main-sidebar .side
 }
 
 .layout-navbar-fixed .wrapper .sidebar-light-danger .brand-link:not([class*="navbar"]) {
-  background-color: #fff;
+  background-color: #FF8B13;
 }
 
 .layout-navbar-fixed .wrapper .sidebar-dark-light .brand-link:not([class*="navbar"]) {
-  background-color: #343a40;
+  background-color: #FF8B13;
 }
 
 .layout-navbar-fixed .wrapper .sidebar-light-light .brand-link:not([class*="navbar"]) {
-  background-color: #fff;
+  background-color: #FF8B13;
 }
 
 .layout-navbar-fixed .wrapper .sidebar-dark-dark .brand-link:not([class*="navbar"]) {
-  background-color: #343a40;
+  background-color: #FF8B13;
 }
 
 .layout-navbar-fixed .wrapper .sidebar-light-dark .brand-link:not([class*="navbar"]) {
-  background-color: #fff;
+  background-color: #FF8B13;
 }
 
 .layout-navbar-fixed .wrapper .sidebar-dark-lightblue .brand-link:not([class*="navbar"]) {
-  background-color: #343a40;
+  background-color: #FF8B13;
 }
 
 .layout-navbar-fixed .wrapper .sidebar-light-lightblue .brand-link:not([class*="navbar"]) {
-  background-color: #fff;
+  background-color: #FF8B13;
 }
 
 .layout-navbar-fixed .wrapper .sidebar-dark-navy .brand-link:not([class*="navbar"]) {
@@ -11841,7 +11841,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 }
 
 .main-footer {
-  background-color: #fff;
+  background-color: #FF8B13;
   border-top: 1px solid #dee2e6;
   color: #869099;
   padding: 1rem;
@@ -12336,8 +12336,8 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .navbar-dark .form-control-navbar,
 .navbar-dark .btn-navbar {
-  background-color: #343a40;
-  border-color: #6c757d;
+  background-color: #FF8B13;
+  border-color: #FF8B13;
 }
 
 .navbar-dark .form-control-navbar::-webkit-input-placeholder {
@@ -12566,15 +12566,15 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-  background-color: #a9a9a9;
+  background-color: #FF8B13;
 }
 
 .sidebar::-webkit-scrollbar-track {
-  background-color: transparent;
+  background-color: #FF8B13;
 }
 
 .sidebar::-webkit-scrollbar-corner {
-  background-color: transparent;
+  background-color: #FF8B13;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -12934,13 +12934,13 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
 .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #007bff;
-  color: #fff;
+  background-color: #FF8B13;
+  color: #FF8B13;
 }
 
 .sidebar-dark-primary .nav-sidebar.nav-legacy > .nav-item > .nav-link.active,
 .sidebar-light-primary .nav-sidebar.nav-legacy > .nav-item > .nav-link.active {
-  border-color: #007bff;
+  border-color: #FF8B13;
 }
 
 .sidebar-dark-secondary .nav-sidebar > .nav-item > .nav-link.active,

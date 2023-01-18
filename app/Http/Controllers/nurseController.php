@@ -12,6 +12,8 @@ use App\Models\reservationModel;
 use App\Models\donorRequestModel;
 use Illuminate\Support\Facades\Hash;
 use App\Models\enrollementModel;
+use Notification;
+use App\Notifications\sendNotification;
 
 class nurseController extends Controller
 {
@@ -190,5 +192,32 @@ class nurseController extends Controller
         }
         $var->save();
         return view('nurse.registerDonor')->with('success', 'Task Added Successfully!');
+    }
+    function notifys()
+    {
+        $var = enrollementModel::all();
+        return view('nurse.notify', ['donors' => $var]);
+    }
+    public function sendnotification($id)
+    {
+        try {
+
+            $msg = enrollementModel::where('id', $id)->get();
+            $details = [
+                'greeting' => 'hi',
+                'body' => 'how are you',
+                'acttext' => 'Dear customer, the day of donation has arrived',
+                'actionurl' => 'goto to our center',
+                'lastline' => 'last information',
+            ];
+            Notification::send($msg, new sendNotification($details));
+            dd('done');
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Something went wrong in nurseController.sendnotification',
+                'error' => $e->getMessage()
+            ], 400);
+            //return view('nurse.notify')->with('success', 'Message send Successfully!');
+        }
     }
 }

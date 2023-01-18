@@ -34,4 +34,8 @@ class enrollementModel extends Model
         'typeofdonation',
         'email',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

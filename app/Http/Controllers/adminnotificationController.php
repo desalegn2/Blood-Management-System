@@ -26,8 +26,7 @@ class adminnotificationController extends Controller
             'actionurl' => 'goto to login',
             'lastline' => 'last information',
         ];
-
-        Notification::send($user, new sendNotification($details));
+        // Notification::send($user, new sendNotification($details));
         //return view('admin.viewNewUser');
         return redirect('admin/home')->with('success', 'Task Added Successfully!');
         // return redirect()->back()->with('success', 'Task Added Successfully!');

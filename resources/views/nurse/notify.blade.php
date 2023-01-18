@@ -1,24 +1,21 @@
+@extends('nurse.sidebar')
+@section('content')
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset='UTF-8'>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <title>Responsive Table</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/style.css">
 
-    <!--[if !IE]><!-->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -61,48 +58,6 @@
             padding: 6px;
             border: 1px solid #ccc;
             text-align: left;
-        }
-
-        /* dropdown css*/
-        .dropbtn {
-            background-color: #04AA6D;
-            color: white;
-            padding: 16px;
-            font-size: 16px;
-            border: none;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f1f1f1;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown:hover .dropbtn {
-            background-color: #3e8e41;
         }
 
         /* 
@@ -214,11 +169,6 @@
         }
 
         /* From separet style ----------- */
-        .modalpop-body {
-            background: brown;
-            margin: 30px;
-            font-size: 24px;
-        }
     </style>
     <!--<![endif]-->
 
@@ -227,70 +177,58 @@
 <body>
 
     <div id="page-wrap">
+        <a class="btn btn-success" href="{{url('nurse/home')}}">Home</a>
 
-        <h1>Total users IN BBBMS</h1>
-        <a class="btn btn-success" href="home">Home</a>
+        <h1>Donors Who send request</h1>
 
 
 
+        <p></p>
 
         <table>
             <thead>
                 <tr>
-                    <th>user Name</th>
+                    <th>photo</th>
+                    <th>Full Name</th>
                     <th>email</th>
-                    <th>User Type</th>
-                    <th>Give Permision</th>
-
+                    <th>Phone</th>
+                    <th>blood Type</th>
+                    <th>Status</th>
+                    <th>Duration</th>
+                    <th>Notify</th>
+                    <th>Operation</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($views as $view)
+                @foreach ($donors as $donor)
+                @for($i=$donor->created_at->diffInMinutes(\Carbon\Carbon::now());$i>=155;$i--)
                 <tr>
-                    <td>{{$view->name}}</td>
-                    <td>{{$view->email}}</td>
-                    <td>{{$view->usertype}}</td>
+
                     <td>
-                        <div class="dropdown">
-                            <button class="dropbtn">Permision</button>
-                            <div class="dropdown-content">
-                                <a href="{{url('admin/donorpermision', $view->id)}}">Donor</a>
-                                <a href="{{url('admin/nursepermision', $view->id)}}">Nurse</a>
-                                <a href="{{url('admin/technicianpermision', $view->id)}}">Technician</a>
-                                <a href="{{url('admin/healthpermision', $view->id)}}">Health Institution</a>
-                            </div>
-                        </div>
-
+                        <img src="{{asset('uploads/registers/'.$donor->photo)}}" width="80" height="80">
                     </td>
-
+                    <td>{{$donor->fullname}}</td>
+                    <td>{{$donor->email}}</td>
+                    <td>{{$donor->phone}}</td>
+                    <td>{{$donor->bloodtype}}</td>
+                    <td>{{$donor->status}}</td>
+                    <td>{{ $donor->created_at->diffInMinutes(\Carbon\Carbon::now()) }} min ago</td>
+                    <td>
+                        <a class="btn btn-success" href="{{url('nurse/send', $donor->id)}}">Notify By Email</a>
+                    </td>
+                    <td>
+                        <a href="#delete{{$donor->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</a>
+                    </td>
                 </tr>
+                @break
+                @endfor
                 @endforeach
             </tbody>
         </table>
 
     </div>
     @include('sweetalert::alert')
-    <script>
-        /* When the user clicks on the button, 
-                              toggle between hiding and showing the dropdown content */
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-    </script>
 </body>
 
 </html>
+@endsection
