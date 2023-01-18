@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
+    <title>Nurse page</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -315,11 +315,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{url('/nurse/enroll')}}">
                         <span class="icon">
                             <ion-icon name="dice-sharp"></ion-icon>
                         </span>
-                        <span class="title">Add News</span>
+                        <span class="title">Enroll Donor</span>
                     </a>
                 </li>
                 <li>

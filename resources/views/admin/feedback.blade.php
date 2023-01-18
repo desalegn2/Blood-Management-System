@@ -1,3 +1,5 @@
+@extends('admin.adminlte')
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -141,7 +143,7 @@
             <div class="row">
                 <!-- one card -->
                 @foreach ($feedback as $view)
-                <div class="col-lg-6 mt-4">
+                <div class="card col-lg-6 mt-4 ml-2">
                     <div class="member d-flex align-items-start">
 
                         <div class="teampic">
@@ -151,7 +153,7 @@
             border-radius: 50%;" src="{{asset('uploads/registers/'.$view->photo)}}" alt="Image not display">
                         </div>
                         <div class="member-info" style="padding-left: 30px;">
-                            <h2>{{$view->name}} </h2>
+                            <h2><a href="#">{{$view->name}}</a> </h2>
                             <h4>{{ $view->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</h4>
 
                             <h5>{{$view->email}}</h5>
@@ -173,3 +175,4 @@
 </body>
 
 </html>
+@endsection

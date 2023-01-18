@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('seekerregister', function (Blueprint $table) {
-            $table->id();
-            $table->string('fname');
-            $table->string('lname');
-            $table->string('email');
-            $table->string('password');
-            $table->string('phone');
-            $table->timestamps();
+        Schema::table('enrolldonor', function (Blueprint $table) {
+            $table->dropColumn('lastname');
         });
     }
 
@@ -31,6 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seekerregister');
+        //
     }
 };

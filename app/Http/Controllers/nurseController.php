@@ -11,6 +11,7 @@ use App\Models\advertises;
 use App\Models\reservationModel;
 use App\Models\donorRequestModel;
 use Illuminate\Support\Facades\Hash;
+use App\Models\enrollementModel;
 
 class nurseController extends Controller
 {
@@ -154,5 +155,40 @@ class nurseController extends Controller
         $res->appointmentdate = $var;
         $res->save();
         return redirect()->back()->with('success', 'Task Added Successfully!');
+    }
+    function enrollDonor(Request $req)
+    {
+        $var = new enrollementModel;
+        $var->user_id = $req->user_id;
+        $var->fullname = $req->fullname;
+        $var->occupation = $req->occupation;
+        $var->email = $req->email;
+        $var->phone = $req->phone;
+        $var->gender = $req->gender;
+        $var->bloodpressure = $req->bloodpressure;
+        $var->bloodtype = $req->bloodtype;
+        $var->volume = $req->volume;
+        $var->hct = $req->hct;
+        $var->remark = $req->remark;
+        $var->weight = $req->weight;
+        $var->height = $req->height;
+        $var->rh = $req->rh;
+        $var->bithdate = $req->birthdate;
+        $var->state = $req->state;
+        $var->city = $req->city;
+        $var->zone = $req->zone;
+        $var->woreda = $req->woreda;
+        $var->kebelie = $req->kebelie;
+        $var->housenumber = $req->housenumber;
+        $var->typeofdonation = $req->typeofdonation;
+        if ($req->hasfile('photo')) {
+            $file = $req->file('photo');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('uploads/registers', $filename);
+            $var->photo =  $filename;
+        }
+        $var->save();
+        return view('nurse.registerDonor')->with('success', 'Task Added Successfully!');
     }
 }

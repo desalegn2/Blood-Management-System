@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4" style="color: #FF8B13;">
     <!-- Brand Logo -->
     <a href="" class="brand-link">
         <img src="{{asset('backend/dist/img/AdminLTELogo.png')}}" alt="BBBMS" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -6,7 +6,7 @@
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" style="color: #FF8B13;">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">

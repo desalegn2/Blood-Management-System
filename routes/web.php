@@ -174,6 +174,8 @@ Route::middleware(['auth', 'user-role:nurse'])->group(function () {
     Route::get('/nurse/profile/{id}', [nurseController::class, 'Profile']);
     Route::post('/nurse/changepassword', [nurseController::class, 'changepassword']);
 
+    Route::view('/nurse/enroll', 'nurse.registerDonor');
+    Route::post('/nurse/enrolldonor', [nurseController::class, 'enrollDonor']);
     Route::view('/nurse/advertise', 'nurse.advertise');
     Route::post('/nurse/advertise', [nurseController::class, 'advertise']);
     Route::get('/nurse/display', [donorReq::class, 'display']);
@@ -219,7 +221,7 @@ Route::middleware(['auth', 'user-role:technitian'])->group(function () {
 
 Route::middleware(['auth', 'user-role:healthinstitute'])->group(function () {
     Route::get('/healthinstitute/home', [HomeController::class, 'healthinstituteHome'])->name('healthinstitute.home');
-    Route::get('/healthinstitute/home', [hospitalRequestController::class, 'viewblood'])->name('technitian.home');
+    Route::get('/healthinstitute/home', [hospitalRequestController::class, 'viewblood'])->name('healthinstitute.home');
     Route::view('/healthinstitute/seekerRegister', 'healthinstitute.postSeeker');
     Route::view('/healthinstitute/profile', 'healthinstitute.profile');
     Route::post('/healthinstitute/profile', [healthinstituteController::class, 'profile']);

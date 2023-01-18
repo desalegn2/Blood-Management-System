@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\addBloodModel;
 use App\Models\discardBloodModel;
-use App\Models\adminsend;
+use App\Models\hospitalRequestModel;
 use App\Models\distributeBloodModel;
 
 class techController extends Controller
@@ -149,7 +149,7 @@ class techController extends Controller
 
     function distribute()
     {
-        $dist = adminsend::all()->where('readat', '=', 'unread');
+        $dist = hospitalRequestModel::all()->where('readat', '=', 'unread');
         return view('technitian.distributeToHospital', ['dist' => $dist]);
     }
 
@@ -351,7 +351,7 @@ class techController extends Controller
     }
     function read($id)
     {
-        $res = adminsend::find($id);
+        $res = hospitalRequestModel::find($id);
         $res->readat = "read";
         $res->save();
         return redirect()->back();
@@ -360,7 +360,7 @@ class techController extends Controller
     function viewblood()
     {
         $bloods = addBloodModel::paginate(10);
-        $numberof_message = adminsend::where('readat', 'unread')->count();
+        $numberof_message = hospitalRequestModel::where('readat', 'unread')->count();
         // $now = Carbon::now();
         //$created_at = Carbon::parse($calls['created_at']);
         //$diffMinutes = $created_at->diffInMinutes($now);

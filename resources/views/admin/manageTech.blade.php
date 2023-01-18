@@ -18,10 +18,10 @@
             libero voluptates impedit laudantium distinctio obcaecati excepturi amet. Possimus, minima.</h1>
         <div class="row">
             <div class="col-md-12 col-md-offset-1">
-                <h2> <a href="home" class="btn btn-primary btn-block">{{ __('Back') }}</a>
-                    Manage Technitian
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add</button>
-                </h2>
+                <h2> <a href="home" class="btn btn-primary btn-block">{{ __('Back') }}</a> </h2>
+                Manage Technitian
+                <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add</button>
+
 
             </div>
         </div>
@@ -33,10 +33,12 @@
                         <th>Email</th>
                         <th>Action</th>
                         <th>Block User</th>
+                        <th>Image</th>
                     </thead>
                     <tbody>
                         @foreach($members as $member)
                         <tr>
+                            <td><img class="img-fluid" src="{{asset('uploads/registers/'.$member->photo)}}" alt="This user not insert photo"></td>
                             <td>{{$member->name}}</td>
                             <td>{{$member->email}}</td>
                             <td>

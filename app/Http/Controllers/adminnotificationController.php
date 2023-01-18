@@ -9,8 +9,10 @@ use App\Notifications\sendNotification;
 
 class adminnotificationController extends Controller
 {
-    public function sendnotification(Request $id)
+
+    public function sendnotification($id)
     {
+
         $user = User::find($id);
         $details = [
             // 'greeting' => $request->greeting,
@@ -22,9 +24,12 @@ class adminnotificationController extends Controller
             'body' => 'wellcome',
             'acttext' => 'you can login',
             'actionurl' => 'goto to login',
-            'lastline' => 'jvsdhvds',
+            'lastline' => 'last information',
         ];
+
         Notification::send($user, new sendNotification($details));
-        dd("done");
+        //return view('admin.viewNewUser');
+        return redirect('admin/home')->with('success', 'Task Added Successfully!');
+        // return redirect()->back()->with('success', 'Task Added Successfully!');
     }
 }
