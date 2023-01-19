@@ -12,7 +12,8 @@ use App\Models\reservationModel;
 use App\Models\donorRequestModel;
 use Illuminate\Support\Facades\Hash;
 use App\Models\enrollementModel;
-use Notification;
+use \Notification;
+use Illuminate\Notifications\Messages\MailMessage;
 use App\Notifications\sendNotification;
 
 class nurseController extends Controller
@@ -200,18 +201,19 @@ class nurseController extends Controller
     }
     public function sendnotification($id)
     {
+        $details = [
+            'greeting' => 'hi',
+            'body' => 'how are you',
+            'acttext' => 'Dear customer, the day of donation has arrived',
+            'actionurl' => 'goto to our center',
+            'lastline' => 'last information',
+        ];
         try {
 
-            $msg = enrollementModel::where('id', $id)->get();
-            $details = [
-                'greeting' => 'hi',
-                'body' => 'how are you',
-                'acttext' => 'Dear customer, the day of donation has arrived',
-                'actionurl' => 'goto to our center',
-                'lastline' => 'last information',
-            ];
-            Notification::send($msg, new sendNotification($details));
-            dd('done');
+            $msg = enrollementModel::find($id);
+
+            \Notification::send($msg, new sendNotification($details));
+            return view('nurse.nurseHome')->with('success', 'Message send Successfully!');
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Something went wrong in nurseController.sendnotification',
