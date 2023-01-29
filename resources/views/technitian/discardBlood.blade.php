@@ -68,7 +68,7 @@
     <div class="form-data">
         <div class="heading">
             <h2> Discard Blood Registry </h2>
-            <a type="reset" href="home">Back</a>
+            <a href="{{ URL::previous() }}">Back</a>
         </div>
         <div>
             <form action="discardblood" method="post">

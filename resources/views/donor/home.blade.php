@@ -196,9 +196,9 @@
                     <h3 class="name">Provision of Red Blood Cell</h3>
                     <!-- <p class="title">email</p> -->
                     <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique corporis libero dolores vero autem, ipsa rerum tempora magnam placeat magni! Nesciunt aspernatur libero id eaque quas quae corrupti a totam!</p>
-                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+
                     <div class="social"><a href="">View Detail</a></div>
-                    <a href="mailto:">Send Reservation</a>
+
                 </div>
             </div>
             <div class="col-md-6 col-lg-4 item">
@@ -206,9 +206,9 @@
                     <h3 class="name">Blood Donation</h3>
                     <!-- <p class="title">email</p> -->
                     <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique corporis libero dolores vero autem, ipsa rerum tempora magnam placeat magni! Nesciunt aspernatur libero id eaque quas quae corrupti a totam!</p>
-                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+
                     <div class="social"><a href="">View Detail</a></div>
-                    <a href="mailto:">Send Reservation</a>
+
                 </div>
             </div>
             <div class="col-md-6 col-lg-4 item">
@@ -216,19 +216,19 @@
                     <h3 class="name">Blood Storage</h3>
                     <!-- <p class="title">email</p> -->
                     <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique corporis libero dolores vero autem, ipsa rerum tempora magnam placeat magni! Nesciunt aspernatur libero id eaque quas quae corrupti a totam!</p>
-                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+
                     <div class="social"><a href="">View Detail</a></div>
-                    <a href="mailto:">Send Reservation</a>
+
                 </div>
             </div>
             <div class="col-md-6 col-lg-4 item">
                 <div class="box"><img style="width:236px; height:279px" class="" src="{{asset('assets/imgs/c.jpg')}}">
-                    <h3 class="name">Blood Storage</h3>
+                    <h3 class="name">Blood Camp Management</h3>
                     <!-- <p class="title">email</p> -->
                     <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique corporis libero dolores vero autem, ipsa rerum tempora magnam placeat magni! Nesciunt aspernatur libero id eaque quas quae corrupti a totam!</p>
-                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+
                     <div class="social"><a href="">View Detail</a></div>
-                    <a href="mailto:">Send Reservation</a>
+
                 </div>
             </div>
             <div class="col-md-6 col-lg-4 item">
@@ -236,19 +236,19 @@
                     <h3 class="name">provision of platlets</h3>
                     <!-- <p class="title">email</p> -->
                     <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique corporis libero dolores vero autem, ipsa rerum tempora magnam placeat magni! Nesciunt aspernatur libero id eaque quas quae corrupti a totam!</p>
-                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+
                     <div class="social"><a href="">View Detail</a></div>
-                    <a href="mailto:">Send Reservation</a>
+
                 </div>
             </div>
             <div class="col-md-6 col-lg-4 item">
                 <div class="box"><img class="" style="width:236px; height:279px" src="{{asset('assets/imgs/bloodstorage.jpg')}}">
-                    <h3 class="name">Blood Storage</h3>
+                    <h3 class="name">Donor Management</h3>
                     <!-- <p class="title">email</p> -->
                     <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique corporis libero dolores vero autem, ipsa rerum tempora magnam placeat magni! Nesciunt aspernatur libero id eaque quas quae corrupti a totam!</p>
-                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+
                     <div class="social"><a href="">View Detail</a></div>
-                    <a href="mailto:">Send Reservation</a>
+
                 </div>
             </div>
         </div>

@@ -13,6 +13,7 @@ class techController extends Controller
     function discardblood(Request $req)
     {
 
+
         $aplus_stored = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
         $aminus_stored = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
         $oplus_stored = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
@@ -56,6 +57,7 @@ class techController extends Controller
                 $var->unitdiscarded = $req->unitdiscard;
                 $var->reason = $req->message;
                 $var->save();
+
                 return redirect('technitian/discardblood')->with('success', 'Task Added Successfully!');
             } else {
                 return redirect('technitian/discardblood')->with('warning', 'you enter wrong amount!');
@@ -134,6 +136,7 @@ class techController extends Controller
             }
         } else if ($req->bloodtype == 'O+') {
             if ($oplus >= $req->unitdiscard) {
+
                 $var = new discardBloodModel;
                 $var->user_id = $req->user_id;
                 $var->bloodGroup = $req->bloodtype;
@@ -313,6 +316,7 @@ class techController extends Controller
         $var->user_id = $req->user_id;
         $var->bloodgroup = $req->bloodtype;
         $var->volume = $req->volume;
+        $var->packno = $req->packno;
         $var->donationtype = $req->donationtype;
         $var->save();
         return redirect()->back()->with('success', 'Task Added Successfully!');

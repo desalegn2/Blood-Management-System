@@ -49,6 +49,6 @@ class donorReq extends Controller
     function viewdetail($id)
     {
         $donors = donorRequest::find($id);
-        return view('admin.viewDonorDetail', ['donors' => $donors]);
+        return view('nurse.donorDetail', ['donors' => $donors]);
     }
 }

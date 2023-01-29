@@ -12,6 +12,7 @@ use App\Http\Requests\Auth\LoginRequest;
 class LoginController extends Controller
 {
     /*
+    bbmanager
     |--------------------------------------------------------------------------
     | Login Controller
     |--------------------------------------------------------------------------
@@ -53,8 +54,14 @@ class LoginController extends Controller
 
         if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
 
-            if (auth()->user()->role == 'null') {
-                return redirect('login');
+            if (auth()->user()->role == 'bbmanager') {
+                if (auth()->user()->isBlocked == 1) {
+                    Auth::logout();
+                    return
+                        redirect()->route('login')
+                        ->with('warning', 'User has been blocked please contanct administrator.');
+                }
+                return redirect()->route('bbmanager.home');
             }
             if (auth()->user()->role == 'admin') {
                 return redirect()->route('admin.home');

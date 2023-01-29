@@ -214,15 +214,7 @@
             font-weight: 500;
         }
 
-        .recentCustomers {
-            position: relative;
-            display: grid;
-            min-height: 500px;
-            padding: 20px;
-            background: var(--white);
-            box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-            border-radius: 20px;
-        }
+
 
         .recentCustomers .imgBx {
             position: relative;
@@ -257,7 +249,7 @@
         }
 
         .recentCustomers table tr:hover {
-            background: var(--blue);
+            background: red;
             color: var(--white);
         }
 
@@ -357,7 +349,7 @@
             <div class="row">
                 <div class="col-12 mt-3 mb-1">
                     <h4 class="text-uppercase">Total Blood Donor Register with us</h4>
-                    <p>Statistics on minimal cards.</p>
+
                 </div>
             </div>
             <div class="row">
@@ -365,16 +357,18 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body">
+                            <div class="card-body" style="background-color: #8EA7E9;">
                                 <div class="media d-flex">
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
                                     </div>
                                     <div class="media-body text-right">
-                                        <a href="#">
-                                            <h3>278</h3>
-                                            <span>A-</span>
+                                        <a href="{{url('nurse/aminusdonor')}}">
+                                            <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
                                         </a>
+                                        <h3>278</h3>
+                                        <span>A-</span>
+
                                     </div>
                                 </div>
                             </div>
@@ -384,12 +378,13 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body">
+                            <div class="card-body" style="background-color: #8EA7E9;">
                                 <div class="media d-flex">
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
                                     </div>
                                     <div class="media-body text-right">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
                                         <h3>156</h3>
                                         <span>A+</span>
                                     </div>
@@ -401,12 +396,13 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body">
+                            <div class="card-body" style="background-color: #8EA7E9;">
                                 <div class="media d-flex">
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
                                     </div>
                                     <div class="media-body text-right">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
                                         <h3>64.89 %</h3>
                                         <span>B-</span>
                                     </div>
@@ -418,12 +414,13 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body">
+                            <div class="card-body" style="background-color: #8EA7E9;">
                                 <div class="media d-flex">
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
                                     </div>
                                     <div class="media-body text-right">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
                                         <h3>423</h3>
                                         <span>B+</span>
                                     </div>
@@ -439,9 +436,10 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body">
+                            <div class="card-body" style="background-color: #8EA7E9;">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
                                         <h3 class="danger">278</h3>
                                         <span>AB-</span>
                                     </div>
@@ -456,9 +454,10 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body">
+                            <div class="card-body" style="background-color: #8EA7E9;">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
                                         <h3 class="success">156</h3>
                                         <span>AB+</span>
                                     </div>
@@ -474,9 +473,10 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body">
+                            <div class="card-body" style="background-color: #8EA7E9;">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
                                         <h3 class="warning">64.89 %</h3>
                                         <span>O-</span>
                                     </div>
@@ -491,9 +491,10 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body">
+                            <div class="card-body" style="background-color: #8EA7E9;">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
                                         <h3 class="primary">423</h3>
                                         <span>O+</span>
                                     </div>
@@ -506,16 +507,14 @@
                     </div>
                 </div>
             </div>
-
-
         </section>
 
-        <!-- <section id="stats-subtitle">
+        <section id="stats-subtitle">
 
             <div class="row">
                 <div class="col-12 mt-3 mb-1">
-                    <h4 class="text-uppercase">Statistics With Subtitle</h4>
-                    <p>Statistics on minimal cards with Title &amp; Sub Title.</p>
+                    <h4 class="text-uppercase">Statistics </h4>
+                    <p>Statistics on &amp; </p>
                 </div>
             </div>
 
@@ -526,11 +525,12 @@
                             <div class="card-body cleartfix">
                                 <div class="media align-items-stretch">
                                     <div class="align-self-center">
-                                        <i class="icon-pencil primary font-large-2 mr-2"></i>
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
                                     </div>
                                     <div class="media-body">
-                                        <h4>Total Posts</h4>
-                                        <span>Monthly blog posts</span>
+
+                                        <h4>Total Donor Registered</h4>
+                                        <span></span>
                                     </div>
                                     <div class="align-self-center">
                                         <h1>18,000</h1>
@@ -547,10 +547,10 @@
                             <div class="card-body cleartfix">
                                 <div class="media align-items-stretch">
                                     <div class="align-self-center">
-                                        <i class="icon-speech warning font-large-2 mr-2"></i>
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
                                     </div>
                                     <div class="media-body">
-                                        <h4>Total Comments</h4>
+                                        <h4>Total Enrolled</h4>
                                         <span>Monthly blog comments</span>
                                     </div>
                                     <div class="align-self-center">
@@ -562,51 +562,7 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-xl-6 col-md-12">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body cleartfix">
-                                <div class="media align-items-stretch">
-                                    <div class="align-self-center">
-                                        <h1 class="mr-2">$76,456.00</h1>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>Total Sales</h4>
-                                        <span>Monthly Sales Amount</span>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <i class="icon-heart danger font-large-2"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-6 col-md-12">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body cleartfix">
-                                <div class="media align-items-stretch">
-                                    <div class="align-self-center">
-                                        <h1 class="mr-2">$36,000.00</h1>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>Total Cost</h4>
-                                        <span>Monthly Cost</span>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <i class="icon-wallet success font-large-2"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
+        </section>
 
     </div>
 
@@ -621,14 +577,14 @@
         <div class="recentOrders">
             <div class="cardHeader">
                 <h2>Manage Reservation</h2>
-                <a href="#" class="btn">View All</a>
+                <a href="{{url('nurse/reservation')}}" class="btn">View All</a>
             </div>
             <table>
                 <thead>
                     <tr>
                         <td>Name</td>
                         <td>Phone</td>
-                        <td>photo</td>
+
                         <td>Status</td>
                         <td>Opration</td>
 
@@ -640,7 +596,7 @@
                     <tr>
                         <td>{{$dis->name}}</td>
                         <td>{{$dis->phone}}</td>
-                        <td><img src="{{asset('uploads/registers/'.$dis->photo)}}" width="80" height="80"></td>
+
                         <td>{{$dis->status}}</td>
 
                         <td>

@@ -1,5 +1,6 @@
-@extends('technitian.sidebar')
+@extends('bloodBankManager.sidebar')
 @section('content')
+
 <!DOCTYPE html>
 <html>
 
@@ -177,10 +178,7 @@
     <div id="page-wrap">
 
         <h1>Incoming Blood Request</h1>
-        <a class="btn btn-success" href="{{url('technitian/home')}}">Home</a>
-
-
-
+        <a class="btn btn-success" href="{{ url()->previous() }}">Home</a>
         <table>
             <thead>
                 <tr>
@@ -194,7 +192,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($dist as $dis)
+                @foreach ($req as $dis)
                 <tr>
                     <td>{{$dis->hospitalname}}</td>
                     <td>{{$dis->bloodgroup}}</td>
@@ -204,7 +202,7 @@
                     <td>
                         <a href="#distribute{{$dis->id}}" data-bs-toggle="modal" class="btn btn-info"><i class='fa fa-edit'></i> Distribute</a>
                         <a href="#delete{{$dis->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</a>
-                        @include('technitian.distmodal')
+                        @include('bloodBankManager.distModal')
                     </td>
                 </tr>
                 @endforeach

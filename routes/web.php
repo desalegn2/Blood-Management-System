@@ -24,6 +24,7 @@ use App\Http\Controllers\donorController;
 use App\Http\Controllers\healthinstituteController;
 use App\Http\Controllers\nurseController;
 use App\Http\Controllers\techController;
+use App\Http\Controllers\bbManagerController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -165,8 +166,10 @@ Route::middleware(['auth', 'user-role:admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'user-role:nurse'])->group(function () {
+
     Route::get('/nurse/home', [HomeController::class, 'nurseHome'])->name('nurse.home');
     // Route::view('/nurse/newhome', 'nurse.home');
+    Route::get('/nurse/report', [nurseController::class, 'generateReport']);
     Route::view('/nurse/profile', 'nurse.profile');
     Route::view('/nurse/insert', 'nurse.insertProfile');
     Route::post('/nurse/insertprofiles', [nurseController::class, 'insertprofile']);
@@ -199,8 +202,11 @@ Route::middleware(['auth', 'user-role:nurse'])->group(function () {
     Route::get('/nurse/accept/{id}', [nurseController::class, 'accept']);
     Route::get('/nurse/notaccept/{id}', [nurseController::class, 'notAccept']);
     Route::patch('/nurse.changereservation/{id}', [nurseController::class, 'changeReservation']);
+
+    Route::get('/nurse/aminusdonor', [nurseController::class, 'aminusDonor']);
 });
 Route::middleware(['auth', 'user-role:technitian'])->group(function () {
+
     Route::get('/technitian/home', [HomeController::class, 'technitanHome'])->name('technitian.home');
     Route::view('/technitian/addbloods', 'technitian.addBlood');
     Route::post('/technitian/addbloods', [techController::class, 'addblood']);
@@ -224,6 +230,7 @@ Route::middleware(['auth', 'user-role:technitian'])->group(function () {
 });
 
 Route::middleware(['auth', 'user-role:healthinstitute'])->group(function () {
+
     Route::get('/healthinstitute/home', [HomeController::class, 'healthinstituteHome'])->name('healthinstitute.home');
     Route::get('/healthinstitute/home', [hospitalRequestController::class, 'viewblood'])->name('healthinstitute.home');
     Route::view('/healthinstitute/seekerRegister', 'healthinstitute.postSeeker');
@@ -244,4 +251,14 @@ Route::middleware(['auth', 'user-role:healthinstitute'])->group(function () {
     // Route::view('/healthinstitute/mypost', 'healthinstitute.mypost');
     Route::get('/healthinstitute/mypost/{id}', [hospitalRequestController::class, 'mypost']);
     Route::delete('/healthinstitute/deletepost/{id}', [hospitalRequestController::class, 'deletepost']);
+});
+
+Route::middleware(['auth', 'user-role:bbmanager'])->group(function () {
+    Route::get('/bbmanager/home', [HomeController::class, 'bbmanagerHome'])->name('bbmanager.home');
+    Route::get('/bbmanager/report', [bbManagerController::class, 'Reports']);
+    Route::get('/bbmanager/generatereport', [bbManagerController::class, 'view']);
+    // Route::view('/bbmanager/tes', 'bloodBankManager.pdf.report');
+    Route::get('/bbmanager/res', [bbManagerController::class, 'rest']);
+
+    Route::get('/bbmanager/request', [bbManagerController::class, 'requests']);
 });

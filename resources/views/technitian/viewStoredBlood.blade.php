@@ -25,6 +25,7 @@
 
         body {
             font: 14px/1.4 Georgia, Serif;
+            width: 100%;
         }
 
         #page-wrap {
@@ -185,11 +186,13 @@
 
         <a class="btn btn-success" href="{{url('technitian/home')}}">Home</a>
         <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add</button>
+        <br><br>
         <table>
             <thead>
                 <tr>
                     <th>Blood Group</th>
                     <th>Volume</th>
+                    <th>Pack Number</th>
                     <th>duration</th>
                     <th>Action</th>
 
@@ -200,6 +203,7 @@
                 <tr>
                     <td>{{$bloods->bloodgroup}}</td>
                     <td>{{$bloods->volume}}</td>
+                    <td>{{$bloods->packno}}</td>
                     <td scope="row">{{ $bloods->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
                     <td>
                         <a href="#setexpaired{{$bloods->id}}" data-bs-toggle="modal" class="btn btn-info"><i class='fa fa-edit'></i> fillDiscard</a>
@@ -212,7 +216,7 @@
         </table>
 
     </div>
-    <!-- Add Modal -->
+    <!-- Add Blood Modal -->
     <div class="modal fade" id="addnew" tabindex="-1" aria-labelledby="addnewModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -220,14 +224,21 @@
                     <h5 class="modal-title" id="addnewModalLabel">Register Blood</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
                 <div class="modal-body">
                     {!! Form::open(['url' => 'technitian/addbloods']) !!}
                     <div class="mb-3">
                         {!! Form::hidden('user_id', Auth::user()->id, ['class' => 'form-control']) !!}
                     </div>
                     <div class="mb-3">
+                        {!! Form::label('packno', 'Pack Number') !!}
+                        {!! Form::text('packno', '', ['class' => 'form-control', 'placeholder' => 'Input pack number', 'required']) !!}
+                    </div>
+                    <div class="mb-3">
                         {!! Form::label('bloodtype', 'Blood Type') !!}
-                        {!! Form::text('bloodtype', '', ['class' => 'form-control', 'placeholder' => 'Input blood type', 'required']) !!}
+                        {!! Form::select('bloodtype', array(''=>'choose Blood Type', 'A-' => 'A-', 'A+' => 'A+','B-' => 'B-', 'B+' => 'B+',
+                        'AB-' => 'AB-', 'AB+' => 'AB+','O-' => 'O-','O+'=>'O+')) !!}
+
                     </div>
                     <div class="mb-3">
                         {!! Form::label('volume', 'Volume') !!}

@@ -193,15 +193,15 @@
                         <h3> About Us</h3>
                         <ul>
                             <li> <a href="#"> about us </a> </li>
-                            <li> <a href="#">How It Works</a> </li>
-                            <li> <a href="#"> Contact Us </a> </li>
+                            <li> <a href="#">Nurse</a> </li>
+                            <li> <a href="#"> Technician </a> </li>
                         </ul>
                     </div>
                     <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                        <h3> Want To Donate</h3>
+                        <h3> Looking For Blood</h3>
                         <ul>
-                            <li> <a href="#">Blood Donation Camp </a> </li>
-                            <li> <a href="#">About Blood Donation </a> </li>
+                            <li> <a href="#">Blood Availability </a> </li>
+                            <li> <a href="#">Blood Request </a> </li>
 
                         </ul>
                     </div>

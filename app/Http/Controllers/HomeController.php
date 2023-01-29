@@ -37,6 +37,10 @@ class HomeController extends Controller
     }
 
 
+    public function bbmanagerHome()
+    {
+        return view('bloodBankManager.home');
+    }
     public function donorHome()
     {
         return view('donor.home');

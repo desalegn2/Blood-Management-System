@@ -180,11 +180,7 @@
         <a class="btn btn-success" href="{{url('nurse/home')}}">Home</a>
 
         <h1>Donors Who send request</h1>
-
-
-
-        <p></p>
-
+        <a href="{{url('nurse/report')}}">Report</a>
         <table>
             <thead>
                 <tr>

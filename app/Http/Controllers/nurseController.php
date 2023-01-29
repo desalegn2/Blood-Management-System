@@ -13,11 +13,23 @@ use App\Models\donorRequestModel;
 use Illuminate\Support\Facades\Hash;
 use App\Models\enrollementModel;
 use \Notification;
+use PDF;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Notifications\sendNotification;
 
 class nurseController extends Controller
 {
+    function viewdetail($id)
+    {
+        $donors = donorRequestModel::find($id);
+        return view('nurse.donorDetail', ['donors' => $donors]);
+    }
+
+    function aminusDonor()
+    {
+        $aminus = donorRequestModel::all()->where('bloodtype', '=', 'A-');
+        return view('nurse.aminusDonor', ['aminusdonors' => $aminus]);
+    }
     function insertprofile(Request $req)
     {
         $var = new nurseprofile;
@@ -107,7 +119,8 @@ class nurseController extends Controller
         //$stats = donorRequestModel::all()->orderBy('created_at', 'desc')->take(4);
         $date = \Carbon\Carbon::today()->subDays(1);
         $stats = donorRequestModel::where('created_at', '>=', $date)->get();
-        $display1 = approvedViewModel::all()->where('status', '=', 'Approved');
+        $display1 = reservationModel::all();
+
         return view('nurse.nurseHome', compact('display1', 'stats'));
     }
     function Profile($id)
@@ -197,6 +210,7 @@ class nurseController extends Controller
     function notifys()
     {
         $var = enrollementModel::all();
+
         return view('nurse.notify', ['donors' => $var]);
     }
     public function sendnotification($id)
@@ -221,5 +235,10 @@ class nurseController extends Controller
             ], 400);
             //return view('nurse.notify')->with('success', 'Message send Successfully!');
         }
+    }
+    public function generateReport()
+    {
+        $pdf = PDF::loadView('nurse.viewDonor');
+        return $pdf->download('demo.pdf');
     }
 }

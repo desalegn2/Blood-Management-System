@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technician Page</title>
+    <title>Manager Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
@@ -283,14 +283,9 @@
         <div class="navigation">
             <ul>
                 <li>
-                <li href="#">
-                    <a>
-                        {{ Auth::user()->name }}
-                    </a>
-                </li>
 
                 <li>
-                    <a href="{{url('/technitian/home')}}">
+                    <a href="{{url('/bbmanager/home')}}">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -298,36 +293,38 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('/technitian/discardblood')}}">
+                    <a href="{{url('/bbmanager/')}}">
                         <span class="icon">
                             <ion-icon name="bag-remove-outline"></ion-icon>
                         </span>
-                        <span class="title">Discard Blood</span>
+                        <span class="title">Post Information</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{url('/technitian/distributetohospital')}}">
+                    <a href="{{url('/bbmanager/')}}">
+                        <span class="icon">
+                            <ion-icon name="bag-remove-outline"></ion-icon>
+                        </span>
+                        <span class="title">Available Blood</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{url('/bbmanager/request')}}">
                         <span class="icon">
                             <ion-icon name="swap-horizontal-outline"></ion-icon>
                         </span>
                         <span class="title">Blood Request</span>
                     </a>
                 </li>
+
                 <li>
-                    <a href="viewstoredblood">
+                    <a href="{{url('/bbmanager/generatereport')}}">
                         <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
+                            <ion-icon name="swap-horizontal-outline"></ion-icon>
                         </span>
-                        <span class="title">Manage Stored Blood</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/technitian/handling')}}">
-                        <span class="icon">
-                            <ion-icon name="bag-handle-outline"></ion-icon></ion-icon>
-                        </span>
-                        <span class="title">Handling</span>
+                        <span class="title">Report</span>
                     </a>
                 </li>
 
@@ -359,7 +356,7 @@
 
             @yield('content')
             <div>
-                @include('technitian.footer')
+                @include('bloodBankManager.footer')
             </div>
         </div>
 

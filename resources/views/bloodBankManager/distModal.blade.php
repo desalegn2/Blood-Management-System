@@ -1,40 +1,43 @@
 <!-- Edit Modal -->
-<div class="modal fade" id="setexpaired{{$bloods->id}}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="distribute{{$dis->id}}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Manage Donor</h5>
+                <h5 class="modal-title" id="myModalLabel">distribute Blood</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {!! Form::model($blood, [ 'method' => 'post','url' => ['technitian/filldiscard'] ]) !!}
+                {!! Form::model($req, [ 'method' => 'post','url' => ['technitian/savedistribute'] ]) !!}
                 <div class="mb-3">
                     {!! Form::hidden('user_id', Auth::user()->id, ['class' => 'form-control']) !!}
-                    {!! Form::hidden('id',$bloods->id, ['class' => 'form-control']) !!}
-                </div>
-                <div class="mb-3">
-                    {!! Form::label('packno', 'Pack Number') !!}
-                    {!! Form::text('packno', $bloods->packno, ['class' => 'form-control']) !!}
                 </div>
                 <div class="mb-3">
                     {!! Form::label('bloodgroup', 'Blood group') !!}
-                    {!! Form::text('bloodgroup', $bloods->bloodgroup, ['class' => 'form-control']) !!}
+                    {!! Form::text('bloodtype', $dis->bloodgroup, ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="mb-3">
-                    {!! Form::label('bloodgroup', 'Unit Discarded') !!}
-                    {!! Form::text('volume', $bloods->volume, ['class' => 'form-control']) !!}
+                    {!! Form::label('volume', 'Volume') !!}
+                    {!! Form::text('volume', $dis->volume, ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="mb-3">
-                    {!! Form::label('Reason', 'Reason of Discard') !!}
-                    {!! Form::textarea('reason', '', ['class' => 'form-control']) !!}
+                    {!! Form::label('issueddate', 'Issued date') !!}
+                    {!! Form::date('issuedate', $dis->date, ['class' => 'form-control']) !!}
+                </div>
+                <div class="mb-3">
+                    {!! Form::label('expirydate', 'Expiry date') !!}
+                    {!! Form::date('expirydate', $dis->expirydate, ['class' => 'form-control']) !!}
+                </div>
+                <div class="mb-3">
+                    {!! Form::label('recievedby', 'Recieved By') !!}
+                    {!! Form::text('centerid', '', ['class' => 'form-control']) !!}
                 </div>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-                {{Form::button('<i class="fa fa-check-square-o"></i> Distrinute', ['class' => 'btn btn-success', 'type' => 'Discard'])}}
+                {{Form::button('<i class="fa fa-check-square-o"></i> Distrinute', ['class' => 'btn btn-success', 'type' => 'submit'])}}
                 {!! Form::close() !!}
             </div>
         </div>
@@ -42,7 +45,7 @@
 </div>
 
 <!-- Delete Modal -->
-<div class="modal fade" id="delete{{$bloods->id}}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="delete{{$dis->id}}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -50,9 +53,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {!! Form::model($blood, [ 'method' => 'delete','url' => ['admin/deletedonor', $bloods->id] ]) !!}
+                {!! Form::model($req, [ 'method' => 'delete','url' => ['admin/deletedonor', $dis->id] ]) !!}
                 <h4 class="text-center">Are you sure you want to delete This Data?</h4>
-                <h5 class="text-center">Name: {{$bloods->name}} {{$bloods->email}}</h5>
+                <h5 class="text-center">Name: {{$dis->name}} {{$dis->email}}</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
