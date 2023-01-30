@@ -1,3 +1,5 @@
+@extends('admin.sidebars')
+@section('content')
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +13,8 @@
 
 <body>
     <div class="container">
-        <h1 class="page-header text-center">iiiiiiiiiiiiiiifffffg</h1>
+
+        <h1 class="page-header text-center"></h1>
         <div class="row">
             <div class="col-md-12 col-md-offset-1">
 
@@ -62,6 +65,7 @@
             </div>
         </div>
     </div>
+
     <!-- Add Modal -->
     <div class="modal fade" id="addnew" tabindex="-1" aria-labelledby="addnewModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -93,3 +97,4 @@
 </body>
 
 </html>
+@endsection

@@ -307,4 +307,38 @@ class AdminController extends Controller
         // return redirect()->previous();
         return redirect()->back();
     }
+    function Profile($id)
+    {
+        $isExist = User::select("*")
+            ->where("id", $id)
+            ->exists();
+        if ($isExist) {
+            $data = User::all()->where('id', '=', $id);
+            //return view('nurse.profile', ['data' => $data]);
+            return view('admin.profile', ['data' => $data]);
+        }
+    }
+    function updateProfile(Request $req, int $id)
+    {
+
+        User::where("id", $id)
+            ->update(["name" => $req->name, "email" => $req->email, "phone" => $req->phone]);
+        return redirect('admin/home');
+    }
+
+    function updatephoto(Request $req, int $id)
+    {
+
+        $var = User::all()->where('id', '=', $id);
+        if ($req->hasfile('photo')) {
+            $file = $req->file('photo');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('uploads/registers', $filename);
+            $var->photo = $filename;
+        }
+        User::where("id", $id)
+            ->update(["photo" => $filename]);
+        return redirect('admin/home');
+    }
 }

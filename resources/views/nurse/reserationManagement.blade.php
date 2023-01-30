@@ -1,10 +1,13 @@
+@extends('nurse.sidebar')
+@section('content')
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset='UTF-8'>
 
-    <title>Responsive Table</title>
+    <title>Reservation</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -20,6 +23,9 @@
         }
 
         body {
+            left: 0;
+
+            margin-right: 50px;
             font: 14px/1.4 Georgia, Serif;
         }
 
@@ -168,7 +174,7 @@
 
 </head>
 
-<body style="background-color: #FF8E9E;">
+<body>
 
     <div id="page-wrap">
         <a class="btn btn-success" href="{{url('nurse/home')}}">Home</a>
@@ -218,3 +224,4 @@
 </body>
 
 </html>
+@endsection

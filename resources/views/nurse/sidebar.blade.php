@@ -34,6 +34,7 @@
         body {
             min-height: 100vh;
             overflow-x: hidden;
+
         }
 
         .container {
@@ -49,7 +50,7 @@
             background: #FF7B54;
             border-left: 0px solid var(--blue);
             transition: 0.5s;
-            overflow: hidden;
+            overflow-y: scroll;
         }
 
         .navigation.active {
@@ -57,6 +58,7 @@
         }
 
         .navigation ul {
+
             position: absolute;
             top: 0;
             left: 0;
@@ -64,6 +66,7 @@
         }
 
         .navigation ul li {
+
             position: relative;
             width: 100%;
             list-style: none;
@@ -82,6 +85,7 @@
         }
 
         .navigation ul li a {
+
             position: relative;
             display: block;
             width: 100%;
@@ -285,7 +289,7 @@
             <ul>
                 <li>
                 <li class="nav-item dropdown">
-                    <a>
+                    <a href="{{url('/nurse/profile',Auth::user()->id)}}">
                         {{ Auth::user()->name }}
                     </a>
                 </li>
@@ -311,7 +315,7 @@
                         <span class="icon">
                             <ion-icon name="dice-sharp"></ion-icon>
                         </span>
-                        <span class="title">Add Events</span>
+                        <span class="title">Notify</span>
                     </a>
                 </li>
                 <li>
@@ -346,23 +350,6 @@
                         <span class="title">Manage Reservation</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{url('/nurse/profile',Auth::user()->id)}}">
-                        <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
-                        </span>
-                        <span class="title">Profile</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                        <span class="title">Password</span>
-                    </a>
-                </li>
-
                 </li>
 
                 <li>
@@ -378,6 +365,7 @@
                         @csrf
                     </form>
                 </li>
+
                 </li>
             </ul>
         </div>
@@ -392,7 +380,7 @@
 
 
                 <div class="user">
-                    <img src="assets/imgs/customer01.jpg" alt="">
+                    <img src="{{asset('uploads/registers/'. Auth::user()->photo )}}" alt="no image">
                 </div>
             </div>
 

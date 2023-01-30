@@ -1,3 +1,6 @@
+@extends('admin.sidebars')
+@section('content')
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,8 +58,7 @@
 
                                     <form action="{{ route('register') }}" method="post" enctype=" multipart/form-data">
                                         @csrf
-                                        <input type="hidden" name="role" class="form-control" value="1" required>
-                                        <input type="hidden" name="photo" class="form-control" value="0.png" required>
+
                                         <div class="form-outline mb-4">
                                             <div style="color: red;">
                                                 @error('name')
@@ -80,6 +82,32 @@
                                         </div>
                                         <div class="form-outline mb-4">
                                             <div style="color: red;">
+                                                @error('photo')
+                                                <strong>{{ $message }}</strong>
+                                                @enderror
+                                            </div>
+                                            <input type="file" name="photo" id="form2Example11" class="form-control" placeholder="Enter Password" />
+                                            <label class="form-label" for="form2Example11">Photo</label>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <div style="color: red;">
+                                                @error('password')
+                                                <strong>{{ $message }}</strong>
+                                                @enderror
+                                            </div>
+                                            <select name="role" class="form-control">
+                                                <option value="">choose usertype</option>
+                                                <option value="3">Nurse</option>
+                                                <option value="4">Technician</option>
+                                                <option value="5">HI</option>
+                                                <input type="file" name="photo" id="form2Example11" class="form-control" placeholder="Enter Password" />
+
+                                            </select>
+                                            <label class="form-label" for="form2Example11">Add User</label>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <div style="color: red;">
                                                 @error('password')
                                                 <strong>{{ $message }}</strong>
                                                 @enderror
@@ -95,10 +123,7 @@
                                         <div class="text-center pt-1 mb-5 pb-1">
                                             <button class="btn btn-info btn-lg btn-block" type="submit">Create</button>
                                         </div>
-                                        <div class="d-flex align-items-center justify-content-center pb-4">
-                                            <a>I already have a membership</a>
-                                            <button type="button" class="btn btn-outline-danger"><a href="{{ route('login') }}" class="text-center">Login</a></button>
-                                        </div>
+
                                     </form>
                                 </div>
                             </div>
@@ -117,3 +142,4 @@
 </body>
 
 </html>
+@endsection

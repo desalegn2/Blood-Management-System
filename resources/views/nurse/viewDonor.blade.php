@@ -180,7 +180,7 @@
         <a class="btn btn-success" href="{{url('nurse/home')}}">Home</a>
 
         <h1>Donors Who send request</h1>
-        <a href="{{url('nurse/report')}}">Report</a>
+
         <table>
             <thead>
                 <tr>
@@ -204,11 +204,14 @@
                     <td>{{$donor->bloodtype}}</td>
                     <td>{{$donor->status}}</td>
                     <td>
+                        <a class="btn btn-success" href="{{url('nurse/viewdetail', $donor->id)}}">View</a>
+                        <!--
                         <a class="btn btn-success" href="{{url('nurse/approved', $donor->id)}}">Approve</a>
                         <a class="btn btn-danger" href="{{url('nurse/canceled', $donor->id)}}">Disapprove</a>
+                         -->
                     </td>
                     <td>
-                        <a class="btn btn-success" href="{{url('nurse/viewdetail', $donor->id)}}">View</a>
+
                         <a href="#delete{{$donor->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</a>
                         <!-- <a class="btn btn-danger" href=" {{url('nurse/delete', $donor->id)}}">Delete</a> -->
                         <!-- <button type="button" class="btn btn-danger deleteCatagoryBtn" value="{{$donor->id}}"></button> -->

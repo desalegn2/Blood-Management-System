@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technician Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <title>Admin page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- ======= Styles ====== -->
 
@@ -33,6 +34,7 @@
         body {
             min-height: 100vh;
             overflow-x: hidden;
+
         }
 
         .container {
@@ -43,12 +45,12 @@
         /* =============== Navigation ================ */
         .navigation {
             position: fixed;
-            width: 160px;
+            width: 300px;
             height: 100%;
             background: #FF7B54;
             border-left: 0px solid var(--blue);
             transition: 0.5s;
-            overflow: hidden;
+            overflow-y: scroll;
         }
 
         .navigation.active {
@@ -56,6 +58,7 @@
         }
 
         .navigation ul {
+
             position: absolute;
             top: 0;
             left: 0;
@@ -63,6 +66,7 @@
         }
 
         .navigation ul li {
+
             position: relative;
             width: 100%;
             list-style: none;
@@ -70,10 +74,10 @@
             border-bottom-left-radius: 30px;
         }
 
-        /* .navigation ul li:hover,
+        .navigation ul li:hover,
         .navigation ul li.hovered {
             background-color: var(--white);
-        } */
+        }
 
         .navigation ul li:nth-child(1) {
             margin-bottom: 40px;
@@ -81,6 +85,7 @@
         }
 
         .navigation ul li a {
+
             position: relative;
             display: block;
             width: 100%;
@@ -89,10 +94,10 @@
             color: var(--white);
         }
 
-        /* .navigation ul li:hover a,
+        .navigation ul li:hover a,
         .navigation ul li.hovered a {
             color: var(--blue);
-        } */
+        }
 
         .navigation ul li a .icon {
             position: relative;
@@ -283,50 +288,58 @@
         <div class="navigation">
             <ul>
                 <li>
-                <li href="#">
-                    <a href="{{url('/technitian/profile',Auth::user()->id)}}">
+                <li class="nav-item dropdown">
+                    <a href="{{url('/admin/profile',Auth::user()->id)}}">
                         {{ Auth::user()->name }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/technitian/home')}}">
-                        <span class="icon">
-                            <ion-icon name="home-outline"></ion-icon>
-                        </span>
-                        <span class="title">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/technitian/discardblood')}}">
-                        <span class="icon">
-                            <ion-icon name="bag-remove-outline"></ion-icon>
-                        </span>
-                        <span class="title">Discard Blood</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{url('/technitian/distributetohospital')}}">
+                    <a href="{{url('/admin/home')}}">
                         <span class="icon">
-                            <ion-icon name="swap-horizontal-outline"></ion-icon>
+                            <ion-icon name="home-outline"></ion-icon>
                         </span>
-                        <span class="title">Blood Request</span>
+                        <span class="title">Home</span>
                     </a>
                 </li>
                 <li>
-                    <a href="viewstoredblood">
+                    <a href="{{url('/admin/add')}}">
                         <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
+                            <ion-icon name="dice-sharp"></ion-icon>
                         </span>
-                        <span class="title">Manage Stored Blood</span>
+                        <span class="title">Add user</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('/technitian/handling')}}">
+                    <a href="{{url('/admin/viewdonor')}}">
                         <span class="icon">
-                            <ion-icon name="bag-handle-outline"></ion-icon></ion-icon>
+                            <ion-icon name="dice-sharp"></ion-icon>
                         </span>
-                        <span class="title">Handling</span>
+                        <span class="title">Manage Donor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('/admin/viewnurse')}}">
+                        <span class="icon">
+                            <ion-icon name="dice-sharp"></ion-icon>
+                        </span>
+                        <span class="title">Manage Nurses</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('/admin/viewtech')}}">
+                        <span class="icon">
+                            <ion-icon name="dice-sharp"></ion-icon>
+                        </span>
+                        <span class="title">Manage Tech </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('/admin/viewhi')}}">
+                        <span class="icon">
+                            <ion-icon name="dice-sharp"></ion-icon>
+                        </span>
+                        <span class="title">Manage HI</span>
                     </a>
                 </li>
 
@@ -345,24 +358,29 @@
                         @csrf
                     </form>
                 </li>
+
                 </li>
             </ul>
         </div>
+
+
         <!-- ========================= Main ==================== -->
         <div class="main">
             <div class="topbar">
                 <div class="toggle">
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
+
+
                 <div class="user">
                     <img src="{{asset('uploads/registers/'. Auth::user()->photo )}}" alt="">
                 </div>
             </div>
-
             @yield('content')
             <div>
-                @include('technitian.footer')
+                @include('admin.footer')
             </div>
+
         </div>
 
     </div>

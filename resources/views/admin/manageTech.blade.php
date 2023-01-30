@@ -1,5 +1,6 @@
-@extends('admin.adminlte')
+@extends('admin.sidebars')
 @section('content')
+
 <!DOCTYPE html>
 <html>
 
@@ -13,16 +14,12 @@
 
 <body style="left: 0;">
     <div class="container">
-        <h1 class="page-header text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, deleniti
-            modi iusto quod eaque, quia odio est porro velit, natus
-            libero voluptates impedit laudantium distinctio obcaecati excepturi amet. Possimus, minima.</h1>
+        <h1 class="page-header text-center">.</h1>
         <div class="row">
             <div class="col-md-12 col-md-offset-1">
                 <h2> <a href="home" class="btn btn-primary btn-block">{{ __('Back') }}</a> </h2>
                 Manage Technitian
                 <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add</button>
-
-
             </div>
         </div>
         <div class="row">

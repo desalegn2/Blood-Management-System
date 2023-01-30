@@ -18,12 +18,18 @@
             <div class="row">
                 <div class="col col-md-6"><b>Donor Details</b></div>
                 <div class="col col-md-6">
-                    <!-- <a href="{{url('nurse/back')}}" class="btn btn-primary btn-sm float-end">View All</a> -->
+
                     <a href="{{ URL::previous() }}" class="btn btn-primary btn-sm float-end">Back</a>
                 </div>
             </div>
         </div>
         <div class="card-body">
+            <div class="row mb-4">
+                <label class="col-sm-2 col-label-form"><b>Image</b></label>
+                <div class="col-sm-10">
+                    <img src="{{asset('uploads/registers/'.$donors->photo)}}" width="80" height="80">
+                </div>
+            </div>
             <div class="row mb-3">
                 <label class="col-sm-2 col-label-form"><b>Donor Name</b></label>
                 <div class="col-sm-10">
@@ -89,10 +95,12 @@
                         {{ $donors->status }}
                     </div>
                 </div>
+
                 <div class="row mb-4">
-                    <label class="col-sm-2 col-label-form"><b>Image</b></label>
+                    <!-- <label class="col-sm-2 col-label-form"><b>Status</b></label> -->
+                    <p class="col-sm-2 col-label-form"><a class="btn btn-success" href="{{url('nurse/approved', $donors->id)}}">Approve</a></p>
                     <div class="col-sm-10">
-                        <img src="{{asset('uploads/registers/'.$donors->photo)}}" width="80" height="80">
+                        <a class="btn btn-danger" href="{{url('nurse/canceled', $donors->id)}}">Disapprove</a>
                     </div>
                 </div>
             </div>

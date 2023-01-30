@@ -30,48 +30,40 @@ class nurseController extends Controller
         $aminus = donorRequestModel::all()->where('bloodtype', '=', 'A-');
         return view('nurse.aminusDonor', ['aminusdonors' => $aminus]);
     }
-    function insertprofile(Request $req)
+    function Profile($id)
     {
-        $var = new nurseprofile;
-        $var->user_id = $req->user_id;
-        $var->nursename = $req->firstname;
-        $var->nurselname = $req->lastname;
-        $var->email = $req->email;
-        $var->phone = $req->phone;
-
-        if ($req->hasfile('photo')) {
-            $file = $req->file('photo');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
-            $file->move('uploads/registers', $filename);
-            $var->nursephoto =  $filename;
+        $isExist = User::select("*")
+            ->where("id", $id)
+            ->exists();
+        if ($isExist) {
+            $data = User::all()->where('id', '=', $id);
+            //return view('nurse.profile', ['data' => $data]);
+            return view('nurse.profile', ['data' => $data]);
         }
-        $var->save();
-        return redirect('nurse/home');
     }
-
     function updateProfile(Request $req, int $id)
     {
 
-        nurseprofile::where("user_id", $id)
-            ->update(["nurselname" => $req->nurselname, "phone" => $req->phone]);
-        return redirect('nurse/home');
+        User::where("id", $id)
+            ->update(["name" => $req->name, "email" => $req->email, "phone" => $req->phone]);
+        return redirect()->back()->with('success', 'your Profile,Changed');
     }
 
     function updatephoto(Request $req, int $id)
     {
 
-        $var = nurseprofile::all()->where('user_id', '=', $id);
+        $var = User::all()->where('id', '=', $id);
         if ($req->hasfile('photo')) {
             $file = $req->file('photo');
             $extention = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extention;
             $file->move('uploads/registers', $filename);
-            $var->nursephoto = $filename;
+            $var->photo = $filename;
         }
-        nurseprofile::where("user_id", $id)
-            ->update(["nursephoto" => $filename]);
-        return redirect('nurse/home');
+        User::where("id", $id)
+            ->update(["photo" => $filename]);
+        //return redirect('nurse/home');
+        return redirect()->back()->with('success', 'your Image,Changed');
     }
     function changepassword(Request $req)
     {
@@ -94,6 +86,7 @@ class nurseController extends Controller
 
     function advertise(Request $req)
     {
+
         $var = new advertises;
         $var->title = $req->title;
         $var->description = $req->discription;
@@ -122,19 +115,6 @@ class nurseController extends Controller
         $display1 = reservationModel::all();
 
         return view('nurse.nurseHome', compact('display1', 'stats'));
-    }
-    function Profile($id)
-    {
-        $isExist = nurseprofile::select("*")
-            ->where("user_id", $id)
-            ->exists();
-        if ($isExist) {
-            $data = nurseprofile::all()->where('user_id', '=', $id);
-            //return view('nurse.profile', ['data' => $data]);
-            return view('nurse.profile', ['data' => $data]);
-        } else {
-            return redirect('nurse/insert');
-        }
     }
 
     function manageReservation()

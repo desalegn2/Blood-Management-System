@@ -240,7 +240,6 @@
             }
         }
     </style>
-
 </head>
 
 <body>
@@ -333,13 +332,9 @@
                         <div>
                             <label>Health Status</label>
                             <select name="healthstatus" required>
-                                <option value="Felege">Felege</option>
-                                <option value="adama">adama</option>
-                                <option value="fhkhfz">fhkhfz</option>
-                                <option value="uyuiay">uyuiay</option>
-                                <option value="ljakdaHS">ljakdaHS</option>
-                                <option value="buyai">buyai</option>
-                                <option value="tiytat">tiytat</option>
+                                <option value="Felege">Normal</option>
+                                <option value="adama">Have HIV</option>
+                                <option value="fhkhfz">Have Hepataitus</option>
                             </select>
                         </div>
                         <div>
@@ -353,10 +348,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
 
                 </div>
             </fieldset>

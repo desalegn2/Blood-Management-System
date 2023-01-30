@@ -327,6 +327,14 @@
                         <span class="title">Report</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{url('#')}}">
+                        <span class="icon">
+                            <ion-icon name="bag-remove-outline"></ion-icon>
+                        </span>
+                        <span class="title">Feed Backs</span>
+                    </a>
+                </li>
 
                 </li>
 

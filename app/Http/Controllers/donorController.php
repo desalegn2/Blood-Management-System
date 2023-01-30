@@ -189,7 +189,7 @@ class donorController extends Controller
 
         User::where("id", $id)
             ->update(["name" => $req->name, "email" => $req->email, "phone" => $req->phone]);
-        return redirect('donor/home');
+        return redirect()->back()->with('success', 'your Profile,Changed');
     }
 
     function updatephoto(Request $req, int $id)
@@ -205,7 +205,7 @@ class donorController extends Controller
         }
         User::where("id", $id)
             ->update(["photo" => $filename]);
-        return redirect('donor/home');
+        return redirect()->back()->with('success', 'your Image,Changed');
     }
     function feedbacks()
     {

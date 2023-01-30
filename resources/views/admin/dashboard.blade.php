@@ -1,189 +1,637 @@
-@extends('admin.adminlte')
+@extends('admin.sidebars')
 @section('content')
-<div class="content-wrapper">
 
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <!-- ======= Bootstrap css ====== -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        /* =========== Google Fonts ============ */
+        @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" data-toggle="dropdown" href="#">
-                                <i class="far fa-bell"></i>{{$numberof_message}} user
-                                <span class="badge badge-warning navbar-badge"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                <span class="dropdown-item dropdown-header">New Notifications</span>
-                                <div class="dropdown-divider"></div>
 
-                                <a href="viewnewusers" class="dropdown-item">
-                                    <i class="fas fa-envelope mr-2"></i>{{$numberof_message}}
-                                    <span class="float-right text-muted text-sm">3 mins</span>
-                                </a>
+        .grey-bg {
+            background-color: #F5F7FA;
+        }
 
-                            </div>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <section class="content">
-        <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
+        /* =============== Globals ============== */
+        * {
+            font-family: "Ubuntu", sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-            <h5 class="mb-2">Available Blood in Store</h5>
+        :root {
+            --blue: #2a2185;
+            --white: #fff;
+            --gray: #f5f5f5;
+            --black1: #222;
+            --black2: #999;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ======================= Cards ====================== */
+        .cardBox {
+            position: relative;
+            width: 100%;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 30px;
+        }
+
+        .cardBox .card {
+            position: relative;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+            box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .cardBox .card .numbers {
+            position: relative;
+            font-weight: 500;
+            font-size: 2.5rem;
+            color: var(--blue);
+        }
+
+        .cardBox .card .cardName {
+            color: var(--black2);
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+
+        .cardBox .card .iconBx {
+            font-size: 3.5rem;
+            color: var(--black2);
+        }
+
+        .cardBox .card:hover {
+            background: var(--blue);
+        }
+
+        .cardBox .card:hover .numbers,
+        .cardBox .card:hover .cardName,
+        .cardBox .card:hover .iconBx {
+            color: var(--white);
+        }
+
+        /* ================== Order Details List ============== */
+        .details {
+            position: relative;
+            width: 100%;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-gap: 30px;
+            /* margin-top: 10px; */
+        }
+
+        .details .recentOrders {
+            position: relative;
+            display: grid;
+            min-height: 500px;
+            background: var(--white);
+            padding: 20px;
+            box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+            border-radius: 20px;
+        }
+
+        .details .cardHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .cardHeader h2 {
+            font-weight: 600;
+            color: var(--blue);
+        }
+
+        .cardHeader .btn {
+            position: relative;
+            padding: 5px 10px;
+            background: var(--blue);
+            text-decoration: none;
+            color: var(--white);
+            border-radius: 6px;
+        }
+
+        .details table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .details table thead td {
+            font-weight: 600;
+        }
+
+        .details .recentOrders table tr {
+            color: var(--black1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .details .recentOrders table tr:last-child {
+            border-bottom: none;
+        }
+
+        .details .recentOrders table tbody tr:hover {
+            background: var(--blue);
+            color: var(--white);
+        }
+
+        .details .recentOrders table tr td {
+            padding: 10px;
+        }
+
+        .details .recentOrders table tr td:last-child {
+            text-align: end;
+        }
+
+        .details .recentOrders table tr td:nth-child(2) {
+            text-align: end;
+        }
+
+        .details .recentOrders table tr td:nth-child(3) {
+            text-align: center;
+        }
+
+        .status.delivered {
+            padding: 2px 4px;
+            background: #8de02c;
+            color: var(--white);
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status.pending {
+            padding: 2px 4px;
+            background: #e9b10a;
+            color: var(--white);
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status.return {
+            padding: 2px 4px;
+            background: #f00;
+            color: var(--white);
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status.inProgress {
+            padding: 2px 4px;
+            background: #1795ce;
+            color: var(--white);
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+
+
+        .recentCustomers .imgBx {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .recentCustomers .imgBx img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .recentCustomers table tr td {
+            padding: 12px 10px;
+        }
+
+        .recentCustomers table tr td h4 {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.2rem;
+        }
+
+        .recentCustomers table tr td h4 span {
+            font-size: 14px;
+            color: var(--black2);
+        }
+
+        .recentCustomers table tr:hover {
+            background: red;
+            color: var(--white);
+        }
+
+        .recentCustomers table tr:hover td h4 span {
+            color: var(--white);
+        }
+
+        /* ====================== Responsive Design ========================== */
+        @media (max-width: 991px) {
+            .navigation {
+                left: -300px;
+            }
+
+            .navigation.active {
+                width: 300px;
+                left: 0;
+            }
+
+            .main {
+                width: 100%;
+                left: 0;
+            }
+
+            .main.active {
+                left: 300px;
+            }
+
+            .cardBox {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .recentOrders {
+                overflow-x: auto;
+            }
+
+            .status.inProgress {
+                white-space: nowrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cardBox {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            .cardHeader h2 {
+                font-size: 20px;
+            }
+
+            .user {
+                min-width: 40px;
+            }
+
+            .navigation {
+                width: 100%;
+                left: -100%;
+                z-index: 1000;
+            }
+
+            .navigation.active {
+                width: 100%;
+                left: 0;
+            }
+
+            .toggle {
+                z-index: 10001;
+            }
+
+            .main.active .toggle {
+                color: #fff;
+                position: fixed;
+                right: 0;
+                left: initial;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!-- ======================= Cards ================== -->
+
+
+
+    <div class="grey-bg container-fluid">
+
+
+        <section id="minimal-statistics">
+
             <div class="row">
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="info-box">
-                        <img src="{{asset('assets/imgs/p7.jpg')}}" width="120px" height="120px" alt="">
+                <div class="col-12 mt-3 mb-1">
+                    <h4 class="text-uppercase">Total Blood Donor Register with us</h4>
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">
-                                <h1>A+</h1>
-                            </span>
-                            <span class="info-box-number">{{$aplus}}</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
                 </div>
-                <!-- /.col -->
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="info-box">
-                        <img src="{{asset('assets/imgs/p7.jpg')}}" width="120px" height="120px" alt="">
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">
-                                <h1>A-</h1>
-                            </span>
-                            <span class="info-box-number">{{$aminus}}</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="info-box">
-                        <img src="{{asset('assets/imgs/p7.jpg')}}" width="120px" height="120px" alt="">
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">
-                                <h1>B+</h1>
-                            </span>
-                            <span class="info-box-number">{{$bplus}}</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="info-box">
-                        <img src="{{asset('assets/imgs/p7.jpg')}}" width="120px" height="120px" alt="">
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">
-                                <h1>B-</h1>
-                            </span>
-                            <span class="info-box-number">{{$bminus}}</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
             </div>
-            <div class="container-fluid">
+            <div class="row">
 
-                <div class="row">
-                    <div class="col-md-3 col-sm-6 col-12">
-                        <div class="info-box">
-                            <img src="{{asset('assets/imgs/p7.jpg')}}" width="120px" height="120px" alt="">
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #8EA7E9;">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <a href="">
+                                            <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                        </a>
+                                        <h3>278</h3>
+                                        <span>A-</span>
 
-                            <div class="info-box-content">
-                                <span class="info-box-text">
-                                    <h1>AB+</h1>
-                                </span>
-                                <span class="info-box-number">{{$abplus}}</span>
+                                    </div>
+                                </div>
                             </div>
-                            <!-- /.info-box-content -->
                         </div>
-                        <!-- /.info-box -->
                     </div>
-                    <!-- /.col -->
-                    <div class="col-md-3 col-sm-6 col-12">
-                        <div class="info-box">
-                            <img src="{{asset('assets/imgs/p7.jpg')}}" width="120px" height="120px" alt="">
-
-                            <div class="info-box-content">
-                                <span class="info-box-text">
-                                    <h1>AB-</h1>
-                                </span>
-                                <span class="info-box-number">{{$abminus}}</span>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #8EA7E9;">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                        <h3>156</h3>
+                                        <span>A+</span>
+                                    </div>
+                                </div>
                             </div>
-                            <!-- /.info-box-content -->
                         </div>
-                        <!-- /.info-box -->
                     </div>
-                    <!-- /.col -->
-                    <div class="col-md-3 col-sm-6 col-12">
-                        <div class="info-box">
-                            <img src="{{asset('assets/imgs/p7.jpg')}}" width="120px" height="120px" alt="">
-
-                            <div class="info-box-content">
-                                <span class="info-box-text">
-                                    <h1>O+</h1>
-                                </span>
-                                <span class="info-box-number">{{$oplus}}</span>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #8EA7E9;">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                        <h3>64.89 %</h3>
+                                        <span>B-</span>
+                                    </div>
+                                </div>
                             </div>
-                            <!-- /.info-box-content -->
                         </div>
-                        <!-- /.info-box -->
                     </div>
-                    <!-- /.col -->
-                    <div class="col-md-3 col-sm-6 col-12">
-                        <div class="info-box">
-                            <img src="{{asset('assets/imgs/p7.jpg')}}" width="120px" height="120px" alt="">
-
-                            <div class="info-box-content">
-                                <span class="info-box-text">
-                                    <h1>O-</h1>
-                                </span>
-                                <span class="info-box-number">{{$ominus}}</span>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #8EA7E9;">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                        <h3>423</h3>
+                                        <span>B+</span>
+                                    </div>
+                                </div>
                             </div>
-                            <!-- /.info-box-content -->
                         </div>
-                        <!-- /.info-box -->
                     </div>
+                </div>
+            </div>
 
+            <div class="row">
 
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #8EA7E9;">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                        <h3 class="danger">278</h3>
+                                        <span>AB-</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #8EA7E9;">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                        <h3 class="success">156</h3>
+                                        <span>AB+</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #8EA7E9;">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                        <h3 class="warning">64.89 %</h3>
+                                        <span>O-</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #8EA7E9;">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                        <h3 class="primary">423</h3>
+                                        <span>O+</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
+
+        <section id="stats-subtitle">
+
+            <div class="row">
+                <div class="col-12 mt-3 mb-1">
+                    <h4 class="text-uppercase">Statistics </h4>
+                    <p>Statistics on &amp; </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-6 col-md-12">
+                    <div class="card overflow-hidden">
+                        <div class="card-content">
+                            <div class="card-body cleartfix">
+                                <div class="media align-items-stretch">
+                                    <div class="align-self-center">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                    </div>
+                                    <div class="media-body">
+
+                                        <h4>Total Donor Registered</h4>
+                                        <span></span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h1>18,000</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-md-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body cleartfix">
+                                <div class="media align-items-stretch">
+                                    <div class="align-self-center">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4>Total Enrolled</h4>
+                                        <span>Monthly blog comments</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h1>84,695</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+
+
+    <!-- ======================= Cards ================== -->
+
+
+    <!-- ================ Order Details List ================= -->
+    <div class="details">
+        <div class="recentOrders">
+            <div class="cardHeader">
+                <h2>Manage Reservation</h2>
+                <a href="{{url('nurse/reservation')}}" class="btn">View All</a>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Phone</td>
+                        <td>Status</td>
+                        <td>Opration</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>name</td>
+                        <td>phone</td>
+                        <td>status</td>
+                        <td>
+                            <a class="btn btn-success" href="">View</a>
+                            <a class="btn btn-danger" href=" ">Delete</a>
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
         </div>
 
-    </section>
-    <div>
-        Totol donor
+        <!-- ================= New Customers ================ -->
+        <div class="recentCustomers">
+            <div class="cardHeader">
+                <h2>Recent user Joined</h2>
+            </div>
+
+            <table>
+
+                <tr>
+                    <td width="60px">
+                        <div class="imgBx"><img src="" alt=""></div>
+                    </td>
+                    <td>
+                        <h4>name <br> <span>city</span></h4>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
     </div>
-    <div>
-        Totol nurse
-    </div>
-    <div>
-        Totol Tech
-    </div>
-    <div>
-        Totol HI
-    </div>
-</div>
 
 
+
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
 @endsection

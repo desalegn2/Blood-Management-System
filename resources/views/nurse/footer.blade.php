@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Footer</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -15,7 +15,7 @@
         }
 
         .gap {
-            height: 30px;
+            height: 70px;
             width: 100%;
             clear: both;
             display: block;
@@ -44,7 +44,7 @@
         }
 
         .footer h3 {
-            border-bottom: 1px solid #BAC1C8;
+            /* border-bottom: 1px solid #BAC1C8; */
             color: #54697E;
             font-size: 18px;
             font-weight: 600;
@@ -65,10 +65,13 @@
         .footer ul li a {
             padding: 0 0 5px 0;
             display: block;
+            text-decoration: none;
         }
 
         .footer a {
-            color: #78828D
+            font-size: large;
+            color: whitesmoke;
+            text-decoration: none;
         }
 
         .supportLi h4 {
@@ -112,7 +115,7 @@
         }
 
         .social li {
-            background: none repeat scroll 0 0 #B5B5B5;
+            background: none repeat scroll 0 0 #03C988;
             border: 2px solid #B5B5B5;
             -webkit-border-radius: 50%;
             -moz-border-radius: 50%;
@@ -151,7 +154,7 @@
         }
 
         .social li a i {
-            font-size: 16px;
+            font-size: 30px;
             margin: 0 0 0 5px;
             color: #EDEFF1 !important;
         }
@@ -180,65 +183,54 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                        <h3> Lorem Ipsum </h3>
+                        <img class='mt-4' style="border-radius:59%; width: 100px; height:100px; float: left;" src="{{asset('assets/imgs/logo1.png')}}" alt="">
+                        <a href="#">
+                            <h2 style="color: red;">6578</h2>
+                            Donor Already Connected
+                        </a>
+                    </div>
+                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                        <h3> About Us</h3>
                         <ul>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
+                            <li> <a href="#"> about us </a> </li>
+                            <li> <a href="#">Nurse</a> </li>
+                            <li> <a href="#"> Technician </a> </li>
                         </ul>
                     </div>
                     <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                        <h3> Lorem Ipsum </h3>
+                        <h3> Looking For Blood</h3>
                         <ul>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                        <h3> Lorem Ipsum </h3>
-                        <ul>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
+                            <li> <a href="#">Blood Availability </a> </li>
+                            <li> <a href="#">Blood Request </a> </li>
+
                         </ul>
                     </div>
 
                     <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
-                        <h3> Lorem Ipsum </h3>
-                        <ul>
-                            <li>
-                                <div class="input-append newsletter-box text-center">
-                                    <input type="text" class="full text-center" placeholder="Email ">
-                                    <button class="btn  bg-gray" type="button"> Lorem ipsum <i class="fa fa-long-arrow-right"> </i> </button>
-                                </div>
-                            </li>
-                        </ul>
+                        <h3> Share </h3>
+
                         <ul class="social">
-                            <li> <a href="#"> <i class=" fa fa-facebook"> </i> </a> </li>
+                            <li> <a href="https://www.facebook.com/desalegn.sisay.7503" value=""> <i class=" fa fa-facebook"> </i> </a> </li>
                             <li> <a href="#"> <i class="fa fa-twitter"> </i> </a> </li>
                             <li> <a href="#"> <i class="fa fa-google-plus"> </i> </a> </li>
-
                             <li> <a href="#"> <i class="fa fa-youtube"> </i> </a> </li>
+                            <li> <a href="#"> <i class="fa fa-telegram"> </i> </a> </li>
                         </ul>
                     </div>
                 </div>
-                <!--/.row-->
+
             </div>
-            <!--/.container-->
+
         </div>
-        <!--/.footer-->
+
 
         <div class="footer-bottom">
             <div class="container">
-                <p class="pull-left"> Copyright © Footer E-commerce Plugin 2014. All right reserved. </p>
+                <p class="pull-left" style="text-align:center;"> Copyright © Footer E-commerce Plugin 2014. All right reserved. </p>
 
             </div>
         </div>
-        <!--/.footer-bottom-->
+
     </footer>
 </body>
 

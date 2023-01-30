@@ -43,7 +43,7 @@ Route::get('/', function () {
 
 Route::view('aa', 'Test');
 Route::get('bb', function () {
-    return view('admin.newjquery');
+    return view('index');
 });
 
 Auth::routes(['verify' => true]);
@@ -57,6 +57,7 @@ All Normal Users Routes List
 --------------------------------------------
 --------------------------------------------*/
 Route::middleware(['auth', 'user-role:donor'])->group(function () {
+
 
     Route::get('/donor/home', [HomeController::class, 'donorHome'])->name('donor.home');
     //Route::get('/donor/home', [donorController::class, 'getAdvertise'])->name('donor.home');
@@ -99,6 +100,7 @@ All Admin Routes List
 --------------------------------------------
 --------------------------------------------*/
 Route::middleware(['auth', 'user-role:admin'])->group(function () {
+
 
 
     Route::get('/admin/home', [HomeController::class, 'dashboard'])->name('admin.home');
@@ -163,19 +165,19 @@ Route::middleware(['auth', 'user-role:admin'])->group(function () {
     #Notification mark as Read
 
     //Route::post('/admin/mark-as-read',[AdminController::class, 'markNotification'])->name('markNotification');
+    Route::get('/admin/profile/{id}', [AdminController::class, 'Profile']);
+    Route::post('/admin/updateprofile/{id}', [AdminController::class, 'updateProfile']);
+    Route::post('/admin/updatephoto/{id}', [AdminController::class, 'updatephoto']);
 });
 
 Route::middleware(['auth', 'user-role:nurse'])->group(function () {
 
+
     Route::get('/nurse/home', [HomeController::class, 'nurseHome'])->name('nurse.home');
     // Route::view('/nurse/newhome', 'nurse.home');
-    Route::get('/nurse/report', [nurseController::class, 'generateReport']);
-    Route::view('/nurse/profile', 'nurse.profile');
-    Route::view('/nurse/insert', 'nurse.insertProfile');
-    Route::post('/nurse/insertprofiles', [nurseController::class, 'insertprofile']);
+    Route::get('/nurse/profile/{id}', [nurseController::class, 'Profile']);
     Route::post('/nurse/updateprofile/{id}', [nurseController::class, 'updateProfile']);
     Route::post('/nurse/updatephoto/{id}', [nurseController::class, 'updatephoto']);
-    Route::get('/nurse/profile/{id}', [nurseController::class, 'Profile']);
     Route::post('/nurse/changepassword', [nurseController::class, 'changepassword']);
 
     Route::view('/nurse/enroll', 'nurse.registerDonor');
@@ -208,6 +210,13 @@ Route::middleware(['auth', 'user-role:nurse'])->group(function () {
 Route::middleware(['auth', 'user-role:technitian'])->group(function () {
 
     Route::get('/technitian/home', [HomeController::class, 'technitanHome'])->name('technitian.home');
+
+    Route::get('/technitian/profile/{id}', [techController::class, 'Profile']);
+    Route::post('/technitian/updateprofile/{id}', [techController::class, 'updateProfile']);
+    Route::post('/technitian/updatephoto/{id}', [techController::class, 'updatephoto']);
+    Route::post('/technitian/changepassword', [techController::class, 'changepassword']);
+
+
     Route::view('/technitian/addbloods', 'technitian.addBlood');
     Route::post('/technitian/addbloods', [techController::class, 'addblood']);
 
@@ -231,8 +240,15 @@ Route::middleware(['auth', 'user-role:technitian'])->group(function () {
 
 Route::middleware(['auth', 'user-role:healthinstitute'])->group(function () {
 
+
     Route::get('/healthinstitute/home', [HomeController::class, 'healthinstituteHome'])->name('healthinstitute.home');
     Route::get('/healthinstitute/home', [hospitalRequestController::class, 'viewblood'])->name('healthinstitute.home');
+
+    Route::get('/healthinstitute/profile/{id}', [hospitalRequestController::class, 'Profile']);
+    Route::post('/healthinstitute/updateprofile/{id}', [hospitalRequestController::class, 'updateProfile']);
+    Route::post('/healthinstitute/updatephoto/{id}', [hospitalRequestController::class, 'updatephoto']);
+    Route::post('/healthinstitute/changepassword', [hospitalRequestController::class, 'changepassword']);
+
     Route::view('/healthinstitute/seekerRegister', 'healthinstitute.postSeeker');
     Route::view('/healthinstitute/profile', 'healthinstitute.profile');
     Route::post('/healthinstitute/profile', [healthinstituteController::class, 'profile']);
@@ -258,7 +274,7 @@ Route::middleware(['auth', 'user-role:bbmanager'])->group(function () {
     Route::get('/bbmanager/report', [bbManagerController::class, 'Reports']);
     Route::get('/bbmanager/generatereport', [bbManagerController::class, 'view']);
     // Route::view('/bbmanager/tes', 'bloodBankManager.pdf.report');
-    Route::get('/bbmanager/res', [bbManagerController::class, 'rest']);
+    // Route::get('/bbmanager/res', [bbManagerController::class, 'rest']);
 
     Route::get('/bbmanager/request', [bbManagerController::class, 'requests']);
 });

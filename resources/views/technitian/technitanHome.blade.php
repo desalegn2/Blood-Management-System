@@ -339,17 +339,7 @@
 </head>
 
 <body>
-    <div class="top">
-        <!--  -->
-        <h1></h1>
-        <div style="margin-top: 0;">
-            <a href="distributetohospital">
-                <i style="margin-top: 0;" class="fa fa-bell"></i>
-                <span style="margin-top: 0;" class="badge text-bg-secondary">{{$numberof_message}} New Message</span>
-            </a>
-            <img class="user" src="{{asset('assets/imgs/customer01.jpg')}}" alt="">
-        </div>
-    </div>
+
     <hr>
     <!-- ======================= Cards ================== -->
 

@@ -284,7 +284,7 @@
             <ul>
                 <li>
                 <li class="nav-item dropdown">
-                    <a>
+                    <a href="{{url('/healthinstitute/profile',Auth::user()->id)}}">
                         {{ Auth::user()->name }}
                     </a>
                 </li>

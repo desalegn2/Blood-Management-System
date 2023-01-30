@@ -20,11 +20,15 @@
     <div class="register-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="" class="h1"><b>Fill</b>To Create Account For User</a>
+                <a href="">Create Account</a>
             </div>
             <div class="card-body">
-                <form action="add" method="post" enctype="multipart/form-data">
+                <!-- <p class="login-box-msg">Register a new membership</p> -->
+
+                <form action="{{ route('register') }}" method="post" enctype=" multipart/form-data">
                     @csrf
+                    <input type="hidden" name="role" class="form-control" value="1" required>
+                    <input type="hidden" name="photo" class="form-control" value="0.png" required>
                     <div class="input-group mb-3">
                         <input type="text" name="name" class="form-control" placeholder="Full name">
                         <div class="input-group-append">
@@ -38,11 +42,12 @@
                         <strong>{{ $message }}</strong>
                         @enderror
                     </div>
-                    <div class=" input-group mb-3">
+                    <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
+
                             </div>
                         </div>
                     </div>
@@ -52,8 +57,7 @@
                         @enderror
                     </div>
 
-
-                    <div class="input-group mb-3">
+                    <!-- <div class="input-group mb-3">
                         <input type="file" name="photo" class="form-control">
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -65,7 +69,8 @@
                         @error('photo')
                         <strong>{{ $message }}</strong>
                         @enderror
-                    </div>
+                    </div> -->
+
                     <div class="input-group mb-3">
                         <input type="password" name="password" class="form-control" placeholder="Password">
                         <div class="input-group-append">
@@ -88,33 +93,11 @@
                         </div>
                     </div>
 
-                    <div class="input-group mb-3">
-                        Choose Your type
-                        <select name="role" class="form-control">
-                            <option value="">choose usertype</option>
-                            <option value="3">Nurse</option>
-                            <option value="4">Technician</option>
-                            <option value="5">HI</option>
-                            <option value="0">Manager</option>
 
-
-                        </select>
-
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="color: red;">
-                        @error('role')
-                        <strong>{{ $message }}</strong>
-                        @enderror
-                    </div>
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
+                                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
                                 <label for="agreeTerms">
                                     I agree to the <a href="#">terms</a>
                                 </label>
@@ -122,20 +105,18 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">{{ __('Register') }}</button><br>
-
+                            <button type="submit" class="btn btn-primary btn-block">{{ __('Register') }}</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
 
-                <a href="home" class="btn btn-primary btn-block">{{ __('Back') }}</a>
+                <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
             </div>
             <!-- /.form-box -->
         </div><!-- /.card -->
     </div>
-
-    @include('sweetalert::alert')
+    <!-- /.register-box -->
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>

@@ -1,4 +1,4 @@
-@extends('nurse.sidebar')
+@extends('technitian.sidebar')
 @section('content')
 
 <!DOCTYPE html>
@@ -87,7 +87,7 @@
             <div class="row gutters-sm">
 
                 <div class="col-md-4 mb-3">
-                    <form action=" {{url('/nurse/updatephoto',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
+                    <form action=" {{url('/technitian/updatephoto',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="card">
                             <div class="card-body">
@@ -132,12 +132,10 @@
 
                                 </div>
                             </div>
-                            <form action="  {{url('/nurse/updateprofile',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
+                            <form action="  {{url('/technitian/updateprofile',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
                                 @csrf
 
                                 <hr>
-
-
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0"> User ID</h6>
@@ -200,7 +198,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    {!! Form::open(['url' => 'nurse/changepassword']) !!}
+                    {!! Form::open(['url' => 'technitian/changepassword']) !!}
                     <div class="mb-3">
                         {!! Form::label('oldpassword', 'Old Password') !!}
                         {{ Form::password('password', array('name' => 'oldpassword', "class" => "form-control" ,"placeholder" =>"enter new password")) }}
