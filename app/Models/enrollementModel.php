@@ -19,12 +19,12 @@ class enrollementModel extends Model
         'gender',
         'bloodtype',
         'volume',
-        'bloodpressure',
-        'hct',
+
+
         'remark',
         'weight',
         'height',
-        'rh',
+
         'bithdate',
         'state',
         'city',

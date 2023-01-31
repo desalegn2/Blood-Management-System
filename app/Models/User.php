@@ -49,7 +49,7 @@ class User extends Authenticatable
     protected function role(): Attribute
     {
         return new Attribute(
-            get: fn ($value) =>  ["bbmanager", "donor", "admin", "nurse", "technitian", "healthinstitute"][$value],
+            get: fn ($value) =>  ["bbmanager", "donor", "admin", "nurse", "technitian", "healthinstitute", "encoder"][$value],
         );
     }
     public function posts()

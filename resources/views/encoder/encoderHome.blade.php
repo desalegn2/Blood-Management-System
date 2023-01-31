@@ -1,3 +1,6 @@
+@extends('encoder.sidebar')
+@section('content')
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
     <!-- ======= Styles ====== -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+
     <style>
         /* =========== Google Fonts ============ */
         @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
@@ -25,6 +35,7 @@
             --gray: #f5f5f5;
             --black1: #222;
             --black2: #999;
+            --red:
         }
 
         body {
@@ -32,197 +43,13 @@
             overflow-x: hidden;
         }
 
-        .container {
-            position: relative;
+        .top {
             width: 100%;
-        }
-
-        /* =============== Navigation ================ */
-        .navigation {
-            position: fixed;
-            width: 300px;
-            height: 100%;
-            background: var(--blue);
-            border-left: 10px solid var(--blue);
-            transition: 0.5s;
-            overflow: hidden;
-        }
-
-        .navigation.active {
-            width: 80px;
-        }
-
-        .navigation ul {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-        }
-
-        .navigation ul li {
-            position: relative;
-            width: 100%;
-            list-style: none;
-            border-top-left-radius: 30px;
-            border-bottom-left-radius: 30px;
-        }
-
-        .navigation ul li:hover,
-        .navigation ul li.hovered {
-            background-color: var(--white);
-        }
-
-        .navigation ul li:nth-child(1) {
-            margin-bottom: 40px;
-            pointer-events: none;
-        }
-
-        .navigation ul li a {
-            position: relative;
-            display: block;
-            width: 100%;
-            display: flex;
-            text-decoration: none;
-            color: var(--white);
-        }
-
-        .navigation ul li:hover a,
-        .navigation ul li.hovered a {
-            color: var(--blue);
-        }
-
-        .navigation ul li a .icon {
-            position: relative;
-            display: block;
-            min-width: 60px;
-            height: 60px;
-            line-height: 75px;
-            text-align: center;
-        }
-
-        .navigation ul li a .icon ion-icon {
-            font-size: 1.75rem;
-        }
-
-        .navigation ul li a .title {
-            position: relative;
-            display: block;
-            padding: 0 10px;
-            height: 60px;
-            line-height: 60px;
-            text-align: start;
-            white-space: nowrap;
-        }
-
-        /* --------- curve outside ---------- */
-        .navigation ul li:hover a::before,
-        .navigation ul li.hovered a::before {
-            content: "";
-            position: absolute;
-            right: 0;
-            top: -50px;
-            width: 50px;
-            height: 50px;
-            background-color: transparent;
-            border-radius: 50%;
-            box-shadow: 35px 35px 0 10px var(--white);
-            pointer-events: none;
-        }
-
-        .navigation ul li:hover a::after,
-        .navigation ul li.hovered a::after {
-            content: "";
-            position: absolute;
-            right: 0;
-            bottom: -50px;
-            width: 50px;
-            height: 50px;
-            background-color: transparent;
-            border-radius: 50%;
-            box-shadow: 35px -35px 0 10px var(--white);
-            pointer-events: none;
-        }
-
-        /* ===================== Main ===================== */
-        .main {
-            position: absolute;
-            width: calc(100% - 300px);
-            left: 300px;
-            min-height: 100vh;
-            background: var(--white);
-            transition: 0.5s;
-        }
-
-        .main.active {
-            width: calc(100% - 80px);
-            left: 80px;
-        }
-
-        .topbar {
-            width: 100%;
-            height: 60px;
+            height: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 10px;
-        }
-
-        .toggle {
-            position: relative;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2.5rem;
-            cursor: pointer;
-        }
-
-        .search {
-            position: relative;
-            width: 400px;
-            margin: 0 10px;
-        }
-
-        .search label {
-            position: relative;
-            width: 100%;
-        }
-
-        .search label input {
-            width: 100%;
-            height: 40px;
-            border-radius: 40px;
-            padding: 5px 20px;
-            padding-left: 35px;
-            font-size: 18px;
-            outline: none;
-            border: 1px solid var(--black2);
-        }
-
-        .search label ion-icon {
-            position: absolute;
-            top: 0;
-            left: 10px;
-            font-size: 1.2rem;
-        }
-
-        .user {
-            position: relative;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .user img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
         /* ======================= Cards ====================== */
@@ -285,15 +112,7 @@
             /* margin-top: 10px; */
         }
 
-        .details .recentOrders {
-            position: relative;
-            display: grid;
-            min-height: 500px;
-            background: var(--white);
-            padding: 20px;
-            box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-            border-radius: 20px;
-        }
+
 
         .details .cardHeader {
             display: flex;
@@ -355,7 +174,7 @@
             text-align: center;
         }
 
-        .status.delivered {
+        .status.notexpire {
             padding: 2px 4px;
             background: #8de02c;
             color: var(--white);
@@ -364,7 +183,7 @@
             font-weight: 500;
         }
 
-        .status.pending {
+        .status.expire {
             padding: 2px 4px;
             background: #e9b10a;
             color: var(--white);
@@ -393,7 +212,7 @@
 
         .recentCustomers {
             position: relative;
-            display: grid;
+            /* display: grid; */
             min-height: 500px;
             padding: 20px;
             background: var(--white);
@@ -517,203 +336,239 @@
             }
         }
     </style>
-    <script>
-        // add hovered class to selected list item
-        let list = document.querySelectorAll(".navigation li");
-
-        function activeLink() {
-            list.forEach((item) => {
-                item.classList.remove("hovered");
-            });
-            this.classList.add("hovered");
-        }
-
-        list.forEach((item) => item.addEventListener("mouseover", activeLink));
-
-        // Menu Toggle
-        let toggle = document.querySelector(".toggle");
-        let navigation = document.querySelector(".navigation");
-        let main = document.querySelector(".main");
-
-        toggle.onclick = function() {
-            navigation.classList.toggle("active");
-            main.classList.toggle("active");
-        };
-    </script>
 </head>
 
 <body>
-    <!-- =============== Navigation ================ -->
-    <div class="container">
-        <div class="navigation">
-            <ul>
-                <li>
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }}
-                    </a>
 
-                    </a>
-                </li>
+    <hr>
+    <!-- ======================= Cards ================== -->
 
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="home-outline"></ion-icon>
-                        </span>
-                        <span class="title">Dashboard</span>
-                    </a>
-                </li>
+    <div class="grey-bg container-fluid">
+        <section id="minimal-statistics">
 
-                <li>
-                    <a href="">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">Donors</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">Approved Donors</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="help-outline"></ion-icon>
-                        </span>
-                        <span class="title">Help</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="settings-outline"></ion-icon>
-                        </span>
-                        <span class="title">Settings</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                        <span class="title">Password</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-
-
-                        <span class="icon">
-                            <ion-icon name="log-out-outline"></ion-icon>
-                        </span>
-
-                        <span class="title">Logout</span>
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                </li>
-            </ul>
-        </div>
-
-
-        <!-- ========================= Main ==================== -->
-        <div class="main">
-            <div class="topbar">
-                <div class="toggle">
-                    <ion-icon name="menu-outline"></ion-icon>
+            <div class="row">
+                <div class="col-12 mt-3 mb-1">
+                    <h4 class="text-uppercase">Total Blood Stored In Each Type</h4>
+                    <p></p>
                 </div>
+            </div>
+            <div class="row">
 
-                <div class="search">
-                    <label>
-                        <input type="text" placeholder="Search here">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #FF6E31;">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+                                        <a href="#">
+                                            <h1>A-</h1>
+                                            <h3>5</h3>
+
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #FF6E31;">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <img style="width: 130px; height:100px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+                                        <h1>A+</h1>
+                                        <h3>8</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #FF6E31;">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+                                        <h1>B-</h1>
+                                        <h3>8</h3>
 
-                <div class="user">
-                    <img src="assets/imgs/customer01.jpg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #FF6E31;">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+                                        <h1>B+</h1>
+                                        <h3>78</h3>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- ======================= Cards ================== -->
-            <div class="cardBox">
-                <div class="card">
-                    <div>
-                        <div class="numbers">1,504</div>
-                        <div class="cardName">Daily Views</div>
-                    </div>
+            <div class="row">
 
-                    <div class="iconBx">
-                        <ion-icon name="eye-outline"></ion-icon>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #FF6E31;">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <img style="width: 100px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+                                        <h1>AB-</h1>
+                                        <h3>5</h3>
+
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #FF6E31;">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <img style="width: 100px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+                                        <h1>AB+</h1>
+                                        <h3>7</h3>
+
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div>
-                        <div class="numbers">80</div>
-                        <div class="cardName">Sales</div>
-                    </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #FF6E31;">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+                                        <h1>O-</h1>
+                                        <h3>7</h3>
 
-                    <div class="iconBx">
-                        <ion-icon name="cart-outline"></ion-icon>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #FF6E31;">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <img style="width: 120px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+                                        <h1>O+</h1>
+                                        <h3>7</h3>
 
-
-
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- ================ Order Details List ================= -->
-            <div class="details">
-                <div class="recentOrders">
-                    <div class="cardHeader">
-                        <h2>Donor List</h2>
 
-                    </div>
+        </section>
 
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>photo</th>
-                                <th>First Name</th>
-                                <th>Phone</th>
-                                <th>Status</th>
-
-                                <th>Operation</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-
-                </div>
-
-                <!-- ================= New Customers ================ -->
-
-            </div>
-        </div>
     </div>
 
-    <!-- =========== Scripts =========  -->
-    <script src="assets/js/main.js"></script>
+    <!-- ================ Order Details List ================= -->
+    <div class="details">
+        <div class="recentOrders">
+            <div class="cardHeader">
+                <h2>Blood Storage</h2>
+                <a href="{{url('technitian/viewstoredblood')}}" class="btn">View All</a>
+            </div>
 
-    <!-- ====== ionicons ======= -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Blood Group</td>
+                        <td>Volume</td>
+                        <td>Duration</td>
+                        <td>Status</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>t</td>
+                        <td>tyy</td>
+                        <td scope="row">tftyDays ago</td>
+                        <td>tf</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <!-- ================= New Customers ================ -->
+        <div class="recentCustomers">
+            <div class="cardHeader">
+                <h4>Recent Added</h4>
+            </div>
+
+            <table>
+                <tr>
+                    <td width="60px">
+                        <div class="imgBx"><img src="{{asset('assets/imgs/11.jpg')}}" alt=""></div>
+                    </td>
+                    <td>
+                        <h4>David <br> <span>Italy</span></h4>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </body>
 
 </html>
+@endsection

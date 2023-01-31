@@ -261,7 +261,7 @@
         }
 
         button {
-            width: 100%;
+            width: 10%;
             padding: 10px 0;
             margin: 10px auto;
             border-radius: 5px;
@@ -312,7 +312,7 @@
             <h1>Blood Request Form</h1>
             <fieldset>
                 <legend>
-                    <h3>Fill This Form</h3>
+                    <h3>Donor Information</h3>
                 </legend>
                 <div><input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required></div>
                 <div class="account-details">
@@ -334,7 +334,7 @@
             </fieldset>
             <fieldset>
                 <legend>
-                    <h3>Fill This Form</h3>
+                    <h3>Contact Information</h3>
                 </legend>
                 <div class="personal-details">
                     <div>
@@ -350,6 +350,7 @@
                             <label>Blood Group</label>
                             <select name="bloodtype" required>
                                 <option value="">Choose Blood Type</A></option>
+                                <option value="unknown">Unknown</A></option>
                                 <option value="A+">A+</A></option>
                                 <option value="A-">A-</option>
                                 <option value="B+">B+</option>
@@ -359,10 +360,7 @@
                                 <option value="O-">O+</option>
                             </select>
                         </div>
-                        <div><label>Volume</label><input type="text" name="volume"></div>
-                        <div><label>Blood Pressure</label><input type="text" name="bloodpressure" required></div>
-                        <div><label>Rh</label><input type="text" name="rh" required></div>
-                        <div><label>Hct.</label><input type="text" name="hct" required></div>
+                        <div><label>Volume</label><input type="text" name="volume" required></div>
                         <div>
                             <label>Remark</label>
                             <textarea id="w3review" name="remark" rows="5" cols="30"></textarea>
@@ -370,19 +368,8 @@
                     </div>
                 </div>
             </fieldset>
-            <fieldset>
-                <legend>
-                    <h3>Terms and Mailing</h3>
-                </legend>
-                <div class="terms-mailing">
-                    <div class="checkbox">
-                        <input type="checkbox" name=""><span>I accept the <a href="https://www.w3docs.com/privacy-policy">Privacy Policy for W3Docs.</a></span>
-                    </div>
-                    <div class="checkbox">
-                        <input type="checkbox" name=""><span>I want to recelve personallzed offers by your site</span>
-                    </div>
-            </fieldset>
-            <button type="submit" href="">Submit</button>
+
+            <center> <button type="submit">Submit</button></center>
         </form>
     </div>
     @include('sweetalert::alert')

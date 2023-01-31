@@ -57,4 +57,9 @@ class HomeController extends Controller
     {
         return view('healthinstitute.healthinstituteHome');
     }
+
+    public function encoderHome()
+    {
+        return view('encoder.encoderHome');
+    }
 }

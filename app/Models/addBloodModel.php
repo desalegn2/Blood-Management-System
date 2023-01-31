@@ -15,5 +15,8 @@ class addBloodModel extends Model
     'volume',
     'donationtype',
     'status',
+    'rh',
+    'hct',
+    'bloodpressure',
   ];
 }

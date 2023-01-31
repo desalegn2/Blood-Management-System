@@ -25,6 +25,7 @@ use App\Http\Controllers\healthinstituteController;
 use App\Http\Controllers\nurseController;
 use App\Http\Controllers\techController;
 use App\Http\Controllers\bbManagerController;
+use App\Http\Controllers\encoderController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -173,6 +174,7 @@ Route::middleware(['auth', 'user-role:admin'])->group(function () {
 Route::middleware(['auth', 'user-role:nurse'])->group(function () {
 
 
+
     Route::get('/nurse/home', [HomeController::class, 'nurseHome'])->name('nurse.home');
     // Route::view('/nurse/newhome', 'nurse.home');
     Route::get('/nurse/profile/{id}', [nurseController::class, 'Profile']);
@@ -208,6 +210,7 @@ Route::middleware(['auth', 'user-role:nurse'])->group(function () {
     Route::get('/nurse/aminusdonor', [nurseController::class, 'aminusDonor']);
 });
 Route::middleware(['auth', 'user-role:technitian'])->group(function () {
+
 
     Route::get('/technitian/home', [HomeController::class, 'technitanHome'])->name('technitian.home');
 
@@ -277,4 +280,19 @@ Route::middleware(['auth', 'user-role:bbmanager'])->group(function () {
     // Route::get('/bbmanager/res', [bbManagerController::class, 'rest']);
 
     Route::get('/bbmanager/request', [bbManagerController::class, 'requests']);
+});
+
+Route::middleware(['auth', 'user-role:encoder'])->group(function () {
+    Route::get('/encoder/home', [HomeController::class, 'encoderHome'])->name('encoder.home');
+
+    Route::get('/encoder/profile/{id}', [encoderController::class, 'Profile']);
+    Route::post('/encoder/updateprofile/{id}', [encoderController::class, 'updateProfile']);
+    Route::post('/encoder/updatephoto/{id}', [encoderController::class, 'updatephoto']);
+    Route::post('/encoder/changepassword', [encoderController::class, 'changepassword']);
+
+    // Route::view('/encoder/addbloods', 'encoder.addBlood');
+    Route::post('/encoder/addbloods', [encoderController::class, 'addblood']);
+
+    Route::view('/encoder/addbloods', 'encoder.add');
+    Route::view('/encoder/handling', 'encoder.handling');
 });

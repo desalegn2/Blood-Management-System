@@ -222,45 +222,20 @@ class AdminController extends Controller
 
     function bloodavailability()
     {
-        $numberof_message = User::count();
+        $numberof_user = User::count();
+        $numberof_donor = User::where('role', 1)->count();
+        $numberof_nurse = User::where('role', 3)->count();
+        $numberof_manager = User::where('role', 0)->count();
+        $numberof_tech = User::where('role', 4)->count();
+        $numberof_hi = User::where('role', 5)->count();
+        $numberof_encoder = User::where('role', 6)->count();
+        $numberof_blocked = User::where('isBlocked', 1)->count();
 
-        $aplus_stored = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
-        $aminus_stored = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
-        $oplus_stored = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
-        $ominus_stored = addBloodModel::where('bloodgroup', 'O-')->sum('volume');
-        $bplus_stored = addBloodModel::where('bloodgroup', 'B+')->sum('volume');
-        $bminus_stored = addBloodModel::where('bloodgroup', 'B-')->sum('volume');
-        $abplus_stored = addBloodModel::where('bloodgroup', 'AB+')->sum('volume');
-        $abminu_stored = addBloodModel::where('bloodgroup', 'AB-')->sum('volume');
+        $date = \Carbon\Carbon::today()->subDays(1);
+        $stats = User::where('created_at', '>=', $date)->get();
 
-        $aplusdiscard = discardBloodModel::where('bloodgroup', 'A+')->sum('unitdiscarded');
-        $aminudiscard = discardBloodModel::where('bloodgroup', 'A-')->sum('unitdiscarded');
-        $bplusdiscard = discardBloodModel::where('bloodgroup', 'B+')->sum('unitdiscarded');
-        $bminusdiscard = discardBloodModel::where('bloodgroup', 'B-')->sum('unitdiscarded');
-        $abplusdiscard = discardBloodModel::where('bloodgroup', 'AB+')->sum('unitdiscarded');
-        $abminudiscard = discardBloodModel::where('bloodgroup', 'AB-')->sum('unitdiscarded');
-        $oplusdiscard = discardBloodModel::where('bloodgroup', 'O+')->sum('unitdiscarded');
-        $ominusdiscard = discardBloodModel::where('bloodgroup', 'O-')->sum('unitdiscarded');
-
-        $aplusdistribute = distributeBloodModel::where('bloodgroup', 'A+')->sum('volume');
-        $aminusdistribute = distributeBloodModel::where('bloodgroup', 'A-')->sum('volume');
-        $bplusdistribute = distributeBloodModel::where('bloodgroup', 'B+')->sum('volume');
-        $bminusdistribute = distributeBloodModel::where('bloodgroup', 'B-')->sum('volume');
-        $abplusdistribute = distributeBloodModel::where('bloodgroup', 'AB+')->sum('volume');
-        $abminusdistribute = distributeBloodModel::where('bloodgroup', 'AB-')->sum('volume');
-        $oplusdistribute = distributeBloodModel::where('bloodgroup', 'O+')->sum('volume');
-        $ominusdistribute = distributeBloodModel::where('bloodgroup', 'O-')->sum('volume');
-        //$total = $aplus + $aminus + $oplus + $ominus + $bplus + $bminus + $abplus + $abminus;
-        $aplus = $aplus_stored - $aplusdiscard - $aplusdistribute;
-        $aminus = $aminus_stored - $aminudiscard - $aminusdistribute;
-        $bplus = $bplus_stored - $bplusdiscard - $bplusdistribute;
-        $bminus = $bminus_stored - $bminusdiscard - $bminusdistribute;
-        $abplus = $abplus_stored - $abplusdiscard - $abplusdistribute;
-        $abminus = $abminu_stored - $abminudiscard - $abminusdistribute;
-        $oplus = $oplus_stored - $oplusdiscard - $oplusdistribute;
-        $ominus = $ominus_stored - $ominusdiscard - $ominusdistribute;
-
-        return view('admin.dashboard', compact('numberof_message', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
+        $user = User::paginate(10);
+        return view('admin.dashboard', compact('numberof_user', 'user', 'stats', 'numberof_blocked', 'numberof_encoder', 'numberof_donor', 'numberof_nurse', 'numberof_manager', 'numberof_tech', 'numberof_hi'));
     }
 
     function send(Request $req)
@@ -323,7 +298,7 @@ class AdminController extends Controller
 
         User::where("id", $id)
             ->update(["name" => $req->name, "email" => $req->email, "phone" => $req->phone]);
-        return redirect('admin/home');
+        return redirect()->back()->with('success', 'your Profile,Changed');
     }
 
     function updatephoto(Request $req, int $id)
@@ -339,6 +314,6 @@ class AdminController extends Controller
         }
         User::where("id", $id)
             ->update(["photo" => $filename]);
-        return redirect('admin/home');
+        return redirect()->back()->with('success', 'your Image,Changed');
     }
 }

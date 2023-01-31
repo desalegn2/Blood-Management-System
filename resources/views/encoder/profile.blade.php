@@ -1,4 +1,4 @@
-@extends('admin.sidebars')
+@extends('encoder.sidebar')
 @section('content')
 
 <!DOCTYPE html>
@@ -87,27 +87,31 @@
             <div class="row gutters-sm">
 
                 <div class="col-md-4 mb-3">
-                    <form action=" {{url('/admin/updatephoto',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
+                    <form action=" {{url('/encoder/updatephoto',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
-                                    <img src="{{asset('uploads/registers/'.$dataprofil->photo)}}" alt="Admin" class="rounded-circle" width="230" height="230">
+                                    <img src="{{asset('uploads/registers/'.$dataprofil->photo)}}" alt="Admin" class="rounded-circle" width="150">
 
                                     <div class="mt-3">
                                         <h4> {{$dataprofil->name}}</h4>
-                                        <p class="text-secondary mb-1">Bahir Dar Blood Bank Admin</p>
-                                        <p class="text-muted font-size-sm"></p>
+                                        <p class="text-secondary mb-1">Full Stack Developer</p>
+
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class='fa fa-edit'></i>Change Password</button>
 
                                     </div>
                                 </div>
                                 <hr>
+
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Photo</h6>
+                                        <h6 class="mb-0">Change Photo</h6>
+
                                     </div>
+
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="file" name="photo" required>
+                                        <input type="file" name="photo">
                                         <input type="submit" value="save">
                                     </div>
                                 </div>
@@ -128,7 +132,7 @@
 
                                 </div>
                             </div>
-                            <form action="  {{url('/admin/updateprofile',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
+                            <form action="  {{url('/encoder/updateprofile',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
                                 @csrf
 
                                 <hr>
@@ -151,6 +155,9 @@
                                         <input type="text" name="name" value="{{$dataprofil->name}}">
                                     </div>
                                 </div>
+
+                                <hr>
+
                                 <hr>
 
                                 <div class="row">
@@ -176,19 +183,49 @@
                                         <input type="submit" value="edite">
                                     </div>
                                 </div>
-
                         </div>
                     </div>
-                    <br><br><br><br>
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-left"><i class='fa fa-edit'></i>Change Password</button>
                 </div>
                 </form>
                 @endforeach
             </div>
         </div>
     </div>
+    <!-- change password Modal -->
+    <div class="modal fade" id="addnew" tabindex="-1" aria-labelledby="addnewModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addnewModalLabel">Change password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {!! Form::open(['url' => 'nurse/changepassword']) !!}
+                    <div class="mb-3">
+                        {!! Form::label('oldpassword', 'Old Password') !!}
+                        {{ Form::password('password', array('name' => 'oldpassword', "class" => "form-control" ,"placeholder" =>"enter new password")) }}
 
+                    </div>
+                    <div class="mb-3">
+                        {!! Form::label('newpassword', 'New Password') !!}
+                        {{ Form::password('password', array('name' => 'password', "class" => "form-control", "placeholder" =>"enter new password")) }}
 
+                    </div>
+                    <div class="mb-3">
+                        {!! Form::label('confirmnewpassword', ' Confirm New Password') !!}
+                        {{ Form::password('password', array('name' => 'password_confirmation', "class" => "form-control", "placeholder" =>"confirm new password")) }}
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Change</button>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    @include('sweetalert::alert')
 </body>
 
 </html>

@@ -154,6 +154,7 @@ class nurseController extends Controller
     }
     function enrollDonor(Request $req)
     {
+
         $var = new enrollementModel;
         $var->user_id = $req->user_id;
         $var->fullname = $req->fullname;
@@ -161,14 +162,14 @@ class nurseController extends Controller
         $var->email = $req->email;
         $var->phone = $req->phone;
         $var->gender = $req->gender;
-        $var->bloodpressure = $req->bloodpressure;
+
         $var->bloodtype = $req->bloodtype;
         $var->volume = $req->volume;
-        $var->hct = $req->hct;
+
         $var->remark = $req->remark;
         $var->weight = $req->weight;
         $var->height = $req->height;
-        $var->rh = $req->rh;
+
         $var->bithdate = $req->birthdate;
         $var->state = $req->state;
         $var->city = $req->city;
@@ -190,7 +191,6 @@ class nurseController extends Controller
     function notifys()
     {
         $var = enrollementModel::all();
-
         return view('nurse.notify', ['donors' => $var]);
     }
     public function sendnotification($id)
@@ -207,7 +207,8 @@ class nurseController extends Controller
             $msg = enrollementModel::find($id);
 
             \Notification::send($msg, new sendNotification($details));
-            return view('nurse.nurseHome')->with('success', 'Message send Successfully!');
+            //return view('nurse.nurseHome')->with('success', 'Message send Successfully!');
+            return redirect()->back()->with('success', 'Message send Successfully! to', $msg);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Something went wrong in nurseController.sendnotification',

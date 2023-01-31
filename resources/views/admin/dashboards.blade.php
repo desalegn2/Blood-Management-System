@@ -56,7 +56,7 @@
                                         <h4 class="mt-1 mb-5 pb-1">Bahir Dar Blood Bank</h4>
                                     </div>
 
-                                    <form action="{{ route('register') }}" method="post" enctype=" multipart/form-data">
+                                    <form action="add" method="post" enctype=" multipart/form-data">
                                         @csrf
 
                                         <div class="form-outline mb-4">
@@ -100,10 +100,10 @@
                                                 <option value="3">Nurse</option>
                                                 <option value="4">Technician</option>
                                                 <option value="5">HI</option>
-                                                <input type="file" name="photo" id="form2Example11" class="form-control" placeholder="Enter Password" />
+
 
                                             </select>
-                                            <label class="form-label" for="form2Example11">Add User</label>
+                                            <label class="form-label" for="form2Example11">Choose User Type</label>
                                         </div>
 
                                         <div class="form-outline mb-4">
@@ -139,6 +139,7 @@
             </div>
         </div>
     </section>
+    @include('sweetalert::alert')
 </body>
 
 </html>

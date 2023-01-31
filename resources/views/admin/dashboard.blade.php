@@ -20,12 +20,6 @@
         /* =========== Google Fonts ============ */
         @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 
-
-        .grey-bg {
-            background-color: #F5F7FA;
-        }
-
-
         /* =============== Globals ============== */
         * {
             font-family: "Ubuntu", sans-serif;
@@ -40,11 +34,21 @@
             --gray: #f5f5f5;
             --black1: #222;
             --black2: #999;
+            --red:
         }
 
         body {
             min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        .top {
+            width: 100%;
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
         }
 
         /* ======================= Cards ====================== */
@@ -107,15 +111,7 @@
             /* margin-top: 10px; */
         }
 
-        .details .recentOrders {
-            position: relative;
-            display: grid;
-            min-height: 500px;
-            background: var(--white);
-            padding: 20px;
-            box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-            border-radius: 20px;
-        }
+
 
         .details .cardHeader {
             display: flex;
@@ -177,7 +173,7 @@
             text-align: center;
         }
 
-        .status.delivered {
+        .status.notexpire {
             padding: 2px 4px;
             background: #8de02c;
             color: var(--white);
@@ -186,7 +182,7 @@
             font-weight: 500;
         }
 
-        .status.pending {
+        .status.expire {
             padding: 2px 4px;
             background: #e9b10a;
             color: var(--white);
@@ -213,7 +209,15 @@
             font-weight: 500;
         }
 
-
+        .recentCustomers {
+            position: relative;
+            /* display: grid; */
+            min-height: 500px;
+            padding: 20px;
+            background: var(--white);
+            box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+            border-radius: 20px;
+        }
 
         .recentCustomers .imgBx {
             position: relative;
@@ -248,7 +252,7 @@
         }
 
         .recentCustomers table tr:hover {
-            background: red;
+            background: var(--blue);
             color: var(--white);
         }
 
@@ -343,177 +347,13 @@
     <div class="grey-bg container-fluid">
 
 
-        <section id="minimal-statistics">
-
-            <div class="row">
-                <div class="col-12 mt-3 mb-1">
-                    <h4 class="text-uppercase">Total Blood Donor Register with us</h4>
-
-                </div>
-            </div>
-            <div class="row">
-
-                <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body" style="background-color: #8EA7E9;">
-                                <div class="media d-flex">
-                                    <div class="align-self-center">
-                                        <i class="bi bi-balloon-heart-fill"></i>
-                                    </div>
-                                    <div class="media-body text-right">
-                                        <a href="">
-                                            <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        </a>
-                                        <h3>278</h3>
-                                        <span>A-</span>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body" style="background-color: #8EA7E9;">
-                                <div class="media d-flex">
-                                    <div class="align-self-center">
-                                        <i class="bi bi-balloon-heart-fill"></i>
-                                    </div>
-                                    <div class="media-body text-right">
-                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        <h3>156</h3>
-                                        <span>A+</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body" style="background-color: #8EA7E9;">
-                                <div class="media d-flex">
-                                    <div class="align-self-center">
-                                        <i class="bi bi-balloon-heart-fill"></i>
-                                    </div>
-                                    <div class="media-body text-right">
-                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        <h3>64.89 %</h3>
-                                        <span>B-</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body" style="background-color: #8EA7E9;">
-                                <div class="media d-flex">
-                                    <div class="align-self-center">
-                                        <i class="bi bi-balloon-heart-fill"></i>
-                                    </div>
-                                    <div class="media-body text-right">
-                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        <h3>423</h3>
-                                        <span>B+</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-
-                <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body" style="background-color: #8EA7E9;">
-                                <div class="media d-flex">
-                                    <div class="media-body text-left">
-                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        <h3 class="danger">278</h3>
-                                        <span>AB-</span>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <i class="bi bi-balloon-heart-fill"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body" style="background-color: #8EA7E9;">
-                                <div class="media d-flex">
-                                    <div class="media-body text-left">
-                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        <h3 class="success">156</h3>
-                                        <span>AB+</span>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <i class="bi bi-balloon-heart-fill"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body" style="background-color: #8EA7E9;">
-                                <div class="media d-flex">
-                                    <div class="media-body text-left">
-                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        <h3 class="warning">64.89 %</h3>
-                                        <span>O-</span>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <i class="bi bi-balloon-heart-fill"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body" style="background-color: #8EA7E9;">
-                                <div class="media d-flex">
-                                    <div class="media-body text-left">
-                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        <h3 class="primary">423</h3>
-                                        <span>O+</span>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <i class="bi bi-balloon-heart-fill"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section id="stats-subtitle">
+
 
             <div class="row">
                 <div class="col-12 mt-3 mb-1">
                     <h4 class="text-uppercase">Statistics </h4>
-                    <p>Statistics on &amp; </p>
+
                 </div>
             </div>
 
@@ -521,7 +361,7 @@
                 <div class="col-xl-6 col-md-12">
                     <div class="card overflow-hidden">
                         <div class="card-content">
-                            <div class="card-body cleartfix">
+                            <div class="card-body cleartfix" style="background-color: #03C988;">
                                 <div class="media align-items-stretch">
                                     <div class="align-self-center">
                                         <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
@@ -532,7 +372,7 @@
                                         <span></span>
                                     </div>
                                     <div class="align-self-center">
-                                        <h1>18,000</h1>
+                                        <h1>{{$numberof_donor}}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -543,17 +383,17 @@
                 <div class="col-xl-6 col-md-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body cleartfix">
+                            <div class="card-body cleartfix" style="background-color: #03C988;">
                                 <div class="media align-items-stretch">
                                     <div class="align-self-center">
                                         <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
                                     </div>
                                     <div class="media-body">
-                                        <h4>Total Enrolled</h4>
-                                        <span>Monthly blog comments</span>
+                                        <h4>Total Nurse</h4>
+                                        <span></span>
                                     </div>
                                     <div class="align-self-center">
-                                        <h1>84,695</h1>
+                                        <h1>{{$numberof_nurse}}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -563,65 +403,167 @@
             </div>
         </section>
 
+        <section id="stats-subtitle">
+            <div class="row">
+                <div class="col-xl-6 col-md-12">
+                    <div class="card overflow-hidden">
+                        <div class="card-content">
+                            <div class="card-body cleartfix" style="background-color: #03C988;">
+                                <div class="media align-items-stretch">
+                                    <div class="align-self-center">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                    </div>
+                                    <div class="media-body">
+
+                                        <h4>Total Technician Registered</h4>
+                                        <span></span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h1>{{$numberof_tech}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-md-12">
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body cleartfix" style="background-color: #03C988;">
+                                <div class="media align-items-stretch">
+                                    <div class="align-self-center">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4>Total Encoder</h4>
+                                        <span></span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h1>{{$numberof_encoder}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xl-6 col-md-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body cleartfix" style="background-color: #03C988;">
+                                <div class="media align-items-stretch">
+                                    <div class="align-self-center">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4>Total Manager</h4>
+                                        <span></span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h1>{{$numberof_manager}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-md-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body cleartfix" style="background-color: #03C988;">
+                                <div class="media align-items-stretch">
+                                    <div class="align-self-center">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4>Total Health Institute</h4>
+                                        <span></span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h1>{{$numberof_hi}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-md-12">
+                    <div class="card" style="background-color: #F99417;">
+                        <div class="card-content">
+                            <div class="card-body cleartfix">
+                                <div class="media align-items-stretch">
+                                    <div class="align-self-center">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4>Blocked</h4>
+                                        <span></span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h1>{{$numberof_blocked}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-
-
-
-
-    <!-- ======================= Cards ================== -->
-
-
     <!-- ================ Order Details List ================= -->
     <div class="details">
         <div class="recentOrders">
             <div class="cardHeader">
-                <h2>Manage Reservation</h2>
-                <a href="{{url('nurse/reservation')}}" class="btn">View All</a>
+                <h2>{{$numberof_user}} Total user</h2>
+                <a href="" class="btn">View All</a>
             </div>
+
             <table>
                 <thead>
                     <tr>
-                        <td>Name</td>
-                        <td>Phone</td>
-                        <td>Status</td>
-                        <td>Opration</td>
+                        <td>Full Name</td>
+                        <td>Role</td>
+                        <td>Email</td>
+                        <td>Joined Date</td>
                     </tr>
                 </thead>
                 <tbody>
-
+                    @foreach ($user as $u)
                     <tr>
-                        <td>name</td>
-                        <td>phone</td>
-                        <td>status</td>
-                        <td>
-                            <a class="btn btn-success" href="">View</a>
-                            <a class="btn btn-danger" href=" ">Delete</a>
-                        </td>
+                        <td>{{$u->name}}</td>
+                        <td>{{$u->role}}</td>
+                        <td>{{$u->email}}</td>
+                        <td scope="row">{{ $u->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
                     </tr>
-
-
+                    @endforeach
                 </tbody>
             </table>
+            {{$user->links()}}
         </div>
-
         <!-- ================= New Customers ================ -->
         <div class="recentCustomers">
             <div class="cardHeader">
-                <h2>Recent user Joined</h2>
+                <h2>Recent User Joined</h2>
             </div>
-
+            @foreach($stats as $stat)
             <table>
-
                 <tr>
                     <td width="60px">
-                        <div class="imgBx"><img src="" alt=""></div>
+                        <div class="imgBx"><img src="{{asset('uploads/registers/'.$stat->photo)}}" alt=""></div>
                     </td>
                     <td>
-                        <h4>name <br> <span>city</span></h4>
+                        <h4>{{$stat->name}} <br> <span>{{$stat->role}}</span></h4>
                     </td>
-                </tr>
-            </table>
 
+                </tr>
+
+            </table>
+            @endforeach
         </div>
     </div>
 
