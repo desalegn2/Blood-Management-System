@@ -111,7 +111,7 @@
                                     </div>
 
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="file" name="photo">
+                                        <input type="file" name="photo" required>
                                         <input type="submit" value="save">
                                     </div>
                                 </div>

@@ -41,7 +41,6 @@
                     <td>{{$view->email}}</td>
                     <td>{{$view->phone}}</td>
                     <td>{{$view->bloodtype}}</td>
-
                     <td>
                         <a class="btn btn-success" href="">Approve</a>
                         <a class="btn btn-danger" href="">Disapprove</a>
@@ -49,8 +48,6 @@
                     <td>
                         <a class="btn btn-success" href="">View</a>
                         <a href="" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</a>
-
-
                     </td>
                 </tr>
                 @endforeach

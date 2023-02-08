@@ -37,6 +37,7 @@
         /* 
 	Generic Styling, for Desktops/Laptops 
 	*/
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -65,6 +66,7 @@
 	This query will take effect for any screen smaller than 760px
 	and also iPads specifically.
 	*/
+
         @media only screen and (max-width: 760px),
         (min-device-width: 768px) and (max-device-width: 1024px) {
 
@@ -175,11 +177,17 @@
 </head>
 
 <body>
-
     <div id="page-wrap">
-        <a class="btn btn-success" href="{{url('nurse/home')}}">Home</a>
-
-        <h1>Donors Who send request</h1>
+        <form action="{{url('/nurse/search_donor')}}" method="post">
+            @csrf
+            <div style="float: right;">
+                <input type="text" name="fullname" style="width: 200px;" placeholder="enter name.email,phone" required>
+                <input type="submit" style="width: 50px;">
+            </div>
+        </form>
+        <br> <br>
+        <a href="{{ URL::previous() }}" class="btn btn-primary btn-sm float-end">Back</a>
+        <h1>Donors Who Donate Before</h1>
         <p></p>
         <table>
             <thead>
@@ -188,40 +196,28 @@
                     <th>Full Name</th>
                     <th>email</th>
                     <th>Phone</th>
-                    <th>blood Type</th>
-                    <th>Status</th>
                     <th>Duration</th>
-                    <th>Notify</th>
                     <th>Operation</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($donors as $donor)
-                @for($i=$donor->created_at->diffInMinutes(\Carbon\Carbon::now());$i>=155;$i--)
+                @foreach ($data as $donor)
                 <tr>
-
                     <td>
                         <img src="{{asset('uploads/registers/'.$donor->photo)}}" width="80" height="80">
                     </td>
                     <td>{{$donor->fullname}}</td>
                     <td>{{$donor->email}}</td>
                     <td>{{$donor->phone}}</td>
-                    <td>{{$donor->bloodtype}}</td>
-                    <td>{{$donor->status}}</td>
                     <td>{{ $donor->created_at->diffInMinutes(\Carbon\Carbon::now()) }} min ago</td>
                     <td>
-                        <a class="btn btn-success" href="{{url('nurse/send', $donor->id)}}">Notify By Email</a>
-                    </td>
-                    <td>
-                        <a href="#delete{{$donor->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</a>
+                        <a href="{{url('nurse/registordon',$donor->id)}}"><i class='fa fa-edit'></i> Registor</a>
                     </td>
                 </tr>
-                @break
-                @endfor
                 @endforeach
             </tbody>
         </table>
-
+        {{$data->links()}}
     </div>
     @include('sweetalert::alert')
 </body>

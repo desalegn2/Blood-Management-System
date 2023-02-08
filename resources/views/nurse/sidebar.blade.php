@@ -334,14 +334,14 @@
                         <span class="title">Manage Donor</span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="{{url('/nurse/listofapproved')}}">
                         <span class="icon">
                             <ion-icon name="dice-sharp"></ion-icon>
                         </span>
                         <span class="title">Approved Donor</span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="{{url('/nurse/reservation')}}">
                         <span class="icon">
@@ -351,26 +351,21 @@
                     </a>
                 </li>
                 </li>
-
                 <li>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
-
                         <span class="title">Logout</span>
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
                 </li>
-
                 </li>
             </ul>
         </div>
-
-
         <!-- ========================= Main ==================== -->
         <div class="main">
             <div class="topbar">
@@ -381,6 +376,7 @@
 
                 <div class="user">
                     <img src="{{asset('uploads/registers/'. Auth::user()->photo )}}" alt="no image">
+
                 </div>
             </div>
 

@@ -37,7 +37,6 @@ class nurseController extends Controller
             ->exists();
         if ($isExist) {
             $data = User::all()->where('id', '=', $id);
-            //return view('nurse.profile', ['data' => $data]);
             return view('nurse.profile', ['data' => $data]);
         }
     }
@@ -187,6 +186,28 @@ class nurseController extends Controller
         }
         $var->save();
         return view('nurse.registerDonor')->with('success', 'Task Added Successfully!');
+    }
+
+    function listofDonor()
+    {
+        $data = enrollementModel::paginate(5);
+        return view('nurse.listOfRegistor', compact('data'));
+    }
+    function searchDonor(Request $req)
+    {
+        $a = $req->fullname;
+        $data = enrollementModel::where('fullname', $a)->orWhere('phone', $a)->orWhere('email', $a)->get();
+        return view('nurse.listOfRegistor', compact('data'));
+    }
+    function getDonor($id)
+    {
+        $isExist = enrollementModel::select("*")
+            ->where("id", $id)
+            ->exists();
+        if ($isExist) {
+            $donors = enrollementModel::find($id);
+            return view('nurse.registorAlreadyDonated', ['data' => $donors]);
+        }
     }
     function notifys()
     {

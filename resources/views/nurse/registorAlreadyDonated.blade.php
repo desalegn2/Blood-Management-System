@@ -303,18 +303,14 @@
 </head>
 
 <body>
-
     <!-- ======================= Cards ================== -->
-
-    <div style="float: right;">
-
-        <!-- <input type="text" name="fullname" style="width: 200px;" placeholder="Enter Donor Name" required> -->
-        <a href="{{url('/nurse/listofdonor')}}" style="decoration:none;">Are you Donate Before?</a>
-    </div>
 
 
     <div class="main-block">
+
+
         <form action="{{url('/nurse/enrolldonor')}}" method="post" enctype="multipart/form-data">
+
             @csrf
             <h1>Blood Donor Enrollment Form</h1>
             <fieldset>
@@ -322,16 +318,18 @@
                     <h3>Donor Information</h3>
                 </legend>
                 <div><input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required></div>
+
                 <div class="account-details">
-                    <div><label>Full Name</label><input type="text" name="fullname" required></div>
-                    <div><label>Birth Date</label><input type="date" name="birthdate" required></div>
-                    <div><label>Occupation</label><input type="text" name="occupation" required></div>
-                    <div><label>phone</label><input type="text" name="phone" required></div>
-                    <div><label>Email</label><input type="text" name="email" required></div>
-                    <div><label>Weight</label><input type="text" name="weight" required></div>
-                    <div><label>Type of Donation</label><input type="text" name="typeofdonation" required></div>
-                    <div><label>Height</label><input type="text" name="height" required></div>
-                    <div><label>Image</label><input type="file" name="photo" required></div>
+
+                    <div><label>Full Name</label><input type="text" name="fullname" value="{{$data->fullname}}" required></div>
+                    <div><label>Birth Date</label><input type="date" name="birthdate" value="{{$data->birthdate}}" required></div>
+                    <div><label>Occupation</label><input type="text" name="occupation" value="{{$data->occupation}}" required></div>
+                    <div><label>phone</label><input type="text" name="phone" value="{{$data->phone}}" required></div>
+                    <div><label>Email</label><input type="text" name="email" value="{{$data->email}}" required></div>
+                    <div><label>Weight</label><input type="text" name="weight" value="{{$data->weight}}" required></div>
+                    <div><label>Type of Donation</label><input type="text" name="typeofdonation" value="{{$data->typeofdonation}}" required></div>
+                    <div><label>Height</label><input type="text" name="height" value="{{$data->height}}" required></div>
+                    <div><label>Image</label><input type="file" name="photo" value="{{$data->photo}}" required></div>
                     <div>
                         <label>Gendor</label>
                         <div>Male <input type="radio" value="male" name="gender" required></div>
@@ -344,20 +342,20 @@
                     <h3>Contact Information</h3>
                 </legend>
                 <div class="personal-details">
+
                     <div>
-                        <div><label>State</label><input type="text" name="state" required></div>
-                        <div><label>City</label><input type="text" name="city" required></div>
-                        <div><label>Zone</label><input type="text" name="zone" required></div>
-                        <div><label>Woreda</label><input type="text" name="woreda" required></div>
-                        <div><label>Kebelie</label><input type="text" name="kebelie" required></div>
-                        <div><label>House Number</label><input type="text" name="housenumber" required></div>
+                        <div><label>State</label><input type="text" name="state" value="{{$data->state}}" required></div>
+                        <div><label>City</label><input type="text" name="city" value="{{$data->city}}" required></div>
+                        <div><label>Zone</label><input type="text" name="zone" value="{{$data->zone}}" required></div>
+                        <div><label>Woreda</label><input type="text" name="woreda" value="{{$data->woreda}}" required></div>
+                        <div><label>Kebelie</label><input type="text" name="kebelie" value="{{$data->kebelie}}" required></div>
+                        <div><label>House Number</label><input type="text" name="housenumber" value="{{$data->housenumber}}" required></div>
                     </div>
                     <div>
                         <div>
                             <label>Blood Group</label>
                             <select name="bloodtype" required>
-                                <option value="">Choose Blood Type</A></option>
-                                <option value="unknown">Unknown</A></option>
+                                <option value="{{$data->bloodtype}}">{{$data->bloodtype}}</A></option>
                                 <option value="A+">A+</A></option>
                                 <option value="A-">A-</option>
                                 <option value="B+">B+</option>
@@ -367,7 +365,7 @@
                                 <option value="O-">O+</option>
                             </select>
                         </div>
-                        <div><label>Volume</label><input type="text" name="volume" required></div>
+                        <div><label>Volume</label><input type="text" name="volume" value="{{ Auth::user()->id }}" required></div>
                         <div>
                             <label>Remark</label>
                             <textarea id="w3review" name="remark" rows="5" cols="30"></textarea>
@@ -376,7 +374,10 @@
                 </div>
             </fieldset>
             <center> <button type="submit">Submit</button></center>
+
         </form>
+
+
     </div>
     @include('sweetalert::alert')
 </body>

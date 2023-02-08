@@ -172,9 +172,6 @@ Route::middleware(['auth', 'user-role:admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'user-role:nurse'])->group(function () {
-
-
-
     Route::get('/nurse/home', [HomeController::class, 'nurseHome'])->name('nurse.home');
     // Route::view('/nurse/newhome', 'nurse.home');
     Route::get('/nurse/profile/{id}', [nurseController::class, 'Profile']);
@@ -208,6 +205,9 @@ Route::middleware(['auth', 'user-role:nurse'])->group(function () {
     Route::patch('/nurse.changereservation/{id}', [nurseController::class, 'changeReservation']);
 
     Route::get('/nurse/aminusdonor', [nurseController::class, 'aminusDonor']);
+    Route::get('/nurse/listofdonor', [nurseController::class, 'listofDonor']);
+    Route::post('/nurse/search_donor', [nurseController::class, 'searchDonor']);
+    Route::get('/nurse/registordon/{id}', [nurseController::class, 'getDonor']);
 });
 Route::middleware(['auth', 'user-role:technitian'])->group(function () {
 
