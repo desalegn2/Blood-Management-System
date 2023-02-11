@@ -42,14 +42,22 @@
                     <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                         <div class="card-body p-4 p-md-5">
                             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Blood</h3>
-                            <form action="addbloods" method="post">
+
+                            <form action="{{url('/encoder/addbloods')}}" method="post">
                                 @csrf
+
                                 <input type="hidden" id="date" name="user_id" value="{{Auth::user()->id}}" required>
+                                <input type="hidden" id="date" name="fullname" value="{{$data->fullname}}" required>
+                                <input type="hidden" id="date" name="email" value="{{$data->email}}" required>
+                                <input type="hidden" id="date" name="phone" value="{{$data->phone}}" required>
+                                <input type="hidden" id="date" name="state" value="{{$data->state}}" required>
+                                <input type="hidden" id="date" name="city" value="{{$data->city}}" required>
+                                <input type="hidden" id="date" name="kebelie" value="{{$data->kebelie}}" required>
                                 <div class="row">
                                     <div class="row">
                                         <div class="col-12">
 
-                                            <select class="select form-control-lg" name="bloodtype">
+                                            <select class="select form-control-lg" name="bloodtype" required>
                                                 <option value="">Choose Blood Type</option>
                                                 <option value="A+">A+</option>
                                                 <option value="A-">A-</option>
@@ -62,21 +70,18 @@
                                             </select>
                                             <br>
                                             <label class="form-label">Choose Blood Type</label>
-
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
-
                                         <div class="form-outline">
-                                            <input type="text" name="volume" id="firstName" class="form-control form-control-lg" />
+                                            <input type="text" name="volume" id="firstName" value="{{$data->volume}}" class="form-control form-control-lg" />
                                             <label class="form-label" for="firstName">Volume in ML</label>
                                         </div>
-
                                     </div>
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form-outline">
-                                            <input type="text" name="packno" id="firstName" class="form-control form-control-lg" />
+                                            <input type="text" name="packno" id="" value="{{$data->packno}}" class="form-control form-control-lg" />
                                             <label class="form-label" for="firstName">Pack Number</label>
                                         </div>
 
@@ -84,7 +89,7 @@
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form-outline">
-                                            <input type="text" name="donationtype" id="firstName" class="form-control form-control-lg" />
+                                            <input type="text" name="donationtype" id="" value="{{$data->donationtype}}" class="form-control form-control-lg" />
                                             <label class="form-label" for="firstName">Donation Type</label>
                                         </div>
 
@@ -92,13 +97,13 @@
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form-outline">
-                                            <input type="text" name="bloodpressure" id="firstName" class="form-control form-control-lg" />
+                                            <input type="text" name="bloodpressure" id="firstName" value="" class="form-control form-control-lg" />
                                             <label class="form-label" for="firstName">Blood Pressure</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" name="hct" id="lastName" class="form-control form-control-lg" />
+                                            <input type="text" name="hct" id="" value="" class="form-control form-control-lg" />
                                             <label class="form-label" for="lastName">Hct Level</label>
                                         </div>
                                     </div>

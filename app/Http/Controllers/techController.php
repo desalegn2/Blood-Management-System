@@ -9,6 +9,7 @@ use App\Models\hospitalRequestModel;
 use App\Models\distributeBloodModel;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\enrollementModel;
 
 class techController extends Controller
 {
@@ -312,6 +313,29 @@ class techController extends Controller
         }
     }
 
+    function testBlood()
+    {
+        $data = enrollementModel::all();
+        return view('technitian.testBlood', ['data' => $data]);
+    }
+
+    function approved($id)
+    {
+        $data = enrollementModel::find($id);
+
+        $data->status = "approve";
+        $data->save();
+        return redirect()->back();
+    }
+
+    function discards($id)
+    {
+        $data = enrollementModel::find($id);
+
+        $data->status = "discard";
+        $data->save();
+        return redirect()->back();
+    }
     function addblood(Request $req)
     {
         $var = new addBloodModel;

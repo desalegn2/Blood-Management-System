@@ -201,6 +201,7 @@
                 </tr>
             </thead>
             <tbody>
+                @if(count($data))
                 @foreach ($data as $donor)
                 <tr>
                     <td>
@@ -209,12 +210,18 @@
                     <td>{{$donor->fullname}}</td>
                     <td>{{$donor->email}}</td>
                     <td>{{$donor->phone}}</td>
-                    <td>{{ $donor->created_at->diffInMinutes(\Carbon\Carbon::now()) }} min ago</td>
+                    <td>{{ $donor->created_at->diffInDays(\Carbon\Carbon::now()) }} days ago</td>
                     <td>
                         <a href="{{url('nurse/registordon',$donor->id)}}"><i class='fa fa-edit'></i> Registor</a>
                     </td>
                 </tr>
                 @endforeach
+                <br><br>
+                @else
+                <tr>
+                    <td> Donor With this Input</td>
+                </tr>
+                @endif
             </tbody>
         </table>
         {{$data->links()}}

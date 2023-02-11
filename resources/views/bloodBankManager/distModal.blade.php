@@ -7,20 +7,37 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {!! Form::model($req, [ 'method' => 'post','url' => ['technitian/savedistribute'] ]) !!}
+                {!! Form::model($data, [ 'method' => 'post','url' => ['bbmanager/distribute'] ]) !!}
                 <div class="mb-3">
                     {!! Form::hidden('user_id', Auth::user()->id, ['class' => 'form-control']) !!}
+                    {!! Form::hidden('fullname', $dis->fullname, ['class' => 'form-control']) !!}
+                    {!! Form::hidden('email', $dis->email, ['class' => 'form-control']) !!}
+                    {!! Form::hidden('phone', $dis->phone, ['class' => 'form-control']) !!}
+                </div>
+                <div class="mb-3">
+                    {!! Form::label('packno', 'Pack NO') !!}
+                    {!! Form::text('packno', $dis->packno, ['class' => 'form-control']) !!}
                 </div>
                 <div class="mb-3">
                     {!! Form::label('bloodgroup', 'Blood group') !!}
                     {!! Form::text('bloodtype', $dis->bloodgroup, ['class' => 'form-control']) !!}
                 </div>
-
                 <div class="mb-3">
                     {!! Form::label('volume', 'Volume') !!}
                     {!! Form::text('volume', $dis->volume, ['class' => 'form-control']) !!}
                 </div>
-
+                <div class="mb-3">
+                    {!! Form::label('bloodpressure', 'Blood Pressure') !!}
+                    {!! Form::text('bloodpressure', $dis->bloodpressure, ['class' => 'form-control']) !!}
+                </div>
+                <div class="mb-3">
+                    {!! Form::label('rh', 'Rh') !!}
+                    {!! Form::text('rh', $dis->rh, ['class' => 'form-control']) !!}
+                </div>
+                <div class="mb-3">
+                    {!! Form::label('hct', 'Hct') !!}
+                    {!! Form::text('hct', $dis->hct, ['class' => 'form-control']) !!}
+                </div>
                 <div class="mb-3">
                     {!! Form::label('issueddate', 'Issued date') !!}
                     {!! Form::date('issuedate', $dis->date, ['class' => 'form-control']) !!}
@@ -53,7 +70,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {!! Form::model($req, [ 'method' => 'delete','url' => ['admin/deletedonor', $dis->id] ]) !!}
+                {!! Form::model($data, [ 'method' => 'delete','url' => ['admin/deletedonor', $dis->id] ]) !!}
                 <h4 class="text-center">Are you sure you want to delete This Data?</h4>
                 <h5 class="text-center">Name: {{$dis->name}} {{$dis->email}}</h5>
             </div>

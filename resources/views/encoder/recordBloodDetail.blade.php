@@ -1,21 +1,19 @@
-@extends('nurse.sidebar')
+@extends('encoder.sidebar')
 @section('content')
-
 <!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset='UTF-8'>
-
-    <title>Responsive Table</title>
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
+    <title>Document</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -37,7 +35,6 @@
         /* 
 	Generic Styling, for Desktops/Laptops 
 	*/
-
         table {
             width: 100%;
             border-collapse: collapse;
@@ -66,7 +63,6 @@
 	This query will take effect for any screen smaller than 760px
 	and also iPads specifically.
 	*/
-
         @media only screen and (max-width: 760px),
         (min-device-width: 768px) and (max-device-width: 1024px) {
 
@@ -172,58 +168,43 @@
 
         /* From separet style ----------- */
     </style>
-    <!--<![endif]-->
+
 
 </head>
 
 <body>
 
     <div id="page-wrap">
-        <a class="btn btn-success" href="{{url('nurse/home')}}">Home</a>
 
-        <h1>Donors Who Donare 3 Month Ago</h1>
-        <p></p>
+        <h1>Incoming Blood Request</h1>
+        <a class="btn btn-success" href="{{url('encoder/home')}}">Home</a>
         <table>
             <thead>
                 <tr>
-                    <th>photo</th>
-                    <th>Full Name</th>
-                    <th>email</th>
-                    <th>Phone</th>
-                    <th>blood Type</th>
-                    <th>Status</th>
-                    <th>Duration</th>
-                    <th>Notify</th>
-                    <th>Operation</th>
+                    <th>Full Name </th>
+                    <th> Blood Type</th>
+                    <th>Volume</th>
+                    <th>Date</th>
+                    <th>Pack No</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($donors as $donor)
-                @for($i=$donor->created_at->diffInMinutes(\Carbon\Carbon::now());$i>=5;$i--)
-                <tr>
+                @foreach ($data as $dis)
 
+                <tr>
+                    <td>{{$dis->fullname}}</td>
+                    <td>{{$dis->bloodtype}}</td>
+                    <td>{{$dis->volume}}</td>
+                    <td>{{$dis->created_at}}</td>
+                    <td>{{$dis->packno}}</td>
                     <td>
-                        <img src="{{asset('uploads/registers/'.$donor->photo)}}" width="80" height="80">
-                    </td>
-                    <td>{{$donor->fullname}}</td>
-                    <td>{{$donor->email}}</td>
-                    <td>{{$donor->phone}}</td>
-                    <td>{{$donor->bloodtype}}</td>
-                    <td>{{$donor->status}}</td>
-                    <td>{{ $donor->created_at->diffInMinutes(\Carbon\Carbon::now()) }} min ago</td>
-                    <td>
-                        <a class="btn btn-success" href="{{url('nurse/send', $donor->id)}}">Notify By Email</a>
-                    </td>
-                    <td>
-                        <a href="#delete{{$donor->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</a>
+                        <a href="{{url('encoder/recordblood', $dis->id)}}"><i class='fa fa-edit'></i> Record</a>
                     </td>
                 </tr>
-                @break
-                @endfor
                 @endforeach
             </tbody>
         </table>
-
     </div>
     @include('sweetalert::alert')
 </body>

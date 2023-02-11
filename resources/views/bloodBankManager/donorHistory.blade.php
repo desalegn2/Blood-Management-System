@@ -1,6 +1,5 @@
-@extends('nurse.sidebar')
+@extends('bloodBankManager.sidebar')
 @section('content')
-
 <!DOCTYPE html>
 <html>
 
@@ -177,53 +176,69 @@
 </head>
 
 <body>
-
     <div id="page-wrap">
-        <a class="btn btn-success" href="{{url('nurse/home')}}">Home</a>
-
-        <h1>Donors Who Donare 3 Month Ago</h1>
+        <form action="{{url('/bbmanager/searchdonor')}}" method="post">
+            @csrf
+            <div style="float: right;">
+                <input type="text" name="fullname" style="width: 200px;" placeholder="enter name.email,phone" required>
+                <input type="submit" style="width: 50px;">
+            </div>
+        </form>
+        <br> <br>
+        <a href="{{ URL::previous() }}" class="btn btn-primary btn-sm float-end">Back</a>
+        <h1>Donors Result</h1>
         <p></p>
         <table>
             <thead>
                 <tr>
-                    <th>photo</th>
                     <th>Full Name</th>
                     <th>email</th>
                     <th>Phone</th>
-                    <th>blood Type</th>
-                    <th>Status</th>
+
+                    <th>Pack No</th>
+                    <th>Blood Type</th>
+                    <th>Volume</th>
+                    <th>Blood Pressure</th>
+                    <th>Rh</th>
+                    <th>Hct</th>
                     <th>Duration</th>
-                    <th>Notify</th>
-                    <th>Operation</th>
+                    <th>Action</th>
+
                 </tr>
             </thead>
             <tbody>
-                @foreach ($donors as $donor)
-                @for($i=$donor->created_at->diffInMinutes(\Carbon\Carbon::now());$i>=5;$i--)
+                @if(count($data))
+                @foreach ($data as $donor)
                 <tr>
 
-                    <td>
-                        <img src="{{asset('uploads/registers/'.$donor->photo)}}" width="80" height="80">
-                    </td>
                     <td>{{$donor->fullname}}</td>
                     <td>{{$donor->email}}</td>
                     <td>{{$donor->phone}}</td>
-                    <td>{{$donor->bloodtype}}</td>
-                    <td>{{$donor->status}}</td>
-                    <td>{{ $donor->created_at->diffInMinutes(\Carbon\Carbon::now()) }} min ago</td>
+
+                    <td>{{$donor->packno}}</td>
+                    <td>{{$donor->bloodgroup}}</td>
+                    <td>{{$donor->volume}}</td>
+                    <td>{{$donor->bloodpressure}}</td>
+                    <td>{{$donor->rh}}</td>
+                    <td>{{$donor->hct}}</td>
+                    <td>{{ $donor->created_at}}</td>
                     <td>
-                        <a class="btn btn-success" href="{{url('nurse/send', $donor->id)}}">Notify By Email</a>
+                        <!-- <a href="" class="btn btn-info"><i class='fa fa-edit'></i> send</a> -->
+                        <a href="#sendmessage{{$donor->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-edit'></i> send</a>
+                        @include('bloodBankManager.sendmodal')
                     </td>
-                    <td>
-                        <a href="#delete{{$donor->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</a>
-                    </td>
+
                 </tr>
-                @break
-                @endfor
                 @endforeach
+                <br><br>
+                @else
+                <tr>
+                    <td> Donor With this Input</td>
+                </tr>
+                @endif
             </tbody>
         </table>
-
+        {{$data->links()}}
     </div>
     @include('sweetalert::alert')
 </body>

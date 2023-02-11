@@ -110,8 +110,8 @@
 
         .details .recentOrders {
             position: relative;
-            display: grid;
-            min-height: 500px;
+            /* display: grid;
+            min-height: 500px; */
             background: var(--white);
             padding: 20px;
             box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
@@ -574,6 +574,7 @@
 
     <!-- ================ Order Details List ================= -->
     <div class="details">
+
         <div class="recentOrders">
             <div class="cardHeader">
                 <h2>Manage Reservation</h2>

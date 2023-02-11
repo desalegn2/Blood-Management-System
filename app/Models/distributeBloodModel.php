@@ -17,5 +17,13 @@ class distributeBloodModel extends Model
         'expirydate',
         'recievedby',
 
+        'donateby',
+        'rh',
+        'hct',
+        'bloodpressure',
+        'packno',
+        'donoremail',
+        'donorphone'
+
     ];
 }

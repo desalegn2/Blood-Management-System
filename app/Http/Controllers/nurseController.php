@@ -153,22 +153,19 @@ class nurseController extends Controller
     }
     function enrollDonor(Request $req)
     {
-
         $var = new enrollementModel;
         $var->user_id = $req->user_id;
         $var->fullname = $req->fullname;
+        $var->packno = $req->packno;
         $var->occupation = $req->occupation;
         $var->email = $req->email;
         $var->phone = $req->phone;
         $var->gender = $req->gender;
-
         $var->bloodtype = $req->bloodtype;
         $var->volume = $req->volume;
-
         $var->remark = $req->remark;
         $var->weight = $req->weight;
         $var->height = $req->height;
-
         $var->bithdate = $req->birthdate;
         $var->state = $req->state;
         $var->city = $req->city;
@@ -196,7 +193,7 @@ class nurseController extends Controller
     function searchDonor(Request $req)
     {
         $a = $req->fullname;
-        $data = enrollementModel::where('fullname', $a)->orWhere('phone', $a)->orWhere('email', $a)->get();
+        $data = enrollementModel::where('fullname', $a)->orWhere('phone', $a)->orWhere('email', $a)->paginate(5);
         return view('nurse.listOfRegistor', compact('data'));
     }
     function getDonor($id)
@@ -228,14 +225,12 @@ class nurseController extends Controller
             $msg = enrollementModel::find($id);
 
             \Notification::send($msg, new sendNotification($details));
-            //return view('nurse.nurseHome')->with('success', 'Message send Successfully!');
             return redirect()->back()->with('success', 'Message send Successfully! to', $msg);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Something went wrong in nurseController.sendnotification',
                 'error' => $e->getMessage()
             ], 400);
-            //return view('nurse.notify')->with('success', 'Message send Successfully!');
         }
     }
     public function generateReport()

@@ -6,22 +6,40 @@ use Illuminate\Http\Request;
 use App\Models\addBloodModel;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Models\enrollementModel;
 
 class encoderController extends Controller
 {
+
+    function Record()
+    {
+        $data = enrollementModel::all()->where('status', '=', 'approve');
+        return view('encoder.recordBloodDetail', ['data' => $data]);
+    }
+
+    function recordBloods($id)
+    {
+        $data = enrollementModel::find($id);
+        return view('encoder.add', ['data' => $data]);
+    }
     function addblood(Request $req)
     {
         $var = new addBloodModel;
+
         $var->user_id = $req->user_id;
+        $var->fullname = $req->fullname;
+        $var->email = $req->email;
+        $var->phone = $req->phone;
+        $var->state = $req->state;
+        $var->city = $req->city;
+        $var->kebelie = $req->kebelie;
         $var->bloodgroup = $req->bloodtype;
         $var->volume = $req->volume;
         $var->packno = $req->packno;
         $var->donationtype = $req->donationtype;
-
         $var->rh = $req->rh;
         $var->hct = $req->hct;
         $var->bloodpressure = $req->bloodpressure;
-
         $var->save();
         return redirect()->back()->with('success', 'Task Added Successfully!');
         //return redirect()->with('success', 'Task Added Successfully!');

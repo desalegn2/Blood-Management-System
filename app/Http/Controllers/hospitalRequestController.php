@@ -116,7 +116,7 @@ class hospitalRequestController extends Controller
         //$var= new donorRequestModel;
         $blood = $request->bloodtype;
         $city = $request->city;
-        $data = donorRequestModel::where('bloodtype', $blood)->Where('city', $city)->get();
+        $data = addBloodModel::where('bloodgroup', $blood)->Where('city', $city)->get();
         return view('healthinstitute.donor',  ['data' => $data]);
         //echo($dat->name);
         //echo($dat->email);

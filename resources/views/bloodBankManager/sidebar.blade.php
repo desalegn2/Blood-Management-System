@@ -293,7 +293,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('/bbmanager/')}}">
+                    <a href="{{url('/bbmanager/bbinfo')}}">
                         <span class="icon">
                             <ion-icon name="bag-remove-outline"></ion-icon>
                         </span>
@@ -301,8 +301,9 @@
                     </a>
                 </li>
 
+
                 <li>
-                    <a href="{{url('/bbmanager/')}}">
+                    <a href="{{url('/bbmanager/bloods')}}">
                         <span class="icon">
                             <ion-icon name="bag-remove-outline"></ion-icon>
                         </span>
@@ -328,7 +329,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('#')}}">
+                    <a href="{{url('/bbmanager/donorhistory')}}">
+                        <span class="icon">
+                            <ion-icon name="bag-remove-outline"></ion-icon>
+                        </span>
+                        <span class="title">Donor History</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('/bbmanager/feedback')}}">
                         <span class="icon">
                             <ion-icon name="bag-remove-outline"></ion-icon>
                         </span>

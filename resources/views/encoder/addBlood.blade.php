@@ -60,7 +60,7 @@
 
 
     <div>
-        <h3>Blood Registerform</h3>
+        <h3>Blood </h3>
         <form action="addbloods" method="post">
             @csrf
             <input type="hidden" id="date" name="user_id" value="{{Auth::user()->id}}" required>

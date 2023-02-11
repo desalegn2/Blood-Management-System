@@ -324,6 +324,7 @@
                 <div><input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required></div>
                 <div class="account-details">
                     <div><label>Full Name</label><input type="text" name="fullname" required></div>
+
                     <div><label>Birth Date</label><input type="date" name="birthdate" required></div>
                     <div><label>Occupation</label><input type="text" name="occupation" required></div>
                     <div><label>phone</label><input type="text" name="phone" required></div>
@@ -331,12 +332,12 @@
                     <div><label>Weight</label><input type="text" name="weight" required></div>
                     <div><label>Type of Donation</label><input type="text" name="typeofdonation" required></div>
                     <div><label>Height</label><input type="text" name="height" required></div>
-                    <div><label>Image</label><input type="file" name="photo" required></div>
                     <div>
                         <label>Gendor</label>
                         <div>Male <input type="radio" value="male" name="gender" required></div>
                         <div>Female<input type="radio" value="female" name="gender" required></div>
                     </div>
+                    <div><label>Image</label><input type="file" name="photo" required></div>
                 </div>
             </fieldset>
             <fieldset>
@@ -368,6 +369,7 @@
                             </select>
                         </div>
                         <div><label>Volume</label><input type="text" name="volume" required></div>
+                        <div><label>Pack No</label><input type="text" name="packno" required></div>
                         <div>
                             <label>Remark</label>
                             <textarea id="w3review" name="remark" rows="5" cols="30"></textarea>

@@ -15,7 +15,7 @@
 
 <body>
 
-    <div class="content-wrapper">
+    <div class="content-wrapper mb-5">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
@@ -78,6 +78,29 @@
         </div>
 
     </div>
+
+    <table>
+
+        <thead>
+            <tr>
+                <td>Blood Group</td>
+                <td>Volume</td>
+                <td>Duration</td>
+                <td>Status</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>A</td>
+                <td>342</td>
+                <td scope="row">464 Days ago</td>
+                <td>
+                    vsfs
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
 </body>
 
 </html>

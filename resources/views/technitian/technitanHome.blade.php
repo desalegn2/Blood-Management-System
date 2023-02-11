@@ -344,6 +344,7 @@
     <!-- ======================= Cards ================== -->
 
     <div class="grey-bg container-fluid">
+
         <section id="minimal-statistics">
 
             <div class="row">
@@ -521,6 +522,7 @@
 
     <!-- ================ Order Details List ================= -->
     <div class="details">
+
         <div class="recentOrders">
             <div class="cardHeader">
                 <h2>Blood Storage</h2>
@@ -528,6 +530,7 @@
             </div>
 
             <table>
+
                 <thead>
                     <tr>
                         <td>Blood Group</td>
@@ -542,7 +545,9 @@
                         <td>{{$blood->bloodgroup}}</td>
                         <td>{{$blood->volume}}</td>
                         <td scope="row">{{ $blood->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
-                        <td>{{$blood->status}}</td>
+                        <td>
+                            {{$blood->status}}
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

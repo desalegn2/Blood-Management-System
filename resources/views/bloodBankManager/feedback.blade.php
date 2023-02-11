@@ -1,5 +1,6 @@
-@extends('admin.adminlte')
+@extends('bloodBankManager.sidebar')
 @section('content')
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -155,23 +156,20 @@
                         <div class="member-info" style="padding-left: 30px;">
                             <h2><a href="#">{{$view->name}}</a> </h2>
                             <h4>{{ $view->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</h4>
-
                             <h5>{{$view->email}}</h5>
                             <p>Lorem ipsum dolor sit amet consectetur adipisic</p>
-
                             <div class="card-footer">
                                 <small class="text-muted">{{ $view->created_at}}</small>
-
+                                <a href="{{url('bbmanager/deletefeedback')}}" style="float:right;">Delete</a>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
                 @endforeach
             </div>
         </div>
     </section>
+    @include('sweetalert::alert')
 </body>
 
 </html>

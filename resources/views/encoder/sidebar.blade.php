@@ -299,7 +299,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{('/encoder/addbloods')}}">
+                    <a href="{{('/encoder/record')}}">
                         <span class="icon">
                             <ion-icon name="bag-handle-outline"></ion-icon>
                         </span>

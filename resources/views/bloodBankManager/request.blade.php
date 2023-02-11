@@ -182,13 +182,15 @@
         <table>
             <thead>
                 <tr>
-                    <th>Hospital Name</th>
-                    <th>Needed Blood Type</th>
+                    <th>H Name</th>
+                    <th>Blood Type</th>
                     <th>Volume</th>
                     <th>Date</th>
+                    <th>Status</th>
                     <th>mark as read</th>
+                    <th>Availability</th>
+                    <th>Availability</th>
                     <th>Action</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -198,11 +200,17 @@
                     <td>{{$dis->bloodgroup}}</td>
                     <td>{{$dis->volume}}</td>
                     <td>{{$dis->date}}</td>
-                    <td> <a href="{{url('technitian/read', $dis->id)}}" class="btn btn-info"><i class='fa fa-edit'></i> read</a></td>
+                    <td>{{$dis->status}}</td>
+                    <td> <a href="{{url('bbmanager/read', $dis->id)}}" class="btn btn-info"><i class='fa fa-edit'></i></a></td>
                     <td>
-                        <a href="#distribute{{$dis->id}}" data-bs-toggle="modal" class="btn btn-info"><i class='fa fa-edit'></i> Distribute</a>
+                        <a href="{{url('bbmanager/approve', $dis->id)}}" class="btn btn-primary"><i class='fa fa-edit'></i> Approve</a>
+
+                    </td>
+                    <td><a href="{{url('bbmanager/disapprove', $dis->id)}}" class="btn btn-warning"><i class='fa fa-edit'></i> DisApprove</a></td>
+                    <td>
+
                         <a href="#delete{{$dis->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</a>
-                        @include('bloodBankManager.distModal')
+                        @include('bloodBankManager.requestDeleteModal')
                     </td>
                 </tr>
                 @endforeach

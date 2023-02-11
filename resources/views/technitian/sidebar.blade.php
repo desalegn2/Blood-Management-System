@@ -314,14 +314,14 @@
                     </a>
                 </li>
 
-                <li>
+                <!-- <li>
                     <a href="{{url('/technitian/distributetohospital')}}">
                         <span class="icon">
                             <ion-icon name="swap-horizontal-outline"></ion-icon>
                         </span>
                         <span class="title">Blood Request</span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="viewstoredblood">
                         <span class="icon">

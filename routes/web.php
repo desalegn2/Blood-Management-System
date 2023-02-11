@@ -104,6 +104,7 @@ Route::middleware(['auth', 'user-role:admin'])->group(function () {
 
 
 
+
     Route::get('/admin/home', [HomeController::class, 'dashboard'])->name('admin.home');
     //  Route::get('/admin/send/{id}', [adminnotificationController::class, 'sendnotification']);
     Route::get('/admin/home', [AdminController::class, 'bloodavailability'])->name('admin.home');
@@ -113,7 +114,7 @@ Route::middleware(['auth', 'user-role:admin'])->group(function () {
     Route::post('/ admin.block/{id}', [AdminController::class, 'blocks']);
     //Route::view('/admin/aa', 'admin.navbar');
     //users  Notification1
-    Route::get('admin/feedback', [AdminController::class, 'feedbacks']);
+
     Route::get('/admin/img', [AdminController::class, 'imgup']);
     Route::post('/admin/imgs', [AdminController::class, 'imgups']);
     Route::view('/admin/add', 'admin.addUser');
@@ -172,6 +173,7 @@ Route::middleware(['auth', 'user-role:admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'user-role:nurse'])->group(function () {
+
     Route::get('/nurse/home', [HomeController::class, 'nurseHome'])->name('nurse.home');
     // Route::view('/nurse/newhome', 'nurse.home');
     Route::get('/nurse/profile/{id}', [nurseController::class, 'Profile']);
@@ -212,6 +214,7 @@ Route::middleware(['auth', 'user-role:nurse'])->group(function () {
 Route::middleware(['auth', 'user-role:technitian'])->group(function () {
 
 
+
     Route::get('/technitian/home', [HomeController::class, 'technitanHome'])->name('technitian.home');
 
     Route::get('/technitian/profile/{id}', [techController::class, 'Profile']);
@@ -237,7 +240,9 @@ Route::middleware(['auth', 'user-role:technitian'])->group(function () {
     Route::post('/technitian/filldiscard', [techController::class, 'filldiscard']);
     Route::post('/technitian/savedistribute', [techController::class, 'saveddistribute']);
     //Route::get('/technitian/notification', [HomeController::class, 'sendOfferNotification']);
-
+    Route::get('/technitian/test', [techController::class, 'testBlood']);
+    Route::get('/technitian/approve/{id}', [techController::class, 'approved']);
+    Route::get('/technitian/discard/{id}', [techController::class, 'discards']);
     Route::get('/technitian/handling', [techController::class, 'handling']);
 });
 
@@ -273,16 +278,32 @@ Route::middleware(['auth', 'user-role:healthinstitute'])->group(function () {
 });
 
 Route::middleware(['auth', 'user-role:bbmanager'])->group(function () {
+
     Route::get('/bbmanager/home', [HomeController::class, 'bbmanagerHome'])->name('bbmanager.home');
     Route::get('/bbmanager/report', [bbManagerController::class, 'Reports']);
     Route::get('/bbmanager/generatereport', [bbManagerController::class, 'view']);
+    Route::get('/bbmanager/donorhistory', [bbManagerController::class, 'DonorHistory']);
+    Route::post('/bbmanager/searchdonor', [bbManagerController::class, 'searchDonor']);
+
+    Route::post('/bbmanager/sendresult/{id}', [bbManagerController::class, 'sendResult']);
     // Route::view('/bbmanager/tes', 'bloodBankManager.pdf.report');
     // Route::get('/bbmanager/res', [bbManagerController::class, 'rest']);
+    Route::view('/bbmanager/bbinfo', 'bloodBankManager.addInformation');
+    Route::get('/bbmanager/feedback', [bbManagerController::class, 'feedbacks']);
+    Route::get('/bbmanager/deletefeedback/{id}', [bbManagerController::class, 'deleteFeedbacks']);
 
     Route::get('/bbmanager/request', [bbManagerController::class, 'requests']);
-});
+    Route::delete('/bbmanager/deleterequest/{id}', [bbManagerController::class, 'deleteRequest']);
 
+    Route::get('/bbmanager/bloods', [bbManagerController::class, 'Bloods']);
+    Route::post('/bbmanager/distribute', [bbManagerController::class, 'Distribute']);
+
+    Route::get('/bbmanager/read/{id}', [bbManagerController::class, 'Read']);
+    Route::get('/bbmanager/approve/{id}', [bbManagerController::class, 'Approve']);
+    Route::get('/bbmanager/disapprove/{id}', [bbManagerController::class, 'DisApprove']);
+});
 Route::middleware(['auth', 'user-role:encoder'])->group(function () {
+
     Route::get('/encoder/home', [HomeController::class, 'encoderHome'])->name('encoder.home');
 
     Route::get('/encoder/profile/{id}', [encoderController::class, 'Profile']);
@@ -290,9 +311,12 @@ Route::middleware(['auth', 'user-role:encoder'])->group(function () {
     Route::post('/encoder/updatephoto/{id}', [encoderController::class, 'updatephoto']);
     Route::post('/encoder/changepassword', [encoderController::class, 'changepassword']);
 
-    // Route::view('/encoder/addbloods', 'encoder.addBlood');
+    // Route::view('/encoder/addbloods', 'encoder.addBlood');recordBloodDetail
+    Route::get('/encoder/record', [encoderController::class, 'Record']);
+
+    Route::get('/encoder/recordblood/{id}', [encoderController::class, 'recordBloods']);
     Route::post('/encoder/addbloods', [encoderController::class, 'addblood']);
 
-    Route::view('/encoder/addbloods', 'encoder.add');
+    // Route::view('/encoder/addbloods', 'encoder.add');
     Route::view('/encoder/handling', 'encoder.handling');
 });

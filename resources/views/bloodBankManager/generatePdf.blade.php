@@ -31,8 +31,7 @@
                     <thead>
                         <th>Fulltname</th>
                         <th>Email</th>
-                        <th>Fulltname</th>
-                        <th>Email</th>
+
                     </thead>
                     <tbody>
                         @if(count($don))

@@ -13,6 +13,7 @@ class enrollementModel extends Model
     protected $fillable = [
         'user_id',
         'fullname',
+        'packno',
         'occupation',
         'photo',
         'phone',

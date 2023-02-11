@@ -305,22 +305,6 @@
                         <span class="icon">
                             <ion-icon name="dice-sharp"></ion-icon>
                         </span>
-                        <span class="title">Blogs</span>
-                    </a>
-                </li>
-                <li>
-                    <!-- <a href="">
-                        <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
-                        </span>
-                        <span class="title">Events</span>
-                    </a> -->
-                </li>
-                <li>
-                    <a href="">
-                        <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
-                        </span>
                         <span class="title">News</span>
                     </a>
                 </li>
@@ -346,7 +330,7 @@
             <span class="icon">
               <ion-icon name="people-circle-sharp"></ion-icon>
             </span>
-            <span class="title">View Seeker</span>
+            <span class="title">Feedback</span>
           </a>
         </li> -->
                 <li>

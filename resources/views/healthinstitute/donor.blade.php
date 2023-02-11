@@ -113,12 +113,15 @@
             @foreach ($data as $x)
             <div class="col-md-6 col-lg-4 item">
                 <div class="box"><img class="rounded-circle" src="{{asset('uploads/registers/'.$x->photo)}}">
-                    <h3 class="name">{{$x->name}}</h3>
-                    <p class="title">{{$x->email}}</p>
-                    <p class="description">{{$x->phone}}</p>
-                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                    <h3 class="name">Name:{{$x->name}}</h3>
+                    <p class="title">Email:{{$x->email}}</p>
+                    <p class="description">Rh:{{$x->rh}}</p>
+                    <p class="de<p class=" description">HCT:{{$x->hct}}</p>scription">{{$x->hct}}</p>
+
+
+                    <!-- <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
                     <div class="social"><a href="">View Detail</a></div>
-                    <a href="mailto:{{$x->email}}">Send Reservation</a>
+                    <a href="mailto:{{$x->email}}">email</a> -->
                 </div>
             </div>
             @endforeach

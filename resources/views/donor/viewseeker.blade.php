@@ -41,7 +41,7 @@
             font-weight: 700;
             margin-bottom: 5px;
             font-size: 20px;
-            color: red;
+            color: green;
         }
 
         .team.member span {
@@ -144,7 +144,8 @@
             margin-bottom: 20px;
             padding-bottom: 20px;
             position: relative;
-            color: tomato; margin-top: 20px;">name</h2>
+            color: green; 
+            margin-top: 20px;">name</h2>
                 <div class="underline" style="width: 150px;
             height: 1px;
             background-color: black;
