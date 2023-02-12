@@ -16,9 +16,31 @@ use \Notification;
 use PDF;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Notifications\sendNotification;
+use App\Models\addBloodModel;
 
 class nurseController extends Controller
 {
+    function ReturntoHome()
+    {
+        //$stats = donorRequestModel::all()->orderBy('created_at', 'desc')->take(4);
+        $donors_enrolled = enrollementModel::count();
+        $donor = donorRequestModel::count();
+
+        $aplus = addBloodModel::where('bloodgroup', 'A+')->count();
+        $aminus = addBloodModel::where('bloodgroup', 'A-')->count();
+        $bplus = addBloodModel::where('bloodgroup', 'B+')->count();
+        $bminus = addBloodModel::where('bloodgroup', 'B-')->count();
+        $abminus = addBloodModel::where('bloodgroup', 'AB-')->count();
+        $abplus = addBloodModel::where('bloodgroup', 'AB+')->count();
+        $ominus = addBloodModel::where('bloodgroup', 'O-')->count();
+        $oplus = addBloodModel::where('bloodgroup', 'O+')->count();
+
+        $date = \Carbon\Carbon::today()->subDays(1);
+        $stats = donorRequestModel::where('created_at', '>=', $date)->get();
+        $display1 = reservationModel::all();
+
+        return view('nurse.nurseHome', compact('display1', 'stats', 'donor', 'donors_enrolled', 'aminus', 'aplus', 'bminus', 'bplus', 'abminus', 'abplus', 'ominus', 'oplus'));
+    }
     function viewdetail($id)
     {
         $donors = donorRequestModel::find($id);
@@ -106,15 +128,7 @@ class nurseController extends Controller
         $xy = approvedViewModel::all()->where('status', '=', 'Approved');
         return view('nurse.approvedDonor', ['xy' => $xy]);
     }
-    function displayA()
-    {
-        //$stats = donorRequestModel::all()->orderBy('created_at', 'desc')->take(4);
-        $date = \Carbon\Carbon::today()->subDays(1);
-        $stats = donorRequestModel::where('created_at', '>=', $date)->get();
-        $display1 = reservationModel::all();
 
-        return view('nurse.nurseHome', compact('display1', 'stats'));
-    }
 
     function manageReservation()
     {

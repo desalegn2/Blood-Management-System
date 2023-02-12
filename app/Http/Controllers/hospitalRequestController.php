@@ -17,6 +17,12 @@ use App\Models\User;
 
 class hospitalRequestController extends Controller
 {
+
+    function findDonor(Request $req)
+    {
+        $data = addBloodModel::all();
+        return view('healthinstitute.findDonor', ['data' => $data]);
+    }
     function hospitalreq(Request $req)
     {
         $var = new hospitalRequestModel;
@@ -72,6 +78,14 @@ class hospitalRequestController extends Controller
     function postSeeker(Request $req)
     {
 
+        $req->validate([
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:hospitalpost'],
+            'photo' => 'required|mimes:jpeg,png,jpg,gif',
+            'fname' => 'required|string|max:255',
+            'lname' => 'required|string|max:255',
+            'age' => 'min:1|max:3',
+            'phone' => 'numeric|min:10|max:13',
+        ]);
         $var = new hospitalPosts;
         $var->user_id = $req->user_id;
         $var->patientname = $req->fname;
@@ -97,6 +111,20 @@ class hospitalRequestController extends Controller
         $var->save();
         return redirect('healthinstitute/post')->with('success', 'Task Added Successfully!');
     }
+    public function mypost($id)
+    {
+        $isExist = hospitalPosts::select("*")
+            ->where("user_id", $id)
+            ->exists();
+        if ($isExist) {
+            $data = hospitalPosts::where('user_id', "=", $id)->get();
+            //$data = hospitalRequestModel::where('user_id', 'LIKE', '%' . $id . '%')->get();
+            return view('healthinstitute.mypost', compact('data'));
+        } else {
+            return redirect('healthinstitute/post');
+        }
+    }
+
     public function viewrequest($id)
     {
         $isExist = hospitalRequestModel::select("*")
@@ -164,19 +192,7 @@ class hospitalRequestController extends Controller
         return view('healthinstitute.healthinstituteHome', compact('aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
 
-    public function mypost($id)
-    {
-        $isExist = hospitalPosts::select("*")
-            ->where("user_id", $id)
-            ->exists();
-        if ($isExist) {
-            $data = hospitalPosts::where('user_id', "=", $id)->get();
-            //$data = hospitalRequestModel::where('user_id', 'LIKE', '%' . $id . '%')->get();
-            return view('healthinstitute.mypost', compact('data'));
-        } else {
-            return redirect('healthinstitute/post');
-        }
-    }
+
     function deletepost($id)
     {
         $res = hospitalPosts::find($id);

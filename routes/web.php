@@ -197,7 +197,7 @@ Route::middleware(['auth', 'user-role:nurse'])->group(function () {
     Route::delete('/nurse/delete/{id}', [donorReq::class, 'delete']);
 
     Route::get('/nurse/listofapproved', [nurseController::class, 'displayapproved']);
-    Route::get('/nurse/home', [nurseController::class, 'displayA'])->name('nurse.home');
+    Route::get('/nurse/home', [nurseController::class, 'ReturntoHome'])->name('nurse.home');
 
     Route::view('/nurse/reservation', 'nurse.reserationManagement');
     Route::get('/nurse/reservation', [nurseController::class, 'manageReservation']);
@@ -247,8 +247,6 @@ Route::middleware(['auth', 'user-role:technitian'])->group(function () {
 });
 
 Route::middleware(['auth', 'user-role:healthinstitute'])->group(function () {
-
-
     Route::get('/healthinstitute/home', [HomeController::class, 'healthinstituteHome'])->name('healthinstitute.home');
     Route::get('/healthinstitute/home', [hospitalRequestController::class, 'viewblood'])->name('healthinstitute.home');
 
@@ -269,17 +267,24 @@ Route::middleware(['auth', 'user-role:healthinstitute'])->group(function () {
 
     Route::get('/healthinstitute/request/{id}', [hospitalRequestController::class, 'viewrequest']);
 
-    Route::view('/healthinstitute/finddonor', 'healthinstitute.findDonor');
+    //  Route::view('/healthinstitute/finddonor', 'healthinstitute.findDonor');
     Route::post('/healthinstitute/search', [hospitalRequestController::class, 'search']);
+    Route::get('/healthinstitute/finddonor', [hospitalRequestController::class, 'findDonor']);
 
     // Route::view('/healthinstitute/mypost', 'healthinstitute.mypost');
-    Route::get('/healthinstitute/mypost/{id}', [hospitalRequestController::class, 'mypost']);
+    Route::get('/healthinstitute/mypostss/{id}', [hospitalRequestController::class, 'mypost']);
     Route::delete('/healthinstitute/deletepost/{id}', [hospitalRequestController::class, 'deletepost']);
 });
 
 Route::middleware(['auth', 'user-role:bbmanager'])->group(function () {
-
     Route::get('/bbmanager/home', [HomeController::class, 'bbmanagerHome'])->name('bbmanager.home');
+
+    Route::get('/bbmanager/profile/{id}', [bbManagerController::class, 'Profile']);
+    Route::post('/bbmanager/updateprofile/{id}', [bbManagerController::class, 'updateProfile']);
+    Route::post('/bbmanager/updatephoto/{id}', [bbManagerController::class, 'updatephoto']);
+    Route::post('/bbmanager/changepassword', [bbManagerController::class, 'changepassword']);
+
+
     Route::get('/bbmanager/report', [bbManagerController::class, 'Reports']);
     Route::get('/bbmanager/generatereport', [bbManagerController::class, 'view']);
     Route::get('/bbmanager/donorhistory', [bbManagerController::class, 'DonorHistory']);

@@ -177,7 +177,7 @@
 <body>
 
     <div id="page-wrap">
-        <a class="btn btn-success" href="{{url('nurse/home')}}">Home</a>
+        <a href="{{ URL::previous() }}" class="btn btn-primary btn-sm float-end">Back</a>
 
         <h1>Donors Who send request</h1>
         <table>
@@ -196,6 +196,7 @@
                 </tr>
             </thead>
             <tbody>
+                @if(count($accepts))
                 @foreach ($accepts as $accept)
                 <tr>
                     <td>{{$accept->name}}</td>
@@ -212,11 +213,16 @@
                     </td>
                     <td>
                         <a href="#delete{{$accept->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</a>
-                        <a href="#resend{{$accept->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-edit'></i> Change Date</a>
+                        <a href="#resend{{$accept->id}}" data-bs-toggle="modal" class="btn btn-info"><i class='fa fa-edit'></i> Change Date</a>
                         @include('nurse.resendReservation')
                     </td>
                 </tr>
                 @endforeach
+                @else
+                <tr>
+                    <td>There is No Donor Who send Reservation</td>
+                </tr>
+                @endif
             </tbody>
         </table>
     </div>

@@ -1,3 +1,6 @@
+@extends('healthinstitute.sidebar')
+@section('content')
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -108,17 +111,17 @@
             <h2 class="text-center">Voluntary Donors </h2>
 
         </div>
-        <a class="btn btn-success" href="">Home</a>
+        <a href="{{ URL::previous() }}" class="btn btn-primary">Back</a>
         <div class="row people">
             @foreach ($data as $x)
             <div class="col-md-6 col-lg-4 item">
                 <div class="box"><img class="rounded-circle" src="{{asset('uploads/registers/'.$x->photo)}}">
-                    <h3 class="name">Name:{{$x->name}}</h3>
+                    <h3 class="name">Name:{{$x->fullname}}</h3>
                     <p class="title">Email:{{$x->email}}</p>
+                    <p class="title">Phone:{{$x->phone}}</p>
                     <p class="description">Rh:{{$x->rh}}</p>
-                    <p class="de<p class=" description">HCT:{{$x->hct}}</p>scription">{{$x->hct}}</p>
-
-
+                    <p class="">HCT:{{$x->hct}}</p>
+                    <p class="">Donate:{{$x->created_at}} ({{ $x->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago)</p>
                     <!-- <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
                     <div class="social"><a href="">View Detail</a></div>
                     <a href="mailto:{{$x->email}}">email</a> -->
@@ -132,3 +135,4 @@
 </body>
 
 </html>
+@endsection

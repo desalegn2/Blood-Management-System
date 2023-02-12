@@ -48,7 +48,7 @@
             background: #FF7B54;
             border-left: 0px solid var(--blue);
             transition: 0.5s;
-            overflow: hidden;
+            overflow-x: scroll;
         }
 
         .navigation.active {

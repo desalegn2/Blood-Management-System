@@ -48,7 +48,7 @@
             background: #FF7B54;
             border-left: 0px solid var(--blue);
             transition: 0.5s;
-            overflow: hidden;
+            overflow-x: scroll;
         }
 
         .navigation.active {
@@ -283,6 +283,11 @@
         <div class="navigation">
             <ul>
                 <li>
+                <li class="nav-item dropdown">
+                    <a href="{{url('/bbmanager/profile',Auth::user()->id)}}">
+                        {{ Auth::user()->name }}
+                    </a>
+                </li>
 
                 <li>
                     <a href="{{url('/bbmanager/home')}}">
@@ -368,6 +373,9 @@
             <div class="topbar">
                 <div class="toggle">
                     <ion-icon name="menu-outline"></ion-icon>
+                </div>
+                <div class="user">
+                    <img src="{{asset('uploads/registers/'. Auth::user()->photo )}}" alt="">
                 </div>
             </div>
 

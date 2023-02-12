@@ -350,4 +350,57 @@ class bbManagerController extends Controller
             }
         }
     }
+
+    function Profile($id)
+    {
+        $isExist = User::select("*")
+            ->where("id", $id)
+            ->exists();
+        if ($isExist) {
+            $data = User::all()->where('id', '=', $id);
+            return view('bloodBankManager.profile', ['data' => $data]);
+        }
+    }
+    function updateProfile(Request $req, int $id)
+    {
+
+        User::where("id", $id)
+            ->update(["name" => $req->name, "email" => $req->email, "phone" => $req->phone]);
+        return redirect()->back()->with('success', 'your Profile,Changed');
+    }
+
+    function updatephoto(Request $req, int $id)
+    {
+
+        $var = User::all()->where('id', '=', $id);
+        if ($req->hasfile('photo')) {
+            $file = $req->file('photo');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('uploads/registers', $filename);
+            $var->photo = $filename;
+        }
+        User::where("id", $id)
+            ->update(["photo" => $filename]);
+        //return redirect('nurse/home');
+        return redirect()->back()->with('success', 'your Image,Changed');
+    }
+    function changepassword(Request $req)
+    {
+        # Validation
+        $req->validate([
+            'oldpassword' => ['required', 'string', 'min:8'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        $currentPasswordStatus = Hash::check($req->oldpassword, auth()->user()->password);
+        if ($currentPasswordStatus) {
+
+            User::findOrFail(auth()->user()->id)->update([
+                'password' => Hash::make($req->password)
+            ]);
+            return redirect()->back()->with('success', 'password changed Successfully!');
+        } else {
+            return redirect()->back()->with('warnig', 'password not match with old!');
+        }
+    }
 }

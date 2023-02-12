@@ -35,55 +35,6 @@
             --black2: #999;
         }
 
-        /* ======================= Cards ====================== */
-        .cardBox {
-            position: relative;
-            width: 100%;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 30px;
-        }
-
-        .cardBox .card {
-            position: relative;
-            background: var(--white);
-            padding: 30px;
-            border-radius: 20px;
-            display: flex;
-            justify-content: space-between;
-            cursor: pointer;
-            box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-        }
-
-        .cardBox .card .numbers {
-            position: relative;
-            font-weight: 500;
-            font-size: 2.5rem;
-            color: var(--blue);
-        }
-
-        .cardBox .card .cardName {
-            color: var(--black2);
-            font-size: 1.1rem;
-            margin-top: 5px;
-        }
-
-        .cardBox .card .iconBx {
-            font-size: 3.5rem;
-            color: var(--black2);
-        }
-
-        .cardBox .card:hover {
-            background: var(--blue);
-        }
-
-        .cardBox .card:hover .numbers,
-        .cardBox .card:hover .cardName,
-        .cardBox .card:hover .iconBx {
-            color: var(--white);
-        }
-
         /* ====================== Responsive Design ========================== */
 
         @media (max-width: 480px) {
@@ -304,49 +255,7 @@
 <body>
 
     <!-- ======================= Cards ================== -->
-    <div class="cardBox">
-        <div class="card">
-            <div>
-                <div class="numbers">1,504</div>
-                <div class="cardName">Daily Views</div>
-            </div>
 
-            <div class="iconBx">
-                <ion-icon name="eye-outline"></ion-icon>
-            </div>
-        </div>
-
-        <div class="card">
-            <div>
-                <div class="numbers">80</div>
-                <div class="cardName">Sales</div>
-            </div>
-
-            <div class="iconBx">
-                <ion-icon name="cart-outline"></ion-icon>
-            </div>
-        </div>
-        <div class="card">
-            <div>
-                <div class="numbers">80</div>
-                <div class="cardName">Sales</div>
-            </div>
-
-            <div class="iconBx">
-                <ion-icon name="cart-outline"></ion-icon>
-            </div>
-        </div>
-        <div class="card">
-            <div>
-                <div class="numbers">80</div>
-                <div class="cardName">Sales</div>
-            </div>
-
-            <div class="iconBx">
-                <ion-icon name="cart-outline"></ion-icon>
-            </div>
-        </div>
-    </div>
     <div class="main-block">
         <form action="post" method="post" enctype="multipart/form-data">
             @csrf
@@ -361,9 +270,24 @@
                     <div><label>When You Need</label><input type="date" name="whenneed" required></div>
                     <div><label>Last name</label><input type="text" name="lname" required></div>
                     <div><label>State</label><input type="text" name="state" required></div>
-                    <div><label>Email</label><input type="text" name="email" required></div>
+
+                    <div><label>Email</label><input type="text" name="email" required>
+                        <div style="color: red;">
+                            @error('email')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
                     <div><label>City</label><input type="text" name="city" required></div>
-                    <div><label>Image</label><input type="file" name="photo" required></div>
+                    <div>
+
+                        <label>Image</label><input type="file" name="photo" required>
+                        <div style="color: red;">
+                            @error('photo')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
                     <div><input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required></div>
                 </div>
             </fieldset>
@@ -381,8 +305,20 @@
 
                             </select>
                         </div>
-                        <div><label>Age</label><input type="number" name="age" required></div>
-                        <div><label>Phone</label><input type="text" name="phone" required></div>
+                        <div><label>Age</label><input type="number" name="age" required>
+                            <div style="color: red;">
+                                @error('age')
+                                <strong>{{ $message }}</strong>
+                                @enderror
+                            </div>
+                        </div>
+                        <div><label>Phone</label><input type="text" name="phone" required>
+                            <div style="color: red;">
+                                @error('phone')
+                                <strong>{{ $message }}</strong>
+                                @enderror
+                            </div>
+                        </div>
                         <div>
                             <label>Blood Group</label>
                             <select name="bloodtype" required>
@@ -413,6 +349,7 @@
                     <div>
 
                         <div>
+
                             <label>For What Purpose Do You Want</label>
                             <textarea id="w3review" name="purpose" rows="5" cols="30"></textarea>
                         </div>

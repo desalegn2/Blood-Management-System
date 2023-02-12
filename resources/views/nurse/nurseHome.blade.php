@@ -366,8 +366,8 @@
                                         <a href="{{url('nurse/aminusdonor')}}">
                                             <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
                                         </a>
-                                        <h3>278</h3>
-                                        <span>A-</span>
+                                        <h3><strong>{{$aminus}}</strong></h3>
+                                        <span><strong>A-</strong></span>
 
                                     </div>
                                 </div>
@@ -385,8 +385,8 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        <h3>156</h3>
-                                        <span>A+</span>
+                                        <h3><strong>{{$aplus}}</strong></h3>
+                                        <span><strong>A+</strong></span>
                                     </div>
                                 </div>
                             </div>
@@ -403,8 +403,8 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        <h3>64.89 %</h3>
-                                        <span>B-</span>
+                                        <h3><strong>{{$bminus}}</strong></h3>
+                                        <span><strong>B-</strong></span>
                                     </div>
                                 </div>
                             </div>
@@ -421,8 +421,8 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        <h3>423</h3>
-                                        <span>B+</span>
+                                        <h3><strong>{{$bplus}}</strong></h3>
+                                        <span><strong>B+</strong></span>
                                     </div>
                                 </div>
                             </div>
@@ -440,8 +440,8 @@
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
                                         <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        <h3 class="danger">278</h3>
-                                        <span>AB-</span>
+                                        <h3><strong>{{$abminus}}</strong></h3>
+                                        <span><strong>AB-</strong></span>
                                     </div>
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
@@ -458,8 +458,8 @@
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
                                         <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        <h3 class="success">156</h3>
-                                        <span>AB+</span>
+                                        <h3><strong>{{$abplus}}</strong></h3>
+                                        <span><strong>AB+</strong></span>
                                     </div>
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
@@ -477,8 +477,8 @@
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
                                         <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        <h3 class="warning">64.89 %</h3>
-                                        <span>O-</span>
+                                        <h3><strong>{{$ominus}}</strong></h3>
+                                        <span><strong>O-</strong></span>
                                     </div>
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
@@ -495,8 +495,8 @@
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
                                         <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        <h3 class="primary">423</h3>
-                                        <span>O+</span>
+                                        <h3><strong>{{$oplus}}</strong></h3>
+                                        <span><strong>O+</strong></span>
                                     </div>
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
@@ -513,8 +513,7 @@
 
             <div class="row">
                 <div class="col-12 mt-3 mb-1">
-                    <h4 class="text-uppercase">Statistics </h4>
-                    <p>Statistics on &amp; </p>
+                    <h4 class="text-uppercase">Statistics of Donors </h4>
                 </div>
             </div>
 
@@ -529,11 +528,11 @@
                                     </div>
                                     <div class="media-body">
 
-                                        <h4>Total Donor Registered</h4>
+                                        <h4>Total Donor Registered At Home</h4>
                                         <span></span>
                                     </div>
                                     <div class="align-self-center">
-                                        <h1>18,000</h1>
+                                        <h1>{{$donor}}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -554,7 +553,7 @@
                                         <span>Monthly blog comments</span>
                                     </div>
                                     <div class="align-self-center">
-                                        <h1>84,695</h1>
+                                        <h1>{{$donors_enrolled}}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -578,7 +577,7 @@
         <div class="recentOrders">
             <div class="cardHeader">
                 <h2>Manage Reservation</h2>
-                <a href="{{url('nurse/reservation')}}" class="btn">View All</a>
+                <a href="{{url('/nurse/reservation')}}" class="btn">View All</a>
             </div>
             <table>
                 <thead>
@@ -593,19 +592,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if(count($display1))
                     @foreach ($display1 as $dis)
                     <tr>
                         <td>{{$dis->name}}</td>
                         <td>{{$dis->phone}}</td>
-
                         <td>{{$dis->status}}</td>
-
                         <td>
-                            <a class="btn btn-success" href="{{url('nurse/viewdetail', $dis->id)}}">View</a>
-                            <a class="btn btn-danger" href=" {{url('nurse/delete', $dis->id)}}">Delete</a>
+                            <a class="btn btn-success" href="{{url('/nurse/reservation')}}">View</a>
                         </td>
                     </tr>
                     @endforeach
+                    @else
+                    <tr>
+                        <td>There is No Donor Who send Reservation</td>
+                    </tr>
+                    @endif
 
                 </tbody>
             </table>
