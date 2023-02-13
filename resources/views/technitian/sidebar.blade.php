@@ -365,7 +365,7 @@
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
                 <div class="user">
-                    <img src="{{asset('uploads/registers/'. Auth::user()->photo )}}" alt="">
+                    <!-- <img src="{{asset('uploads/registers/'. Auth::user()->photo )}}" alt=""> -->
                 </div>
             </div>
 

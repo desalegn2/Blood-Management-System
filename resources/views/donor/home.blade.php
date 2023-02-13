@@ -1,4 +1,4 @@
-@extends('donor.sidebar')
+@extends('donor.navbar')
 @section('content')
 
 <!DOCTYPE html>
@@ -152,23 +152,23 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100" src="{{asset('assets/imgs/c.jpg')}}" alt="First slide">
+                <img class="d-block w-100" src="{{asset('assets/imgs/p13.jpg')}}" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 style="color: black;">Slider One Item</h5>
+                    <h5 style="color: black;">Blood Donation Illustration</h5>
                     <p style="color: green;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
                 </div>
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="{{asset('assets/imgs/r.jpg')}}" alt="Second slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Slider One Item</h5>
+                    <h5 style="color: black;">Blood Donation Illustration</h5>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="{{asset('assets/imgs/b.jpg')}}" alt="Third slide">
+                <img class="d-block w-100" src="{{asset('assets/imgs/d.jpg')}}" alt="Third slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Slider One Item</h5>
+                    <h5 style="color: black;">Blood Donation Illustration</h5>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
                 </div>
             </div>
@@ -195,7 +195,7 @@
                 <div class="box"><img class="" style="width:236px; height:279px" src="{{asset('assets/imgs/provisioredbloodcell.jpg')}}">
                     <h3 class="name">Provision of Red Blood Cell</h3>
                     <!-- <p class="title">email</p> -->
-                    <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique corporis libero dolores vero autem, ipsa rerum tempora magnam placeat magni! Nesciunt aspernatur libero id eaque quas quae corrupti a totam!</p>
+                    <p class="description">Red blood cells are responsible for transporting oxygen from your lungs to your body’s tissues. Your tissues produce energy with the oxygen and release a waste, identified as carbon dioxide. Your red blood cells take the carbon dioxide waste to your lungs for you to exhale</p>
 
                     <div class="social"><a href="">View Detail</a></div>
 
@@ -235,7 +235,7 @@
                 <div class="box"><img class="" style="width:236px; height:279px" src="{{asset('assets/imgs/provisionplatlets.jpg')}}">
                     <h3 class="name">provision of platlets</h3>
                     <!-- <p class="title">email</p> -->
-                    <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique corporis libero dolores vero autem, ipsa rerum tempora magnam placeat magni! Nesciunt aspernatur libero id eaque quas quae corrupti a totam!</p>
+                    <p class="description">Platelet transfusion is a lifesaving procedure that is carried out to prevent bleeding or stop ongoing bleeding in patients with low platelet count or functional platelet disorders.s</p>
 
                     <div class="social"><a href="">View Detail</a></div>
 
@@ -277,45 +277,6 @@
             </div>
         </div>
     </div>
-    <!-- <center>Event</center> -->
-    <div class="container">
-        <div class="intro">
-            <h2 class="text-center">Event </h2>
-        </div>
-        <div class="row people">
-            <div class="col-md-6 col-lg-4 item">
-                <div class="box"><img class="" src="{{asset('assets/imgs/2.jpg')}}">
-                    <h3 class="name">Provision of Red Blood Cell</h3>
-                    <!-- <p class="title">email</p> -->
-                    <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique corporis libero dolores vero autem, ipsa rerum tempora magnam placeat magni! Nesciunt aspernatur libero id eaque quas quae corrupti a totam!</p>
-                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
-                    <div class="social"><a href="">View Detail</a></div>
-                    <a href="mailto:">Send Reservation</a>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 item">
-                <div class="box"><img class="" src="{{asset('assets/imgs/1.jpg')}}">
-                    <h3 class="name">Blood Donation</h3>
-                    <!-- <p class="title">email</p> -->
-                    <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique corporis libero dolores vero autem, ipsa rerum tempora magnam placeat magni! Nesciunt aspernatur libero id eaque quas quae corrupti a totam!</p>
-                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
-                    <div class="social"><a href="">View Detail</a></div>
-                    <a href="mailto:">Send Reservation</a>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 item">
-                <div class="box"><img class="img-fluid" src="{{asset('assets/imgs/l.jpg')}}">
-                    <h3 class="name">Blood Storage</h3>
-                    <!-- <p class="title">email</p> -->
-                    <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique corporis libero dolores vero autem, ipsa rerum tempora magnam placeat magni! Nesciunt aspernatur libero id eaque quas quae corrupti a totam!</p>
-                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
-                    <div class="social"><a href="">View Detail</a></div>
-                    <a href="mailto:">Send Reservation</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <div class="container mt-5">
         <div class=" mt-5">

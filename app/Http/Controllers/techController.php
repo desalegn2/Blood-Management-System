@@ -162,6 +162,7 @@ class techController extends Controller
 
     function saveddistribute(Request $req)
     {
+
         $aplus_stored = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
         $aminus_stored = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
         $oplus_stored = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
@@ -386,14 +387,23 @@ class techController extends Controller
         $res->save();
         return redirect()->back();
     }
+    function ExpiredBlood()
+    {
+        $date = \Carbon\Carbon::today()->subDays(1);
+        $blood = addBloodModel::where('created_at', '<=', $date)->get();
+        return view('technitian.expired', compact('blood'));
+    }
 
     function viewblood()
     {
+
+
         $bloods = addBloodModel::paginate(10);
         $numberof_message = hospitalRequestModel::where('readat', 'unread')->count();
-        // $now = Carbon::now();
-        //$created_at = Carbon::parse($calls['created_at']);
-        //$diffMinutes = $created_at->diffInMinutes($now);
+
+        $date = \Carbon\Carbon::today()->subDays(1);
+        $notification = addBloodModel::where('created_at', '<=', $date)->count();
+
         $aplus_stored = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
         $aminus_stored = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
         $oplus_stored = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
@@ -430,8 +440,7 @@ class techController extends Controller
         $oplus = $oplus_stored - $oplusdiscard - $oplusdistribute;
         $ominus = $ominus_stored - $ominusdiscard - $ominusdistribute;
 
-        $res = $aplus - $aplusdiscard - $aminusdistribute;
-        return view('technitian.technitanHome', compact('bloods', 'numberof_message', 'res', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
+        return view('technitian.technitanHome', compact('bloods', 'numberof_message', 'notification', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
     function handling()
     {

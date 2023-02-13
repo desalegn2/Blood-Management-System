@@ -183,7 +183,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                        <img class='mt-4' style="border-radius:59%; width: 100px; height:100px; float: left;" src="{{asset('assets/imgs/logo1.png')}}" alt="">
+                        <img class='mt-4' style="border-radius:59%; width: 100px; height:100px; float: left;" src="{{asset('assets/imgs/bblogo3.png')}}" alt="">
                         <a href="#">
                             <h2 style="color: red;">6578</h2>
                             Donor Already Connected

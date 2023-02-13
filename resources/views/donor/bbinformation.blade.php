@@ -19,10 +19,12 @@
 </head>
 
 <body>
-    <h1>Hello, world!</h1>
+    <h1>Bahir Dar Blood Bank!</h1>
+
 
     <div class="container mt-5">
-        @foreach($advert as $adv)
+
+        @foreach($data as $adv)
         <div class=" mt-5">
             <div class="row mt-5">
                 <div class="col-md-4 ml-5">
@@ -39,14 +41,34 @@
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">{{ $adv->created_at}}</small>
-                    <a href="" style="float: right;">Read more</a>
+                    <p style="float: right;">Bahir Dar Blood Bank</p>
                 </div>
             </div>
         </div>
 
         @endforeach
     </div>
+    <div class="container mt-5">
 
+        <div class=" mt-5">
+            <div class="row mt-5">
+                <div class="col-md-4 ml-5">
+                    <img class="img-fluid" src="{{asset('uploads/registers/'.$adv->image)}}" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <h3 class="card-title mt-2">Blood Compatibility</h3>
+                    <p class="card-text mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos accusantium amet quaerat illo saepe eos pariatur earum natus cumque, eaque tenetur, ratione voluptas consequatur iusto molestiae doloribus excepturi alias vero?</p>
+                    <img class="d-block w-100" src="{{asset('assets/imgs/blood-donor-compatibilityv3.jpg')}}" alt="First slide">
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted"></small>
+                    <p style="float: right;">Bahir Dar Blood Bank</p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 </body>

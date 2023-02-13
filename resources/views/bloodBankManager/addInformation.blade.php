@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <form action="advertise" method="post" enctype="multipart/form-data">
+    <form action="{{url('/bbmanager/addinfo')}}" method="post" enctype="multipart/form-data">
         @csrf
         <label for="title">Title:</label><br>
         <input type="text" id="" name="title" value="" required><br>

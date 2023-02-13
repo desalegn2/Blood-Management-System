@@ -65,7 +65,8 @@ Route::middleware(['auth', 'user-role:donor'])->group(function () {
     // Route::view('donor/newhome', 'donor.home');
     Route::post('donor/donorregister', [donorController::class, 'register']);
     Route::view('donor/donorregister', 'donor.Register');
-    Route::view('donor/reservation', 'donor.Reservation');
+    //Route::view('donor/reservation', 'donor.Reservation');
+    Route::get('/donor/reservationform', [donorController::class, 'ReservationForm']);
     Route::post('/donor/reservation/{id}', [donorController::class, 'reservation']);
     Route::get('/donor/history/{id}', [donorController::class, 'history']);
     Route::get('/donor/reservationhistory/{id}', [donorController::class, 'reservationHistory']);
@@ -81,7 +82,8 @@ Route::middleware(['auth', 'user-role:donor'])->group(function () {
     // Route::get('donor/seeker', [donorViewseeker::class, 'viewS']);
     Route::post('/donor/comment', [donorController::class, 'comments']);
 
-    Route::get('donor/blog', [donorController::class, 'viewblog']);
+    Route::get('donor/news', [donorController::class, 'viewNews']);
+    Route::get('donor/information', [donorController::class, 'viewInfo']);
     Route::get('donor/feedback', [donorController::class, 'feedbacks']);
     Route::post('/donor/givefeedbak', [donorController::class, 'givefeedbacks']);
     //Route::view('donor/viewseeker', 'donor.viewSeekers');
@@ -213,15 +215,13 @@ Route::middleware(['auth', 'user-role:nurse'])->group(function () {
 });
 Route::middleware(['auth', 'user-role:technitian'])->group(function () {
 
-
-
     Route::get('/technitian/home', [HomeController::class, 'technitanHome'])->name('technitian.home');
 
+    Route::get('/technitian/expired', [techController::class, 'ExpiredBlood']);
     Route::get('/technitian/profile/{id}', [techController::class, 'Profile']);
     Route::post('/technitian/updateprofile/{id}', [techController::class, 'updateProfile']);
     Route::post('/technitian/updatephoto/{id}', [techController::class, 'updatephoto']);
     Route::post('/technitian/changepassword', [techController::class, 'changepassword']);
-
 
     Route::view('/technitian/addbloods', 'technitian.addBlood');
     Route::post('/technitian/addbloods', [techController::class, 'addblood']);
@@ -277,15 +277,23 @@ Route::middleware(['auth', 'user-role:healthinstitute'])->group(function () {
 });
 
 Route::middleware(['auth', 'user-role:bbmanager'])->group(function () {
+
     Route::get('/bbmanager/home', [HomeController::class, 'bbmanagerHome'])->name('bbmanager.home');
+    Route::get('/bbmanager/home', [bbManagerController::class, 'HomePage'])->name('bbmanager.home');
+
+    Route::view('/bbmanager/addhospital', 'bloodBankManager.addHospital');
+    Route::post('/bbmanager/add_hospital', [bbManagerController::class, 'addHospital']);
 
     Route::get('/bbmanager/profile/{id}', [bbManagerController::class, 'Profile']);
     Route::post('/bbmanager/updateprofile/{id}', [bbManagerController::class, 'updateProfile']);
     Route::post('/bbmanager/updatephoto/{id}', [bbManagerController::class, 'updatephoto']);
     Route::post('/bbmanager/changepassword', [bbManagerController::class, 'changepassword']);
 
+    Route::post('/bbmanager/reportcollection', [bbManagerController::class, 'ReportCollection']);
+    Route::post('/bbmanager/reportdistribute', [bbManagerController::class, 'ReportDistribute']);
+    Route::post('/bbmanager/reportrequest', [bbManagerController::class, 'ReportRequest']);
+    Route::post('/bbmanager/distribute_specificday', [bbManagerController::class, 'ReportDis_one']);
 
-    Route::get('/bbmanager/report', [bbManagerController::class, 'Reports']);
     Route::get('/bbmanager/generatereport', [bbManagerController::class, 'view']);
     Route::get('/bbmanager/donorhistory', [bbManagerController::class, 'DonorHistory']);
     Route::post('/bbmanager/searchdonor', [bbManagerController::class, 'searchDonor']);
@@ -294,6 +302,8 @@ Route::middleware(['auth', 'user-role:bbmanager'])->group(function () {
     // Route::view('/bbmanager/tes', 'bloodBankManager.pdf.report');
     // Route::get('/bbmanager/res', [bbManagerController::class, 'rest']);
     Route::view('/bbmanager/bbinfo', 'bloodBankManager.addInformation');
+
+    Route::post('/bbmanager/addinfo', [bbManagerController::class, 'addInfo']);
     Route::get('/bbmanager/feedback', [bbManagerController::class, 'feedbacks']);
     Route::get('/bbmanager/deletefeedback/{id}', [bbManagerController::class, 'deleteFeedbacks']);
 

@@ -343,11 +343,11 @@
         <!--  -->
         <h1></h1>
         <div style="margin-top: 0;">
-            <a href="distributetohospital">
+            <a href="{{url('/bbmanager/request')}}">
                 <i style="margin-top: 0;" class="fa fa-bell"></i>
-                <span style="margin-top: 0;" class="badge text-bg-secondary"> New Message</span>
+                <span style="margin-top: 0;" class="badge text-bg-secondary"> {{$numberof_message}}New Request</span>
             </a>
-            <img class="user" src="{{asset('assets/imgs/customer01.jpg')}}" alt="">
+            <img class="user" src="{{asset('uploads/registers/'. Auth::user()->photo )}}" alt="">
         </div>
     </div>
     <hr>
@@ -374,11 +374,9 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
-                                        <a href="#">
-                                            <h1>A-</h1>
-                                            <h3>23</h3>
 
-                                        </a>
+                                        <h1>A-</h1>
+                                        <h3>{{$aminus}}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -396,7 +394,7 @@
                                     <div class="media-body text-right">
                                         <img style="width: 130px; height:100px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
                                         <h1>A+</h1>
-                                        <h3>23</h3>
+                                        <h3>{{$aplus}}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -414,7 +412,7 @@
                                     <div class="media-body text-right">
                                         <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
                                         <h1>B-</h1>
-                                        <h3>34</h3>
+                                        <h3>{{$bminus}}</h3>
 
                                     </div>
                                 </div>
@@ -433,7 +431,7 @@
                                     <div class="media-body text-right">
                                         <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
                                         <h1>B+</h1>
-                                        <h3>8</h3>
+                                        <h3>{{$bplus}}</h3>
 
                                     </div>
                                 </div>
@@ -453,7 +451,7 @@
                                     <div class="media-body text-left">
                                         <img style="width: 100px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
                                         <h1>AB-</h1>
-                                        <h3>78</h3>
+                                        <h3>{{$abminus}}</h3>
 
                                     </div>
                                     <div class="align-self-center">
@@ -472,7 +470,7 @@
                                     <div class="media-body text-left">
                                         <img style="width: 100px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
                                         <h1>AB+</h1>
-                                        <h3>7</h3>
+                                        <h3>{{$abplus}}</h3>
 
                                     </div>
                                     <div class="align-self-center">
@@ -492,7 +490,7 @@
                                     <div class="media-body text-left">
                                         <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
                                         <h1>O-</h1>
-                                        <h3>56</h3>
+                                        <h3>{{$ominus}}</h3>
 
                                     </div>
                                     <div class="align-self-center">
@@ -511,7 +509,7 @@
                                     <div class="media-body text-left">
                                         <img style="width: 120px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
                                         <h1>O+</h1>
-                                        <h3>56</h3>
+                                        <h3>{{$oplus}}</h3>
 
                                     </div>
                                     <div class="align-self-center">
@@ -533,49 +531,50 @@
     <div class="details">
         <div class="recentOrders">
             <div class="cardHeader">
-                <h2>Blood Storage</h2>
+                <h2>Blood Donor</h2>
                 <a href="{{url('technitian/viewstoredblood')}}" class="btn">View All</a>
             </div>
 
             <table>
                 <thead>
                     <tr>
-                        <td>Blood Group</td>
-                        <td>Volume</td>
+                        <td>Name </td>
+                        <td>Phone</td>
                         <td>Duration</td>
-                        <td>Status</td>
                     </tr>
                 </thead>
                 <tbody>
-
+                    @foreach ($donors as $donor)
                     <tr>
-                        <td>g</td>
-                        <td>v</td>
-                        <td scope="row"> Days ago</td>
-                        <td>s</td>
-                    </tr>
+                        <td>{{$donor->fullname}}</td>
+                        <td>{{$donor->phone}}</td>
+                        <td scope="row">{{ $donor->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
 
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
-
+            {{$donors->links()}}
         </div>
 
         <!-- ================= New Customers ================ -->
         <div class="recentCustomers">
             <div class="cardHeader">
-                <h4>Recent Added</h4>
+                <h2>Recent Donor Joined</h2>
             </div>
-
+            @foreach($stats as $stat)
             <table>
+
                 <tr>
                     <td width="60px">
-                        <div class="imgBx"><img src="{{asset('assets/imgs/11.jpg')}}" alt=""></div>
+                        <div class="imgBx"><img src="{{asset('uploads/registers/'.$stat->photo)}}" alt=""></div>
                     </td>
                     <td>
-                        <h4>David <br> <span>Italy</span></h4>
+                        <h4>{{$dis->fullname}} <br> <span>{{$dis->city}}</span></h4>
                     </td>
                 </tr>
             </table>
+            @endforeach
         </div>
     </div>
 </body>

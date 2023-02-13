@@ -185,7 +185,6 @@
         <p>PACKED RED BLOOD CELLS (PRBCS) are stored in a Blood Bank refrigerator at a temp of 1-6ºC until issue. The shelf life is 42 days from the date of collection The expiration date is located on the unit(s).</p>
 
         <a class="btn btn-success" href="{{url('technitian/home')}}">Home</a>
-        <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add</button> -->
         <br><br>
         <table>
             <thead>
@@ -193,8 +192,7 @@
                     <th>Blood Group</th>
                     <th>Volume</th>
                     <th>Pack Number</th>
-                    <th>Duration</th>
-                    <th>Status</th>
+                    <th>duration</th>
                     <th>Action</th>
 
                 </tr>
@@ -207,13 +205,6 @@
                     <td>{{$bloods->packno}}</td>
                     <td scope="row">{{ $bloods->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
                     <td>
-                        @if($bloods->created_at->diffInMinutes(\Carbon\Carbon::now()) >100)
-                        Expired
-                        @else
-                        {{$bloods->created_at->diffInMinutes(\Carbon\Carbon::now()) - 100}} Minute left
-                        @endif
-                    </td>
-                    <td>
                         <a href="#setexpaired{{$bloods->id}}" data-bs-toggle="modal" class="btn btn-info"><i class='fa fa-edit'></i> fillDiscard</a>
                         <a href="{{url('technitian/discard2', $bloods->id)}}" class="btn btn-info"><i class='fa fa-edit'></i> Discard</a>
                         @include('technitian.expiredmodal')
@@ -224,48 +215,6 @@
         </table>
 
     </div>
-    <!-- Add Blood Modal -->
-    <div class="modal fade" id="addnew" tabindex="-1" aria-labelledby="addnewModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addnewModalLabel">Register Blood</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    {!! Form::open(['url' => 'technitian/addbloods']) !!}
-                    <div class="mb-3">
-                        {!! Form::hidden('user_id', Auth::user()->id, ['class' => 'form-control']) !!}
-                    </div>
-                    <div class="mb-3">
-                        {!! Form::label('packno', 'Pack Number') !!}
-                        {!! Form::text('packno', '', ['class' => 'form-control', 'placeholder' => 'Input pack number', 'required']) !!}
-                    </div>
-                    <div class="mb-3">
-                        {!! Form::label('bloodtype', 'Blood Type') !!}
-                        {!! Form::select('bloodtype', array(''=>'choose Blood Type', 'A-' => 'A-', 'A+' => 'A+','B-' => 'B-', 'B+' => 'B+',
-                        'AB-' => 'AB-', 'AB+' => 'AB+','O-' => 'O-','O+'=>'O+')) !!}
-
-                    </div>
-                    <div class="mb-3">
-                        {!! Form::label('volume', 'Volume') !!}
-                        {!! Form::text('volume', '', ['class' => 'form-control', 'placeholder' => 'Input volume', 'required']) !!}
-                    </div>
-                    <div class="mb-3">
-                        {!! Form::label('donationtype', 'Donation Type') !!}
-                        {!! Form::text('donationtype', '', ['class' => 'form-control', 'placeholder' => 'Input donation type', 'required']) !!}
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
-                    {!! Form::close() !!}
-                </div>
-            </div>
-        </div>
-    </div>
-
     @include('sweetalert::alert')
 </body>
 

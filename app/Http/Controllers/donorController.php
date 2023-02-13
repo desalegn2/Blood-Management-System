@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\hospitalPosts;
 use App\Models\donorProfile;
 use App\Models\feedbackModel;
+use App\Models\bbinformatiomModel;
 
 class donorController extends Controller
 {
@@ -21,10 +22,17 @@ class donorController extends Controller
         return view('donor.donorHome', ['advert' => $advert]);
     }
 
-    function viewblog()
+    function viewNews()
     {
         $advert = advertises::all();
         return view('donor.blog', ['advert' => $advert]);
+    }
+
+
+    function viewInfo()
+    {
+        $data = bbinformatiomModel::all();
+        return view('donor.bbinformation', ['data' => $data]);
     }
     function register(Request $req)
     {
@@ -53,6 +61,11 @@ class donorController extends Controller
         return redirect('donor/home')->with('success', 'Task Added Successfully!');
     }
 
+    function ReservationForm()
+    {
+        $data = User::where('role', 5)->get();
+        return view('donor.Reservation', ['data' => $data]);
+    }
     function reservation(Request $req, int $id)
     {
         $isExist = donorRequestModel::select("*")

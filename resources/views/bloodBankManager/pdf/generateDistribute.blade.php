@@ -28,28 +28,20 @@
 
     <table class="table table-bordered table-responsive table-striped">
         <thead>
-            <th>photo</th>
-            <th>Fulltname</th>
-            <th>Email</th>
-            <th>Donation Date</th>
+            <th>Reciever</th>
             <th>Blood Type</th>
-            <th>Gender</th>
-            <th>phone</th>
-            <th>Occupation</th>
-
+            <th>Volume</th>
+            <th>Donate By</th>
         </thead>
         <tbody>
-            @if(count($don))
-            @foreach($don as $member)
+            @if(count($data))
+            @foreach($data as $member)
             <tr>
-                <td><img src="{{public_path('uploads/registers/'.$member->photo)}}" width="80" height="80"></td>
-                <td>{{$member->fullname}}</td>
-                <td>{{$member->email}}</td>
-                <td>{{$member->created_at}}</td>
-                <td>{{$member->bloodtype}}</td>
-                <td>{{$member->gender}}</td>
-                <td>{{$member->phone}}</td>
-                <td>{{$member->occupation}}</td>
+                <td>{{$member->recievedby}}</td>
+                <td>{{$member->bloodgroup}}</td>
+                <td>{{$member->volume}}</td>
+                <td>{{$member->donateby}}</td>
+
             </tr>
             @endforeach
             @else

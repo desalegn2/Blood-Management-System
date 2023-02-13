@@ -1,4 +1,4 @@
-@extends('donor.sidebar')
+@extends('donor.navbar')
 @section('content')
 
 <!DOCTYPE html>
@@ -304,23 +304,16 @@
                 </legend>
                 <div class="personal-details">
                     <div>
-
-
                         <div>
                             <label>Center</label>
                             <select name="center" required>
-                                <option value="Felege">Felege</option>
-                                <option value="adama">adama</option>
-                                <option value="fhkhfz">Gambi</option>
-                                <option value="uyuiay">uyuiay</option>
-                                <option value="ljakdaHS">ljakdaHS</option>
-                                <option value="buyai">buyai</option>
-                                <option value="tiytat">tiytat</option>
+                                <option value="">Choose Hospital</option>
+                                @foreach($data as $dat)
+                                <option value="{{$dat->name}}">{{$dat->name}}</option>
+                                @endforeach
                             </select>
                         </div>
-
                     </div>
-
                 </div>
             </fieldset>
             <fieldset>

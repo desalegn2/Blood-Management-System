@@ -350,6 +350,15 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{url('/bbmanager/addhospital')}}">
+                        <span class="icon">
+                            <ion-icon name="bag-remove-outline"></ion-icon>
+                        </span>
+                        <span class="title">Add Hospital</span>
+                    </a>
+                </li>
+
                 </li>
 
                 <li>
@@ -375,7 +384,7 @@
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
                 <div class="user">
-                    <img src="{{asset('uploads/registers/'. Auth::user()->photo )}}" alt="">
+
                 </div>
             </div>
 

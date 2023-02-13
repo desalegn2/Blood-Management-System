@@ -52,55 +52,6 @@
             padding: 0 10px;
         }
 
-        /* ======================= Cards ====================== */
-        .cardBox {
-            position: relative;
-            width: 100%;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 30px;
-        }
-
-        .cardBox .card {
-            position: relative;
-            background: var(--white);
-            padding: 30px;
-            border-radius: 20px;
-            display: flex;
-            justify-content: space-between;
-            cursor: pointer;
-            box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-        }
-
-        .cardBox .card .numbers {
-            position: relative;
-            font-weight: 500;
-            font-size: 2.5rem;
-            color: var(--blue);
-        }
-
-        .cardBox .card .cardName {
-            color: var(--black2);
-            font-size: 1.1rem;
-            margin-top: 5px;
-        }
-
-        .cardBox .card .iconBx {
-            font-size: 3.5rem;
-            color: var(--black2);
-        }
-
-        .cardBox .card:hover {
-            background: var(--blue);
-        }
-
-        .cardBox .card:hover .numbers,
-        .cardBox .card:hover .cardName,
-        .cardBox .card:hover .iconBx {
-            color: var(--white);
-        }
-
         /* ================== Order Details List ============== */
         .details {
             position: relative;
@@ -213,7 +164,7 @@
         .recentCustomers {
             position: relative;
             /* display: grid; */
-            min-height: 500px;
+
             padding: 20px;
             background: var(--white);
             box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
@@ -339,7 +290,17 @@
 </head>
 
 <body>
-
+    <div class="top">
+        <!--  -->
+        <h1></h1>
+        <div style="margin-top: 0;">
+            <a href="{{url('/technitian/expired')}}">
+                <i style="margin-top: 0;" class="fa fa-bell"></i>
+                <span style="margin-top: 0;" class="badge text-bg-secondary"> {{$notification}}Expired Pack</span>
+            </a>
+            <img class="user" src="{{asset('uploads/registers/'. Auth::user()->photo )}}" alt="">
+        </div>
+    </div>
     <hr>
     <!-- ======================= Cards ================== -->
 
@@ -514,8 +475,6 @@
                     </div>
                 </div>
             </div>
-
-
         </section>
 
     </div>
@@ -528,9 +487,7 @@
                 <h2>Blood Storage</h2>
                 <a href="{{url('technitian/viewstoredblood')}}" class="btn">View All</a>
             </div>
-
             <table>
-
                 <thead>
                     <tr>
                         <td>Blood Group</td>
@@ -544,9 +501,13 @@
                     <tr>
                         <td>{{$blood->bloodgroup}}</td>
                         <td>{{$blood->volume}}</td>
-                        <td scope="row">{{ $blood->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
+                        <td scope="row">{{ $blood->created_at->diffInMinutes(\Carbon\Carbon::now()) }} M ago</td>
                         <td>
-                            {{$blood->status}}
+                            @if($blood->created_at->diffInMinutes(\Carbon\Carbon::now()) >100)
+                            Expired
+                            @else
+                            {{$blood->created_at->diffInMinutes(\Carbon\Carbon::now()) - 100}} Minute left
+                            @endif
                         </td>
                     </tr>
                     @endforeach
@@ -560,7 +521,6 @@
             <div class="cardHeader">
                 <h4>Recent Added</h4>
             </div>
-
             <table>
                 <tr>
                     <td width="60px">
