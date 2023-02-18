@@ -31,7 +31,7 @@
             border-top: 1px solid #DDDDDD;
         }
 
-        .container {
+        .con {
             width: 100%;
         }
 
@@ -180,7 +180,7 @@
 
     <footer>
         <div class="footer" id="footer">
-            <div class="container">
+            <div class="con">
                 <div class="row">
                     <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
                         <img class='mt-4' style="border-radius:59%; width: 100px; height:100px; float: left;" src="{{asset('assets/imgs/logo1.png')}}" alt="">
@@ -192,8 +192,8 @@
                     <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
                         <h3> About Us</h3>
                         <ul>
-                            <li> <a href="#"> about us </a> </li>
-                            <li> <a href="#">How It Works</a> </li>
+                            <li> <a href="{{url('donor/aboutus')}}"> about us </a> </li>
+                            <li> <a href="{{url('donor/feedback')}}">FeedBack</a> </li>
                             <li> <a href="#"> Contact Us </a> </li>
                         </ul>
                     </div>

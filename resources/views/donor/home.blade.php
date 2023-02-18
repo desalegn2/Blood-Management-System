@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Document</title>
+    <title>Home</title>
 
     <style>
         * {
@@ -215,7 +215,9 @@
                 <div class="box"><img style="width:236px; height:279px" src="{{asset('assets/imgs/c.jpg')}}">
                     <h3 class="name">Blood Storage</h3>
                     <!-- <p class="title">email</p> -->
-                    <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique corporis libero dolores vero autem, ipsa rerum tempora magnam placeat magni! Nesciunt aspernatur libero id eaque quas quae corrupti a totam!</p>
+                    <p class="description">
+                        PRBCs are stored in a Blood Bank refrigerator at a temp of 1-6ºC until issue. The shelf life is 42 days from the date of collection The expiration date is located on the unit(s).
+                    </p>
 
                     <div class="social"><a href="">View Detail</a></div>
 
@@ -245,7 +247,9 @@
                 <div class="box"><img class="" style="width:236px; height:279px" src="{{asset('assets/imgs/bloodstorage.jpg')}}">
                     <h3 class="name">Donor Management</h3>
                     <!-- <p class="title">email</p> -->
-                    <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique corporis libero dolores vero autem, ipsa rerum tempora magnam placeat magni! Nesciunt aspernatur libero id eaque quas quae corrupti a totam!</p>
+                    <p class="description">
+                        Donor management is an essential aspect of nonprofit management that involves building and maintaining relationships with all your donors and tracking various donor details and interactions. Although it sounds simple, donor management requires paying close attention to your donors’ activity, habits, and experiences. As a nonprofit, you must be prepared to manage a large donor base that consists of all types of donors — recurring donors, one-time donors, major donors, or in-kind donors.
+                    </p>
 
                     <div class="social"><a href="">View Detail</a></div>
 
@@ -256,14 +260,28 @@
 
 
     <div class="container mt-5">
+
         <div class=" mt-5">
             <div class="row mt-5 mb-5">
                 <div class="col-md-4 ml-5">
-                    <img class="img-fluid" src="{{asset('assets/imgs/c.jpg')}}" alt="...">
+                    <img class="img-fluid" src="{{asset('assets/imgs/bblogo.jpg')}}" alt="...">
                 </div>
                 <div class="col-md-8">
                     <h3 class="card-title mt-2">Benefit of Donating Blood</h3>
-                    <p class="card-text mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates corrupti possimus quae quidem itaque voluptatum, delectus quo soluta voluptate sequi dignissimos eos sint neque! Possimus cumque magnam excepturi necessitatibus obcaecati?</p>
+                    <p class="card-text mb-4">
+                        The health benefits of donating blood are considerable—but of course, the most important part of the process is helping to save lives. Donating blood is good for you, and it's even better for all the people who desperately need the help.
+                        helping others can:<br>
+                    <ul>
+                        <li>reduce stress</li>
+                        <li>improve your emotional well-being</li>
+                        <li> benefit your physical health</li>
+                        <li>help get rid of negative feelings</li>
+                        <li> provide a sense of belonging and reduce isolation</li>
+                        <li>Research has found further evidence of the health benefits that come specifically from donating blood.</li>
+                    </ul>
+                    <br>
+
+                    </p>
                     <button class="mb-4" href="" style="float: right;">share </button>
 
                     <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fparse.com" target="_blank" rel="noopener">
@@ -284,12 +302,12 @@
                 <div class="card col-md-8 ml-5">
                     <!-- <img class="img-fluid" src="{{asset('assets/imgs/c.jpg')}}" alt="..."> -->
                     <h3 class="card-title mt-2">Why Donate Blood</h3>
-                    <p class="card-text mb-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit, modi et inventore deleniti alias odio similique ducimus officia quidem? Necessitatibus illo a totam perferendis minima, laborum adipisci optio. Eveniet, optio.
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore et rerum est aliquid, dolore amet quisquam sit, harum porro suscipit officia a ex laborum tenetur cupiditate dicta unde corporis quidem.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates corrupti possimus quae quidem itaque voluptatum, delectus quo soluta voluptate sequi dignissimos eos sint neque! Possimus cumque magnam excepturi necessitatibus obcaecati?</p>
+                    <p class="card-text mb-4">
+                        There is no substitute for blood. Donors provide the only supply of life-saving blood for those in need. Donating is simple, fast, and convenient. The donation process can take as little as 45 minutes of your time, but can make a lifelong difference for someone else.
+                    </p>
                 </div>
                 <div class="col-md-4">
-                    <img class="img-fluid" src="{{asset('assets/imgs/c.jpg')}}" alt="...">
+                    <img class="img-fluid" src="{{asset('assets/imgs/bblogo.jpg')}}" alt="...">
                     <!-- <h3 class="card-title mt-2">Title</h3>
                     <p class="card-text mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates corrupti possimus quae quidem itaque voluptatum, delectus quo soluta voluptate sequi dignissimos eos sint neque! Possimus cumque magnam excepturi necessitatibus obcaecati?</p>
                     <button class="mb-4" href="" style="float: right;">share </button>

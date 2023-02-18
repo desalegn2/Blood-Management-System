@@ -31,11 +31,8 @@
                 <div class="col-md-8">
                     <h3 class="card-title mt-2">{{$adv->title}}</h3>
                     <p class="card-text mb-4">{{$adv->description}}</p>
-                    <button class="mb-4" href="" style="float: right;">share </button>
 
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fparse.com" target="_blank" rel="noopener">
-                        <img class="YOUR_FB_CSS_STYLING_CLASS" src="{{asset('assets/imgs/fb2.png')}}" width="30px" height="30px" alt="Share on Facebook">
-                    </a>
+
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">{{ $adv->created_at}}</small>

@@ -6,6 +6,9 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -102,7 +105,7 @@
                     <input type="email" id="email" name="email" placeholder="Your Email..">
                 </div>
             </div>
-            <div class="row">
+            <div class="">
                 <div class="col-25">
                     <label for="country">Address</label>
                 </div>

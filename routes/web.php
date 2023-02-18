@@ -86,6 +86,8 @@ Route::middleware(['auth', 'user-role:donor'])->group(function () {
     Route::get('donor/information', [donorController::class, 'viewInfo']);
     Route::get('donor/feedback', [donorController::class, 'feedbacks']);
     Route::post('/donor/givefeedbak', [donorController::class, 'givefeedbacks']);
+
+    Route::view('donor/aboutus', 'donor.aboutus');
     //Route::view('donor/viewseeker', 'donor.viewSeekers');
     // Route::get('donor/views', [donorViewseeker::class, 'viewS']);
     // Route::get('/donor/viewdetail/{id}', [donorViewseeker::class, 'viewdetail']);

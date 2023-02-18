@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Navigation Bar | MultiWebPress</title>
+    <title>Donor Home Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
@@ -154,8 +154,11 @@
 </head>
 
 <body>
+
     <div>
+
         <header>
+
             <div class="inner-width">
 
                 <i class="menu-toggle-btn fas fa-bars"></i>
@@ -163,12 +166,12 @@
                     <a href="{{url('/donor/home')}}">Home</a>
                     <a href="{{url('/donor/news')}}"></i> News</a>
                     <a href="{{url('/donor/information')}}"></i> Blood Bank Information</a>
-                    <a href="{{url('/donor/history',Auth::user()->id)}}"></i> Ristration Status</a>
+                    <a href="{{url('/donor/history',Auth::user()->id)}}"></i> Rigstration Status</a>
                     <a href="{{url('/donor/seeker')}}"></i> View Seeker</a>
                     <a href="{{url('/donor/donorregister')}}"></i> Registor</a>
                     <a href="{{url('/donor/reservationform')}}"></i> Reservation</a>
                     <a href="{{url('/donor/reservationhistory',Auth::user()->id)}}"></i> Reservation Status</a>
-                    <a href="{{ url('') }}" class="aj_btn"> <i class="fas fa-lock" aria-hidden="true"></i>
+                    <a href="{{ url('') }}" class="aj_btn"> <i class="fa fa-sign-out" aria-hidden="true"></i>
                         Logout</a>
                 </nav>
             </div>
