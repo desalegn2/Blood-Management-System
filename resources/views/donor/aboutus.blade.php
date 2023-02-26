@@ -358,6 +358,7 @@
                 </div>
 
             </div>
+
             <div class="sec-title">
                 <span class="title">Mission</span>
 
@@ -370,12 +371,15 @@
 
             <div class="sec-title">
                 <span class="title">Vision</span>
-
             </div>
             <div class="text">
                 በህይወት ስጦታው በኢትዮጵያ የጤና አገልግሎት የማዕዘን ድንጋይ ለመሆን።
             </div>
+            <div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.4225642360157!2d37.38063771447331!3d11.593192846756851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1644cfdc6cf0c047%3A0x287c29bd91e8e341!2sBahir%20Dar%20Blood%20Bank!5e0!3m2!1sen!2snl!4v1677426336759!5m2!1sen!2snl" width="900" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
         </div>
+
     </section>
 </body>
 

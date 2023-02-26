@@ -110,6 +110,18 @@
             color: #fff;
             font-size: 25px;
         }
+
+        /* #img {
+            -webkit-filter: blur(15px);
+            -moz-filter: blur(15px);
+            -o-filter: blur(15px);
+            -ms-filter: blur(15px);
+            filter: blur(15px);
+            position: fixed;
+            background-color: dark;
+            background-blend-mode: multiply;
+
+        } */
     </style>
 </head>
 <!-- git push -u origin main -->
@@ -128,16 +140,13 @@
                         <a class="nav-link" href="#"><b> <i class="fa fa-home" aria-hidden="true"></i>Home</b></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><b>About</b></a>
+                        <a class="nav-link" href="about"><b>About</b></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}"><b>Login</b></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('register') }}"><b>Create Account</b></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><b>Contact</b></a>
                     </li>
                 </ul>
             </div>
@@ -154,22 +163,22 @@
             <div class="carousel-item active">
                 <img class="d-block w-100" src="{{asset('assets/imgs/c.jpg')}}" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Slider One Item</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="{{asset('assets/imgs/a.jpg')}}" alt="Second slide">
+                <img id="img" class="d-block w-100" src="{{asset('assets/imgs/p9.jpg')}}" alt="Second slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Slider One Item</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+                    <h5>ለጋሾቻችን</h5>
+                    <p>ዓለም አቀፋዊ ደህንነቱ የተጠበቀ ደም ማግኘት ለማንኛውም ሀገር የጤና አጠባበቅ ስርዓት የህይወት መስመር ነው።
+                    </p>
+
                 </div>
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="{{asset('assets/imgs/b.jpg')}}" alt="Third slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Slider One Item</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+
                 </div>
             </div>
         </div>
@@ -182,10 +191,6 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-
-
-
-
 
     <!--- ignore the code below-->
 

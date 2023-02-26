@@ -42,7 +42,7 @@ Route::get('/', function () {
     return view('Test');
 });
 
-Route::view('aa', 'Test');
+Route::view('about', 'aboutus');
 Route::get('bb', function () {
     return view('index');
 });
@@ -261,8 +261,8 @@ Route::middleware(['auth', 'user-role:healthinstitute'])->group(function () {
     Route::view('/healthinstitute/profile', 'healthinstitute.profile');
     Route::post('/healthinstitute/profile', [healthinstituteController::class, 'profile']);
     Route::post('/healthinstitute/seekerRegister', [bloodRequestController::class, 'bloodrequest']);
-    Route::view('/healthinstitute/post', 'healthinstitute.hospitalPost');
-    Route::post('/healthinstitute/post', [hospitalRequestController::class, 'postSeeker']);
+    Route::view('/healthinstitute/posts', 'healthinstitute.hospitalPost');
+    Route::post('/healthinstitute/post_seeker', [hospitalRequestController::class, 'postSeeker']);
     Route::post('/healthinstitute/hospitalrequest', [hospitalRequestController::class, 'hospitalreq']);
 
     Route::view('/healthinstitute/hospitalrequest', 'healthinstitute.bloodRequestform');
@@ -274,7 +274,7 @@ Route::middleware(['auth', 'user-role:healthinstitute'])->group(function () {
     Route::get('/healthinstitute/finddonor', [hospitalRequestController::class, 'findDonor']);
 
     // Route::view('/healthinstitute/mypost', 'healthinstitute.mypost');
-    Route::get('/healthinstitute/mypostss/{id}', [hospitalRequestController::class, 'mypost']);
+    Route::get('/healthinstitute/aa/{id}', [hospitalRequestController::class, 'mypost']);
     Route::delete('/healthinstitute/deletepost/{id}', [hospitalRequestController::class, 'deletepost']);
 });
 

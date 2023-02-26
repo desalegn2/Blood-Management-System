@@ -210,7 +210,7 @@
         }
 
         button {
-            width: 100%;
+
             padding: 10px 0;
             margin: 10px auto;
             border-radius: 5px;
@@ -309,17 +309,15 @@
             </fieldset>
             <fieldset>
                 <legend>
-                    <h3>Terms and Mailing</h3>
+                    <h3>Term</h3>
                 </legend>
                 <div class="terms-mailing">
+
                     <div class="checkbox">
-                        <input type="checkbox" name=""><span>I accept the <a href="https://www.w3docs.com/privacy-policy">Privacy Policy for W3Docs.</a></span>
-                    </div>
-                    <div class="checkbox">
-                        <input type="checkbox" name=""><span>I want to recelve personallzed offers by your site</span>
+                        <input type="checkbox" name=""><span>I am agree with above information</span>
                     </div>
             </fieldset>
-            <button type="submit" href="">Submit</button>
+            <center><button type="submit" href="">Submit</button></center>
         </form>
     </div>
 

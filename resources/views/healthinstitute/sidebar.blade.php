@@ -313,7 +313,7 @@
                 </li>
 
                 <li>
-                    <a href="{{url('/healthinstitute/post')}}">
+                    <a href="{{url('/healthinstitute/posts')}}">
                         <span class="icon">
                             <ion-icon name="people-sharp"></ion-icon>
                         </span>
@@ -328,16 +328,16 @@
                         <span class="title">view Request</span>
                     </a>
                 </li>
+
+
                 <li>
-                    <a href="{{url('/healthinstitute/mypostss',Auth::user()->id)}}">
+                    <a href="{{url('/healthinstitute/aa',Auth::user()->id)}}">
                         <span class="icon">
                             <ion-icon name="people-sharp"></ion-icon>
                         </span>
-                        <span class="title">My Post</span>
+                        <span class="title">our Post</span>
                     </a>
                 </li>
-
-
                 </li>
 
                 <li>

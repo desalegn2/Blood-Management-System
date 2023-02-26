@@ -171,8 +171,13 @@
                     <a href="{{url('/donor/donorregister')}}"></i> Registor</a>
                     <a href="{{url('/donor/reservationform')}}"></i> Reservation</a>
                     <a href="{{url('/donor/reservationhistory',Auth::user()->id)}}"></i> Reservation Status</a>
-                    <a href="{{ url('') }}" class="aj_btn"> <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" class="aj_btn"> <i class="fa fa-sign-out" aria-hidden="true"></i>
+
                         Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </nav>
             </div>
         </header>

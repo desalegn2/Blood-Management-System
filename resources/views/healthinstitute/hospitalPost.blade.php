@@ -257,7 +257,7 @@
     <!-- ======================= Cards ================== -->
 
     <div class="main-block">
-        <form action="post" method="post" enctype="multipart/form-data">
+        <form action="post_seeker" method="post" enctype="multipart/form-data">
             @csrf
             <h1>Blood Request Form</h1>
             <fieldset>
@@ -363,10 +363,7 @@
                 </legend>
                 <div class="terms-mailing">
                     <div class="checkbox">
-                        <input type="checkbox" name=""><span>I accept the <a href="https://www.w3docs.com/privacy-policy">Privacy Policy for W3Docs.</a></span>
-                    </div>
-                    <div class="checkbox">
-                        <input type="checkbox" name=""><span>I want to recelve personallzed offers by your site</span>
+                        <input type="checkbox" name=""><span>I am agree with above information</span>
                     </div>
             </fieldset>
             <button type="submit" href="">Submit</button>

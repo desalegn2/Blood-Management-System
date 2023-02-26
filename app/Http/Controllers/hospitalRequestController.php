@@ -84,7 +84,6 @@ class hospitalRequestController extends Controller
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
             'age' => 'min:1|max:3',
-            'phone' => 'numeric|min:10|max:13',
         ]);
         $var = new hospitalPosts;
         $var->user_id = $req->user_id;
@@ -109,7 +108,7 @@ class hospitalRequestController extends Controller
             $var->photo =  $filename;
         }
         $var->save();
-        return redirect('healthinstitute/post')->with('success', 'Task Added Successfully!');
+        return redirect('healthinstitute/post_seeker')->with('success', 'Task Added Successfully!');
     }
     public function mypost($id)
     {
@@ -121,7 +120,7 @@ class hospitalRequestController extends Controller
             //$data = hospitalRequestModel::where('user_id', 'LIKE', '%' . $id . '%')->get();
             return view('healthinstitute.mypost', compact('data'));
         } else {
-            return redirect('healthinstitute/post');
+            return redirect('healthinstitute/post_seeker');
         }
     }
 
@@ -136,7 +135,8 @@ class hospitalRequestController extends Controller
             //$data = hospitalRequestModel::where('user_id', 'LIKE', '%' . $id . '%')->get();
             return view('healthinstitute.viewRequest', compact('data'));
         } else {
-            return view('healthinstitute.healthinstituteHome')->with('warning', 'you do not send request!');
+            // return view('healthinstitute.healthinstituteHome')->with('warning', 'you do not send request!');
+            return redirect('healthinstitute/home')->with('warning', 'No Request');
         }
     }
     public function search(Request $request)
@@ -151,7 +151,6 @@ class hospitalRequestController extends Controller
     }
     function viewblood()
     {
-
         $aplus_stored = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
         $aminus_stored = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
         $oplus_stored = addBloodModel::where('bloodgroup', 'O+')->sum('volume');

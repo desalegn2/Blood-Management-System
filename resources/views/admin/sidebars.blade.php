@@ -45,7 +45,7 @@
         /* =============== Navigation ================ */
         .navigation {
             position: fixed;
-            width: 300px;
+            width: 160px;
             height: 100%;
             background: #FF7B54;
             border-left: 0px solid var(--blue);
@@ -305,7 +305,7 @@
                 <li>
                     <a href="{{url('/admin/add')}}">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="person-add-outline"></ion-icon>
                         </span>
                         <span class="title">Add user</span>
                     </a>
@@ -313,7 +313,7 @@
                 <li>
                     <a href="{{url('/admin/viewdonor')}}">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="people-circle-outline"></ion-icon>
                         </span>
                         <span class="title">Manage Donor</span>
                     </a>
@@ -321,7 +321,7 @@
                 <li>
                     <a href="{{url('/admin/viewnurse')}}">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="people-circle-outline"></ion-icon>
                         </span>
                         <span class="title">Manage Nurses</span>
                     </a>
@@ -329,7 +329,7 @@
                 <li>
                     <a href="{{url('/admin/viewtech')}}">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="people-circle-outline"></ion-icon>
                         </span>
                         <span class="title">Manage Tech </span>
                     </a>
@@ -337,7 +337,7 @@
                 <li>
                     <a href="{{url('/admin/viewhi')}}">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="people-circle-outline"></ion-icon>
                         </span>
                         <span class="title">Manage HI</span>
                     </a>
@@ -377,7 +377,7 @@
                 </div>
             </div>
             @yield('content')
-            <div>
+            <div class="footer">
                 @include('admin.footer')
             </div>
 

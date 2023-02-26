@@ -152,24 +152,24 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100" src="{{asset('assets/imgs/p13.jpg')}}" alt="First slide">
+                <img class="d-block w-100" src="{{asset('assets/imgs/photo1.jpg')}}" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 style="color: black;">Blood Donation Illustration</h5>
-                    <p style="color: green;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+                    <!-- <h5 style="color: black;">Blood Donation Illustration</h5>
+                    <p style="color: green;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p> -->
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="{{asset('assets/imgs/r.jpg')}}" alt="Second slide">
+                <img class="d-block w-100" src="{{asset('assets/imgs/photo2.jpg')}}" alt="Second slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 style="color: black;">Blood Donation Illustration</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+                    <!-- <h5 style="color: black;">Blood Donation Illustration</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p> -->
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="{{asset('assets/imgs/d.jpg')}}" alt="Third slide">
+                <img class="d-block w-100" src="{{asset('assets/imgs/photo6.jpg')}}" alt="Third slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 style="color: black;">Blood Donation Illustration</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+                    <!-- <h5 style="color: black;">Blood Donation Illustration</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p> -->
                 </div>
             </div>
         </div>
@@ -195,28 +195,9 @@
                 <div class="box"><img class="" style="width:236px; height:279px" src="{{asset('assets/imgs/provisioredbloodcell.jpg')}}">
                     <h3 class="name">Provision of Red Blood Cell</h3>
                     <!-- <p class="title">email</p> -->
-                    <p class="description">Red blood cells are responsible for transporting oxygen from your lungs to your body’s tissues. Your tissues produce energy with the oxygen and release a waste, identified as carbon dioxide. Your red blood cells take the carbon dioxide waste to your lungs for you to exhale</p>
-
-                    <div class="social"><a href="">View Detail</a></div>
-
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 item">
-                <div class="box"><img style="width:236px; height:279px" src="{{asset('assets/imgs/blood2.jpg')}}">
-                    <h3 class="name">Blood Donation</h3>
-                    <!-- <p class="title">email</p> -->
-                    <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique corporis libero dolores vero autem, ipsa rerum tempora magnam placeat magni! Nesciunt aspernatur libero id eaque quas quae corrupti a totam!</p>
-
-                    <div class="social"><a href="">View Detail</a></div>
-
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 item">
-                <div class="box"><img style="width:236px; height:279px" src="{{asset('assets/imgs/c.jpg')}}">
-                    <h3 class="name">Blood Storage</h3>
-                    <!-- <p class="title">email</p> -->
                     <p class="description">
-                        PRBCs are stored in a Blood Bank refrigerator at a temp of 1-6ºC until issue. The shelf life is 42 days from the date of collection The expiration date is located on the unit(s).
+                        Blood typing and cross-matching: Before a blood transfusion, the patient's blood type and Rh factor are determined. The donor blood is also tested to ensure compatibility. The donor blood must be the same type and Rh factor as the patient's blood to avoid a transfusion reaction.
+                        he red blood cells are collected from a donor and processed to remove any white blood cells, platelets, or plasma.
                     </p>
 
                     <div class="social"><a href="">View Detail</a></div>
@@ -224,10 +205,58 @@
                 </div>
             </div>
             <div class="col-md-6 col-lg-4 item">
-                <div class="box"><img style="width:236px; height:279px" class="" src="{{asset('assets/imgs/c.jpg')}}">
+                <div class="box"><img style="width:236px; height:279px" src="{{asset('assets/imgs/blood2.jpg')}}">
+                    <h3 class="name">በደምዎ ህይዎትን ያስቀጥሉ</h3>
+                    <!-- <p class="title">email</p> -->
+                    <p class="description">
+                        ከ1% በታች የሚሆነው የኢትዮጵያ ደም ለጋሾች ንቁ ናቸው።
+                        አንድ የደም ክፍል የሚቆየው ከለገሱ በኋላ ለ 90 ቀናት ብቻ ነው, በዚህ ምክንያት ደም ለጋሾች
+                        በየጊዜው መለገስ አስፈላጊ ነው. ለጋሾች በ12 ሳምንቱ ብዙ ጊዜ ደም መስጠት ይችላሉ።
+
+                        ደም ወደ ቀይ የደም ሴሎች፣ ፕላዝማ እና ፕሌትሌትስ ስለሚለያይ እያንዳንዱ የደም ክፍል ቢያንስ
+                        የሶስት ህይወትን ማዳን ይችላል።
+
+                        በጤና አጠባበቅ ስርዓት ውስጥ ደህንነቱ የተጠበቀ እና በቂ የደም አቅርቦትን ለማረጋገጥ በቀን
+                        3000 ዩኒት ደም ለመሰብሰብ ያለመ ነው።
+
+                        ለህዝብ ክፍት የሆኑ ብዙ የደም ልገሳ ማዕከላት አሉ። ወይም ለሁሉም የሰራተኛ አባላት ምቾት
+                        ሲባል ቀጣሪዎ በቢሮዎ ውስጥ የደም ግፊትን እንዲያስተናግድ ለማነሳሳት ሊያስቡበት ይችላሉ።
+                    </p>
+
+                    <div class="social"><a href="">View Detail</a></div>
+
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 item">
+                <div class="box"><img style="width:236px; height:279px" src="{{asset('assets/imgs/c.jpg')}}">
+                    <h3 class="name">ለመለገስ ብቁ ነዎት?</h3>
+                    <!-- <p class="title">email</p> -->
+                    <p class="description">
+                        በአጠቃላይ ጤነኛ ከሆንክ እና ለአደጋ ተጋላጭ ያልሆነ የአኗኗር ዘይቤ የምትመራ ከሆነ መለገስ ትችላለህ<br>
+                        "ጤናማ" ማለት ጥሩ ስሜት ይሰማዎታል እና የተለመዱ ተግባራትን ማከናወን ይችላሉ. እንደ የስኳር
+                        በሽታ ያለ ሥር የሰደደ በሽታ ካለብዎት, "ጤናማ" ማለት እርስዎ እየታከሙ እና ሁኔታው ​​​​በቁጥጥር ስር
+                        ነው ማለት ነው.
+
+                        እንደ ከማያውቁት ሰው ጋር የግብረ ሥጋ ግንኙነት መፈጸም ወይም ራስን በመድኃኒት መርፌ እንደ “አደጋ
+                        የሚያጋልጥ ባሕርይ” ማለት እንደ ኤች አይ ቪ እና ሄፓታይተስ ቢ እና ሲ ያሉ በደም ምትክ የሚተላለፉ
+                        ኢንፌክሽኖች ሊያዙ ይችላሉ ማለት ነው። አደገኛ ባህሪ ላይ ከተሰማራ አትለግስ።
+                    </p>
+
+                    <div class="social"><a href="">View Detail</a></div>
+
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 item">
+                <div class="box"><img style="width:236px; height:279px" class="" src="{{asset('assets/imgs/blood-samples-are-stored-in-a-hospital.jpg')}}">
                     <h3 class="name">Blood Camp Management</h3>
                     <!-- <p class="title">email</p> -->
-                    <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique corporis libero dolores vero autem, ipsa rerum tempora magnam placeat magni! Nesciunt aspernatur libero id eaque quas quae corrupti a totam!</p>
+                    <p class="description">
+                        We collect, process, and store blood and blood components for use in medical emergencies. we are doing the following activities
+                        Donor screening,Blood collection,Blood processing,Storage,Distribution,Quality control Recruit donors
+
+                        We recruit new donors to maintain a sufficient supply of blood.
+
+                    </p>
 
                     <div class="social"><a href="">View Detail</a></div>
 
@@ -237,7 +266,10 @@
                 <div class="box"><img class="" style="width:236px; height:279px" src="{{asset('assets/imgs/provisionplatlets.jpg')}}">
                     <h3 class="name">provision of platlets</h3>
                     <!-- <p class="title">email</p> -->
-                    <p class="description">Platelet transfusion is a lifesaving procedure that is carried out to prevent bleeding or stop ongoing bleeding in patients with low platelet count or functional platelet disorders.s</p>
+                    <p class="description">Platelet transfusion is a lifesaving procedure that is carried out to prevent bleeding or stop ongoing bleeding in patients with low platelet count or functional platelet disorders.s
+                        platelets are usually stored separately from whole blood and are transfused in a smaller volume.
+                        Platelet transfusions are often used to treat conditions such as (low platelet count), leukemia, and other types of cancer that can affect the production or function of platelets in the body.
+                    </p>
 
                     <div class="social"><a href="">View Detail</a></div>
 

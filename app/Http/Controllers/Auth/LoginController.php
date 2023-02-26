@@ -49,7 +49,7 @@ class LoginController extends Controller
 
         $this->validate($request, [
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required|same:password',
         ]);
 
         if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {

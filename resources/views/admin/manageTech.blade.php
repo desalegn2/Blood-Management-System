@@ -19,7 +19,7 @@
             <div class="col-md-12 col-md-offset-1">
                 <h2> <a href="home" class="btn btn-primary btn-block">{{ __('Back') }}</a> </h2>
                 Manage Technitian
-                <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add</button>
+                <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add</button> -->
             </div>
         </div>
         <div class="row">
