@@ -93,7 +93,7 @@
                     <label for="fname">Name</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="fname" name="name" placeholder="Your name..">
+                    <input type="text" id="fname" name="name" value="{{Auth::user()->name}}">
                 </div>
             </div>
 
@@ -102,10 +102,10 @@
                     <label for="email">Email</label>
                 </div>
                 <div class="col-75">
-                    <input type="email" id="email" name="email" placeholder="Your Email..">
+                    <input type="email" id="email" name="email" value="{{Auth::user()->email}}">
                 </div>
             </div>
-            <div class="">
+            <div class="row">
                 <div class="col-25">
                     <label for="country">Address</label>
                 </div>

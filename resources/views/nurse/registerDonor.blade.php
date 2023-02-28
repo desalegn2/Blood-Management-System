@@ -9,12 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>donor enrollment</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
         /* =========== Google Fonts ============ */
@@ -307,8 +304,6 @@
     <!-- ======================= Cards ================== -->
 
     <div style="float: right;">
-
-        <!-- <input type="text" name="fullname" style="width: 200px;" placeholder="Enter Donor Name" required> -->
         <a href="{{url('/nurse/listofdonor')}}" style="decoration:none;">Are you Donate Before?</a>
     </div>
 
@@ -322,10 +317,11 @@
                     <h3>Donor Information</h3>
                 </legend>
                 <div><input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required></div>
+                <div><input type="hidden" name="nursename" value="{{ Auth::user()->name }}" required></div>
+
                 <div class="account-details">
                     <div><label>Full Name</label><input type="text" name="fullname" required></div>
-
-                    <div><label>Birth Date</label><input type="date" name="birthdate" required></div>
+                    <div><label>Age</label><input type="number" name="age" required></div>
                     <div><label>Occupation</label><input type="text" name="occupation" required></div>
                     <div><label>phone</label><input type="text" name="phone" required></div>
                     <div><label>Email</label><input type="text" name="email" required></div>

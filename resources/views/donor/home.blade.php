@@ -294,35 +294,32 @@
     <div class="container mt-5">
 
         <div class=" mt-5">
+
             <div class="row mt-5 mb-5">
                 <div class="col-md-4 ml-5">
-                    <img class="img-fluid" src="{{asset('assets/imgs/bblogo.jpg')}}" alt="...">
+                    <img class="img-fluid" src="{{asset('assets/imgs/bblogo.jpg')}}" alt="..." style="height: 300px;">
                 </div>
                 <div class="col-md-8">
-                    <h3 class="card-title mt-2">Benefit of Donating Blood</h3>
+                    <h3 class="card-title mt-2">የደም አይነቶች</h3>
                     <p class="card-text mb-4">
-                        The health benefits of donating blood are considerable—but of course, the most important part of the process is helping to save lives. Donating blood is good for you, and it's even better for all the people who desperately need the help.
-                        helping others can:<br>
-                    <ul>
-                        <li>reduce stress</li>
-                        <li>improve your emotional well-being</li>
-                        <li> benefit your physical health</li>
-                        <li>help get rid of negative feelings</li>
-                        <li> provide a sense of belonging and reduce isolation</li>
-                        <li>Research has found further evidence of the health benefits that come specifically from donating blood.</li>
-                    </ul>
-                    <br>
+                        የሰው ሕይወት ከተፀነሰበት ቀን ጀምሮ ደም የሕይወትን የመስጠትና የመንከባከብ ሚናውን ይወጣል። ደም የእድገት ፈሳሽ ነው, ምግብን ከምግብ መፈጨት እና ሆርሞኖችን ከሰውነት ውስጥ እጢ በማጓጓዝ.
+                        ደም የጤንነት ፈሳሽ ነው, በሽታን የሚዋጉ ንጥረ ነገሮችን ወደ ቲሹ እና የሰውነት ቆሻሻ ወደ ኩላሊት ማጓጓዝ.
+
+                        ሕያዋን ሴሎች ስላሉት ደም ሕያው ነው። ከተመረቱ መድሃኒቶች በተለየ ደም ሊመረት አይችልም. ጤናማ ለጋሾች ደም ለሚያስፈልጋቸው ሰዎች ብቸኛው የደም ምንጭ ናቸው.
+
+                        ለደም ለጋሾች ባይሆን ኖሮ ለሕይወት አስጊ የሆነ የደም ማነስ ችግር ላለባቸው ሕጻናት ሕይወት አድን ሕክምና፣ የአካል ጉዳት ሰለባዎች፣ ከእርግዝና ጋር የተያያዙ ችግሮች ላጋጠማቸው ሴቶች፣ የአካል ክፍሎች ንቅለ
+                        ተከላ፣ መቅኒ ንቅለ ተከላ፣ ውስብስብ የቀዶ ሕክምና ሂደቶች እና የካንሰር ሕክምናዎች አይቻሉም ነበር።
 
                     </p>
-                    <button class="mb-4" href="" style="float: right;">share </button>
+
 
                     <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fparse.com" target="_blank" rel="noopener">
                         <img class="YOUR_FB_CSS_STYLING_CLASS" src="{{asset('assets/imgs/fb2.png')}}" width="30px" height="30px" alt="Share on Facebook">
                     </a>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">464/4545/4545</small>
-                    <a href="" style="float: right;">Read more</a>
+                    <small class="text-muted"></small>
+                    <a href="{{url('/donor/blood')}}" style="float: right; text-decoration:none;">Read more</a>
                 </div>
             </div>
         </div>
@@ -333,9 +330,31 @@
             <div class="row mt-5 mb-5">
                 <div class="card col-md-8 ml-5">
                     <!-- <img class="img-fluid" src="{{asset('assets/imgs/c.jpg')}}" alt="..."> -->
-                    <h3 class="card-title mt-2">Why Donate Blood</h3>
+                    <h3 class="card-title mt-2">ለምን ደም ይለግሳሉ ??</h3>
+                    <h6><b>ደም መለገስ ህይወትን ለማዳን የሚረዳ ከራስ ወዳድነት ነፃ የሆነ ተግባር ነው። ደም የምትለግሱበት ምክንያቶች እነኚሁና።</b></h6>
+
                     <p class="card-text mb-4">
-                        There is no substitute for blood. Donors provide the only supply of life-saving blood for those in need. Donating is simple, fast, and convenient. The donation process can take as little as 45 minutes of your time, but can make a lifelong difference for someone else.
+                        1.<b>ሕይወት ለማዳን፡</b> ደም መለገስ በአካል ጉዳት፣ በህመም ወይም በቀዶ ሕክምና፣ በወሊድ ምክንያት ደም ለሚያስፈልጋቸው ሰዎች ደም በመስጠት ህይወትን ማዳን ያስችላል።
+                    <p class="card-text mb-4">
+                        2.<b>ለአደጋ ጊዜ እርዳታ፡ </b>ከፍተኛ መጠን ያለው ደም በፍጥነት በሚያስፈልግበት ጊዜ የደም ልገሳ በተለይ በድንገተኛ ጊዜ አስፈላጊ ነው።
+                    </p>
+                    <p class="card-text mb-4">
+                        3.<b>የእርስዎን ማህበረሰብ ለመደገፍ</b> ደም በመለገስ ለህብረተሰቡ ጤና እና ደህንነት አስተዋፅኦ ማድረግ እና የአካባቢ ሆስፒታሎች ህሙማንን ለማከም የሚያስፈልጋቸውን ደም እንዲያገኙ ማገዝ ይችላሉ።
+                    </p>
+                    <p class="card-text mb-4">
+                        4.<b>ለለጋሾች የጤና ጥቅሞች፡</b> ደም መለገስ ለለጋሾችም የጤና ጠቀሜታ ይኖረዋል፣ ለምሳሌ አንዳንድ የካንሰር እና የልብና የደም ቧንቧ በሽታዎችን ይቀንሳል ።
+                        ደም ከለገሱ በኋላ ሰውነትዎ የጠፋውን ደም ለመሙላት ይሠራል። ይህ አጠቃላይ ጤናዎን እና ደህንነትዎን የሚያሻሽሉ አዳዲስ የደም ሴሎች እንዲፈጠሩ ያነሳሳል።
+                    </p>
+                    <p class="card-text mb-4">
+                        5.<b>ቀላል እና ደህንነቱ የተጠበቀ ነው:</b> ደም የመለገስ ሂደት ቀላል እና ደህንነቱ የተጠበቀ ሲሆን የደም ልገሳ ማዕከላት ሰራተኞቻችን ልምዱ ያላቸው, በተቻለ መጠን ምቾት እና ህመም የሌለበት መሆኑን ለማረጋገጥ የሰለጠኑ ናቸው።
+                        ደም መለገስ ብዙውን ጊዜ ከአንድ ሰአት ያነሰ ጊዜ የሚወስድ ቀላል ሂደት ነው።
+                    </p>
+                    <p class="card-text mb-4">
+                        6.<b>ነፃ የጤና ምርመራ ያገኛሉ:</b> ደም ከመለገስዎ በፊት ፈጣን የጤና ምርመራ ይደረግልዎታል ይህም የደም ግፊትን, የብረት ደረጃዎችን እና ሌሎች የጤና መረጃወችን ያካትታል. ይህ ነፃ የጤና ምርመራ ሊከሰቱ የሚችሉ የጤና ችግሮችን ለመለየት ይረዳል።
+                    </p>
+
+                    <p class="card-text mb-4">
+                        ባጠቃላይ ደም መለገስ ለጋሹንም ሆነ ተቀባዩን ሊጠቅም የሚችል ጠቃሚ እና ህይወትን የሚያድን ተግባር ነው።
                     </p>
                 </div>
                 <div class="col-md-4">
@@ -350,7 +369,7 @@
                 </div>
                 <div class="card-footer">
                     <small class="text-muted"></small>
-                    <a href="" style="float: left;">Read more</a>
+                    <a href="" style="float: left;"></a>
                 </div>
             </div>
         </div>

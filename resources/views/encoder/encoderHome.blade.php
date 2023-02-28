@@ -340,15 +340,15 @@
 
 <body>
 
-    <hr>
-    <!-- ======================= Cards ================== -->
 
+    <!-- ======================= Total blood Availability ================== -->
     <div class="grey-bg container-fluid">
+
         <section id="minimal-statistics">
 
             <div class="row">
                 <div class="col-12 mt-3 mb-1">
-                    <h4 class="text-uppercase">Total Blood Stored In Each Type</h4>
+                    <h4 class="text-uppercase">Total Blood Stored</h4>
                     <p></p>
                 </div>
             </div>
@@ -366,7 +366,7 @@
                                         <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
                                         <a href="#">
                                             <h1>A-</h1>
-                                            <h3>5</h3>
+                                            <h3>{{$aminus}}</h3>
 
                                         </a>
                                     </div>
@@ -386,7 +386,7 @@
                                     <div class="media-body text-right">
                                         <img style="width: 130px; height:100px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
                                         <h1>A+</h1>
-                                        <h3>8</h3>
+                                        <h3>{{$aplus}}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -404,7 +404,7 @@
                                     <div class="media-body text-right">
                                         <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
                                         <h1>B-</h1>
-                                        <h3>8</h3>
+                                        <h3>{{$bminus}}</h3>
 
                                     </div>
                                 </div>
@@ -423,7 +423,7 @@
                                     <div class="media-body text-right">
                                         <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
                                         <h1>B+</h1>
-                                        <h3>78</h3>
+                                        <h3>{{$bplus}}</h3>
 
                                     </div>
                                 </div>
@@ -443,7 +443,7 @@
                                     <div class="media-body text-left">
                                         <img style="width: 100px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
                                         <h1>AB-</h1>
-                                        <h3>5</h3>
+                                        <h3>{{$abminus}}</h3>
 
                                     </div>
                                     <div class="align-self-center">
@@ -462,7 +462,7 @@
                                     <div class="media-body text-left">
                                         <img style="width: 100px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
                                         <h1>AB+</h1>
-                                        <h3>7</h3>
+                                        <h3>{{$abplus}}</h3>
 
                                     </div>
                                     <div class="align-self-center">
@@ -482,7 +482,7 @@
                                     <div class="media-body text-left">
                                         <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
                                         <h1>O-</h1>
-                                        <h3>7</h3>
+                                        <h3>{{$ominus}}</h3>
 
                                     </div>
                                     <div class="align-self-center">
@@ -501,7 +501,7 @@
                                     <div class="media-body text-left">
                                         <img style="width: 120px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
                                         <h1>O+</h1>
-                                        <h3>7</h3>
+                                        <h3>{{$oplus}}</h3>
 
                                     </div>
                                     <div class="align-self-center">
@@ -513,60 +513,8 @@
                     </div>
                 </div>
             </div>
-
-
         </section>
 
-    </div>
-
-    <!-- ================ Order Details List ================= -->
-    <div class="details">
-        <div class="recentOrders">
-            <div class="cardHeader">
-                <h2>Blood Storage</h2>
-                <a href="{{url('technitian/viewstoredblood')}}" class="btn">View All</a>
-            </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <td>Blood Group</td>
-                        <td>Volume</td>
-                        <td>Duration</td>
-                        <td>Status</td>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <tr>
-                        <td>t</td>
-                        <td>tyy</td>
-                        <td scope="row">tftyDays ago</td>
-                        <td>tf</td>
-                    </tr>
-
-                </tbody>
-            </table>
-
-        </div>
-
-        <!-- ================= New Customers ================ -->
-        <div class="recentCustomers">
-            <div class="cardHeader">
-                <h4>Recent Added</h4>
-            </div>
-
-            <table>
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx"><img src="{{asset('assets/imgs/11.jpg')}}" alt=""></div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
-            </table>
-        </div>
     </div>
 </body>
 

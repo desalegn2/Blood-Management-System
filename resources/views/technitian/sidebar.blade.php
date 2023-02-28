@@ -297,14 +297,14 @@
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="{{url('/technitian/discardblood')}}">
                         <span class="icon">
                             <ion-icon name="bag-remove-outline"></ion-icon>
                         </span>
                         <span class="title">Discard Blood</span>
                     </a>
-                </li>
+                </li> -->
 
                 <li>
                     <a href="{{url('/technitian/test')}}">
@@ -336,7 +336,7 @@
                         <span class="icon">
                             <ion-icon name="bag-handle-outline"></ion-icon></ion-icon>
                         </span>
-                        <span class="title">Handling</span>
+                        <span class="title">Rules</span>
                     </a>
                 </li>
 

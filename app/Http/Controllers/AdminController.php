@@ -18,9 +18,21 @@ use App\Models\feedbackModel;
 
 class AdminController extends Controller
 {
+    public function searchUser(Request $req)
+    {
+        $a = $req->user;
+        $members = User::where('role', $a)->paginate(10);
+
+        return view('admin.manageuser', compact('members'));
+    }
+    public function getUser()
+    {
+        $members = User::paginate(5);
+        return view('admin.manageuser', compact('members'));
+    }
+
     public function imgup()
     {
-
         //$members = User::where('role', '1')->get();
         return view('admin.imageup');
     }

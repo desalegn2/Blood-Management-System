@@ -74,15 +74,20 @@
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" name="volume" id="firstName" value="{{$data->volume}}" class="form-control form-control-lg" />
+                                            <input type="text" name="volume" id="firstName" value="{{$data->volume}}" class="form-control form-control-lg" readonly />
                                             <label class="form-label" for="firstName">Volume in ML</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form-outline">
-                                            <input type="text" name="packno" id="" value="{{$data->packno}}" class="form-control form-control-lg" />
+                                            <input type="text" name="packno" id="" value="{{$data->packno}}" class="form-control form-control-lg" readonly />
                                             <label class="form-label" for="firstName">Pack Number</label>
+                                            <div style="color: red;">
+                                                @error('packno')
+                                                <strong>{{ $message }}</strong>
+                                                @enderror
+                                            </div>
                                         </div>
 
                                     </div>

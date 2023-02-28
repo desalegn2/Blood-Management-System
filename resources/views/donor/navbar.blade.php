@@ -69,7 +69,8 @@
         }
 
         .navigation-menu a:hover {
-            background: #273b91;
+            /* background: #273b91; */
+            text-decoration: none;
             color: #fff;
             transform: scale(1.1);
         }
@@ -163,6 +164,9 @@
 
                 <i class="menu-toggle-btn fas fa-bars"></i>
                 <nav class="navigation-menu">
+                    <a href="{{url('/donor/profile',Auth::user()->id)}}" class="aj_btn">
+                        {{ Auth::user()->name }}
+                    </a>
                     <a href="{{url('/donor/home')}}">Home</a>
                     <a href="{{url('/donor/news')}}"></i> News</a>
                     <a href="{{url('/donor/information')}}"></i> Blood Bank Information</a>
@@ -172,7 +176,7 @@
                     <a href="{{url('/donor/reservationform')}}"></i> Reservation</a>
                     <a href="{{url('/donor/reservationhistory',Auth::user()->id)}}"></i> Reservation Status</a>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();" class="aj_btn"> <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                                     document.getElementById('logout-form').submit();"> <i class="fa fa-sign-out" aria-hidden="true"></i>
 
                         Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

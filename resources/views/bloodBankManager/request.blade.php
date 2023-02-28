@@ -187,7 +187,7 @@
                     <th>Volume</th>
                     <th>Date</th>
                     <th>Status</th>
-                    <th>mark as read</th>
+
                     <th>Availability</th>
                     <th>Availability</th>
                     <th>Action</th>
@@ -201,7 +201,7 @@
                     <td>{{$dis->volume}}</td>
                     <td>{{$dis->date}}</td>
                     <td>{{$dis->status}}</td>
-                    <td> <a href="{{url('bbmanager/read', $dis->id)}}" class="btn btn-info"><i class='fa fa-edit'></i></a></td>
+
                     <td>
                         <a href="{{url('bbmanager/approve', $dis->id)}}" class="btn btn-primary"><i class='fa fa-edit'></i> Approve</a>
 

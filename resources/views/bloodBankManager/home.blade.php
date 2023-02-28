@@ -562,19 +562,7 @@
             <div class="cardHeader">
                 <h2>Recent Donor Joined</h2>
             </div>
-            @foreach($stats as $stat)
-            <table>
 
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx"><img src="{{asset('uploads/registers/'.$stat->photo)}}" alt=""></div>
-                    </td>
-                    <td>
-                        <h4>{{$dis->fullname}} <br> <span>{{$dis->city}}</span></h4>
-                    </td>
-                </tr>
-            </table>
-            @endforeach
         </div>
     </div>
 </body>

@@ -7,6 +7,8 @@ use App\Models\addBloodModel;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\enrollementModel;
+use App\Models\discardBloodModel;
+use App\Models\distributeBloodModel;
 
 class encoderController extends Controller
 {
@@ -23,7 +25,11 @@ class encoderController extends Controller
         return view('encoder.add', ['data' => $data]);
     }
     function addblood(Request $req)
+
     {
+        $req->validate([
+            'packno' => ['required', 'unique:storeblood'],
+        ]);
         $var = new addBloodModel;
 
         $var->user_id = $req->user_id;
@@ -96,5 +102,20 @@ class encoderController extends Controller
         } else {
             return redirect()->back()->with('warnig', 'password not match with old!');
         }
+    }
+    function viewblood()
+    {
+        $aplus = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
+        $aminus = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
+        $oplus = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
+        $ominus = addBloodModel::where('bloodgroup', 'O-')->sum('volume');
+        $bplus = addBloodModel::where('bloodgroup', 'B+')->sum('volume');
+        $bminus = addBloodModel::where('bloodgroup', 'B-')->sum('volume');
+        $abplus = addBloodModel::where('bloodgroup', 'AB+')->sum('volume');
+        $abminus = addBloodModel::where('bloodgroup', 'AB-')->sum('volume');
+
+
+
+        return view('encoder.encoderHome', compact('aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
 }

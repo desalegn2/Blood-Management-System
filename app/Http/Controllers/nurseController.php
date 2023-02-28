@@ -12,6 +12,7 @@ use App\Models\reservationModel;
 use App\Models\donorRequestModel;
 use Illuminate\Support\Facades\Hash;
 use App\Models\enrollementModel;
+
 use \Notification;
 use PDF;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -169,6 +170,7 @@ class nurseController extends Controller
     {
         $var = new enrollementModel;
         $var->user_id = $req->user_id;
+        $var->nursename = $req->nursename;
         $var->fullname = $req->fullname;
         $var->packno = $req->packno;
         $var->occupation = $req->occupation;
@@ -180,7 +182,7 @@ class nurseController extends Controller
         $var->remark = $req->remark;
         $var->weight = $req->weight;
         $var->height = $req->height;
-        $var->bithdate = $req->birthdate;
+        $var->age = $req->age;
         $var->state = $req->state;
         $var->city = $req->city;
         $var->zone = $req->zone;
@@ -222,9 +224,21 @@ class nurseController extends Controller
     }
     function notifys()
     {
-        $var = enrollementModel::all();
+        $date = \Carbon\Carbon::today()->subDays(15);
+        $var = enrollementModel::where('created_at', '<=', $date)->get();
+
+        //  $var = enrollementModel::all();
         return view('nurse.notify', ['donors' => $var]);
     }
+
+    function DaystoNotify(Request $req)
+    {
+        $date = $req->date;
+        $lengthof_date = \Carbon\Carbon::today()->subDays($date);
+        $var = enrollementModel::where('created_at', '<=', $lengthof_date)->get();
+        return view('nurse.notify', ['donors' => $var]);
+    }
+
     public function sendnotification($id)
     {
         $details = [
@@ -251,5 +265,12 @@ class nurseController extends Controller
     {
         $pdf = PDF::loadView('nurse.viewDonor');
         return $pdf->download('demo.pdf');
+    }
+
+    public function search_donors(Request $req)
+    {
+        $a = $req->bloodtype;
+        $data = addBloodModel::where('bloodgroup', $a)->paginate(5);
+        return view('nurse.searchDonor', compact('data'));
     }
 }

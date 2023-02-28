@@ -337,14 +337,21 @@
 <body>
 
 
-    <!-- ======================= Cards ================== -->
+    <!-- ======================= body ================== -->
 
+    <form action="{{url('/nurse/donorbybloodtype')}}" method="post">
+        @csrf
+        <div style="float: right;">
+            Search Donor by Blood Type <input type="text" name="bloodtype" style="width: 200px;" placeholder="enter blood group" required>
+            <input type="submit" value="Search" style="width: 50px;">
+        </div>
+    </form>
 
-
+    <br><br><br>
     <div class="grey-bg container-fluid">
 
-
         <section id="minimal-statistics">
+
 
             <div class="row">
                 <div class="col-12 mt-3 mb-1">
@@ -550,7 +557,7 @@
                                     </div>
                                     <div class="media-body">
                                         <h4>Total Enrolled</h4>
-                                        <span>Monthly blog comments</span>
+                                        <span>Person who Give Blood</span>
                                     </div>
                                     <div class="align-self-center">
                                         <h1>{{$donors_enrolled}}</h1>
@@ -626,7 +633,7 @@
                         <div class="imgBx"><img src="{{asset('uploads/registers/'.$stat->photo)}}" alt=""></div>
                     </td>
                     <td>
-                        <h4>{{$dis->name}} <br> <span>{{$dis->city}}</span></h4>
+                        <h4>{{$stat->name}} <br> <span>{{$stat->city}}</span></h4>
                     </td>
                 </tr>
             </table>

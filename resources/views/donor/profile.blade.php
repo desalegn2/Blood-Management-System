@@ -96,8 +96,8 @@
 
                                     <div class="mt-3">
                                         <h4> {{$dataprofil->nursename}}</h4>
-                                        <p class="text-secondary mb-1">Full Stack Developer</p>
-                                        <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                        <p class="text-secondary mb-1">Donor</p>
+                                        <p class="text-muted font-size-sm"></p>
 
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
                                     </div>
 
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="file" name="photo">
+                                        <input type="file" name="photo" required>
                                         <input type="submit" value="save">
                                     </div>
                                 </div>
@@ -187,6 +187,41 @@
                 </div>
                 </form>
                 @endforeach
+            </div>
+        </div>
+    </div>
+
+    <!-- change password Modal -->
+    <div class="modal fade" id="addnew" tabindex="-1" aria-labelledby="addnewModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addnewModalLabel">Change password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {!! Form::open(['url' => 'donor/changepassword']) !!}
+                    <div class="mb-3">
+                        {!! Form::label('oldpassword', 'Old Password') !!}
+                        {{ Form::password('password', array('name' => 'oldpassword', "class" => "form-control" ,"placeholder" =>"enter new password")) }}
+
+                    </div>
+                    <div class="mb-3">
+                        {!! Form::label('newpassword', 'New Password') !!}
+                        {{ Form::password('password', array('name' => 'password', "class" => "form-control", "placeholder" =>"enter new password")) }}
+
+                    </div>
+                    <div class="mb-3">
+                        {!! Form::label('confirmnewpassword', ' Confirm New Password') !!}
+                        {{ Form::password('password', array('name' => 'password_confirmation', "class" => "form-control", "placeholder" =>"confirm new password")) }}
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Change</button>
+                    {!! Form::close() !!}
+                </div>
             </div>
         </div>
     </div>

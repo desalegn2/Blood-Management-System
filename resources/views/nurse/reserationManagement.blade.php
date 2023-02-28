@@ -179,7 +179,7 @@
     <div id="page-wrap">
         <a href="{{ URL::previous() }}" class="btn btn-primary btn-sm float-end">Back</a>
 
-        <h1>Donors Who send request</h1>
+        <h1>Donors Who send reservation</h1>
         <table>
             <thead>
                 <tr>

@@ -12,9 +12,35 @@ use App\Models\hospitalPosts;
 use App\Models\donorProfile;
 use App\Models\feedbackModel;
 use App\Models\bbinformatiomModel;
+use App\Http\Requests\CreateaccountRequest;
+use Illuminate\Support\Facades\Hash;
 
 class donorController extends Controller
 {
+    function createAccount(Request $req)
+    {
+
+        $req->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'role' => ['required', 'int', 'max:5'],
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+        if ($req->hasfile('photo')) {
+            $file = $req->file('photo');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('uploads/registers', $filename);
+        }
+        $var = new User;
+        $var->photo = $req->hasfile('photo') ? $filename : '0.png';
+        $var->name = $req->name;
+        $var->email = $req->email;
+        $var->password = Hash::make($req->password);
+        $var->role = $req->role;
+        $var->save();
+        return redirect('login')->with('success', 'register Successfully!');
+    }
 
     function getAdvertise()
     {
@@ -220,6 +246,25 @@ class donorController extends Controller
             ->update(["photo" => $filename]);
         return redirect()->back()->with('success', 'your Image,Changed');
     }
+    function changepassword(Request $req)
+    {
+        # Validation
+        $req->validate([
+            'oldpassword' => ['required', 'string', 'min:8'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        $currentPasswordStatus = Hash::check($req->oldpassword, auth()->user()->password);
+        if ($currentPasswordStatus) {
+
+            User::findOrFail(auth()->user()->id)->update([
+                'password' => Hash::make($req->password)
+            ]);
+            return redirect()->back()->with('success', 'password changed Successfully!');
+        } else {
+            return redirect()->back()->with('warnig', 'password not match with old!');
+        }
+    }
+
     function feedbacks()
     {
         return view('donor.feedback');

@@ -179,9 +179,17 @@
 <body>
 
     <div id="page-wrap">
+        <h1>Donors Who Donate Before</h1>
         <a class="btn btn-success" href="{{url('nurse/home')}}">Home</a>
+        <form action="{{url('/nurse/datetonotify')}}" method="post">
+            @csrf
+            <div style="float: right;">
+                <b>How Many Days Ago You Notify ?</b><input type="text" name="date" style="width: 200px;" placeholder="enter length of days" required>
+                <input type="submit" value="Enter" style="width: 50px;">
+            </div>
+        </form>
+        <br><br>
 
-        <h1>Donors Who Donare 3 Month Ago</h1>
         <p></p>
         <table>
             <thead>
@@ -198,10 +206,9 @@
                 </tr>
             </thead>
             <tbody>
+                @if(count($donors))
                 @foreach ($donors as $donor)
-                @for($i=$donor->created_at->diffInMinutes(\Carbon\Carbon::now());$i>=5;$i--)
                 <tr>
-
                     <td>
                         <img src="{{asset('uploads/registers/'.$donor->photo)}}" width="80" height="80">
                     </td>
@@ -210,7 +217,7 @@
                     <td>{{$donor->phone}}</td>
                     <td>{{$donor->bloodtype}}</td>
                     <td>{{$donor->status}}</td>
-                    <td>{{ $donor->created_at->diffInMinutes(\Carbon\Carbon::now()) }} min ago</td>
+                    <td>{{ $donor->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
                     <td>
                         <a class="btn btn-success" href="{{url('nurse/send', $donor->id)}}">Notify By Email</a>
                     </td>
@@ -218,9 +225,12 @@
                         <a href="#delete{{$donor->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</a>
                     </td>
                 </tr>
-                @break
-                @endfor
                 @endforeach
+                @else
+                <tr>
+                    <td>No Donor with This Length of Date</td>
+                </tr>
+                @endif
             </tbody>
         </table>
 

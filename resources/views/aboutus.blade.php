@@ -69,7 +69,6 @@
         }
 
         .navigation-menu a:hover {
-            background: #273b91;
             color: #fff;
             transform: scale(1.1);
         }
@@ -92,7 +91,7 @@
 
         a.aj_btn:hover {
             background: #fff;
-            color: #273b91;
+
             font-weight: 500;
             letter-spacing: 2px;
         }
@@ -372,10 +371,10 @@
             position: absolute;
             bottom: 16px;
             z-index: 1;
-            background: red;
+            background: green;
             padding: 10px 15px;
             left: 96px;
-            width: calc(100% - 152px);
+            width: calc(60% - 152px);
             border-radius: 50px;
         }
 
@@ -454,6 +453,10 @@
             background-color: #191e34;
             color: #191e34;
         }
+
+        .class1 {
+            padding: 50px 30px;
+        }
     </style>
 </head>
 
@@ -468,9 +471,6 @@
                 <i class="menu-toggle-btn fas fa-bars"></i>
                 <nav class="navigation-menu">
                     <a href="/">Home</a>
-                    <a href="{{ route('login') }}"></i> Login</a>
-                    <a href="{{ route('register') }}"></i>Create Account</a>
-                    <a href=""></i>About Us</a>
                 </nav>
             </div>
         </header>
@@ -521,25 +521,27 @@
                     </div>
 
                 </div>
-                <div class="sec-title">
-                    <span class="title">Mission</span>
+                <div class="class1">
+                    <div class="sec-title">
+                        <span class="title">Mission</span>
 
-                </div>
-                <div class="text">
-                    የባህር ዳር ደም ባንክ አገልግሎት ተልዕኮ ለሁሉም ህሙማን በቂ፣ ደህንነቱ የተጠበቀ፣ ጥራት<br>
-                    ያለው የደም ምርት እና ደም ከመውሰድ ጋር የተያያዙ የህክምና አገልግሎቶችን ፍትሃዊ፣ ወጪ<br>
-                    ቆጣቢ በሆነ መንገድ ማቅረብ ነው።
-                </div>
+                    </div>
+                    <div class="text">
+                        የባህር ዳር ደም ባንክ አገልግሎት ተልዕኮ ለሁሉም ህሙማን በቂ፣ ደህንነቱ የተጠበቀ፣ ጥራት<br>
+                        ያለው የደም ምርት እና ደም ከመውሰድ ጋር የተያያዙ የህክምና አገልግሎቶችን ፍትሃዊ፣ ወጪ<br>
+                        ቆጣቢ በሆነ መንገድ ማቅረብ ነው።
+                    </div>
 
-                <div class="sec-title">
-                    <span class="title">Vision</span>
+                    <div class="sec-title">
+                        <span class="title">Vision</span>
 
-                </div>
-                <div class="text">
-                    በህይወት ስጦታው በኢትዮጵያ የጤና አገልግሎት የማዕዘን ድንጋይ ለመሆን።
-                </div>
-                <div>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.4225642360157!2d37.38063771447331!3d11.593192846756851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1644cfdc6cf0c047%3A0x287c29bd91e8e341!2sBahir%20Dar%20Blood%20Bank!5e0!3m2!1sen!2snl!4v1677426336759!5m2!1sen!2snl" width="900" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="text">
+                        በህይወት ስጦታው በኢትዮጵያ የጤና አገልግሎት የማዕዘን ድንጋይ ለመሆን።
+                    </div>
+                    <div>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.4225642360157!2d37.38063771447331!3d11.593192846756851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1644cfdc6cf0c047%3A0x287c29bd91e8e341!2sBahir%20Dar%20Blood%20Bank!5e0!3m2!1sen!2snl!4v1677426336759!5m2!1sen!2snl" width="900" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
                 </div>
             </div>
         </section>

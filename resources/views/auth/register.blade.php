@@ -53,7 +53,7 @@
                                         <h4 class="mt-1 mb-5 pb-1">Bahir Dar Blood Bank</h4>
                                     </div>
 
-                                    <form action="{{ route('register') }}" method="post" enctype=" multipart/form-data">
+                                    <form action="{{url('create')}}" method="post" enctype=" multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="role" class="form-control" value="1" required>
                                         <input type="hidden" name="photo" class="form-control" value="0.png" required>

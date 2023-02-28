@@ -12,6 +12,7 @@ class enrollementModel extends Model
     public $table = "enrolldonor";
     protected $fillable = [
         'user_id',
+        'nursename',
         'fullname',
         'packno',
         'occupation',
@@ -26,7 +27,7 @@ class enrollementModel extends Model
         'weight',
         'height',
 
-        'bithdate',
+        'age',
         'state',
         'city',
         'zone',

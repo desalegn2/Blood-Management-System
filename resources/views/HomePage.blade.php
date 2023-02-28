@@ -129,7 +129,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">BBBMS</a>
+            <a class="navbar-brand" href="#">BAHIR DAR BLOOD BANK</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -146,7 +146,7 @@
                         <a class="nav-link" href="{{ route('login') }}"><b>Login</b></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}"><b>Create Account</b></a>
+                        <a class="nav-link" href="create_account"><b>Create Account</b></a>
                     </li>
                 </ul>
             </div>
@@ -191,14 +191,6 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-
-    <!--- ignore the code below-->
-
-    <div class="link-area">
-        <a href="https://www.youtube.com/channel/UCki4IDK86E6_pDtptmsslow" target="_blank">Click for More</a>
-    </div>
-
-
 </body>
 
 </html>

@@ -145,12 +145,13 @@
             padding-bottom: 20px;
             position: relative;
             color: green; 
-            margin-top: 20px;">name</h2>
+            margin-top: 20px;">These Person The Need Help Of Donor </h2>
                 <div class="underline" style="width: 150px;
             height: 1px;
             background-color: black;
             margin: auto;"></div>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. !</p>
+
+                <p></p>
             </div>
             <div class="row">
                 <!-- one card -->
@@ -209,9 +210,6 @@
 
                             </div>
                             <div class="card-footer">
-
-                                <button class="text-muted">send sms</button>
-                                <button href="" style="float: right;">contact</button>
                             </div>
 
                         </div>

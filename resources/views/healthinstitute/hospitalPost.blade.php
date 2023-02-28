@@ -259,6 +259,7 @@
     <div class="main-block">
         <form action="post_seeker" method="post" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="hospital" value="{{ Auth::user()->name }}" required>
             <h1>Blood Request Form</h1>
             <fieldset>
                 <legend>
@@ -326,25 +327,15 @@
                                 <option value="A+">A+</A></option>
                                 <option value="A-">A-</option>
                                 <option value="B+">B+</option>
+                                <option value="B-">B-</option>
                                 <option value="AB+">AB+</option>
                                 <option value="AB-">AB-</option>
                                 <option value="O+">O+</option>
-                                <option value="O-">O+</option>
+                                <option value="O-">O-</option>
                             </select>
                         </div>
                         <div><label>How Many Unit You Need</label><input type="text" name="amount"></div>
-                        <div>
-                            <label>Which Hospital do you Want to Get Blood</label>
-                            <select name="hospital">
-                                <option value="Felege">Felege</option>
-                                <option value="adama">adama</option>
-                                <option value="fhkhfz">fhkhfz</option>
-                                <option value="uyuiay">uyuiay</option>
-                                <option value="ljakdaHS">ljakdaHS</option>
-                                <option value="buyai">buyai</option>
-                                <option value="tiytat">tiytat</option>
-                            </select>
-                        </div>
+
                     </div>
                     <div>
 

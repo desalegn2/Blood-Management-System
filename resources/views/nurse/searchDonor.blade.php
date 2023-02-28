@@ -188,7 +188,6 @@
         <table>
             <thead>
                 <tr>
-                    <th>photo</th>
                     <th>First Name</th>
                     <th>email</th>
                     <th>Phone</th>
@@ -199,9 +198,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($aminusdonors as $donor)
+                @if(count($data))
+                @foreach ($data as $donor)
                 <tr>
-                    <td><img src="{{asset('uploads/registers/'.$donor->photo)}}" width="80" height="80"></td>
                     <td>{{$donor->name}}</td>
                     <td>{{$donor->email}}</td>
                     <td>{{$donor->phone}}</td>
@@ -214,10 +213,13 @@
                     </td>
                 </tr>
                 @endforeach
+                @else
+                <tr>
+                    <td>There is No Donor with This Blood Type</td>
+                </tr>
+                @endif
             </tbody>
         </table>
-
-
     </div>
 </body>
 

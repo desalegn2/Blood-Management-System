@@ -16,6 +16,13 @@
     <div class="container">
         <h1 class="page-header text-center"></h1>
         <div class="row">
+            <form action="{{url('/admin/search_user')}}" method="post">
+                @csrf
+                <div style="float: right;">
+                    <input type="text" name="user" style="width: 200px;" placeholder="enter user type" required>
+                    <input type="submit" value="Search">
+                </div>
+            </form>
             <div class="col-md-12 col-md-offset-1">
                 <h2> <a href="home" class="btn btn-primary btn-block">{{ __('Back') }}</a>
                     Manage Nurse

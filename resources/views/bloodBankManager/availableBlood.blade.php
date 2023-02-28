@@ -175,7 +175,7 @@
 
     <div id="page-wrap">
 
-        <h1>Incoming Blood Request</h1>
+        <h1>Distribute</h1>
         <a class="btn btn-success" href="{{ url()->previous() }}">Home</a>
         <table>
             <thead>

@@ -187,7 +187,7 @@
 <body>
 
 
-    <!-- ======================= Cards ================== -->
+    <!-- ======================= Total blood Availability ================== -->
     <div class="grey-bg container-fluid">
         <section id="minimal-statistics">
 

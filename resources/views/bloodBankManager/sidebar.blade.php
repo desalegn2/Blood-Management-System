@@ -312,7 +312,7 @@
                         <span class="icon">
                             <ion-icon name="bag-remove-outline"></ion-icon>
                         </span>
-                        <span class="title">Available Blood</span>
+                        <span class="title">Distribute Blood</span>
                     </a>
                 </li>
 

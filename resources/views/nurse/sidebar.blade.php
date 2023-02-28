@@ -321,7 +321,7 @@
                 <li>
                     <a href="{{url('/nurse/enroll')}}">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="person-add-outline"></ion-icon>
                         </span>
                         <span class="title">Enroll Donor</span>
                     </a>
@@ -329,7 +329,7 @@
                 <li>
                     <a href="{{url('/nurse/display')}}">
                         <span class="icon">
-                            <ion-icon name="dice-sharp"></ion-icon>
+                            <ion-icon name="people-circle-outline"></ion-icon>
                         </span>
                         <span class="title">Manage Donor</span>
                     </a>

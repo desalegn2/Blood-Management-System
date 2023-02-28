@@ -271,13 +271,7 @@
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required>
                         <div>
                             <label>Hospital Name</label>
-                            <select name="hospital">
-                                <option value="abayhospital">abayhospital</option>
-                                <option value="felege">felege</option>
-                                <option value="ganbi">ganbi</option>
-                                <option value="gion">gion</option>
-                            </select>
-
+                            <input type="text" name="hospital" value="{{ Auth::user()->name }}" readonly required>
                         </div>
                         <div><label>Date you want</label><input type="date" name="date" placeholder="date" required></div>
                         <div><label>Email</label><input type="email" name="email" placeholder="email" required></div>

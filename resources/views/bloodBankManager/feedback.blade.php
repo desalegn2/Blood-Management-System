@@ -137,9 +137,9 @@
     <section class="team">
         <div class="container">
             <div class="section-title">
-                <h2>name</h2>
-                <div class="underline"></div>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. !</p>
+                <h2>Feedback</h2>
+                <div class=""></div>
+                <p></p>
             </div>
             <div class="row">
                 <!-- one card -->
@@ -157,10 +157,10 @@
                             <h2><a href="#">{{$view->name}}</a> </h2>
                             <h4>{{ $view->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</h4>
                             <h5>{{$view->email}}</h5>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisic</p>
+                            <p>{{$view->feedback}}</p>
                             <div class="card-footer">
                                 <small class="text-muted">{{ $view->created_at}}</small>
-                                <a href="{{url('bbmanager/deletefeedback')}}" style="float:right;">Delete</a>
+                                <a href="{{url('bbmanager/deletefeedback',$view->id)}}" style="float:right;">Delete</a>
                             </div>
                         </div>
                     </div>

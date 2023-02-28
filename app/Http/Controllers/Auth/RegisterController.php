@@ -72,7 +72,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        Redirect::setIntendedUrl(url()->previous());
+        //Redirect::setIntendedUrl(url()->previous());
         // if ($data->hasfile('photo')) {
         //     $file = $data->file('photo');
         //     $extention = $file->getClientOriginalExtension();
@@ -87,6 +87,6 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'role' => $data['role'],
         ]);
-        return redirect()->intended(RouteServiceProvider::HOME)->with('data', 'Please Wait Untill You Are Approved By Admin Of System');
+        return redirect()->login();
     }
 }

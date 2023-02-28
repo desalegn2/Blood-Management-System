@@ -17,6 +17,8 @@ class techController extends Controller
     {
 
 
+
+
         $aplus_stored = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
         $aminus_stored = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
         $oplus_stored = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
@@ -158,7 +160,6 @@ class techController extends Controller
         $dist = hospitalRequestModel::all()->where('readat', '=', 'unread');
         return view('technitian.distributeToHospital', ['dist' => $dist]);
     }
-
 
     function saveddistribute(Request $req)
     {
@@ -329,13 +330,20 @@ class techController extends Controller
         return redirect()->back();
     }
 
-    function discards($id)
+    function discards(Request $req, $id)
     {
-        $data = enrollementModel::find($id);
+        $var = new discardBloodModel;
+        $var->user_id = $req->user_id;
+        $var->bloodGroup = $req->bloodtype;
+        $var->unitdiscarded = $req->volume;
+        $var->reason = $req->reason;
+        $var->save();
+        if ($var) {
 
-        $data->status = "discard";
-        $data->save();
-        return redirect()->back();
+            $data = enrollementModel::find($id);
+            $data->delete();
+            return redirect()->back();
+        }
     }
     function addblood(Request $req)
     {
@@ -370,15 +378,20 @@ class techController extends Controller
         return view('technitian.viewStoredBlood', ['dist' => $dist]);
     }
 
-    function filldiscard(Request $req)
+    function filldiscard(Request $req, $id)
     {
         $var = new discardBloodModel;
         $var->user_id = $req->user_id;
-        $var->bloodgroup = $req->bloodgroup;
+        $var->bloodGroup = $req->bloodtype;
         $var->unitdiscarded = $req->volume;
         $var->reason = $req->reason;
         $var->save();
-        return redirect('technitian/viewstoredblood')->with('success', 'Task Added Successfully!');
+        if ($var) {
+            $data = addBloodModel::find($id);
+            $data->delete();
+            return redirect()->back()->with('success', 'Task Added Successfully!');
+        }
+        //return redirect('technitian/viewstoredblood')->with('success', 'Task Added Successfully!');
     }
     function read($id)
     {
@@ -403,43 +416,14 @@ class techController extends Controller
 
         $date = \Carbon\Carbon::today()->subDays(1);
         $notification = addBloodModel::where('created_at', '<=', $date)->count();
-
-        $aplus_stored = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
-        $aminus_stored = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
-        $oplus_stored = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
-        $ominus_stored = addBloodModel::where('bloodgroup', 'O-')->sum('volume');
-        $bplus_stored = addBloodModel::where('bloodgroup', 'B+')->sum('volume');
-        $bminus_stored = addBloodModel::where('bloodgroup', 'B-')->sum('volume');
-        $abplus_stored = addBloodModel::where('bloodgroup', 'AB+')->sum('volume');
-        $abminu_stored = addBloodModel::where('bloodgroup', 'AB-')->sum('volume');
-
-        $aplusdiscard = discardBloodModel::where('bloodgroup', 'A+')->sum('unitdiscarded');
-        $aminudiscard = discardBloodModel::where('bloodgroup', 'A-')->sum('unitdiscarded');
-        $bplusdiscard = discardBloodModel::where('bloodgroup', 'B+')->sum('unitdiscarded');
-        $bminusdiscard = discardBloodModel::where('bloodgroup', 'B-')->sum('unitdiscarded');
-        $abplusdiscard = discardBloodModel::where('bloodgroup', 'AB+')->sum('unitdiscarded');
-        $abminudiscard = discardBloodModel::where('bloodgroup', 'AB-')->sum('unitdiscarded');
-        $oplusdiscard = discardBloodModel::where('bloodgroup', 'O+')->sum('unitdiscarded');
-        $ominusdiscard = discardBloodModel::where('bloodgroup', 'O-')->sum('unitdiscarded');
-
-        $aplusdistribute = distributeBloodModel::where('bloodgroup', 'A+')->sum('volume');
-        $aminusdistribute = distributeBloodModel::where('bloodgroup', 'A-')->sum('volume');
-        $bplusdistribute = distributeBloodModel::where('bloodgroup', 'B+')->sum('volume');
-        $bminusdistribute = distributeBloodModel::where('bloodgroup', 'B-')->sum('volume');
-        $abplusdistribute = distributeBloodModel::where('bloodgroup', 'AB+')->sum('volume');
-        $abminusdistribute = distributeBloodModel::where('bloodgroup', 'AB-')->sum('volume');
-        $oplusdistribute = distributeBloodModel::where('bloodgroup', 'O+')->sum('volume');
-        $ominusdistribute = distributeBloodModel::where('bloodgroup', 'O-')->sum('volume');
-        //$total = $aplus + $aminus + $oplus + $ominus + $bplus + $bminus + $abplus + $abminus;
-        $aplus = $aplus_stored - $aplusdiscard - $aplusdistribute;
-        $aminus = $aminus_stored - $aminudiscard - $aminusdistribute;
-        $bplus = $bplus_stored - $bplusdiscard - $bplusdistribute;
-        $bminus = $bminus_stored - $bminusdiscard - $bminusdistribute;
-        $abplus = $abplus_stored - $abplusdiscard - $abplusdistribute;
-        $abminus = $abminu_stored - $abminudiscard - $abminusdistribute;
-        $oplus = $oplus_stored - $oplusdiscard - $oplusdistribute;
-        $ominus = $ominus_stored - $ominusdiscard - $ominusdistribute;
-
+        $aplus = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
+        $aminus = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
+        $oplus = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
+        $ominus = addBloodModel::where('bloodgroup', 'O-')->sum('volume');
+        $bplus = addBloodModel::where('bloodgroup', 'B+')->sum('volume');
+        $bminus = addBloodModel::where('bloodgroup', 'B-')->sum('volume');
+        $abplus = addBloodModel::where('bloodgroup', 'AB+')->sum('volume');
+        $abminus = addBloodModel::where('bloodgroup', 'AB-')->sum('volume');
         return view('technitian.technitanHome', compact('bloods', 'numberof_message', 'notification', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
     function handling()

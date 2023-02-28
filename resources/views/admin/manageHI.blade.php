@@ -43,8 +43,6 @@
                             <td>
                                 <a href="#edit{{$member->id}}" data-bs-toggle="modal" class="btn btn-success"><i class='fa fa-edit'></i> Edit</a>
                                 <a href="#delete{{$member->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</a>
-                                <a href="" data-bs-toggle="modal" class="btn btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i>Block</a>
-
                             </td>
                             <td>
                                 <form action="{{ url('admin.block', $member->id) }}" method="POST">

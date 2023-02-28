@@ -34,7 +34,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-                {{Form::button('<i class="fa fa-check-square-o"></i> Distrinute', ['class' => 'btn btn-success', 'type' => 'Discard'])}}
+                {{Form::button('<i class="fa fa-check-square-o"></i> Insert', ['class' => 'btn btn-success', 'type' => 'Discard'])}}
                 {!! Form::close() !!}
             </div>
         </div>

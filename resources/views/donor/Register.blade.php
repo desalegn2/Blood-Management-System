@@ -298,13 +298,14 @@
                 </legend>
                 <div class="account-details">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required>
-                    <div><label>First Name</label><input type="text" name="firstname" value="" required></div>
+
+                    <div><label>Full Name</label><input type="text" name="firstname" value="{{ Auth::user()->name }}" required></div>
                     <div><label>Phone</label><input type="text" name="phone" required></div>
-                    <div><label>Last name</label><input type="text" name="lastname" required></div>
-                    <div><label>Weignt</label><input type="text" name="weight" required></div>
-                    <div><label>Email</label><input type="text" name="email" value="" required></div>
-                    <div><label>Birth Date</label><input type="date" name="birthdate" required></div>
+                    <div><label>Weight</label><input type="text" name="weight" required></div>
+                    <div><label>Email</label><input type="text" name="email" value="{{ Auth::user()->email }}" required></div>
+                    <div><label>Age</label><input type="numer" name="birthdate" required></div>
                     <div><label>Image</label><input type="file" name="photo" required></div>
+                    <div><label></label><input type="hidden" name="lastname" value="0" required></div>
                 </div>
             </fieldset>
             <fieldset>

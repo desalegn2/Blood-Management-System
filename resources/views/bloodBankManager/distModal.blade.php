@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {!! Form::model($data, [ 'method' => 'post','url' => ['bbmanager/distribute'] ]) !!}
+                {!! Form::model($data, [ 'method' => 'post','url' => ['bbmanager/distribute',$dis->id] ]) !!}
                 <div class="mb-3">
                     {!! Form::hidden('user_id', Auth::user()->id, ['class' => 'form-control']) !!}
                     {!! Form::hidden('fullname', $dis->fullname, ['class' => 'form-control']) !!}

@@ -214,7 +214,7 @@ class bbManagerController extends Controller
 
     {
         $feedback = User::join('feedbacks', 'feedbacks.user_id', '=', 'users.id')
-            ->get(['feedbacks.*', 'users.*']);
+            ->get(['feedbacks.id', 'feedbacks.created_at', 'feedbacks.feedback', 'users.name', 'users.email', 'users.photo']);
         $fdbk = feedbackModel::all();
         return view('bloodBankManager.feedback', compact('feedback', 'fdbk'));
     }
@@ -224,221 +224,28 @@ class bbManagerController extends Controller
         $res->delete();
         return redirect()->back()->with('success', 'Message Delete Successfully!');
     }
-    function Distribute(Request $req)
+    function Distribute(Request $req, $id)
     {
-        $aplus_stored = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
-        $aminus_stored = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
-        $oplus_stored = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
-        $ominus_stored = addBloodModel::where('bloodgroup', 'O-')->sum('volume');
-        $bplus_stored = addBloodModel::where('bloodgroup', 'B+')->sum('volume');
-        $bminus_stored = addBloodModel::where('bloodgroup', 'B-')->sum('volume');
-        $abplus_stored = addBloodModel::where('bloodgroup', 'AB+')->sum('volume');
-        $abminu_stored = addBloodModel::where('bloodgroup', 'AB-')->sum('volume');
+        $var = new distributeBloodModel;
+        $var->packno = $req->packno;
+        $var->user_id = $req->user_id;
+        $var->bloodgroup = $req->bloodtype;
+        $var->volume = $req->volume;
+        $var->bloodpressure = $req->bloodpressure;
+        $var->rh = $req->rh;
+        $var->hct = $req->hct;
+        $var->issueddate = $req->issuedate;
+        $var->expirydate = $req->expirydate;
+        $var->recievedby = $req->centerid;
+        $var->donateby = $req->fullname;
+        $var->donoremail = $req->email;
+        $var->donorphone = $req->phone;
+        $var->save();
 
-        $aplusdiscard = discardBloodModel::where('bloodgroup', 'A+')->sum('unitdiscarded');
-        $aminudiscard = discardBloodModel::where('bloodgroup', 'A-')->sum('unitdiscarded');
-        $bplusdiscard = discardBloodModel::where('bloodgroup', 'B+')->sum('unitdiscarded');
-        $bminusdiscard = discardBloodModel::where('bloodgroup', 'B-')->sum('unitdiscarded');
-        $abplusdiscard = discardBloodModel::where('bloodgroup', 'AB+')->sum('unitdiscarded');
-        $abminudiscard = discardBloodModel::where('bloodgroup', 'AB-')->sum('unitdiscarded');
-        $oplusdiscard = discardBloodModel::where('bloodgroup', 'O+')->sum('unitdiscarded');
-        $ominusdiscard = discardBloodModel::where('bloodgroup', 'O-')->sum('unitdiscarded');
-
-        $aplusdistribute = distributeBloodModel::where('bloodgroup', 'A+')->sum('volume');
-        $aminusdistribute = distributeBloodModel::where('bloodgroup', 'A-')->sum('volume');
-        $bplusdistribute = distributeBloodModel::where('bloodgroup', 'B+')->sum('volume');
-        $bminusdistribute = distributeBloodModel::where('bloodgroup', 'B-')->sum('volume');
-        $abplusdistribute = distributeBloodModel::where('bloodgroup', 'AB+')->sum('volume');
-        $abminusdistribute = distributeBloodModel::where('bloodgroup', 'AB-')->sum('volume');
-        $oplusdistribute = distributeBloodModel::where('bloodgroup', 'O+')->sum('volume');
-        $ominusdistribute = distributeBloodModel::where('bloodgroup', 'O-')->sum('volume');
-        //$total = $aplus + $aminus + $oplus + $ominus + $bplus + $bminus + $abplus + $abminus;
-        $aplus = $aplus_stored - $aplusdiscard - $aplusdistribute;
-        $aminus = $aminus_stored - $aminudiscard - $aminusdistribute;
-        $bplus = $bplus_stored - $bplusdiscard - $bplusdistribute;
-        $bminus = $bminus_stored - $bminusdiscard - $bminusdistribute;
-        $abplus = $abplus_stored - $abplusdiscard - $abplusdistribute;
-        $abminus = $abminu_stored - $abminudiscard - $abminusdistribute;
-        $oplus = $oplus_stored - $oplusdiscard - $oplusdistribute;
-        $ominus = $ominus_stored - $ominusdiscard - $ominusdistribute;
-
-        if ($req->bloodtype == 'A+') {
-            if ($aplus >= $req->volume) {
-                $var = new distributeBloodModel;
-                $var->packno = $req->packno;
-                $var->user_id = $req->user_id;
-                $var->bloodgroup = $req->bloodtype;
-                $var->volume = $req->volume;
-                $var->bloodpressure = $req->bloodpressure;
-                $var->rh = $req->rh;
-                $var->hct = $req->hct;
-                $var->issueddate = $req->issuedate;
-                $var->expirydate = $req->expirydate;
-                $var->recievedby = $req->centerid;
-
-                $var->donateby = $req->fullname;
-                $var->donoremail = $req->email;
-                $var->donorphone = $req->phone;
-                $var->save();
-                return redirect('technitian/distributetohospital')->with('success', 'Task Added Successfully!');
-            } else {
-                return redirect('technitian/discardblood')->with('warning', 'amount of blood stored less!');
-            }
-        } else if ($req->bloodtype == 'A-') {
-            if ($aminus >= $req->volume) {
-                $var = new distributeBloodModel;
-
-                $var->packno = $req->packno;
-                $var->user_id = $req->user_id;
-                $var->bloodgroup = $req->bloodtype;
-                $var->volume = $req->volume;
-                $var->bloodpressure = $req->bloodpressure;
-                $var->rh = $req->rh;
-                $var->hct = $req->hct;
-                $var->issueddate = $req->issuedate;
-                $var->expirydate = $req->expirydate;
-                $var->recievedby = $req->centerid;
-
-                $var->donateby = $req->fullname;
-                $var->donoremail = $req->email;
-                $var->donorphone = $req->phone;
-                $var->save();
-                return redirect('bbmanager/bloods')->with('success', 'Task Added Successfully!');
-            } else {
-                return redirect('bbmanager/bloods')->with('warning', 'amount of blood stored less!');
-            }
-        } else if ($req->bloodtype == 'B-') {
-            if ($bminus >= $req->volume) {
-                $var = new distributeBloodModel;
-                $var->packno = $req->packno;
-                $var->user_id = $req->user_id;
-                $var->bloodgroup = $req->bloodtype;
-                $var->volume = $req->volume;
-                $var->bloodpressure = $req->bloodpressure;
-                $var->rh = $req->rh;
-                $var->hct = $req->hct;
-                $var->issueddate = $req->issuedate;
-                $var->expirydate = $req->expirydate;
-                $var->recievedby = $req->centerid;
-
-                $var->donateby = $req->fullname;
-                $var->donoremail = $req->email;
-                $var->donorphone = $req->phone;
-                $var->save();
-                return redirect('technitian/distributetohospital')->with('success', 'Task Added Successfully!');
-            } else {
-                return redirect('technitian/discardblood')->with('warning', 'amount of blood stored less!');
-            }
-        } else if ($req->bloodtype == 'B+') {
-            if ($bplus >= $req->volume) {
-                $var = new distributeBloodModel;
-                $var->packno = $req->packno;
-                $var->user_id = $req->user_id;
-                $var->bloodgroup = $req->bloodtype;
-                $var->volume = $req->volume;
-                $var->bloodpressure = $req->bloodpressure;
-                $var->rh = $req->rh;
-                $var->hct = $req->hct;
-                $var->issueddate = $req->issuedate;
-                $var->expirydate = $req->expirydate;
-                $var->recievedby = $req->centerid;
-
-                $var->donateby = $req->fullname;
-                $var->donoremail = $req->email;
-                $var->donorphone = $req->phone;
-                $var->save();
-                return redirect('technitian/distributetohospital')->with('success', 'Task Added Successfully!');
-            } else {
-                return redirect('technitian/discardblood')->with('warning', 'amount of blood stored less!');
-            }
-        } else if ($req->bloodtype == 'AB-') {
-            if ($abminus >= $req->volume) {
-                $var = new distributeBloodModel;
-                $var->packno = $req->packno;
-                $var->user_id = $req->user_id;
-                $var->bloodgroup = $req->bloodtype;
-                $var->volume = $req->volume;
-                $var->bloodpressure = $req->bloodpressure;
-                $var->rh = $req->rh;
-                $var->hct = $req->hct;
-                $var->issueddate = $req->issuedate;
-                $var->expirydate = $req->expirydate;
-                $var->recievedby = $req->centerid;
-
-                $var->donateby = $req->fullname;
-                $var->donoremail = $req->email;
-                $var->donorphone = $req->phone;
-                $var->save();
-                return redirect('technitian/distributetohospital')->with('success', 'Task Added Successfully!');
-            } else {
-                return redirect('technitian/discardblood')->with('warning', 'amount of blood stored less!');
-            }
-        } else if ($req->bloodtype == 'AB+') {
-            if ($abplus >= $req->volume) {
-                $var = new distributeBloodModel;
-                $var->packno = $req->packno;
-                $var->user_id = $req->user_id;
-                $var->bloodgroup = $req->bloodtype;
-                $var->volume = $req->volume;
-                $var->bloodpressure = $req->bloodpressure;
-                $var->rh = $req->rh;
-                $var->hct = $req->hct;
-                $var->issueddate = $req->issuedate;
-                $var->expirydate = $req->expirydate;
-                $var->recievedby = $req->centerid;
-
-                $var->donateby = $req->fullname;
-                $var->donoremail = $req->email;
-                $var->donorphone = $req->phone;
-                $var->save();
-                return redirect('technitian/distributetohospital')->with('success', 'Task Added Successfully!');
-            } else {
-                return redirect('technitian/discardblood')->with('warning', 'amount of blood stored less!');
-            }
-        } else if ($req->bloodtype == 'O-') {
-            if ($ominus >= $req->volume) {
-                $var = new distributeBloodModel;
-                $var->packno = $req->packno;
-                $var->user_id = $req->user_id;
-                $var->bloodgroup = $req->bloodtype;
-                $var->volume = $req->volume;
-                $var->bloodpressure = $req->bloodpressure;
-                $var->rh = $req->rh;
-                $var->hct = $req->hct;
-                $var->issueddate = $req->issuedate;
-                $var->expirydate = $req->expirydate;
-                $var->recievedby = $req->centerid;
-
-                $var->donateby = $req->fullname;
-                $var->donoremail = $req->email;
-                $var->donorphone = $req->phone;
-                $var->save();
-                return redirect('technitian/distributetohospital')->with('success', 'Task Added Successfully!');
-            } else {
-                return redirect('technitian/discardblood')->with('warning', 'amount of blood stored less!');
-            }
-        } else if ($req->bloodtype == 'O+') {
-            if ($oplus >= $req->volume) {
-                $var = new distributeBloodModel;
-                $var->packno = $req->packno;
-                $var->user_id = $req->user_id;
-                $var->bloodgroup = $req->bloodtype;
-                $var->volume = $req->volume;
-                $var->bloodpressure = $req->bloodpressure;
-                $var->rh = $req->rh;
-                $var->hct = $req->hct;
-                $var->issueddate = $req->issuedate;
-                $var->expirydate = $req->expirydate;
-                $var->recievedby = $req->centerid;
-
-                $var->donateby = $req->fullname;
-                $var->donoremail = $req->email;
-                $var->donorphone = $req->phone;
-                $var->save();
-                return redirect('bbmanager/bloods')->with('success', 'Task Added Successfully!');
-            } else {
-                return redirect('bbmanager/bloods')->with('warning', 'amount of blood stored less!');
-            }
+        if ($var) {
+            $data = addBloodModel::find($id);
+            $data->delete();
+            return redirect()->back()->with('success', 'Task Added Successfully!');
         }
     }
 
@@ -503,44 +310,15 @@ class bbManagerController extends Controller
 
         $date = \Carbon\Carbon::today()->subDays(1);
         $stats = enrollementModel::where('created_at', '>=', $date)->get();
-        // $now = Carbon::now();
-        //$created_at = Carbon::parse($calls['created_at']);
-        //$diffMinutes = $created_at->diffInMinutes($now);
-        $aplus_stored = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
-        $aminus_stored = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
-        $oplus_stored = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
-        $ominus_stored = addBloodModel::where('bloodgroup', 'O-')->sum('volume');
-        $bplus_stored = addBloodModel::where('bloodgroup', 'B+')->sum('volume');
-        $bminus_stored = addBloodModel::where('bloodgroup', 'B-')->sum('volume');
-        $abplus_stored = addBloodModel::where('bloodgroup', 'AB+')->sum('volume');
-        $abminu_stored = addBloodModel::where('bloodgroup', 'AB-')->sum('volume');
 
-        $aplusdiscard = discardBloodModel::where('bloodgroup', 'A+')->sum('unitdiscarded');
-        $aminudiscard = discardBloodModel::where('bloodgroup', 'A-')->sum('unitdiscarded');
-        $bplusdiscard = discardBloodModel::where('bloodgroup', 'B+')->sum('unitdiscarded');
-        $bminusdiscard = discardBloodModel::where('bloodgroup', 'B-')->sum('unitdiscarded');
-        $abplusdiscard = discardBloodModel::where('bloodgroup', 'AB+')->sum('unitdiscarded');
-        $abminudiscard = discardBloodModel::where('bloodgroup', 'AB-')->sum('unitdiscarded');
-        $oplusdiscard = discardBloodModel::where('bloodgroup', 'O+')->sum('unitdiscarded');
-        $ominusdiscard = discardBloodModel::where('bloodgroup', 'O-')->sum('unitdiscarded');
-
-        $aplusdistribute = distributeBloodModel::where('bloodgroup', 'A+')->sum('volume');
-        $aminusdistribute = distributeBloodModel::where('bloodgroup', 'A-')->sum('volume');
-        $bplusdistribute = distributeBloodModel::where('bloodgroup', 'B+')->sum('volume');
-        $bminusdistribute = distributeBloodModel::where('bloodgroup', 'B-')->sum('volume');
-        $abplusdistribute = distributeBloodModel::where('bloodgroup', 'AB+')->sum('volume');
-        $abminusdistribute = distributeBloodModel::where('bloodgroup', 'AB-')->sum('volume');
-        $oplusdistribute = distributeBloodModel::where('bloodgroup', 'O+')->sum('volume');
-        $ominusdistribute = distributeBloodModel::where('bloodgroup', 'O-')->sum('volume');
-        //$total = $aplus + $aminus + $oplus + $ominus + $bplus + $bminus + $abplus + $abminus;
-        $aplus = $aplus_stored - $aplusdiscard - $aplusdistribute;
-        $aminus = $aminus_stored - $aminudiscard - $aminusdistribute;
-        $bplus = $bplus_stored - $bplusdiscard - $bplusdistribute;
-        $bminus = $bminus_stored - $bminusdiscard - $bminusdistribute;
-        $abplus = $abplus_stored - $abplusdiscard - $abplusdistribute;
-        $abminus = $abminu_stored - $abminudiscard - $abminusdistribute;
-        $oplus = $oplus_stored - $oplusdiscard - $oplusdistribute;
-        $ominus = $ominus_stored - $ominusdiscard - $ominusdistribute;
+        $aplus = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
+        $aminus = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
+        $oplus = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
+        $ominus = addBloodModel::where('bloodgroup', 'O-')->sum('volume');
+        $bplus = addBloodModel::where('bloodgroup', 'B+')->sum('volume');
+        $bminus = addBloodModel::where('bloodgroup', 'B-')->sum('volume');
+        $abplus = addBloodModel::where('bloodgroup', 'AB+')->sum('volume');
+        $abminus = addBloodModel::where('bloodgroup', 'AB-')->sum('volume');
 
         return view('bloodBankManager.home', compact('donors', 'numberof_message', 'stats', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }

@@ -302,7 +302,7 @@
         </div>
     </div>
     <hr>
-    <!-- ======================= Cards ================== -->
+    <!-- ======================= Total Blood Availability ================== -->
 
     <div class="grey-bg container-fluid">
 
@@ -479,7 +479,7 @@
 
     </div>
 
-    <!-- ================ Order Details List ================= -->
+    <!-- ================  ================= -->
     <div class="details">
 
         <div class="recentOrders">

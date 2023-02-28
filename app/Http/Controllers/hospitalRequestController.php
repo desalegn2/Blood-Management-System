@@ -108,7 +108,7 @@ class hospitalRequestController extends Controller
             $var->photo =  $filename;
         }
         $var->save();
-        return redirect('healthinstitute/post_seeker')->with('success', 'Task Added Successfully!');
+        return redirect('healthinstitute/posts')->with('success', 'Task Added Successfully!');
     }
     public function mypost($id)
     {
@@ -151,43 +151,15 @@ class hospitalRequestController extends Controller
     }
     function viewblood()
     {
-        $aplus_stored = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
-        $aminus_stored = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
-        $oplus_stored = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
-        $ominus_stored = addBloodModel::where('bloodgroup', 'O-')->sum('volume');
-        $bplus_stored = addBloodModel::where('bloodgroup', 'B+')->sum('volume');
-        $bminus_stored = addBloodModel::where('bloodgroup', 'B-')->sum('volume');
-        $abplus_stored = addBloodModel::where('bloodgroup', 'AB+')->sum('volume');
-        $abminu_stored = addBloodModel::where('bloodgroup', 'AB-')->sum('volume');
 
-        $aplusdiscard = discardBloodModel::where('bloodgroup', 'A+')->sum('unitdiscarded');
-        $aminudiscard = discardBloodModel::where('bloodgroup', 'A-')->sum('unitdiscarded');
-        $bplusdiscard = discardBloodModel::where('bloodgroup', 'B+')->sum('unitdiscarded');
-        $bminusdiscard = discardBloodModel::where('bloodgroup', 'B-')->sum('unitdiscarded');
-        $abplusdiscard = discardBloodModel::where('bloodgroup', 'AB+')->sum('unitdiscarded');
-        $abminudiscard = discardBloodModel::where('bloodgroup', 'AB-')->sum('unitdiscarded');
-        $oplusdiscard = discardBloodModel::where('bloodgroup', 'O+')->sum('unitdiscarded');
-        $ominusdiscard = discardBloodModel::where('bloodgroup', 'O-')->sum('unitdiscarded');
-
-        $aplusdistribute = distributeBloodModel::where('bloodgroup', 'A+')->sum('volume');
-        $aminusdistribute = distributeBloodModel::where('bloodgroup', 'A-')->sum('volume');
-        $bplusdistribute = distributeBloodModel::where('bloodgroup', 'B+')->sum('volume');
-        $bminusdistribute = distributeBloodModel::where('bloodgroup', 'B-')->sum('volume');
-        $abplusdistribute = distributeBloodModel::where('bloodgroup', 'AB+')->sum('volume');
-        $abminusdistribute = distributeBloodModel::where('bloodgroup', 'AB-')->sum('volume');
-        $oplusdistribute = distributeBloodModel::where('bloodgroup', 'O+')->sum('volume');
-        $ominusdistribute = distributeBloodModel::where('bloodgroup', 'O-')->sum('volume');
-        //$total = $aplus + $aminus + $oplus + $ominus + $bplus + $bminus + $abplus + $abminus;
-        $aplus = $aplus_stored - $aplusdiscard - $aplusdistribute;
-        $aminus = $aminus_stored - $aminudiscard - $aminusdistribute;
-        $bplus = $bplus_stored - $bplusdiscard - $bplusdistribute;
-        $bminus = $bminus_stored - $bminusdiscard - $bminusdistribute;
-        $abplus = $abplus_stored - $abplusdiscard - $abplusdistribute;
-        $abminus = $abminu_stored - $abminudiscard - $abminusdistribute;
-        $oplus = $oplus_stored - $oplusdiscard - $oplusdistribute;
-        $ominus = $ominus_stored - $ominusdiscard - $ominusdistribute;
-
-        $res = $aplus - $aplusdiscard - $aminusdistribute;
+        $aplus = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
+        $aminus = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
+        $oplus = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
+        $ominus = addBloodModel::where('bloodgroup', 'O-')->sum('volume');
+        $bplus = addBloodModel::where('bloodgroup', 'B+')->sum('volume');
+        $bminus = addBloodModel::where('bloodgroup', 'B-')->sum('volume');
+        $abplus = addBloodModel::where('bloodgroup', 'AB+')->sum('volume');
+        $abminus = addBloodModel::where('bloodgroup', 'AB-')->sum('volume');
         return view('healthinstitute.healthinstituteHome', compact('aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
 

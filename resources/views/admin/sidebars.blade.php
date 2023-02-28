@@ -74,10 +74,6 @@
             border-bottom-left-radius: 30px;
         }
 
-        .navigation ul li:hover,
-        .navigation ul li.hovered {
-            background-color: var(--white);
-        }
 
         .navigation ul li:nth-child(1) {
             margin-bottom: 40px;
@@ -94,10 +90,7 @@
             color: var(--white);
         }
 
-        .navigation ul li:hover a,
-        .navigation ul li.hovered a {
-            color: var(--blue);
-        }
+
 
         .navigation ul li a .icon {
             position: relative;
@@ -311,6 +304,14 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{url('/admin/alluser')}}">
+                        <span class="icon">
+                            <ion-icon name="person-add-outline"></ion-icon>
+                        </span>
+                        <span class="title">Manage User</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{url('/admin/viewdonor')}}">
                         <span class="icon">
                             <ion-icon name="people-circle-outline"></ion-icon>
@@ -335,11 +336,27 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('/admin/viewhi')}}">
+                    <a href="">
                         <span class="icon">
                             <ion-icon name="people-circle-outline"></ion-icon>
                         </span>
                         <span class="title">Manage HI</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon">
+                            <ion-icon name="people-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Manager </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('/admin/viewhi')}}">
+                        <span class="icon">
+                            <ion-icon name="people-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Encoder</span>
                     </a>
                 </li>
 

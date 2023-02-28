@@ -207,16 +207,24 @@
                     <td>{{$bloods->packno}}</td>
                     <td scope="row">{{ $bloods->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
                     <td>
-                        @if($bloods->created_at->diffInMinutes(\Carbon\Carbon::now()) >100)
+                        @if($bloods->created_at->diffInDays(\Carbon\Carbon::now()) >5)
                         Expired
                         @else
-                        {{$bloods->created_at->diffInMinutes(\Carbon\Carbon::now()) - 100}} Minute left
+                        {{$bloods->created_at->diffInDays(\Carbon\Carbon::now()) - 5}} Days left
                         @endif
                     </td>
                     <td>
-                        <a href="#setexpaired{{$bloods->id}}" data-bs-toggle="modal" class="btn btn-info"><i class='fa fa-edit'></i> fillDiscard</a>
-                        <a href="{{url('technitian/discard2', $bloods->id)}}" class="btn btn-info"><i class='fa fa-edit'></i> Discard</a>
-                        @include('technitian.expiredmodal')
+                        <a href="{{url('technitian/filldiscard,$bloods->id')}}" class="btn btn-info">
+                            <form action="{{url('technitian/filldiscard', $bloods->id)}}">
+                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"></input>
+                                <input type="hidden" name="bloodtype" value="{{$bloods->bloodgroup}}"></input>
+                                <input type="hidden" name="volume" value="{{$bloods->volume}}"></input>
+                                <input type="hidden" name="reason" value="not used for patient"></input>
+                                <input type="submit" value="Discard">
+                            </form>
+                        </a>
+
+
                     </td>
                 </tr>
                 @endforeach
