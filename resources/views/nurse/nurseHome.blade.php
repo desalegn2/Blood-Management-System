@@ -627,7 +627,6 @@
             </div>
             @foreach($stats as $stat)
             <table>
-
                 <tr>
                     <td width="60px">
                         <div class="imgBx"><img src="{{asset('uploads/registers/'.$stat->photo)}}" alt=""></div>

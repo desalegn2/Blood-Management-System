@@ -194,7 +194,7 @@
                         <ul>
                             <li> <a href="{{url('donor/aboutus')}}"> about us </a> </li>
                             <li> <a href="{{url('donor/feedback')}}">FeedBack</a> </li>
-                            <li> <a href="#"> Contact Us </a> </li>
+
                         </ul>
                     </div>
                     <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
@@ -207,15 +207,18 @@
                     </div>
 
                     <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
-                        <h3> Share </h3>
+                        <h3> Contact Us </h3>
 
                         <ul class="social">
-                            <li> <a href="https://www.facebook.com/desalegn.sisay.7503" value=""> <i class=" fa fa-facebook"> </i> </a> </li>
+                            <li> <a href="https://www.facebook.com/bdrbloodbank" value=""> <i class=" fa fa-facebook"> </i> </a> </li>
                             <li> <a href="#"> <i class="fa fa-twitter"> </i> </a> </li>
                             <li> <a href="#"> <i class="fa fa-google-plus"> </i> </a> </li>
-                            <li> <a href="#"> <i class="fa fa-youtube"> </i> </a> </li>
+                            <li> <a href="mailto:mikshif2001@gmail.com"> <i class="fa fa-envelope"> </i> </a> </li>
                             <li> <a href="#"> <i class="fa fa-telegram"> </i> </a> </li>
                         </ul>
+                        <br> <br> <br>
+                        <h1>+0582207515</h1>
+                        <h1>+0582207515</h1>
                     </div>
                 </div>
 

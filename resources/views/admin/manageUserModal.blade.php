@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {!! Form::model($members, [ 'method' => 'patch','url' => ['admin/updatenurse', $member->id] ]) !!}
+                {!! Form::model($members, [ 'method' => 'patch','url' => ['admin/updateuser', $member->id] ]) !!}
                 <div class="mb-3">
                     {!! Form::label('firstname', 'Firstname') !!}
                     {!! Form::text('name', $member->name, ['class' => 'form-control']) !!}
@@ -37,7 +37,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {!! Form::model($members, [ 'method' => 'delete','url' => ['admin/deletenurse', $member->id] ]) !!}
+                {!! Form::model($members, [ 'method' => 'delete','url' => ['admin/deleteuser', $member->id] ]) !!}
                 <h4 class="text-center">Are you sure you want to delete This Data?</h4>
                 <h5 class="text-center">Name: {{$member->name}} {{$member->email}}</h5>
             </div>

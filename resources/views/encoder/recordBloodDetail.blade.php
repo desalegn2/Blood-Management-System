@@ -176,7 +176,7 @@
 
     <div id="page-wrap">
 
-        <h1>Incoming Blood Request</h1>
+        <h1>Record Blood Detail</h1>
         <a class="btn btn-success" href="{{url('encoder/home')}}">Home</a>
         <table>
             <thead>

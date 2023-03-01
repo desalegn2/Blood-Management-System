@@ -26,16 +26,17 @@
             <div class="col-md-12 col-md-offset-1">
                 <table class="table table-bordered table-responsive table-striped">
                     <thead>
+                        <!-- <th>Image</th> -->
                         <th>Fisrtname</th>
                         <th>Email</th>
                         <th>Action</th>
                         <th>Block User</th>
-                        <th>Image</th>
+
                     </thead>
                     <tbody>
                         @foreach($members as $member)
                         <tr>
-                            <td><img class="img-fluid" src="{{asset('uploads/registers/'.$member->photo)}}" alt="This user not insert photo"></td>
+                            <!-- <td><img class="img-fluid" src="{{asset('uploads/registers/'.$member->photo)}}" alt="not photo"></td> -->
                             <td>{{$member->name}}</td>
                             <td>{{$member->email}}</td>
                             <td>

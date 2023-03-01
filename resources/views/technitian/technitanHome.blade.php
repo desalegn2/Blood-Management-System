@@ -523,12 +523,8 @@
             </div>
             <table>
                 <tr>
-                    <td width="60px">
-                        <div class="imgBx"><img src="{{asset('assets/imgs/11.jpg')}}" alt=""></div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
+
+
                 </tr>
             </table>
         </div>

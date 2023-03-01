@@ -96,7 +96,7 @@
 
                                     <div class="mt-3">
                                         <h4> {{$dataprofil->name}}</h4>
-                                        <p class="text-secondary mb-1">Full Stack Developer</p>
+                                        <p class="text-secondary mb-1">Encoder</p>
 
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class='fa fa-edit'></i>Change Password</button>
 

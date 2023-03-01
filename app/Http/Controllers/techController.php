@@ -15,10 +15,6 @@ class techController extends Controller
 {
     function discardblood(Request $req)
     {
-
-
-
-
         $aplus_stored = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
         $aminus_stored = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
         $oplus_stored = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
@@ -317,7 +313,7 @@ class techController extends Controller
 
     function testBlood()
     {
-        $data = enrollementModel::all();
+        $data = enrollementModel::where('status', '=', 'in progress')->get();
         return view('technitian.testBlood', ['data' => $data]);
     }
 
@@ -409,7 +405,6 @@ class techController extends Controller
 
     function viewblood()
     {
-
 
         $bloods = addBloodModel::paginate(10);
         $numberof_message = hospitalRequestModel::where('readat', 'unread')->count();

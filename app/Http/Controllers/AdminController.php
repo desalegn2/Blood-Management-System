@@ -20,9 +20,8 @@ class AdminController extends Controller
 {
     public function searchUser(Request $req)
     {
-        $a = $req->user;
-        $members = User::where('role', $a)->paginate(10);
-
+        $a = $req->users;
+        $members = User::where('name', $a)->orWhere('email', $a)->orWhere('role', $a)->paginate(10);
         return view('admin.manageuser', compact('members'));
     }
     public function getUser()
@@ -31,28 +30,17 @@ class AdminController extends Controller
         return view('admin.manageuser', compact('members'));
     }
 
-    public function imgup()
-    {
-        //$members = User::where('role', '1')->get();
-        return view('admin.imageup');
-    }
 
-    public function imgups(Request $req)
+    function register(Request $req)
     {
-        if ($req->hasfile('image')) {
-            $file = $req->file('image');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
-            $file->move('uploads/registers', $filename);
-        }
-        aaa::create([
-            'imgage' => $req->hasfile('image') ? $filename : '0.png'
+        $req->validate([
+            'photo' => 'required|mimes:jpeg,png,jpg,gif',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'role' => ['required', 'int', 'max:6'],
+            'password' => 'required|string|min:8|confirmed',
+
         ]);
-        return view('admin.imageup');
-    }
-
-    function register(CreateaccountRequest $req)
-    {
         try {
 
             // $password = $req->password;
@@ -63,6 +51,7 @@ class AdminController extends Controller
                 $filename = time() . '.' . $extention;
                 $file->move('uploads/registers', $filename);
             }
+
             User::create([
                 'photo' => $req->hasfile('photo') ? $filename : '0.png',
                 'name' => $req->name,
@@ -70,7 +59,7 @@ class AdminController extends Controller
                 'password' => Hash::make($req->password),
                 'role' => $req->role,
             ]);
-            return redirect('admin/add')->with('success', 'Task Added Successfully!');
+            return redirect()->back()->with('success', 'Task Added Successfully!');
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Something went wrong in AdminController.register',
@@ -106,7 +95,7 @@ class AdminController extends Controller
         $input = $request->all();
         $member->fill($input)->save();
 
-        return redirect('admin/viewdonor');
+        return redirect()->back();
     }
 
     function deleteDonor($id)
@@ -114,7 +103,7 @@ class AdminController extends Controller
         $donor = User::find($id);
         $donor->delete();
 
-        return redirect('admin/viewdonor');
+        return redirect()->back();
     }
 
     public function getNurse()
@@ -129,7 +118,7 @@ class AdminController extends Controller
         $input = $request->all();
         $member->fill($input)->save();
 
-        return redirect('admin/viewnurse');
+        return redirect()->back();
     }
 
     function deleteNurse($id)
@@ -137,7 +126,7 @@ class AdminController extends Controller
         $donor = User::find($id);
         $donor->delete();
 
-        return redirect('admin/viewnurse');
+        return redirect()->back();
     }
     public function getTech()
     {
@@ -151,7 +140,7 @@ class AdminController extends Controller
         $input = $request->all();
         $member->fill($input)->save();
 
-        return redirect('admin/viewtech');
+        return redirect()->back();
     }
 
     function deleteTech($id)
@@ -159,7 +148,7 @@ class AdminController extends Controller
         $donor = User::find($id);
         $donor->delete();
 
-        return redirect('admin/viewtech');
+        return redirect()->back();
     }
     public function getHI()
     {
@@ -172,7 +161,7 @@ class AdminController extends Controller
         $member = User::find($id);
         $input = $request->all();
         $member->fill($input)->save();
-        return redirect('admin/viewhi');
+        return redirect()->back();
     }
 
     function deleteHI($id)
@@ -180,43 +169,56 @@ class AdminController extends Controller
         $donor = User::find($id);
         $donor->delete();
 
-        return redirect('admin/viewhi');
+        return redirect()->back();
     }
 
-    function viewnew_user()
+
+    public function getEncoder()
     {
-        $views = User::all();
-        return view('admin.viewNewUser', ['views' => $views]);
+
+        $members = User::where('role', '6')->get();
+        return view('admin.manageEncoder')->with('members', $members);
     }
-    /*donor=1,admin=2,nurse=3, tech=4,health=5*/
-    function donorPermision($id)
+    public function updateEncoder(Request $request, $id)
     {
-        $donors = User::find($id);
-        $donors->role = "1";
-        $donors->save();
+        $member = User::find($id);
+        $input = $request->all();
+        $member->fill($input)->save();
+
         return redirect()->back();
     }
-    function nursePermision($id)
+
+    function deleteEncoder($id)
     {
-        $donors = User::find($id);
-        $donors->role = "3";
-        $donors->save();
+        $donor = User::find($id);
+        $donor->delete();
+
         return redirect()->back();
     }
-    function technicianPermision($id)
+    public function getManager()
     {
-        $donors = User::find($id);
-        $donors->role = "4";
-        $donors->save();
+
+        $members = User::where('role', '0')->get();
+        return view('admin.manager')->with('members', $members);
+    }
+    public function updateManager(Request $request, $id)
+    {
+        $member = User::find($id);
+        $input = $request->all();
+        $member->fill($input)->save();
+
         return redirect()->back();
     }
-    function healthPermision($id)
+
+    function deleteManager($id)
     {
-        $donors = User::find($id);
-        $donors->role = "5";
-        $donors->save();
+        $donor = User::find($id);
+        $donor->delete();
+
         return redirect()->back();
     }
+
+
     function userNotification()
     {
         $notification = User::where('readat', 'unread')->count();
@@ -271,7 +273,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        $users = User::where('role', '1')->orWhere('role', '3')->orWhere('role', '4')->orWhere('role', '5')->get();
+        $users = User::where('role', '0')->orWhere('role', '1')->orWhere('role', '3')->orWhere('role', '4')->orWhere('role', '5')->orWhere('role', '6')->get();
 
         return view('admin.block_user', ['users' => $users]);
         //dd($users);
@@ -294,6 +296,9 @@ class AdminController extends Controller
         // return redirect()->previous();
         return redirect()->back();
     }
+
+
+    /*profile */
     function Profile($id)
     {
         $isExist = User::select("*")
@@ -327,5 +332,23 @@ class AdminController extends Controller
         User::where("id", $id)
             ->update(["photo" => $filename]);
         return redirect()->back()->with('success', 'your Image,Changed');
+    }
+    function changepassword(Request $req)
+    {
+        # Validation
+        $req->validate([
+            'oldpassword' => ['required', 'string', 'min:8'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        $currentPasswordStatus = Hash::check($req->oldpassword, auth()->user()->password);
+        if ($currentPasswordStatus) {
+
+            User::findOrFail(auth()->user()->id)->update([
+                'password' => Hash::make($req->password)
+            ]);
+            return redirect()->back()->with('success', 'password changed Successfully!');
+        } else {
+            return redirect()->back()->with('warnig', 'password not match with old!');
+        }
     }
 }

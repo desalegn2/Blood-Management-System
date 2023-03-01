@@ -42,6 +42,40 @@
                     <!-- <button onclick="myfunction()">darkmode</button> -->
             </div>
         </div>
+
+        <div class="container mt-5">
+
+
+            <div class=" mt-5">
+
+                <div class="row mt-5 mb-5">
+                    <div class="col-md-4 ml-5">
+                        <img class="img-fluid" src="{{asset('assets/imgs/bblogo.jpg')}}" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <h3 class="card-title mt-2">Blood Collection Report</h3>
+                        <form action="{{url('/bbmanager/morethanOneDayCollection')}}" method="post">
+                            @csrf
+                            <p>Blood Collection Report of Many Days</p>
+                            <label>From</label>&nbsp;<input type="date" name="startdate"><br><br>
+                            <label>To</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="enddate">&nbsp;&nbsp;
+                            <input type="submit" value="Report">
+                        </form>
+                        <br><br>
+                        <form action="{{url('/bbmanager/onedayCollection')}}" method="post">
+                            @csrf
+                            <p>Blood Collection Report of one day</p>
+                            <label>From</label>&nbsp;&nbsp;&nbsp;<input type="date" name="startdate" required>
+                            <input type="submit" value="Report">
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">464/4545/4545</small>
+                        <p href="" style="float: right;">Bahir Dar Blood Bank</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>

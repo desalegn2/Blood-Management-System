@@ -19,7 +19,7 @@
 
             <div class="col-md-12 col-md-offset-1">
                 <h2> <a href="home" class="btn btn-primary btn-block">{{ __('Back') }}</a>
-                    Manage Encoder
+                    Manager
 
                     <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add</button> -->
                 </h2>

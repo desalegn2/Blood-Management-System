@@ -531,8 +531,8 @@
     <div class="details">
         <div class="recentOrders">
             <div class="cardHeader">
-                <h2>Blood Donor</h2>
-                <a href="{{url('technitian/viewstoredblood')}}" class="btn">View All</a>
+                <h2> Blood Donor </h2>
+                <a href="{{url('bbmanager/bloods')}}" class="btn">View All</a>
             </div>
 
             <table>
@@ -561,10 +561,24 @@
         <div class="recentCustomers">
             <div class="cardHeader">
                 <h2>Recent Donor Joined</h2>
-            </div>
 
+                @foreach($recentdoner as $stat)
+                <table>
+                    <tr>
+                        <td width="60px">
+                            <div class="imgBx"><img src="{{asset('uploads/registers/'.$stat->photo)}}" alt=""></div>
+                        </td>
+                        <td>
+                            <h4>{{$stat->name}} <br> <span>{{$stat->city}}</span></h4>
+                        </td>
+                    </tr>
+                </table>
+                @endforeach
+            </div>
         </div>
+
     </div>
+
 </body>
 
 </html>

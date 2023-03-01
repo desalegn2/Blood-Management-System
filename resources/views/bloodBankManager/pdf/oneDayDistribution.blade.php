@@ -23,8 +23,8 @@
 
 <body>
 
-    <h2>Hoverable Table</h2>
-    <p>Move the mouse over the table rows to see the effect.</p>
+    <h2>One Day Distribution Report</h2>
+    <p></p>
 
     <table class="table table-bordered table-responsive table-striped">
         <thead>

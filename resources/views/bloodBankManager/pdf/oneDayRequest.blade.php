@@ -23,7 +23,7 @@
 
 <body>
 
-    <h2>Many Day BloodRequest Report</h2>
+    <h2>One Day BloodRequest Report</h2>
     <p></p>
 
     <table class="table table-bordered table-responsive table-striped">
@@ -32,8 +32,6 @@
             <th>Hospital Name</th>
             <th>Date</th>
             <th>phone</th>
-
-
         </thead>
         <tbody>
             @if(count($data))

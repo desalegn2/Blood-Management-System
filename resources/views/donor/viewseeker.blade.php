@@ -178,37 +178,19 @@
             font-size: 15px;
             padding-bottom: 10px;
             position: relative;
-            font-weight: 500;">Patiant name:{{$view->patientname}} {{$view->lastname}}</span>
+            font-weight: 500;">
+                                <b>Patiant name:</b>
+                                &nbsp;&nbsp;{{$view->patientname}} {{$view->lastname}}
+                            </span>
 
-                            <h5>Patiant email:{{$view->email}}</h5>
-                            <h5>Patiant phone:{{$view->phone}}</h5>
+                            <h5><b>email</b>:&nbsp;&nbsp;{{$view->email}}</h5>
+                            <h5><b>Patiant phone</b>:&nbsp;&nbsp;{{$view->phone}}</h5>
                             <p style="margin: 10px 0 0 0;
-            font-size: 14px;">Reason :Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum a at ipsum ab magnam omnis pariatur provident nisi corrupti molestias, qui blanditiis ratione obcaecati perferendis enim ullam expedita delectus iure.</p>
+            font-size: 14px;">
+                                <b>Reason</b> &nbsp;&nbsp;:{{$view->purpose}}
+                            </p>
 
-                            <div class="social" style="margin-top: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;">
-                                <a href="" style="display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            background: white;">
-                                    <i class="bi bi-facebook" style="color: tomato;
-            font-size: 16px;
-            margin: 0 2px;"></i></a>
-                                <a href="" style="display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            background: white;">
-                                    <i class="bi bi-telegram" style="color: tomato;
-            font-size: 16px;
-            margin: 0 2px;"></i></a>
 
-                            </div>
                             <div class="card-footer">
                             </div>
 

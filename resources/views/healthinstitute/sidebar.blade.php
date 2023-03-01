@@ -68,10 +68,7 @@
             border-bottom-left-radius: 30px;
         }
 
-        .navigation ul li:hover,
-        .navigation ul li.hovered {
-            background-color: var(--white);
-        }
+
 
         .navigation ul li:nth-child(1) {
             margin-bottom: 40px;
@@ -87,10 +84,7 @@
             color: var(--white);
         }
 
-        .navigation ul li:hover a,
-        .navigation ul li.hovered a {
-            color: var(--blue);
-        }
+
 
         .navigation ul li a .icon {
             position: relative;

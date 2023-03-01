@@ -9,12 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- ======= Styles ====== -->
 
     <style>
@@ -210,7 +207,7 @@
         }
 
         button {
-
+            width: 100%;
             padding: 10px 0;
             margin: 10px auto;
             border-radius: 5px;
@@ -256,8 +253,8 @@
 
 
     <!-- ======================= Cards ================== -->
-
     <div class="main-block">
+
         <form action="hospitalrequest" method="post" enctype="multipart/form-data">
             @csrf
             <h1>Blood Request Form</h1>
@@ -274,14 +271,15 @@
                             <input type="text" name="hospital" value="{{ Auth::user()->name }}" readonly required>
                         </div>
                         <div><label>Date you want</label><input type="date" name="date" placeholder="date" required></div>
-                        <div><label>Email</label><input type="email" name="email" placeholder="email" required></div>
+                        <div><label>Email</label><input type="email" name="email" value="{{ Auth::user()->email }}" readonly required></div>
                         <div><label>Phone</label><input type="tel" name="phone" placeholder="+251948758542" required></div>
                         <div>
                             <label>Blood Group</label>
                             <select name="bloodtype">
-                                <option value="A+"></option>
+                                <option value="A+">A+</option>
                                 <option value="A-">A-</option>
                                 <option value="B+">B+</option>
+                                <option value="B-">B-</option>
                                 <option value="AB+">AB+</option>
                                 <option value="AB-">AB-</option>
                                 <option value="O+">O+</option>
@@ -311,7 +309,7 @@
                         <input type="checkbox" name=""><span>I am agree with above information</span>
                     </div>
             </fieldset>
-            <center><button type="submit" href="">Submit</button></center>
+            <button type="submit">Submit</button>
         </form>
     </div>
 

@@ -14,12 +14,21 @@
 
 <body>
     <div class="container">
+
         <h1 class="page-header text-center"></h1>
         <div class="row">
-            <form action="{{url('/admin/search_user')}}" method="post">
+            <form action="{{url('/admin/search_user')}}" method="get">
                 @csrf
                 <div style="float: right;">
-                    <input type="text" name="user" style="width: 200px;" placeholder="enter user type" required>
+                    <select name="users" required>
+                        <option value="">Choose User Type</option>
+                        <option value="1">Donor</option>
+                        <option value="3">Nurse</option>
+                        <option value="6">Encoder</option>
+                        <option value="4">Technician</option>
+                        <option value="0">Manager</option>
+                        <option value="5">Health Institute</option>
+                    </select>
                     <input type="submit" value="Search">
                 </div>
             </form>
@@ -43,6 +52,7 @@
                         <th>Block</th>
                     </thead>
                     <tbody>
+                        @if(count($members))
                         @foreach($members as $member)
                         <tr>
                             <td>{{$member->name}}</td>
@@ -63,13 +73,20 @@
                                     <button type="submit" class="btn btn-warning show_block_confirm" data-name={{ $member->isBlocked == 1 ? 'Unblock' : 'Block' }} title='Block'>{{ $member->isBlocked == 1 ? 'Unblock' : 'Block' }}</button>
                                     @endif
                                 </form>
-                                @include('admin.manageNurseModal')
+                                @include('admin.manageUserModal')
                             </td>
                         </tr>
                         @endforeach
+                        @else
+
+                        <tr>
+                            No user with this name or email or role
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
-                {{$members->links()}}
+                {{ $members->appends(Request::all())->links() }}
+
             </div>
         </div>
     </div>

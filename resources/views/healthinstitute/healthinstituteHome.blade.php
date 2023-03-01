@@ -188,7 +188,10 @@
 
 
     <!-- ======================= Total blood Availability ================== -->
+
     <div class="grey-bg container-fluid">
+
+
         <section id="minimal-statistics">
 
             <div class="row">
@@ -202,16 +205,18 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body" style="background-color: #FF7B54;">
+                            <div class="card-body" style="background-color: #FF6E31;">
                                 <div class="media d-flex">
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
                                     </div>
                                     <div class="media-body text-right">
-                                        <a href="#">
-                                            <h3><strong>{{$aminus}}</strong></h3>
-                                            <span><strong>A-</strong></span>
-                                        </a>
+                                        <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+
+                                        <h1>A-</h1>
+                                        <h3>{{$aminus}}</h3>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -221,14 +226,15 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body" style="background-color: #850000;">
+                            <div class="card-body" style="background-color: #FF6E31;">
                                 <div class="media d-flex">
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
                                     </div>
                                     <div class="media-body text-right">
-                                        <h3><strong>{{$aplus}}</strong></h3>
-                                        <span><strong>A+</strong></span>
+                                        <img style="width: 130px; height:100px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+                                        <h1>A+</h1>
+                                        <h3>{{$aplus}}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -238,14 +244,16 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body" style="background-color: #850000;">
+                            <div class="card-body" style="background-color: #FF6E31;">
                                 <div class="media d-flex">
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
                                     </div>
                                     <div class="media-body text-right">
-                                        <h3><strong>{{$bminus}}</strong></h3>
-                                        <span><strong>B-</strong></span>
+                                        <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+                                        <h1>B-</h1>
+                                        <h3>{{$bminus}}</h3>
+
                                     </div>
                                 </div>
                             </div>
@@ -255,14 +263,16 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body" style="background-color: #850000;">
+                            <div class="card-body" style="background-color: #FF6E31;">
                                 <div class="media d-flex">
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
                                     </div>
                                     <div class="media-body text-right">
-                                        <h3><strong>{{$bplus}}</strong></h3>
-                                        <span><strong>B+</strong></span>
+                                        <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+                                        <h1>B+</h1>
+                                        <h3>{{$bplus}}</h3>
+
                                     </div>
                                 </div>
                             </div>
@@ -276,11 +286,13 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body" style="background-color: #850000;">
+                            <div class="card-body" style="background-color: #FF6E31;">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
-                                        <h3 class="danger"><strong>{{$abminus}}</strong></h3>
-                                        <span><strong>AB-</strong></span>
+                                        <img style="width: 100px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+                                        <h1>AB-</h1>
+                                        <h3>{{$abminus}}</h3>
+
                                     </div>
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
@@ -293,11 +305,13 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body" style="background-color: #850000;">
+                            <div class="card-body" style="background-color: #FF6E31;">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
-                                        <h3 class="success"><strong>{{$abplus}}</strong></h3>
-                                        <span><strong>AB+</strong></span>
+                                        <img style="width: 100px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+                                        <h1>AB+</h1>
+                                        <h3>{{$abplus}}</h3>
+
                                     </div>
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
@@ -311,11 +325,13 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body" style="background-color: #850000;">
+                            <div class="card-body" style="background-color: #FF6E31;">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
-                                        <h3 class="warning"><strong>{{$ominus}}</strong></h3>
-                                        <span><strong>O-</strong></span>
+                                        <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+                                        <h1>O-</h1>
+                                        <h3>{{$ominus}}</h3>
+
                                     </div>
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
@@ -328,11 +344,13 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body" style="background-color: #850000;">
+                            <div class="card-body" style="background-color: #FF6E31;">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
-                                        <h3 class="primary"><strong>{{$oplus}}</strong></h3>
-                                        <span><strong>O+</strong></span>
+                                        <img style="width: 120px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+                                        <h1>O+</h1>
+                                        <h3>{{$oplus}}</h3>
+
                                     </div>
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
@@ -344,6 +362,7 @@
                 </div>
             </div>
         </section>
+
     </div>
 
     @include('sweetalert::alert')

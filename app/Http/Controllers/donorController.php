@@ -163,10 +163,12 @@ class donorController extends Controller
     }
 
     function view()
+
     {
+        $date = \Carbon\Carbon::today()->subDays(3);
         $views = User::join('hospitalpost', 'hospitalpost.user_id', '=', 'users.id')
-            ->get(['hospitalpost.*', 'users.*']);
-        //$views = hospitalPosts::all();
+            ->where('hospitalpost.created_at', '>=', $date)->get(['hospitalpost.*', 'users.name', 'users.email']);
+
         return view('donor.viewseeker', compact('views'));
     }
 

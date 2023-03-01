@@ -95,7 +95,7 @@
 
                                     <div class="mt-3">
                                         <h4> {{$dataprofil->name}}</h4>
-                                        <p class="text-secondary mb-1">Full Stack Developer</p>
+                                        <p class="text-secondary mb-1">Health Institute</p>
 
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class='fa fa-edit'></i>Change Password</button>
 
@@ -110,7 +110,7 @@
                                     </div>
 
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="file" name="photo">
+                                        <input type="file" name="photo" required>
                                         <input type="submit" value="save">
                                     </div>
                                 </div>
@@ -199,7 +199,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    {!! Form::open(['url' => 'nurse/changepassword']) !!}
+                    {!! Form::open(['url' => 'healthinstitute/changepassword']) !!}
                     <div class="mb-3">
                         {!! Form::label('oldpassword', 'Old Password') !!}
                         {{ Form::password('password', array('name' => 'oldpassword', "class" => "form-control" ,"placeholder" =>"enter new password")) }}

@@ -302,17 +302,16 @@
                         <span class="icon">
                             <ion-icon name="bag-remove-outline"></ion-icon>
                         </span>
-                        <span class="title">Post Information</span>
+                        <span class="title">&nbsp; &nbsp;Post Information</span>
                     </a>
                 </li>
-
 
                 <li>
                     <a href="{{url('/bbmanager/bloods')}}">
                         <span class="icon">
                             <ion-icon name="bag-remove-outline"></ion-icon>
                         </span>
-                        <span class="title">Distribute Blood</span>
+                        <span class="title">&nbsp; &nbsp;Distribute Blood</span>
                     </a>
                 </li>
 
@@ -321,7 +320,7 @@
                         <span class="icon">
                             <ion-icon name="swap-horizontal-outline"></ion-icon>
                         </span>
-                        <span class="title">Blood Request</span>
+                        <span class="title">&nbsp; &nbsp;Blood Request</span>
                     </a>
                 </li>
 
@@ -338,7 +337,7 @@
                         <span class="icon">
                             <ion-icon name="bag-remove-outline"></ion-icon>
                         </span>
-                        <span class="title">Donor History</span>
+                        <span class="title">&nbsp; &nbsp;Donor History</span>
                     </a>
                 </li>
                 <li>
@@ -389,9 +388,9 @@
             </div>
 
             @yield('content')
-            <div>
+            <!-- <div>
                 @include('bloodBankManager.footer')
-            </div>
+            </div> -->
         </div>
 
     </div>

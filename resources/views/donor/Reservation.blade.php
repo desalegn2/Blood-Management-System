@@ -268,7 +268,6 @@
                         <li>Click History and view your request status </li>
                         <li> If status Apprived, send reservation!</li>
                     </ul>
-                    <a href="" style="float: right;">Read more</a>
                 </div>
 
             </div>
@@ -317,9 +316,7 @@
                 </div>
             </fieldset>
             <fieldset>
-                <legend>
-                    <h3>Terms and Mailing</h3>
-                </legend>
+
                 <div class="terms-mailing">
                     <div class="checkbox">
                         <input type="checkbox" name="" required><span>I agree to the information</a></span>

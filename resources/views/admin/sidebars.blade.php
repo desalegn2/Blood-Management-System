@@ -308,55 +308,7 @@
                         <span class="icon">
                             <ion-icon name="person-add-outline"></ion-icon>
                         </span>
-                        <span class="title">Manage User</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/admin/viewdonor')}}">
-                        <span class="icon">
-                            <ion-icon name="people-circle-outline"></ion-icon>
-                        </span>
-                        <span class="title">Manage Donor</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/admin/viewnurse')}}">
-                        <span class="icon">
-                            <ion-icon name="people-circle-outline"></ion-icon>
-                        </span>
-                        <span class="title">Manage Nurses</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/admin/viewtech')}}">
-                        <span class="icon">
-                            <ion-icon name="people-circle-outline"></ion-icon>
-                        </span>
-                        <span class="title">Manage Tech </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <span class="icon">
-                            <ion-icon name="people-circle-outline"></ion-icon>
-                        </span>
-                        <span class="title">Manage HI</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <span class="icon">
-                            <ion-icon name="people-circle-outline"></ion-icon>
-                        </span>
-                        <span class="title">Manager </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/admin/viewhi')}}">
-                        <span class="icon">
-                            <ion-icon name="people-circle-outline"></ion-icon>
-                        </span>
-                        <span class="title">Encoder</span>
+                        <span class="title">&nbsp; &nbsp;Manage User</span>
                     </a>
                 </li>
 

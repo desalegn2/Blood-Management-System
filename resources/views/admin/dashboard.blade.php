@@ -345,11 +345,15 @@
 
 
     <div class="grey-bg container-fluid">
-
+        <form action="{{url('/admin/search_user')}}" method="get">
+            @csrf
+            <div style="float: right;">
+                <input type="text" name="users" style="width: 200px;" placeholder="enter name ,email" required>
+                <input type="submit" value="Search">
+            </div>
+        </form>
 
         <section id="stats-subtitle">
-
-
             <div class="row">
                 <div class="col-12 mt-3 mb-1">
                     <h4 class="text-uppercase">Statistics </h4>

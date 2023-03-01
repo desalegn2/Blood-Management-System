@@ -328,7 +328,7 @@
                         <span class="icon">
                             <ion-icon name="lock-closed-outline"></ion-icon>
                         </span>
-                        <span class="title">Manage Stored Blood</span>
+                        <span class="title">&nbsp; &nbsp;Manage Stored Blood</span>
                     </a>
                 </li>
                 <li>

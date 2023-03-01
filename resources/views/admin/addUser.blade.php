@@ -91,7 +91,7 @@
                                         </div>
                                         <div class="form-outline mb-4">
                                             <div style="color: red;">
-                                                @error('password')
+                                                @error('role')
                                                 <strong>{{ $message }}</strong>
                                                 @enderror
                                             </div>
@@ -129,7 +129,7 @@
                             </div>
                             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                                 <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                                    <h4 class="mb-4">We are more than just a company</h4>
+                                    <h4 class="mb-4">Bahir Dar Blood Bank</h4>
 
                                 </div>
                             </div>

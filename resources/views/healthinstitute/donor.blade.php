@@ -115,16 +115,15 @@
         <div class="row people">
             @foreach ($data as $x)
             <div class="col-md-6 col-lg-4 item">
-                <div class="box"><img class="rounded-circle" src="{{asset('uploads/registers/'.$x->photo)}}">
+                <div class="box">
                     <h3 class="name">Name:{{$x->fullname}}</h3>
                     <p class="title">Email:{{$x->email}}</p>
                     <p class="title">Phone:{{$x->phone}}</p>
+                    <p class="title">City:{{$x->city}}</p>
+                    <p class="description">Rh:{{$x->bloodgroup}}</p>
                     <p class="description">Rh:{{$x->rh}}</p>
                     <p class="">HCT:{{$x->hct}}</p>
-                    <p class="">Donate:{{$x->created_at}} ({{ $x->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago)</p>
-                    <!-- <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
-                    <div class="social"><a href="">View Detail</a></div>
-                    <a href="mailto:{{$x->email}}">email</a> -->
+                    <p class="">Donated Date:{{$x->created_at}} ({{ $x->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago)</p>
                 </div>
             </div>
             @endforeach

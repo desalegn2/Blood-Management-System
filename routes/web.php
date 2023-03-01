@@ -45,7 +45,7 @@ Route::view('create_account', 'createAccount');
 Route::post('create_acc', [donorController::class, 'createAccount']);
 
 Route::view('about', 'aboutus');
-
+Route::view('aa', 'aaa');
 
 Route::get('bb', function () {
     return view('index');
@@ -112,7 +112,7 @@ All Admin Routes List
         //  Route::get('/admin/send/{id}', [adminnotificationController::class, 'sendnotification']);
         Route::get('/admin/home', [AdminController::class, 'bloodavailability'])->name('admin.home');
 
-        Route::post('/admin/search_user', [AdminController::class, 'searchUser']);
+        Route::get('/admin/search_user', [AdminController::class, 'searchUser']);
         Route::get('/admin/alluser', [AdminController::class, 'getUser']);
         Route::patch('/admin/updateuser/{id}', [AdminController::class, 'updateTech']);
         Route::delete('/admin/deleteuser/{id}', [AdminController::class, 'deleteTech']);
@@ -130,25 +130,9 @@ All Admin Routes List
         Route::view('/admin/add', 'admin.addUser');
         Route::post('/admin/add', [AdminController::class, 'register']);
 
-        Route::get('/admin/viewdonor', [AdminController::class, 'getDonors']);
-        Route::patch('/admin/updatedonor/{id}', [AdminController::class, 'updateDonor']);
-        Route::delete('/admin/deletedonor/{id}', [AdminController::class, 'deleteDonor']);
 
         Route::get('/admin/viewnurse', [AdminController::class, 'getNurse']);
-        Route::patch('/admin/updatenurse/{id}', [AdminController::class, 'updateNurse']);
-        Route::delete('/admin/deletenurse/{id}', [AdminController::class, 'deleteNurse']);
 
-        Route::get('/admin/viewtech', [AdminController::class, 'getTech']);
-        Route::patch('/admin/updatetech/{id}', [AdminController::class, 'updateTech']);
-        Route::delete('/admin/deletetech/{id}', [AdminController::class, 'deleteTech']);
-
-        Route::get('/admin/viewhi', [AdminController::class, 'getHI']);
-        Route::patch('/admin/updatehi/{id}', [AdminController::class, 'updateHI']);
-        Route::delete('/admin/deletehi/{id}', [AdminController::class, 'deleteHI']);
-
-        //Route::get('/admin/display', [donorReq::class, 'display']);
-        // Route::get('/admin/displayapproved', [donorReq::class, 'displayapproved']);
-        // Route::view('/admin/hospitalrequest', 'admin.hospitalRequest');
         Route::get('/admin/hospitalrequest', [hospitalRequestController::class, 'viewHospitalRequest']);
 
         Route::get('/admin/approved/{id}', [hospitalRequestController::class, 'approved']);
@@ -164,22 +148,16 @@ All Admin Routes List
         Route::view('/admin/viewnewusers', 'admin.viewNewUser');
         Route::get('/admin/viewnewusers', [AdminController::class, 'viewnew_user']);
 
-        // Route::get('/admin/donorpermision/{id}', [AdminController::class, 'donorPermision']);
-        // Route::get('/admin/nursepermision/{id}', [AdminController::class, 'nursePermision']);
-        // Route::get('/admin/technicianpermision/{id}', [AdminController::class, 'technicianPermision']);
-        //Route::get('/admin/healthpermision/{id}', [AdminController::class, 'healthPermision']);
+
 
         Route::get('/admin/usernotification', [AdminController::class, 'userNotification']);
 
 
-        //Route::post('/admin/notification', [hospitalRequestController::class, 'sendNotification']);
-        //Route::get('/admin/notification', [AdminController::class, 'showNotificaton']);
-        #Notification mark as Read
-
-        //Route::post('/admin/mark-as-read',[AdminController::class, 'markNotification'])->name('markNotification');
+        //profile
         Route::get('/admin/profile/{id}', [AdminController::class, 'Profile']);
         Route::post('/admin/updateprofile/{id}', [AdminController::class, 'updateProfile']);
         Route::post('/admin/updatephoto/{id}', [AdminController::class, 'updatephoto']);
+        Route::post('/admin/changepassword', [AdminController::class, 'changepassword']);
     });
 
     Route::middleware(['auth', 'user-role:nurse'])->group(function () {
@@ -259,7 +237,7 @@ All Admin Routes List
     Route::middleware(['auth', 'user-role:healthinstitute'])->group(function () {
         Route::get('/healthinstitute/home', [HomeController::class, 'healthinstituteHome'])->name('healthinstitute.home');
         Route::get('/healthinstitute/home', [hospitalRequestController::class, 'viewblood'])->name('healthinstitute.home');
-
+        //profile
         Route::get('/healthinstitute/profile/{id}', [hospitalRequestController::class, 'Profile']);
         Route::post('/healthinstitute/updateprofile/{id}', [hospitalRequestController::class, 'updateProfile']);
         Route::post('/healthinstitute/updatephoto/{id}', [hospitalRequestController::class, 'updatephoto']);
@@ -298,11 +276,15 @@ All Admin Routes List
         Route::post('/bbmanager/updateprofile/{id}', [bbManagerController::class, 'updateProfile']);
         Route::post('/bbmanager/updatephoto/{id}', [bbManagerController::class, 'updatephoto']);
         Route::post('/bbmanager/changepassword', [bbManagerController::class, 'changepassword']);
+        //report
+        Route::get('/bbmanager/report', [bbManagerController::class, 'ReturnReportpage']);
+        Route::post('/bbmanager/morethanOneDayCollection', [bbManagerController::class, 'ReportCollection']);
+        Route::post('/bbmanager/onedayCollection', [bbManagerController::class, 'oneDayCollection']);
 
-        Route::post('/bbmanager/reportcollection', [bbManagerController::class, 'ReportCollection']);
-        Route::post('/bbmanager/reportdistribute', [bbManagerController::class, 'ReportDistribute']);
-        Route::post('/bbmanager/reportrequest', [bbManagerController::class, 'ReportRequest']);
+        Route::post('/bbmanager/manydayDistributeReport', [bbManagerController::class, 'manyDayReportDistribute']);
         Route::post('/bbmanager/distribute_specificday', [bbManagerController::class, 'ReportDis_one']);
+        Route::post('/bbmanager/reportrequest', [bbManagerController::class, 'ReportRequest']);
+        Route::post('/bbmanager/onedayRequest', [bbManagerController::class, 'oneDayRequest']);
 
         Route::get('/bbmanager/generatereport', [bbManagerController::class, 'view']);
         Route::get('/bbmanager/donorhistory', [bbManagerController::class, 'DonorHistory']);

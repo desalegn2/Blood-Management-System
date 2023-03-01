@@ -17,6 +17,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use App\Notifications\sendNotification;
 use App\Models\feedbackModel;
 use App\Models\bbinformatiomModel;
+use App\Models\donorRequestModel;
 use App\Http\Requests\CreateaccountRequest;
 
 class bbManagerController extends Controller
@@ -72,22 +73,48 @@ class bbManagerController extends Controller
         $don = enrollementModel::all();
         return view('bloodBankManager.generatePdf', ['don' => $don]);
     }
-
+    //Report
+    function ReturnReportpage(Request $req)
+    {
+        if ($req->reporttype == 'collection') {
+            return view('bloodBankManager.reportBloodCollection');
+        } else if ($req->reporttype == 'distribution') {
+            return view('bloodBankManager.reportBloodDistribution');
+        } else if ($req->reporttype == 'request') {
+            return view('bloodBankManager.reportBloodRequest');
+        }
+    }
     function ReportCollection(Request $request)
     {
         $startDate = $request->startdate;
         $endDate = $request->enddate;
 
         $data = enrollementModel::whereBetween('created_at', [$startDate, $endDate])->get();
+        $total = enrollementModel::whereBetween('created_at', [$startDate, $endDate])->sum('volume');
+        $mytime = \Carbon\Carbon::now();
         $pdf = PDF::setOptions([
             'defaultFont' => 'sans-serif',
             'isHtml5ParserEnabled' => true,
             'isRemoteEnabled' => true,
-            'chroot' => public_path('uploads/registers'),
-        ])->loadView('bloodBankManager.pdf.generateCollection', compact('data'));
-        return $pdf->download('demo.pdf');
+            // 'chroot' => public_path('uploads/registers'),
+        ])->loadView('bloodBankManager.pdf.generateCollection', compact('data', 'startDate', 'endDate', 'total', 'mytime'));
+        return $pdf->download('blood collection.pdf');
     }
-    function ReportDistribute(Request $request)
+
+    function oneDayCollection(Request $request)
+    {
+        $date = $request->startdate;
+        $data = enrollementModel::whereDate('created_at', $date)->get();
+
+        $pdf = PDF::setOptions([
+            'defaultFont' => 'sans-serif',
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true,
+        ])->loadView('bloodBankManager.pdf.oneDayCollection', compact('data'));
+        return $pdf->download('oneDayCollection.pdf');
+    }
+
+    function manyDayReportDistribute(Request $request)
     {
         $startDate = $request->startdate;
         $endDate = $request->enddate;
@@ -98,19 +125,19 @@ class bbManagerController extends Controller
             'isHtml5ParserEnabled' => true,
             'isRemoteEnabled' => true,
         ])->loadView('bloodBankManager.pdf.generateDistribute', compact('data'));
-        return $pdf->download('Distribute_Data.pdf');
+        return $pdf->download('Distribute_Blood.pdf');
     }
     function ReportDis_one(Request $request)
     {
         $startDate = $request->startdate;
-        $data = distributeBloodModel::where('created_at', $startDate)->get();
+        $data = distributeBloodModel::whereDate('created_at', $startDate)->get();
 
         $pdf = PDF::setOptions([
             'defaultFont' => 'sans-serif',
             'isHtml5ParserEnabled' => true,
             'isRemoteEnabled' => true,
-        ])->loadView('bloodBankManager.pdf.one', compact('data'));
-        return $pdf->download('Dist_Data.pdf');
+        ])->loadView('bloodBankManager.pdf.oneDayDistribution', compact('data'));
+        return $pdf->download('oneDayDistribution.pdf');
     }
 
     function ReportRequest(Request $request)
@@ -127,6 +154,19 @@ class bbManagerController extends Controller
         ])->loadView('bloodBankManager.pdf.generateRequest', compact('data'));
         return $pdf->download('Request_Data.pdf');
     }
+    function oneDayRequest(Request $request)
+    {
+        $startDate = $request->startdate;
+        $data = hospitalRequestModel::whereDate('created_at', $startDate)->get();
+
+        $pdf = PDF::setOptions([
+            'defaultFont' => 'sans-serif',
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true,
+        ])->loadView('bloodBankManager.pdf.oneDayRequest', compact('data'));
+        return $pdf->download('oneDayReport.pdf');
+    }
+
     function requests()
     {
         $request = hospitalRequestModel::all()->where('readat', '=', 'unread');
@@ -309,7 +349,7 @@ class bbManagerController extends Controller
         $numberof_message = hospitalRequestModel::where('readat', 'unread')->count();
 
         $date = \Carbon\Carbon::today()->subDays(1);
-        $stats = enrollementModel::where('created_at', '>=', $date)->get();
+        $recentdoner = donorRequestModel::where('created_at', '>=', $date)->get();
 
         $aplus = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
         $aminus = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
@@ -320,6 +360,6 @@ class bbManagerController extends Controller
         $abplus = addBloodModel::where('bloodgroup', 'AB+')->sum('volume');
         $abminus = addBloodModel::where('bloodgroup', 'AB-')->sum('volume');
 
-        return view('bloodBankManager.home', compact('donors', 'numberof_message', 'stats', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
+        return view('bloodBankManager.home', compact('donors', 'numberof_message', 'recentdoner', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
 }

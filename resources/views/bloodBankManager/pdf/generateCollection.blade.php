@@ -2,65 +2,102 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         table {
             border-collapse: collapse;
             width: 100%;
+            max-width: 800px;
+            margin: auto;
         }
 
         th,
         td {
             padding: 8px;
             text-align: left;
-            border-bottom: 1px solid #DDD;
+            border-bottom: 1px solid #ddd;
         }
 
-        tr:hover {
-            background-color: #D6EEEE;
+        th {
+            background-color: #f2f2f2;
+        }
+
+        @media only screen and (max-width: 600px) {
+            table {
+                font-size: 14px;
+            }
+
+            th,
+            td {
+                padding: 6px;
+            }
+        }
+
+        .company-logo {
+            display: block;
+            margin: auto;
+            max-width: 200px;
+            padding: 10px;
+        }
+
+        .company-name {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
+    <header class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- <img src="{{asset('assets/imgs/bblogo3.png')}}" alt="Company Logo" class="company-logo"> -->
+                </div>
+                <div class="col-md-6">
+                    <h1 class="company-name">BAHIR DAR BLOOD BANK</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="container my-4">
+        <h2>Blood Collection Report</h2>
+        <p>Date: {{$mytime}}</p>
+        <p>Time period: From{{$startDate}} To {{$endDate}}
 
-    <h2>Hoverable Table</h2>
-    <p>Move the mouse over the table rows to see the effect.</p>
+        </p>
+        <p>Total amount collected:{{$total}} ml </p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Donor Name</th>
+                    <th>Date of Donation</th>
+                    <th>Blood Type</th>
+                    <th>Amount Collected (mL)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(count($data))
+                @foreach($data as $member)
+                <tr>
 
-    <table class="table table-bordered table-responsive table-striped">
-        <thead>
-            <th>photo</th>
-            <th>Fulltname</th>
-            <th>Email</th>
-            <th>Donation Date</th>
-            <th>Blood Type</th>
-            <th>Gender</th>
-            <th>phone</th>
-            <th>Occupation</th>
-
-        </thead>
-        <tbody>
-            @if(count($data))
-            @foreach($data as $member)
-            <tr>
-                <td><img src="{{public_path('uploads/registers/'.$member->photo)}}" width="80" height="80"></td>
-                <td>{{$member->fullname}}</td>
-                <td>{{$member->email}}</td>
-                <td>{{$member->created_at}}</td>
-                <td>{{$member->bloodtype}}</td>
-                <td>{{$member->gender}}</td>
-                <td>{{$member->phone}}</td>
-                <td>{{$member->occupation}}</td>
-
-            </tr>
-            @endforeach
-            @else
-            <tr>
-                <td>Data Not Found</td>
-            </tr>
-            @endif
-        </tbody>
-    </table>
-
+                    <td>{{$member->fullname}}</td>
+                    <td>{{$member->created_at}}</td>
+                    <td>{{$member->bloodtype}}</td>
+                    <td>{{$member->volume}}</td>
+                </tr>
+                @endforeach
+                @else
+                <tr>
+                    <td>Data Not Found</td>
+                </tr>
+                @endif
+            </tbody>
+        </table>
+        <p>Notes: [insert any important notes or issues related to the blood collection for the period]</p>
 </body>
 
 </html>

@@ -212,13 +212,7 @@
                             <div class="col-4">
                                 <div class="form-group">
                                     <label>city:</label>
-                                    <select class="select2" style="width: 100%;" name="city">
-                                        <option selected>City</option>
-                                        <option>DT</option>
-                                        <option>Adama</option>
-                                        <option>Bairdar</option>
-                                        <option>AddisAbaba</option>
-                                    </select>
+                                    <input type="text" class="select2" style="width: 100%;" name="city">
                                 </div>
                             </div>
                             <div class="col-4">
@@ -246,6 +240,7 @@
                     <td>Name</td>
                     <td>Blood Group</td>
                     <td>Phone</td>
+                    <td>City</td>
                     <td>Email</td>
                     <td>Duration</td>
                 </tr>
@@ -256,6 +251,7 @@
                     <td>{{$dat->fullname}}</td>
                     <td>{{$dat->bloodgroup}}</td>
                     <td>{{$dat->phone}}</td>
+                    <td>{{$dat->city}}</td>
                     <td> {{$dat->email}}</td>
                     <td scope="row">{{ $dat->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
                 </tr>

@@ -307,7 +307,7 @@
                         <span class="icon">
                             <ion-icon name="dice-sharp"></ion-icon>
                         </span>
-                        <span class="title">Add Advertise</span>
+                        <span class="title">&nbsp; &nbsp;Add Advertise</span>
                     </a>
                 </li>
                 <li>
@@ -323,7 +323,7 @@
                         <span class="icon">
                             <ion-icon name="person-add-outline"></ion-icon>
                         </span>
-                        <span class="title">Enroll Donor</span>
+                        <span class="title">&nbsp; &nbsp;Enroll Donor</span>
                     </a>
                 </li>
                 <li>
@@ -331,7 +331,7 @@
                         <span class="icon">
                             <ion-icon name="people-circle-outline"></ion-icon>
                         </span>
-                        <span class="title">Manage Donor</span>
+                        <span class="title">&nbsp; &nbsp;Manage Donor</span>
                     </a>
                 </li>
                 <!-- <li>
@@ -347,7 +347,7 @@
                         <span class="icon">
                             <ion-icon name="people-circle-sharp"></ion-icon>
                         </span>
-                        <span class="title">Manage Reservation</span>
+                        <span class="title">&nbsp; &nbsp;Manage Reservation</span>
                     </a>
                 </li>
                 </li>
