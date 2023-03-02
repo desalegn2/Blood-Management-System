@@ -184,15 +184,15 @@
             <thead>
                 <tr>
                     <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
+
                     <th>Phone</th>
-                    <th>Gender</th>
-                    <th>Status</th>
+
+
                     <th>Center</th>
                     <th>Reservationdate</th>
                     <th>Action</th>
                     <th>Operation</th>
+                    <!-- <td>Ac</td> -->
                 </tr>
             </thead>
             <tbody>
@@ -200,11 +200,9 @@
                 @foreach ($accepts as $accept)
                 <tr>
                     <td>{{$accept->name}}</td>
-                    <td>{{$accept->lastname}}</td>
-                    <td>{{$accept->email}}</td>
+
                     <td>{{$accept->phone}}</td>
-                    <td>{{$accept->gender}}</td>
-                    <td>{{$accept->status}}</td>
+
                     <td>{{$accept->center}}</td>
                     <td>{{$accept->reservationdate}}</td>
                     <td>
@@ -216,6 +214,17 @@
                         <a href="#resend{{$accept->id}}" data-bs-toggle="modal" class="btn btn-info"><i class='fa fa-edit'></i> Change Date</a>
                         @include('nurse.resendReservation')
                     </td>
+                    <!-- <td>
+                        <form action="{{ url('nurse.reservationstatus', $accept->id) }}" method="POST">
+
+                            @csrf
+                            @if($accept->status == 'in progress')
+                            <button type="submit" class="btn btn-success show_block_confirm" data-name={{ $accept->status == 'in progress' ? 'Approve' : 'DisApprove' }} title='Approve'>{{ $accept->status == 1 ? 'DisApprove' : 'Approve' }}</button>
+                            @else
+                            <button type="submit" class="btn btn-warning show_block_confirm" data-name={{ $accept->status == 'in progress' ? 'Approve' : 'DisApprove' }} title='DisApprove'>{{ $accept->Statuse == 1 ? 'Approve' : 'DisApprove' }}</button>
+                            @endif
+                        </form>
+                    </td> -->
                 </tr>
                 @endforeach
                 @else

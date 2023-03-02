@@ -181,7 +181,7 @@
     <div id="page-wrap">
         <h1>Donors Who Donate Before</h1>
         <a class="btn btn-success" href="{{url('nurse/home')}}">Home</a>
-        <form action="{{url('/nurse/datetonotify')}}" method="post">
+        <form action="{{url('/nurse/datetonotify')}}" method="get">
             @csrf
             <div style="float: right;">
                 <b>How Many Days Ago You Notify ?</b><input type="text" name="date" style="width: 200px;" placeholder="enter length of days" required>
@@ -202,7 +202,7 @@
                     <th>Status</th>
                     <th>Duration</th>
                     <th>Notify</th>
-                    <th>Operation</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -221,9 +221,7 @@
                     <td>
                         <a class="btn btn-success" href="{{url('nurse/send', $donor->id)}}">Notify By Email</a>
                     </td>
-                    <td>
-                        <a href="#delete{{$donor->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</a>
-                    </td>
+
                 </tr>
                 @endforeach
                 @else

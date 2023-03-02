@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
 use Illuminate\Http\Request;
 use App\Models\enrollementModel;
 use App\Models\hospitalRequestModel;
@@ -88,9 +89,9 @@ class bbManagerController extends Controller
     {
         $startDate = $request->startdate;
         $endDate = $request->enddate;
-
         $data = enrollementModel::whereBetween('created_at', [$startDate, $endDate])->get();
         $total = enrollementModel::whereBetween('created_at', [$startDate, $endDate])->sum('volume');
+
         $mytime = \Carbon\Carbon::now();
         $pdf = PDF::setOptions([
             'defaultFont' => 'sans-serif',
@@ -105,12 +106,12 @@ class bbManagerController extends Controller
     {
         $date = $request->startdate;
         $data = enrollementModel::whereDate('created_at', $date)->get();
-
+        $total = enrollementModel::whereDate('created_at', $date)->sum('volume');
         $pdf = PDF::setOptions([
             'defaultFont' => 'sans-serif',
             'isHtml5ParserEnabled' => true,
             'isRemoteEnabled' => true,
-        ])->loadView('bloodBankManager.pdf.oneDayCollection', compact('data'));
+        ])->loadView('bloodBankManager.pdf.oneDayCollection', compact('data', 'total', 'date'));
         return $pdf->download('oneDayCollection.pdf');
     }
 
@@ -131,12 +132,13 @@ class bbManagerController extends Controller
     {
         $startDate = $request->startdate;
         $data = distributeBloodModel::whereDate('created_at', $startDate)->get();
-
+        $total = enrollementModel::whereDate('created_at', $startDate)->sum('volume');
         $pdf = PDF::setOptions([
             'defaultFont' => 'sans-serif',
             'isHtml5ParserEnabled' => true,
             'isRemoteEnabled' => true,
-        ])->loadView('bloodBankManager.pdf.oneDayDistribution', compact('data'));
+        ])->loadView('bloodBankManager.pdf.oneDayDistribution', compact('data', 'startDate', 'total'));
+
         return $pdf->download('oneDayDistribution.pdf');
     }
 
@@ -145,25 +147,27 @@ class bbManagerController extends Controller
         $startDate = $request->startdate;
         $endDate = $request->enddate;
         $data = hospitalRequestModel::whereBetween('created_at', [$startDate, $endDate])->get();
+        $total = hospitalRequestModel::whereBetween('created_at', [$startDate, $endDate])->sum('volume');
 
+        $mytime = \Carbon\Carbon::now();
         $pdf = PDF::setOptions([
             'defaultFont' => 'sans-serif',
             'isHtml5ParserEnabled' => true,
             'isRemoteEnabled' => true,
             'chroot' => public_path('uploads/registers'),
-        ])->loadView('bloodBankManager.pdf.generateRequest', compact('data'));
+        ])->loadView('bloodBankManager.pdf.generateRequest', compact('data', 'total', 'mytime', 'startDate', 'endDate'));
         return $pdf->download('Request_Data.pdf');
     }
     function oneDayRequest(Request $request)
     {
         $startDate = $request->startdate;
         $data = hospitalRequestModel::whereDate('created_at', $startDate)->get();
-
+        $total = enrollementModel::whereDate('created_at', $startDate)->sum('volume');
         $pdf = PDF::setOptions([
             'defaultFont' => 'sans-serif',
             'isHtml5ParserEnabled' => true,
             'isRemoteEnabled' => true,
-        ])->loadView('bloodBankManager.pdf.oneDayRequest', compact('data'));
+        ])->loadView('bloodBankManager.pdf.oneDayRequest', compact('data', 'startDate', 'total'));
         return $pdf->download('oneDayReport.pdf');
     }
 
@@ -183,6 +187,7 @@ class bbManagerController extends Controller
     function Bloods()
     {
         $data = addBloodModel::all()->where('status', '=', 'notexpired');
+
         return view('bloodBankManager.availableBlood', ['data' => $data]);
     }
     function Read($id)

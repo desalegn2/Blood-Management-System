@@ -318,10 +318,11 @@
                     <h3>Donor Information</h3>
                 </legend>
                 <div><input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required></div>
-
+                <div><input type="hidden" name="nursename" value="{{ Auth::user()->name }}" required></div>
                 <div class="account-details">
 
                     <div><label>Full Name</label><input type="text" name="fullname" value="{{$data->fullname}}" required></div>
+                    <div><label>Age</label><input type="number" name="age" required></div>
                     <div><label>Birth Date</label><input type="date" name="birthdate" value="{{$data->birthdate}}" required></div>
                     <div><label>Occupation</label><input type="text" name="occupation" value="{{$data->occupation}}" required></div>
                     <div><label>phone</label><input type="text" name="phone" value="{{$data->phone}}" required></div>
@@ -366,6 +367,7 @@
                             </select>
                         </div>
                         <div><label>Volume</label><input type="text" name="volume" value="{{ Auth::user()->id }}" required></div>
+                        <div><label>Pack No</label><input type="text" name="packno" required></div>
                         <div>
                             <label>Remark</label>
                             <textarea id="w3review" name="remark" rows="5" cols="30"></textarea>

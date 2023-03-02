@@ -179,7 +179,7 @@
     <div id="page-wrap">
         <a class="btn btn-success" href="{{url('nurse/home')}}">Home</a>
 
-        <h1>A- Blood donors</h1>
+        <h1>{{$bloodtype}} Blood donors</h1>
 
 
 
@@ -192,24 +192,19 @@
                     <th>email</th>
                     <th>Phone</th>
                     <th>blood Type</th>
-                    <th>Status</th>
                     <th>Action</th>
-
                 </tr>
             </thead>
             <tbody>
                 @if(count($data))
                 @foreach ($data as $donor)
                 <tr>
-                    <td>{{$donor->name}}</td>
+                    <td>{{$donor->fullname}}</td>
                     <td>{{$donor->email}}</td>
                     <td>{{$donor->phone}}</td>
                     <td>{{$donor->bloodtype}}</td>
-                    <td>{{$donor->status}}</td>
-
                     <td>
-                        <a class="btn btn-success" href="{{url('nurse/viewdetail', $donor->id)}}">View</a>
-                        <a href="" data-bs-toggle="modal" class="btn btn-danger">send msg</a>
+                        <a class="btn btn-success" href="{{url('nurse/donordetail', $donor->id)}}">Detail</a>
                     </td>
                 </tr>
                 @endforeach

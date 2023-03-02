@@ -275,20 +275,21 @@
         </div>
 
     </div>
+
     <div class="main-block">
         <form action=" {{url('/donor/reservation',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
             @csrf
-
+            <div><label></label><input type="hidden" name="lastname" value="l" required></div>
+            <input type="hidden" name="user_id" value="{{Auth::user()->id}}" required>
             <fieldset>
                 <legend>
                     <!-- <h3>Fill This Form</h3> -->
                 </legend>
                 <div class="account-details">
-                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}" required>
-                    <div><label>First Name</label><input type="text" name="firstname" required></div>
+
+                    <div><label>First Name</label><input type="text" name="firstname" value="{{Auth::user()->name }}" required></div>
                     <div><label>Phone</label><input type="text" name="phone" required></div>
-                    <div><label>Last name</label><input type="text" name="lastname" required></div>
-                    <div><label>Email</label><input type="text" name="email" required></div>
+                    <div><label>Email</label><input type="text" name="email" value="{{Auth::user()->email}}" required></div>
                     <div><label>Donation Date</label><input type="date" name="reservationdate" required></div>
                     <div><label>Gender</label> <select name="gender" required>
                             <option value="male">male</option>

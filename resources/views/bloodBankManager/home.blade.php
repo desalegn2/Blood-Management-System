@@ -488,7 +488,7 @@
                             <div class="card-body" style="background-color: #FF6E31;">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
-                                        <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
+                                        <img style="width: 120px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
                                         <h1>O-</h1>
                                         <h3>{{$ominus}}</h3>
 

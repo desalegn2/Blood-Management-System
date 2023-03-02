@@ -42,8 +42,8 @@
         }
 
         .navbar-light .navbar-brand {
-            color: #fff;
-            font-size: 25px;
+            color: white;
+            font-size: 30px;
             text-transform: uppercase;
             font-weight: bold;
             letter-spacing: 2px;
@@ -129,7 +129,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">BAHIR DAR BLOOD BANK</a>
+            <a class="navbar-brand" style="color: white;">BAHIR DAR BLOOD BANK</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

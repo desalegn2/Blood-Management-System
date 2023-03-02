@@ -52,7 +52,7 @@
                                 <div class="card-body p-md-5 mx-md-4">
 
                                     <div class="text-center">
-                                        <img src="{{asset('assets/imgs/logo1.png')}}" style="width: 185px;" alt="logo">
+                                        <img src="{{asset('assets/imgs/IMG_20230213_050749_651.jpg')}}" style="width: 185px;" alt="logo">
                                         <h4 class="mt-1 mb-5 pb-1">Bahir Dar Blood Bank</h4>
                                     </div>
 
@@ -99,7 +99,7 @@
                                                 <option value="">choose usertype</option>
                                                 <option value="3">Nurse</option>
                                                 <option value="4">Technician</option>
-                                                <option value="5">HI</option>
+
                                                 <option value="6">Encoder</option>
                                                 <option value="0">Manager</option>
                                             </select>

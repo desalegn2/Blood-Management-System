@@ -67,9 +67,6 @@ All Normal Users Routes List
 --------------------------------------------
 --------------------------------------------*/
     Route::middleware(['auth', 'user-role:donor'])->group(function () {
-
-
-
         Route::get('/donor/home', [HomeController::class, 'donorHome'])->name('donor.home');
         //Route::get('/donor/home', [donorController::class, 'getAdvertise'])->name('donor.home');
         // Route::view('donor/newhome', 'donor.home');
@@ -189,13 +186,17 @@ All Admin Routes List
 
         Route::view('/nurse/reservation', 'nurse.reserationManagement');
         Route::get('/nurse/reservation', [nurseController::class, 'manageReservation']);
+        Route::post('/nurse.reservationstatus/{id}', [nurseController::class, 'reservationstatus']);
+
         Route::delete('/nurse/deletereservation/{id}', [nurseController::class, 'deleteRes']);
         Route::get('/nurse/accept/{id}', [nurseController::class, 'accept']);
         Route::get('/nurse/notaccept/{id}', [nurseController::class, 'notAccept']);
         Route::patch('/nurse.changereservation/{id}', [nurseController::class, 'changeReservation']);
 
-        Route::post('/nurse/donorbybloodtype', [nurseController::class, 'search_donors']);
-        Route::post('/nurse/datetonotify', [nurseController::class, 'DaystoNotify']);
+        Route::get('/nurse/donorbybloodtype', [nurseController::class, 'search_donors']);
+        Route::get('/nurse/donordetail/{id}', [nurseController::class, 'Donordetail']);
+
+        Route::get('/nurse/datetonotify', [nurseController::class, 'DaystoNotify']);
 
         Route::get('/nurse/listofdonor', [nurseController::class, 'listofDonor']);
         Route::post('/nurse/search_donor', [nurseController::class, 'searchDonor']);
@@ -271,7 +272,7 @@ All Admin Routes List
 
         Route::view('/bbmanager/addhospital', 'bloodBankManager.addHospital');
         Route::post('/bbmanager/add_hospital', [bbManagerController::class, 'addHospital']);
-
+        //profile
         Route::get('/bbmanager/profile/{id}', [bbManagerController::class, 'Profile']);
         Route::post('/bbmanager/updateprofile/{id}', [bbManagerController::class, 'updateProfile']);
         Route::post('/bbmanager/updatephoto/{id}', [bbManagerController::class, 'updatephoto']);
@@ -280,7 +281,6 @@ All Admin Routes List
         Route::get('/bbmanager/report', [bbManagerController::class, 'ReturnReportpage']);
         Route::post('/bbmanager/morethanOneDayCollection', [bbManagerController::class, 'ReportCollection']);
         Route::post('/bbmanager/onedayCollection', [bbManagerController::class, 'oneDayCollection']);
-
         Route::post('/bbmanager/manydayDistributeReport', [bbManagerController::class, 'manyDayReportDistribute']);
         Route::post('/bbmanager/distribute_specificday', [bbManagerController::class, 'ReportDis_one']);
         Route::post('/bbmanager/reportrequest', [bbManagerController::class, 'ReportRequest']);
@@ -291,8 +291,7 @@ All Admin Routes List
         Route::post('/bbmanager/searchdonor', [bbManagerController::class, 'searchDonor']);
 
         Route::post('/bbmanager/sendresult/{id}', [bbManagerController::class, 'sendResult']);
-        // Route::view('/bbmanager/tes', 'bloodBankManager.pdf.report');
-        // Route::get('/bbmanager/res', [bbManagerController::class, 'rest']);
+
         Route::view('/bbmanager/bbinfo', 'bloodBankManager.addInformation');
 
         Route::post('/bbmanager/addinfo', [bbManagerController::class, 'addInfo']);
@@ -323,7 +322,7 @@ All Admin Routes List
         Route::get('/encoder/record', [encoderController::class, 'Record']);
 
         Route::get('/encoder/recordblood/{id}', [encoderController::class, 'recordBloods']);
-        Route::post('/encoder/addbloods', [encoderController::class, 'addblood']);
+        Route::post('/encoder/addbloods/{id}', [encoderController::class, 'addblood']);
 
         // Route::view('/encoder/addbloods', 'encoder.add');
         Route::view('/encoder/handling', 'encoder.handling');

@@ -124,7 +124,7 @@
         /* ===================== Main ===================== */
         .main {
             position: absolute;
-            width: calc(100% - 150px);
+            width: calc(100% - 30px);
             left: 100px;
             min-height: 50vh;
             background: var(--white);
@@ -132,7 +132,7 @@
         }
 
         .main.active {
-            width: calc(100% - 80px);
+            width: calc(100% - 300px);
             left: 80px;
         }
 
@@ -147,8 +147,8 @@
 
         .toggle {
             position: relative;
-            width: 60px;
-            height: 60px;
+            width: 30px;
+            height: 30px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -375,6 +375,7 @@
                 </li>
                 </li>
             </ul>
+
         </div>
         <!-- ========================= Main ==================== -->
         <div class="main">

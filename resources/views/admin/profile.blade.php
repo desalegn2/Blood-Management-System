@@ -148,7 +148,7 @@
                                         <h6 class="mb-0">Full name</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="name" value="{{$dataprofil->name}}">
+                                        <input type="text" name="name" value="{{$dataprofil->name}}" required>
                                     </div>
                                 </div>
                                 <hr>
@@ -158,7 +158,7 @@
                                         <h6 class="mb-0">Email</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="email" value="{{$dataprofil->email}}" readonly>
+                                        <input type="text" name="email" value="{{$dataprofil->email}}" required>
                                     </div>
                                 </div>
 
@@ -168,12 +168,12 @@
                                         <h6 class="mb-0">Phone</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="phone" value="{{$dataprofil->phone}}">
+                                        <input type="text" name="phone" value="{{$dataprofil->phone}}" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <input type="submit" value="edite">
+                                        <input type="submit" value="edit">
                                     </div>
                                 </div>
 

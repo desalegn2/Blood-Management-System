@@ -123,12 +123,13 @@
             -ms-border-radius: 50%;
             border-radius: 50%;
             float: left;
-            height: 36px;
+            height: 40px;
             line-height: 36px;
             margin: 0 8px 0 0;
             padding: 0;
             text-align: center;
-            width: 36px;
+            width: 40px;
+
             transition: all 0.5s ease 0s;
             -moz-transition: all 0.5s ease 0s;
             -webkit-transition: all 0.5s ease 0s;
@@ -209,7 +210,7 @@
                     <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
                         <h3> Contact Us </h3>
 
-                        <ul class="social">
+                        <ul class="social" style="display:flex; justify-content: center; align-items: center; gap: 1rem;">
                             <li> <a href="https://www.facebook.com/bdrbloodbank" value=""> <i class=" fa fa-facebook"> </i> </a> </li>
                             <li> <a href="#"> <i class="fa fa-twitter"> </i> </a> </li>
                             <li> <a href="#"> <i class="fa fa-google-plus"> </i> </a> </li>
@@ -217,8 +218,8 @@
                             <li> <a href="#"> <i class="fa fa-telegram"> </i> </a> </li>
                         </ul>
                         <br> <br> <br>
-                        <h1>+0582207515</h1>
-                        <h1>+0582207515</h1>
+                        <h1 style="color:white;">+0582207515</h1>
+
                     </div>
                 </div>
 

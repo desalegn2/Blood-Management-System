@@ -24,14 +24,16 @@ class encoderController extends Controller
         $data = enrollementModel::find($id);
         return view('encoder.add', ['data' => $data]);
     }
-    function addblood(Request $req)
+    function addblood(Request $req, $id)
 
     {
         $req->validate([
             'packno' => ['required', 'unique:storeblood'],
         ]);
-        $var = new addBloodModel;
+        // $enr = new enrollementModel;
+        // $id = $enr->donor_id;
 
+        $var = new addBloodModel;
         $var->user_id = $req->user_id;
         $var->fullname = $req->fullname;
         $var->email = $req->email;
@@ -47,8 +49,11 @@ class encoderController extends Controller
         $var->hct = $req->hct;
         $var->bloodpressure = $req->bloodpressure;
         $var->save();
-        return redirect()->back()->with('success', 'Task Added Successfully!');
-        //return redirect()->with('success', 'Task Added Successfully!');
+        if ($var) {
+            enrollementModel::where("id", $id)
+                ->update(["status" => 'recorded', "bloodtype" => $req->bloodtype]);
+            return redirect()->back()->with('success', 'Task Added Successfully!');
+        }
     }
     function Profile($id)
     {

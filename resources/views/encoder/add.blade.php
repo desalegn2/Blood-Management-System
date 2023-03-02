@@ -43,8 +43,9 @@
                         <div class="card-body p-4 p-md-5">
                             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Blood</h3>
 
-                            <form action="{{url('/encoder/addbloods')}}" method="post">
+                            <form action="{{url('/encoder/addbloods',$data->id)}}" method="post">
                                 @csrf
+
 
                                 <input type="hidden" id="date" name="user_id" value="{{Auth::user()->id}}" required>
                                 <input type="hidden" id="date" name="fullname" value="{{$data->fullname}}" required>

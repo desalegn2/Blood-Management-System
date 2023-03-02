@@ -304,7 +304,7 @@
     <!-- ======================= Cards ================== -->
 
     <div style="float: right;">
-        <a href="{{url('/nurse/listofdonor')}}" style="decoration:none;">Are you Donate Before?</a>
+        <a href="{{url('/nurse/listofdonor')}}" style="text-decoration:none;">Are you Donate Before?</a>
     </div>
 
 

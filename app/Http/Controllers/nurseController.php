@@ -42,11 +42,7 @@ class nurseController extends Controller
 
         return view('nurse.nurseHome', compact('display1', 'stats', 'donor', 'donors_enrolled', 'aminus', 'aplus', 'bminus', 'bplus', 'abminus', 'abplus', 'ominus', 'oplus'));
     }
-    function viewdetail($id)
-    {
-        $donors = donorRequestModel::find($id);
-        return view('nurse.donorDetail', ['donors' => $donors]);
-    }
+
 
     function aminusDonor()
     {
@@ -136,6 +132,24 @@ class nurseController extends Controller
         $accepts = reservationModel::all();
         return view('nurse.reserationManagement', ['accepts' => $accepts]);
     }
+    // public function reservationstatus(Request $request, $id)
+    // {
+    //     $user = reservationModel::find($id);
+
+    //     $status = $user->status == 'Approve' ? 'DisApprove' : 'Approve';
+
+    //     reservationModel::where('id', $id)
+    //         ->update([
+    //             'status' => $status
+    //         ]);
+
+    //     if ($status == 1)
+    //         $msg = 'User blocked successfully';
+    //     else
+    //         $msg = 'User unblocked successfully';
+    //     // return redirect()->previous();
+    //     return redirect()->back();
+    // }
 
     function deleteRes($id)
     {
@@ -253,7 +267,7 @@ class nurseController extends Controller
             $msg = enrollementModel::find($id);
 
             \Notification::send($msg, new sendNotification($details));
-            return redirect()->back()->with('success', 'Message send Successfully! to', $msg);
+            return redirect()->back()->with('success', 'Message send Successfully!', $msg);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Something went wrong in nurseController.sendnotification',
@@ -269,8 +283,15 @@ class nurseController extends Controller
 
     public function search_donors(Request $req)
     {
-        $a = $req->bloodtype;
-        $data = addBloodModel::where('bloodgroup', $a)->paginate(5);
-        return view('nurse.searchDonor', compact('data'));
+        $bloodtype = $req->bloodtype;
+        $data = enrollementModel::where('bloodtype', $bloodtype)->paginate(5);
+        return view('nurse.searchDonor', compact('data', 'bloodtype'));
+    }
+    public function Donordetail($id)
+    {
+        $donors = enrollementModel::find($id);
+        return view('nurse.DetailofDonated', ['donors' => $donors]);
+
+        //return view('nurse.searchDonor', compact('data', 'bloodtype'));
     }
 }

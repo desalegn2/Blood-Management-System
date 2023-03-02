@@ -27,7 +27,7 @@
             top: 0;
             left: 0;
             z-index: 9999;
-            overflow-y: scroll;
+            /* overflow-y: scroll; */
 
 
         }
@@ -160,30 +160,30 @@
 
         <header>
 
-            <div class="inner-width">
+            <!-- <div class="inner-width" style="width: 90vw; height: 8px;"> -->
 
-                <i class="menu-toggle-btn fas fa-bars"></i>
-                <nav class="navigation-menu">
-                    <a href="{{url('/donor/profile',Auth::user()->id)}}" class="aj_btn">
-                        {{ Auth::user()->name }}
-                    </a>
-                    <a href="{{url('/donor/home')}}">Home</a>
-                    <a href="{{url('/donor/news')}}"></i> News</a>
-                    <a href="{{url('/donor/information')}}"></i> Blood Bank Information</a>
-                    <a href="{{url('/donor/history',Auth::user()->id)}}"></i> Rigstration Status</a>
-                    <a href="{{url('/donor/seeker')}}"></i> View Seeker</a>
-                    <a href="{{url('/donor/donorregister')}}"></i> Registor</a>
-                    <a href="{{url('/donor/reservationform')}}"></i> Reservation</a>
-                    <a href="{{url('/donor/reservationhistory',Auth::user()->id)}}"></i> Reservation Status</a>
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+            <i class="menu-toggle-btn fas fa-bars" style="margin-right: 2rem;"></i>
+            <nav class="navigation-menu" style="margin: auto;">
+                <a href="{{url('/donor/profile',Auth::user()->id)}}" class="aj_btn">
+                    {{ Auth::user()->name }}
+                </a>
+                <a href="{{url('/donor/home')}}">Home</a>
+                <a href="{{url('/donor/news')}}"></i> News</a>
+                <a href="{{url('/donor/information')}}"></i> Blood Bank Information</a>
+                <a href="{{url('/donor/seeker')}}"></i> View Seeker</a>
+                <a href="{{url('/donor/donorregister')}}"></i> Registor</a>
+                <a href="{{url('/donor/history',Auth::user()->id)}}"></i> Rigstration Status</a>
+                <a href="{{url('/donor/reservationform')}}"></i> Reservation</a>
+                <a href="{{url('/donor/reservationhistory',Auth::user()->id)}}"></i> Reservation Status</a>
+                <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
 
-                        Logout</a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                </nav>
-            </div>
+                    Logout</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </nav>
+            <!-- </div> -->
         </header>
 
     </div>
