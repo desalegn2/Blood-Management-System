@@ -186,7 +186,7 @@
             </div>
         </form>
         <br> <br>
-        <a href="{{ URL::previous() }}" class="btn btn-primary btn-sm float-end">Back</a>
+
         <h1>Donors Who Donate Before</h1>
         <p></p>
         <table>

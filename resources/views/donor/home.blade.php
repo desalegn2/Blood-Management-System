@@ -315,7 +315,7 @@
 
                     <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fparse.com" target="_blank" rel="noopener">
                         <img class="YOUR_FB_CSS_STYLING_CLASS" src="{{asset('assets/imgs/fb2.png')}}" width="30px" height="30px" alt="Share on Facebook">
-                    </a>
+                    </a>/donor/reservationhistory/59
                 </div>
                 <div class="card-footer">
                     <small class="text-muted"></small>

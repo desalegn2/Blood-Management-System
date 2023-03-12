@@ -177,7 +177,7 @@
     <div id="page-wrap">
 
         <h1>Incoming Tested Blood</h1>
-        <a class="btn btn-success" href="{{url('technitian/home')}}">Home</a>
+        <!-- <a class="btn btn-success" href="{{url('technitian/home')}}">Home</a> -->
         <table>
             <thead>
                 <tr>

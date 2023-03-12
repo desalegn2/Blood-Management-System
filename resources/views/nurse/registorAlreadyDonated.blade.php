@@ -323,7 +323,7 @@
 
                     <div><label>Full Name</label><input type="text" name="fullname" value="{{$data->fullname}}" required></div>
                     <div><label>Age</label><input type="number" name="age" required></div>
-                    <div><label>Birth Date</label><input type="date" name="birthdate" value="{{$data->birthdate}}" required></div>
+
                     <div><label>Occupation</label><input type="text" name="occupation" value="{{$data->occupation}}" required></div>
                     <div><label>phone</label><input type="text" name="phone" value="{{$data->phone}}" required></div>
                     <div><label>Email</label><input type="text" name="email" value="{{$data->email}}" required></div>
@@ -349,7 +349,7 @@
                         <div><label>City</label><input type="text" name="city" value="{{$data->city}}" required></div>
                         <div><label>Zone</label><input type="text" name="zone" value="{{$data->zone}}" required></div>
                         <div><label>Woreda</label><input type="text" name="woreda" value="{{$data->woreda}}" required></div>
-                        <div><label>Kebelie</label><input type="text" name="kebelie" value="{{$data->kebelie}}" required></div>
+                        <div><label>Kebele</label><input type="text" name="kebelie" value="{{$data->kebelie}}" required></div>
                         <div><label>House Number</label><input type="text" name="housenumber" value="{{$data->housenumber}}" required></div>
                     </div>
                     <div>
@@ -363,7 +363,7 @@
                                 <option value="AB+">AB+</option>
                                 <option value="AB-">AB-</option>
                                 <option value="O+">O+</option>
-                                <option value="O-">O+</option>
+                                <option value="O-">O-</option>
                             </select>
                         </div>
                         <div><label>Volume</label><input type="text" name="volume" value="{{ Auth::user()->id }}" required></div>

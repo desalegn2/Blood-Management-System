@@ -177,8 +177,12 @@
 <body>
 
     <div id="page-wrap">
-        <a href="{{ URL::previous() }}" class="btn btn-primary btn-sm float-end">Back</a>
 
+        <div style="color: red;">
+            @error('photo')
+            <strong>{{ $message }}</strong>
+            @enderror
+        </div>
         <h1>Donors Who send reservation</h1>
         <table>
             <thead>
@@ -197,31 +201,34 @@
             </thead>
             <tbody>
                 @if(count($accepts))
-                @foreach ($accepts as $accept)
+                @foreach ($accepts as $donors)
                 <tr>
-                    <td>{{$accept->name}}</td>
+                    <td>{{$donors->firstname}}</td>
 
-                    <td>{{$accept->phone}}</td>
+                    <td>{{$donors->phone}}</td>
 
-                    <td>{{$accept->center}}</td>
-                    <td>{{$accept->reservationdate}}</td>
+                    <td>{{$donors->center}}</td>
+                    <td>{{$donors->reservationdate}}</td>
                     <td>
-                        <a class="btn btn-success" href="{{url('/nurse/accept', $accept->id)}}">Accept</a>
-                        <a class="btn btn-danger" href="{{url('nurse/notaccept', $accept->id)}}">NotAccept</a>
+                        <a class="btn btn-success" href="{{url('nurse/reservationdetail', $donors->id)}}">View</a>
+
+                        <a href="{{url('nurse/registordon',$donors->id)}}" class="btn btn-primary btn-sm float-end"><i class='fa fa-edit'></i> Registor</a>
+                        <!-- <a class="btn btn-success" href="{{url('/nurse/accept', $donors->id)}}">Accept</a>
+                        <a class="btn btn-danger" href="{{url('nurse/notaccept', $donors->id)}}">NotAccept</a> -->
                     </td>
                     <td>
-                        <a href="#delete{{$accept->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</a>
-                        <a href="#resend{{$accept->id}}" data-bs-toggle="modal" class="btn btn-info"><i class='fa fa-edit'></i> Change Date</a>
+                        <!-- <a href="#delete{{$donors->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</a> -->
+                        <a href="#resend{{$donors->id}}" data-bs-toggle="modal" class="btn btn-info"><i class='fa fa-edit'></i> Change Date</a>
                         @include('nurse.resendReservation')
                     </td>
                     <!-- <td>
-                        <form action="{{ url('nurse.reservationstatus', $accept->id) }}" method="POST">
+                        <form action="{{ url('nurse.reservationstatus', $donors->id) }}" method="POST">
 
                             @csrf
-                            @if($accept->status == 'in progress')
-                            <button type="submit" class="btn btn-success show_block_confirm" data-name={{ $accept->status == 'in progress' ? 'Approve' : 'DisApprove' }} title='Approve'>{{ $accept->status == 1 ? 'DisApprove' : 'Approve' }}</button>
+                            @if($donors->status == 'in progress')
+                            <button type="submit" class="btn btn-success show_block_confirm" data-name={{ $donors->status == 'in progress' ? 'Approve' : 'DisApprove' }} title='Approve'>{{ $donors->status == 1 ? 'DisApprove' : 'Approve' }}</button>
                             @else
-                            <button type="submit" class="btn btn-warning show_block_confirm" data-name={{ $accept->status == 'in progress' ? 'Approve' : 'DisApprove' }} title='DisApprove'>{{ $accept->Statuse == 1 ? 'Approve' : 'DisApprove' }}</button>
+                            <button type="submit" class="btn btn-warning show_block_confirm" data-name={{ $donors->status == 'in progress' ? 'Approve' : 'DisApprove' }} title='DisApprove'>{{ $donors->Statuse == 1 ? 'Approve' : 'DisApprove' }}</button>
                             @endif
                         </form>
                     </td> -->

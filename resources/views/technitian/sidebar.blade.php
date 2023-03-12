@@ -324,7 +324,7 @@
                     </a>
                 </li> -->
                 <li>
-                    <a href="viewstoredblood">
+                    <a href="{{url('/technitian/viewstoredblood')}}">
                         <span class="icon">
                             <ion-icon name="lock-closed-outline"></ion-icon>
                         </span>

@@ -25,6 +25,7 @@ use App\Http\Controllers\healthinstituteController;
 use App\Http\Controllers\nurseController;
 use App\Http\Controllers\techController;
 use App\Http\Controllers\bbManagerController;
+use App\Http\Controllers\botController;
 use App\Http\Controllers\encoderController;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -41,11 +42,13 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('HomePage');
 });
+Route::match(['get', 'post'], 'botman', [botController::class, 'handle']);
+
 Route::view('create_account', 'createAccount');
 Route::post('create_acc', [donorController::class, 'createAccount']);
 
 Route::view('about', 'aboutus');
-Route::view('aa', 'aaa');
+Route::view('aa', 'index');
 
 Route::get('bb', function () {
     return view('index');
@@ -68,13 +71,15 @@ All Normal Users Routes List
 --------------------------------------------*/
     Route::middleware(['auth', 'user-role:donor'])->group(function () {
         Route::get('/donor/home', [HomeController::class, 'donorHome'])->name('donor.home');
-        //Route::get('/donor/home', [donorController::class, 'getAdvertise'])->name('donor.home');
-        // Route::view('donor/newhome', 'donor.home');
-        Route::post('donor/donorregister', [donorController::class, 'register']);
+        Route::view('donor/asks', 'donor.chatbot');
+
+
         Route::view('donor/donorregister', 'donor.Register');
-        //Route::view('donor/reservation', 'donor.Reservation');
+        Route::post('donor/donorregister', [donorController::class, 'register']);
+
+
         Route::get('/donor/reservationform', [donorController::class, 'ReservationForm']);
-        Route::post('/donor/reservation/{id}', [donorController::class, 'reservation']);
+        Route::post('/donor/reservation/', [donorController::class, 'reservation']);
         Route::get('/donor/history/{id}', [donorController::class, 'history']);
         Route::get('/donor/reservationhistory/{id}', [donorController::class, 'reservationHistory']);
 
@@ -158,15 +163,15 @@ All Admin Routes List
     });
 
     Route::middleware(['auth', 'user-role:nurse'])->group(function () {
-
         Route::get('/nurse/home', [HomeController::class, 'nurseHome'])->name('nurse.home');
-        // Route::view('/nurse/newhome', 'nurse.home');
+        Route::get('/nurse/home', [nurseController::class, 'ReturntoHome'])->name('nurse.home');
+        //profile
         Route::get('/nurse/profile/{id}', [nurseController::class, 'Profile']);
         Route::post('/nurse/updateprofile/{id}', [nurseController::class, 'updateProfile']);
         Route::post('/nurse/updatephoto/{id}', [nurseController::class, 'updatephoto']);
         Route::post('/nurse/changepassword', [nurseController::class, 'changepassword']);
 
-        Route::view('/nurse/enroll', 'nurse.registerDonor');
+        Route::view('/nurse/enroll', 'nurse.enrollDonor');
         Route::post('/nurse/enrolldonor', [nurseController::class, 'enrollDonor']);
         Route::get('/nurse/notify', [nurseController::class, 'notifys']);
         Route::get('/nurse/send/{id}', [nurseController::class, 'sendnotification']);
@@ -182,10 +187,12 @@ All Admin Routes List
         Route::delete('/nurse/delete/{id}', [donorReq::class, 'delete']);
 
         Route::get('/nurse/listofapproved', [nurseController::class, 'displayapproved']);
-        Route::get('/nurse/home', [nurseController::class, 'ReturntoHome'])->name('nurse.home');
+
 
         Route::view('/nurse/reservation', 'nurse.reserationManagement');
         Route::get('/nurse/reservation', [nurseController::class, 'manageReservation']);
+        Route::get('/nurse/reservationdetail/{id}', [nurseController::class, 'reservationDetail']);
+
         Route::post('/nurse.reservationstatus/{id}', [nurseController::class, 'reservationstatus']);
 
         Route::delete('/nurse/deletereservation/{id}', [nurseController::class, 'deleteRes']);

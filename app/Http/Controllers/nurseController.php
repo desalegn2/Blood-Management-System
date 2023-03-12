@@ -26,15 +26,18 @@ class nurseController extends Controller
         //$stats = donorRequestModel::all()->orderBy('created_at', 'desc')->take(4);
         $donors_enrolled = enrollementModel::count();
         $donor = donorRequestModel::count();
+        //  $donors_enrolled = enrollementModel::distinct()->count('fullname');
 
-        $aplus = addBloodModel::where('bloodgroup', 'A+')->count();
-        $aminus = addBloodModel::where('bloodgroup', 'A-')->count();
-        $bplus = addBloodModel::where('bloodgroup', 'B+')->count();
-        $bminus = addBloodModel::where('bloodgroup', 'B-')->count();
-        $abminus = addBloodModel::where('bloodgroup', 'AB-')->count();
-        $abplus = addBloodModel::where('bloodgroup', 'AB+')->count();
-        $ominus = addBloodModel::where('bloodgroup', 'O-')->count();
-        $oplus = addBloodModel::where('bloodgroup', 'O+')->count();
+        //  $a = enrollementModel::where('bloodtype', 'A-')->distinct()->count('fullname');
+
+        $aplus = enrollementModel::where('bloodtype', 'A+')->count();
+        $aminus = enrollementModel::where('bloodtype', 'A-')->count();
+        $bplus = enrollementModel::where('bloodtype', 'B+')->count();
+        $bminus = enrollementModel::where('bloodtype', 'B-')->count();
+        $abminus = enrollementModel::where('bloodtype', 'AB-')->count();
+        $abplus = enrollementModel::where('bloodtype', 'AB+')->count();
+        $ominus = enrollementModel::where('bloodtype', 'O-')->count();
+        $oplus = enrollementModel::where('bloodtype', 'O+')->count();
 
         $date = \Carbon\Carbon::today()->subDays(1);
         $stats = donorRequestModel::where('created_at', '>=', $date)->get();
@@ -132,6 +135,12 @@ class nurseController extends Controller
         $accepts = reservationModel::all();
         return view('nurse.reserationManagement', ['accepts' => $accepts]);
     }
+
+    function reservationDetail($id)
+    {
+        $donors = reservationModel::find($id);
+        return view('nurse.reservationDetail', ['donors' => $donors]);
+    }
     // public function reservationstatus(Request $request, $id)
     // {
     //     $user = reservationModel::find($id);
@@ -156,7 +165,7 @@ class nurseController extends Controller
         $res = reservationModel::find($id);
         $res->delete();
 
-        return view('nurse.reserationManagement');
+        return redirect()->back();
     }
     function accept($id)
     {
@@ -174,6 +183,7 @@ class nurseController extends Controller
     }
     function changeReservation(Request $req, $id)
     {
+
         $res = reservationModel::find($id);
         $var = $req->changedate;
         $res->appointmentdate = $var;
@@ -184,8 +194,8 @@ class nurseController extends Controller
     {
         $var = new enrollementModel;
         $var->user_id = $req->user_id;
-        $var->nursename = $req->nursename;
-        $var->fullname = $req->fullname;
+        $var->firstname = $req->first_name;
+        $var->lastname = $req->last_name;
         $var->packno = $req->packno;
         $var->occupation = $req->occupation;
         $var->email = $req->email;
@@ -197,6 +207,7 @@ class nurseController extends Controller
         $var->weight = $req->weight;
         $var->height = $req->height;
         $var->age = $req->age;
+        $var->country = $req->country;
         $var->state = $req->state;
         $var->city = $req->city;
         $var->zone = $req->zone;
@@ -212,7 +223,7 @@ class nurseController extends Controller
             $var->photo =  $filename;
         }
         $var->save();
-        return view('nurse.registerDonor')->with('success', 'Task Added Successfully!');
+        return redirect()->back()->with('success', 'Task Added Successfully!');
     }
 
     function listofDonor()
@@ -283,7 +294,11 @@ class nurseController extends Controller
 
     public function search_donors(Request $req)
     {
+
         $bloodtype = $req->bloodtype;
+
+
+        //$data = enrollementModel::where('bloodtype', $bloodtype)->distinct()->get(['fullname']);
         $data = enrollementModel::where('bloodtype', $bloodtype)->paginate(5);
         return view('nurse.searchDonor', compact('data', 'bloodtype'));
     }

@@ -305,6 +305,7 @@
     <!-- ======================= Total Blood Availability ================== -->
 
     <div class="grey-bg container-fluid">
+        
 
         <section id="minimal-statistics">
 

@@ -12,22 +12,24 @@ class enrollementModel extends Model
     public $table = "enrolldonor";
     protected $fillable = [
         'user_id',
-        'nursename',
-        'fullname',
-        'packno',
+
+        'firstname',
+        'lastname',
+        'age',
         'occupation',
         'photo',
+        'email',
         'phone',
         'gender',
-        'bloodtype',
-        'volume',
-
-
-        'remark',
         'weight',
         'height',
 
-        'age',
+        'packno',
+        'bloodtype',
+        'volume',
+        'remark',
+
+        'country',
         'state',
         'city',
         'zone',
@@ -35,7 +37,6 @@ class enrollementModel extends Model
         'kebelie',
         'housenumber',
         'typeofdonation',
-        'email',
     ];
     public function user()
     {

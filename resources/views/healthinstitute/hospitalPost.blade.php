@@ -258,7 +258,7 @@
         <form action="post_seeker" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="hospital" value="{{ Auth::user()->name }}" required>
-            <h1>Blood Request Form</h1>
+            <h1>Post Seeker Form</h1>
             <fieldset>
                 <legend>
                     <h3>Fill This Form</h3>
@@ -266,7 +266,14 @@
                 <div class="account-details">
 
                     <div><label>First Name</label><input type="text" name="fname" required></div>
-                    <div><label>When You Need</label><input type="date" name="whenneed" required></div>
+                    <div><label>When You Need</label><input type="date" name="whenneed" required>
+                        <div style="color: red;">
+                            @error('whenneed')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+
+                    </div>
                     <div><label>Last name</label><input type="text" name="lname" required></div>
                     <div><label>State</label><input type="text" name="state" required></div>
 

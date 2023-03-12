@@ -177,7 +177,7 @@
 <body>
 
     <div id="page-wrap">
-        <a class="btn btn-success" href="{{url('nurse/home')}}">Home</a>
+
 
         <h1>{{$bloodtype}} Blood donors</h1>
 

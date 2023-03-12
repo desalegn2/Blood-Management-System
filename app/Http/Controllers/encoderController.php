@@ -52,7 +52,7 @@ class encoderController extends Controller
         if ($var) {
             enrollementModel::where("id", $id)
                 ->update(["status" => 'recorded', "bloodtype" => $req->bloodtype]);
-            return redirect()->back()->with('success', 'Task Added Successfully!');
+            return redirect('encoder/record')->with('success', 'Task Added Successfully!');
         }
     }
     function Profile($id)

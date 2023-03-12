@@ -218,7 +218,7 @@
                             <li> <a href="#"> <i class="fa fa-telegram"> </i> </a> </li>
                         </ul>
                         <br> <br> <br>
-                        <h1 style="color:white;">+0582207515</h1>
+                        <h1 style="color:white;">+058 2207515</h1>
 
                     </div>
                 </div>

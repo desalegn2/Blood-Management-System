@@ -174,6 +174,7 @@
                 <a href="{{url('/donor/donorregister')}}"></i> Registor</a>
                 <a href="{{url('/donor/history',Auth::user()->id)}}"></i> Rigstration Status</a>
                 <a href="{{url('/donor/reservationform')}}"></i> Reservation</a>
+                <a href="{{url('/donor/asks')}}"></i> Ask</a>
                 <a href="{{url('/donor/reservationhistory',Auth::user()->id)}}"></i> Reservation Status</a>
                 <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

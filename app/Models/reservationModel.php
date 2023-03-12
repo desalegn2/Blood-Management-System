@@ -13,12 +13,24 @@ class reservationModel extends Model
 
     protected $fillable = [
         'user_id',
-        'name',
+        'firstname',
         'lastname',
+        'age',
+        'occupation',
+        'photo',
         'email',
         'phone',
         'gender',
-        'reservationdate',
-        'center',
+        'weight',
+        'height',
+
+        'bloodtype',
+        'country',
+        'state',
+        'city',
+        'zone',
+        'woreda',
+        'kebelie',
+        'housenumber',
     ];
 }

@@ -13,8 +13,8 @@
         .footer-bottom {
             background: #E3E3E3;
             border-top: 1px solid #DDDDDD;
-            padding-top: 10px;
-            padding-bottom: 10px;
+            /* padding-top: 10px;
+            padding-bottom: 10px; */
         }
 
         .footer-bottom p.pull-left {
@@ -23,7 +23,7 @@
     </style>
 </head>
 
-<body>
+<body style="padding-bottom:0%;">
 
     <footer>
         <div class="footer-bottom">

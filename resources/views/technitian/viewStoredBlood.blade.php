@@ -184,7 +184,7 @@
 
         <p>PACKED RED BLOOD CELLS (PRBCS) are stored in a Blood Bank refrigerator at a temp of 1-6ºC until issue. The shelf life is 42 days from the date of collection The expiration date is located on the unit(s).</p>
 
-        <a class="btn btn-success" href="{{url('technitian/home')}}">Home</a>
+
         <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add</button> -->
         <br><br>
         <table>

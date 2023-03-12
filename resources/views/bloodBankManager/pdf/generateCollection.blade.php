@@ -98,6 +98,7 @@
             </tbody>
         </table>
         <p>proper collection, handling, and transportation of blood samples are critical to obtaining accurate test results and preventing infections or other adverse events.</p>
+        
         <br><br><br>
         <p>Bahir Dar Blood Bank Representative<br>
             {{ Auth::user()->name }}

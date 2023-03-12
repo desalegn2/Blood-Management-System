@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <input type="submit" value="edite">
+                                        <input type="submit" value="edit">
                                     </div>
                                 </div>
                         </div>

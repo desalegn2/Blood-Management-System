@@ -24,7 +24,7 @@
         </div>
         <div class="card-body">
             <div class="row mb-4">
-                <label class="col-sm-2 col-label-form"><b>Image</b></label>
+                <label class="col-sm-2 col-label-form"><b>Photo</b></label>
                 <div class="col-sm-10">
                     <img src="{{asset('uploads/registers/'.$donors->photo)}}" width="80" height="80">
                 </div>

@@ -15,6 +15,7 @@ class techController extends Controller
 {
     function discardblood(Request $req)
     {
+        
         $aplus_stored = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
         $aminus_stored = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
         $oplus_stored = addBloodModel::where('bloodgroup', 'O+')->sum('volume');

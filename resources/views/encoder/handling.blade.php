@@ -31,7 +31,7 @@
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">464/4545/4545</small>
-                    <a href="" style="float: right;">Read more</a>
+
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">464/4545/4545</small>
-                    <a href="" style="float: right;">Read more</a>
+
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">464/4545/4545</small>
-                    <a href="" style="float: right;">Read more</a>
+
                 </div>
             </div>
         </div>
@@ -81,7 +81,7 @@
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">464/4545/4545</small>
-                    <a href="" style="float: right;">Read more</a>
+
                 </div>
             </div>
         </div>

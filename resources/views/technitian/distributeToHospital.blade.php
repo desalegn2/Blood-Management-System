@@ -178,9 +178,6 @@
 
         <h1>Incoming Blood Request</h1>
         <a class="btn btn-success" href="{{url('technitian/home')}}">Home</a>
-
-
-
         <table>
             <thead>
                 <tr>

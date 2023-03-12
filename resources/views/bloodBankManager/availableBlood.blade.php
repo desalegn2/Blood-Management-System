@@ -176,7 +176,7 @@
     <div id="page-wrap">
 
         <h1>Distribute</h1>
-        <a class="btn btn-success" href="{{ url()->previous() }}">Home</a>
+
         <table>
             <thead>
                 <tr>

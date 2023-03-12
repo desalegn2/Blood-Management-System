@@ -524,7 +524,7 @@
         <div class="recentOrders">
             <div class="cardHeader">
                 <h2>{{$numberof_user}} Total user</h2>
-                <a href="" class="btn">View All</a>
+
             </div>
 
             <table>

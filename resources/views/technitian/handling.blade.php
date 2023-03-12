@@ -13,6 +13,8 @@
 <body>
 
     <div class="container mt-5">
+
+
         <h1>Handling, Storage & Returns </h1>
         <h4> PACKED RED BLOOD CELLS (PRBCS) RED BLOOD CELLS (RBCS)
 
@@ -29,7 +31,7 @@
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">464/4545/4545</small>
-                    <a href="" style="float: right;">Read more</a>
+                    <a href="" style="float: right;text-decoration:none;">Bahir dar Blood Bank</a>
                 </div>
             </div>
         </div>
@@ -46,7 +48,7 @@
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">464/4545/4545</small>
-                    <a href="" style="float: right;">Read more</a>
+                    <a href="" style="float: right;">Bahir dar Blood Bank </a>
                 </div>
             </div>
         </div>
@@ -62,7 +64,7 @@
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">464/4545/4545</small>
-                    <a href="" style="float: right;">Read more</a>
+                    <a href="" style="float: right;">Bahir dar Blood Bank</a>
                 </div>
             </div>
         </div>
@@ -79,7 +81,7 @@
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">464/4545/4545</small>
-                    <a href="" style="float: right;">Read more</a>
+                    <a href="" style="float: right;">Bahir dar Blood Bank</a>
                 </div>
             </div>
         </div>

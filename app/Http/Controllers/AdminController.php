@@ -83,35 +83,11 @@ class AdminController extends Controller
         $donors->save();
         return redirect()->back();
     }
-    public function getDonors()
-    {
+   
 
-        $members = User::where('role', '1')->get();
-        return view('admin.donorDetail')->with('members', $members);
-    }
-    public function updateDonor(Request $request, $id)
-    {
-        $member = User::find($id);
-        $input = $request->all();
-        $member->fill($input)->save();
+    
 
-        return redirect()->back();
-    }
-
-    function deleteDonor($id)
-    {
-        $donor = User::find($id);
-        $donor->delete();
-
-        return redirect()->back();
-    }
-
-    public function getNurse()
-    {
-
-        $members = User::where('role', '3')->get();
-        return view('admin.manageNurse')->with('members', $members);
-    }
+    
     public function updateNurse(Request $request, $id)
     {
         $member = User::find($id);
@@ -128,96 +104,10 @@ class AdminController extends Controller
 
         return redirect()->back();
     }
-    public function getTech()
-    {
+    
 
-        $members = User::where('role', '4')->get();
-        return view('admin.manageTech')->with('members', $members);
-    }
-    public function updateTech(Request $request, $id)
-    {
-        $member = User::find($id);
-        $input = $request->all();
-        $member->fill($input)->save();
-
-        return redirect()->back();
-    }
-
-    function deleteTech($id)
-    {
-        $donor = User::find($id);
-        $donor->delete();
-
-        return redirect()->back();
-    }
-    public function getHI()
-    {
-
-        $members = User::where('role', '5')->get();
-        return view('admin.manageHI')->with('members', $members);
-    }
-    public function updateHI(Request $request, $id)
-    {
-        $member = User::find($id);
-        $input = $request->all();
-        $member->fill($input)->save();
-        return redirect()->back();
-    }
-
-    function deleteHI($id)
-    {
-        $donor = User::find($id);
-        $donor->delete();
-
-        return redirect()->back();
-    }
-
-
-    public function getEncoder()
-    {
-
-        $members = User::where('role', '6')->get();
-        return view('admin.manageEncoder')->with('members', $members);
-    }
-    public function updateEncoder(Request $request, $id)
-    {
-        $member = User::find($id);
-        $input = $request->all();
-        $member->fill($input)->save();
-
-        return redirect()->back();
-    }
-
-    function deleteEncoder($id)
-    {
-        $donor = User::find($id);
-        $donor->delete();
-
-        return redirect()->back();
-    }
-    public function getManager()
-    {
-
-        $members = User::where('role', '0')->get();
-        return view('admin.manager')->with('members', $members);
-    }
-    public function updateManager(Request $request, $id)
-    {
-        $member = User::find($id);
-        $input = $request->all();
-        $member->fill($input)->save();
-
-        return redirect()->back();
-    }
-
-    function deleteManager($id)
-    {
-        $donor = User::find($id);
-        $donor->delete();
-
-        return redirect()->back();
-    }
-
+    
+   
 
     function userNotification()
     {

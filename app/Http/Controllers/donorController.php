@@ -14,6 +14,7 @@ use App\Models\feedbackModel;
 use App\Models\bbinformatiomModel;
 use App\Http\Requests\CreateaccountRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Exceptions\PostTooLargeException;
 
 class donorController extends Controller
 {
@@ -62,65 +63,81 @@ class donorController extends Controller
     }
     function register(Request $req)
     {
-        $var = new donorRequestModel;
-        $var->user_id = $req->user_id;
-        $var->name = $req->firstname;
-        $var->lastname = $req->lastname;
-        $var->phone = $req->phone;
-        $var->gender = $req->gender;
-        $var->bloodtype = $req->bloodtype;
-        $var->weight = $req->weight;
-        $var->healthstatus = $req->healthstatus;
-        $var->bithdate = $req->birthdate;
-        $var->state = $req->state;
-        $var->city = $req->city;
-        $var->email = $req->email;
-        if ($req->hasfile('photo')) {
-            $file = $req->file('photo');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
-            $file->move('uploads/registers', $filename);
-            $var->photo =  $filename;
-        }
-        $var->save();
+        try {
 
-        return redirect('donor/home')->with('success', 'Task Added Successfully!');
+            $req->validate([
+                'photo' => 'required|file|max:102400|mimes:jpeg,png,jpg,gif',
+                'email' => 'required|string|email|max:255|unique:users',
+                'firstname' => 'required|string|max:255',
+                //'phone' => 'required|numeric|digits:10',
+                'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:13',
+                'age' => 'required|numeric|min:17|max:70',
+                'weight' => 'required|numeric|min:48'
+            ]);
+
+            $var = new donorRequestModel;
+            $var->user_id = $req->user_id;
+            $var->name = $req->firstname;
+            $var->lastname = $req->lastname;
+            $var->phone = $req->phone;
+            $var->gender = $req->gender;
+            $var->bloodtype = $req->bloodtype;
+            $var->weight = $req->weight;
+            $var->healthstatus = $req->healthstatus;
+            $var->bithdate = $req->age;
+            $var->state = $req->state;
+            $var->city = $req->city;
+            $var->email = $req->email;
+            if ($req->hasfile('photo')) {
+                $file = $req->file('photo');
+                $extention = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extention;
+                $file->move('uploads/registers', $filename);
+                $var->photo =  $filename;
+            }
+            $var->save();
+
+            return redirect('donor/home')->with('success', 'Task Added Successfully!');
+        } catch (PostTooLargeException $exception) {
+            return redirect()->back()->with('success', 'The uploaded file exceeds the maximum size allowed.');
+        }
     }
 
     function ReservationForm()
     {
         $data = User::where('role', 5)->get();
-        return view('donor.Reservation', ['data' => $data]);
+        return view('donor.reservation', ['data' => $data]);
     }
-    function reservation(Request $req, int $id)
+    function reservation(Request $req)
     {
-        $isExist = donorRequestModel::select("*")
-            ->where("user_id", $id)
-            ->exists();
-        if ($isExist) {
-            $stats = donorRequestModel::where('user_id', '=', $id)->orderBy('created_at', 'desc')->first();
-            $stat = $stats->status;
-            if ($stat == 'Approved') {
-                $var = new reservationModel;
-                $var->user_id = $req->user_id;
-                $var->name = $req->firstname;
-                $var->lastname = $req->lastname;
-                $var->phone = $req->phone;
-                $var->gender = $req->gender;
-                $var->email = $req->email;
-                $var->reservationdate = $req->reservationdate;
-                $var->center = $req->center;
-                $var->save();
-                return redirect('donor/home')->with('success', 'Task Added Successfully!');
-            } else if ($stat == 'Disapproved') {
-                return redirect('donor/reservation')->with('warning', 'Reservation not sent your you cannot donate now');
-            } else if ($stat == 'in progress') {
-                return redirect('donor/reservation')->with('warning', 'Reservation not sent please wait untill approved');
-            }
-        } else {
+        $var = new reservationModel;
+        $var->user_id = $req->user_id;
+        $var->firstname = $req->first_name;
+        $var->lastname = $req->last_name;
 
-            return redirect('donor/reservation')->with('warning', 'first register');
-        }
+        $var->occupation = $req->occupation;
+        $var->email = $req->email;
+        $var->phone = $req->phone;
+        $var->gender = $req->gender;
+        $var->bloodtype = $req->bloodtype;
+
+        $var->weight = $req->weight;
+        $var->height = $req->height;
+        $var->health = $req->health;
+
+        $var->age = $req->age;
+        $var->country = $req->country;
+        $var->state = $req->state;
+        $var->city = $req->city;
+        $var->zone = $req->zone;
+        $var->woreda = $req->woreda;
+        $var->kebelie = $req->kebelie;
+        $var->housenumber = $req->housenumber;
+        $var->reservationdate = $req->reservationdate;
+
+
+        $var->save();
+        return redirect()->back()->with('success', 'Task Added Successfully!');
     }
     function history($id)
     {

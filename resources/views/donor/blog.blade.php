@@ -21,6 +21,7 @@
 <body>
     <h1>Hello, world!</h1>
 
+
     <div class="container mt-5">
         @foreach($advert as $adv)
         <div class=" mt-5">
@@ -36,7 +37,7 @@
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">{{ $adv->created_at}}</small>
-                    <a href="" style="float: right;">Read more</a>
+                    <a href="" style="float: right; text-decoration:none;">Bahir Dar Blood Bank</a>
                 </div>
             </div>
         </div>

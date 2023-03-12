@@ -255,6 +255,7 @@
                     <h5>Basic requirement of a potential blood donor: </h5>
                     <ul>
                         <li> Weight: At least 110 lbs (50 kg)</li>
+                        <li> BMI: At least 18.5.BMI is a measure of body fat based on a person's height and weight, and it is calculated by dividing the weight in kilograms by the square of the height in meters.</li>
                         <li> Blood volume collected will depend mainly on you body weight.</li>
                         <li>Pulse rate: Between 60 and 100 beats/minute with regular rhythm.</li>
                         <li> Blood pressure: Between 90 and 160 systolic and 60 and 100 diastolic.</li>
@@ -291,7 +292,7 @@
     <div class="main-block">
         <form action="donorregister" method="post" enctype="multipart/form-data">
             @csrf
-
+            <div><label></label><input type="hidden" name="lastname" value="0" required></div>
             <fieldset>
                 <legend>
                     <h3>Fill This Form To Register For Donate Blood</h3>
@@ -300,12 +301,46 @@
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required>
 
                     <div><label>Full Name</label><input type="text" name="firstname" value="{{ Auth::user()->name }}" required></div>
-                    <div><label>Phone</label><input type="text" name="phone" required></div>
-                    <div><label>Weight</label><input type="text" name="weight" required></div>
-                    <div><label>Email</label><input type="text" name="email" value="{{ Auth::user()->email }}" required></div>
-                    <div><label>Age</label><input type="numer" name="birthdate" required></div>
-                    <div><label>Image</label><input type="file" name="photo" required></div>
-                    <div><label></label><input type="hidden" name="lastname" value="0" required></div>
+                    <div><label>Phone</label><input type="text" name="phone" required>
+                        <div style="color: red;">
+                            @error('phone')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+
+                    </div>
+                    <div><label>Weight</label><input type="text" name="weight" required>
+
+                        <div style="color: red;">
+                            @error('weight')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+                    <div><label>Age</label><input type="number" name="age" required>
+                        <div style="color: red;">
+                            @error('age')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+
+                    </div>
+                    <div><label>Image</label><input type="file" name="photo" required>
+                        <div style="color: red;">
+                            @error('photo')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+                    <div><label>Email</label><input type="text" name="email" value="{{ Auth::user()->email }}" required>
+                        <div style="color: red;">
+                            @error('email')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+
+
                 </div>
             </fieldset>
             <fieldset>
@@ -320,13 +355,14 @@
                             <label>Blood Group</label>
                             <select name="bloodtype" required>
                                 <option value="">choose blood type</option>
+                                <option value="A+">unkown</option>
                                 <option value="A+">A+</option>
                                 <option value="A-">A-</option>
                                 <option value="B+">B+</option>
                                 <option value="AB+">AB+</option>
                                 <option value="AB-">AB-</option>
                                 <option value="O+">O+</option>
-                                <option value="O-">O+</option>
+                                <option value="O-">O-</option>
                             </select>
                         </div>
 
@@ -352,7 +388,7 @@
 
                 </div>
             </fieldset>
-            <fieldset>
+            <fieldset style="padding-left: 30px;">
                 <legend>
                     <h3>Terms and Mailing</h3>
                 </legend>
@@ -365,6 +401,7 @@
             <button type="submit" href="">Submit</button>
         </form>
     </div>
+    @include('sweetalert::alert')
 </body>
 
 </html>

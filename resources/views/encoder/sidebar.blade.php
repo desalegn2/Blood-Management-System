@@ -311,7 +311,7 @@
                         <span class="icon">
                             <ion-icon name="bag-handle-outline"></ion-icon></ion-icon>
                         </span>
-                        <span class="title">Handling</span>
+                        <span class="title">&nbsp; &nbsp;Handling Rule</span>
                     </a>
                 </li>
 

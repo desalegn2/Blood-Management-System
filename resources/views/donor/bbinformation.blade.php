@@ -12,7 +12,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>blood bank</title>
     <style>
 
     </style>
@@ -33,14 +33,10 @@
                 <div class="col-md-8">
                     <h3 class="card-title mt-2">{{$adv->title}}</h3>
                     <p class="card-text mb-4">{{$adv->description}}</p>
-                    <button class="mb-4" href="" style="float: right;">share </button>
-
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fparse.com" target="_blank" rel="noopener">
-                        <img class="YOUR_FB_CSS_STYLING_CLASS" src="{{asset('assets/imgs/fb2.png')}}" width="30px" height="30px" alt="Share on Facebook">
-                    </a>
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">{{ $adv->created_at}}</small>
+
                     <p style="float: right;">Bahir Dar Blood Bank</p>
                 </div>
             </div>
@@ -57,7 +53,7 @@
                 </div>
                 <div class="col-md-8">
                     <h3 class="card-title mt-2">Blood Compatibility</h3>
-                    <p class="card-text mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos accusantium amet quaerat illo saepe eos pariatur earum natus cumque, eaque tenetur, ratione voluptas consequatur iusto molestiae doloribus excepturi alias vero?</p>
+                    <p class="card-text mb-4">Blood compatibility refers to the ability of one person's blood to be transfused into another person's body without causing an adverse reaction. Blood compatibility is determined by the presence or absence of certain antigens and antibodies on the surface of red blood cells.</p>
                     <img class="d-block w-100" src="{{asset('assets/imgs/blood-donor-compatibilityv3.jpg')}}" alt="First slide">
                 </div>
                 <div class="card-footer">

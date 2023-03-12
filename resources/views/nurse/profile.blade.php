@@ -98,20 +98,18 @@
                                         <h4> {{$dataprofil->name}}</h4>
                                         <p class="text-secondary mb-1">Nurse</p>
 
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class='fa fa-edit'></i>Change Password</button>
-
                                     </div>
                                 </div>
                                 <hr>
 
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Change Photo</h6>
-
+                                        <h6 class="mb-0" style="font-size:13px;">change Photo</h6>
                                     </div>
 
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="file" name="photo" required>
+                                        <input type="file" name="photo" style="font-size:15px;" required>
+                                        <br><br>
                                         <input type="submit" value="save">
                                     </div>
                                 </div>
@@ -158,14 +156,14 @@
 
                                 <hr>
 
-                                <hr>
+
 
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Email</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="email" value="{{$dataprofil->email}}" readonly>
+                                        <input type="text" name="email" value="{{$dataprofil->email}}">
                                     </div>
                                 </div>
 
@@ -183,8 +181,12 @@
                                         <input type="submit" value="edit">
                                     </div>
                                 </div>
+
                         </div>
+
                     </div>
+                    <br> <br> <br>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-left"><i class='fa fa-edit'></i>Change Password</button>
                 </div>
                 </form>
                 @endforeach

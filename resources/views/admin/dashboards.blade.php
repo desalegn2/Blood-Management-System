@@ -86,7 +86,7 @@
                                                 <strong>{{ $message }}</strong>
                                                 @enderror
                                             </div>
-                                            <input type="file" name="photo" id="form2Example11" class="form-control" placeholder="Enter Password" />
+                                            <input type="file" name="photo" class="form-control">
                                             <label class="form-label" for="form2Example11">Photo</label>
                                         </div>
                                         <div class="form-outline mb-4">

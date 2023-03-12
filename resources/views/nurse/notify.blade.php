@@ -180,7 +180,7 @@
 
     <div id="page-wrap">
         <h1>Donors Who Donate Before</h1>
-        <a class="btn btn-success" href="{{url('nurse/home')}}">Home</a>
+
         <form action="{{url('/nurse/datetonotify')}}" method="get">
             @csrf
             <div style="float: right;">

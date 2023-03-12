@@ -83,7 +83,15 @@ class hospitalRequestController extends Controller
             'photo' => 'required|mimes:jpeg,png,jpg,gif',
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
+            
+            'fname' => 'required|string|max:255',
+            'lname' => 'required|string|max:255',
+            'fname' => 'required|string|max:255',
+            'lname' => 'required|string|max:255',
+
+
             'age' => 'min:1|max:3',
+            'whenneed' => 'required|date|after_or_equal:today',
         ]);
         $var = new hospitalPosts;
         $var->user_id = $req->user_id;

@@ -89,6 +89,7 @@ class bbManagerController extends Controller
     {
         $startDate = $request->startdate;
         $endDate = $request->enddate;
+        
         $data = enrollementModel::whereBetween('created_at', [$startDate, $endDate])->get();
         $total = enrollementModel::whereBetween('created_at', [$startDate, $endDate])->sum('volume');
 

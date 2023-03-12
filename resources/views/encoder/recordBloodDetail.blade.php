@@ -177,7 +177,7 @@
     <div id="page-wrap">
 
         <h1>Record Blood Detail</h1>
-        <a class="btn btn-success" href="{{url('encoder/home')}}">Home</a>
+        <!-- <a class="btn btn-success" href="{{url('encoder/home')}}">Home</a> -->
         <table>
             <thead>
                 <tr>

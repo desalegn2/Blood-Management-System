@@ -12,7 +12,7 @@
     <div id="page-wrap">
 
         <h1>Responsive Table</h1>
-        <a class="btn btn-success" href="{{url('nurse/home')}}">Home</a>
+        <!-- <a class="btn btn-success" href="{{url('nurse/home')}}">Home</a> -->
         <p>Go to <a href="">Non-Responsive Table</a></p>
 
         <p>This is the exact same table, only has @media queries applied to is so that when the screen is too narrow, it reformats (via only CSS) to make each row a bit like it's own table. This makes for much more repetition and vertical space needed, but it fits within the horizontal space, so only natural vertical scrolling is needed to explore the data.</p>

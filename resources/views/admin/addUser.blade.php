@@ -102,6 +102,7 @@
 
                                                 <option value="6">Encoder</option>
                                                 <option value="0">Manager</option>
+                                                <option value="2">admin</option>
                                             </select>
                                             <label class="form-label" for="form2Example11">Choose User Type</label>
                                         </div>
