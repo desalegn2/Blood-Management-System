@@ -1,4 +1,4 @@
-@extends('nurse.sidebar')
+@extends('nurse.side_bar')
 @section('content')
 
 <!DOCTYPE html>
@@ -77,11 +77,11 @@
                 <div class="form-grid">
                     <div>
                         <label for="last_name">First Name:</label>
-                        <input type="text" id="first_name" name="first_name" required>
+                        <input type="text" id="first_name" name="firstname" required>
                     </div>
                     <div>
                         <label for="first_name">Last Name:</label>
-                        <input type="text" id="last_name" name="last_name" required>
+                        <input type="text" id="last_name" name="lastname" required>
                     </div>
 
                     <div>

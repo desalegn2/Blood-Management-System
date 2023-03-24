@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -25,7 +26,7 @@ class User extends Authenticatable
         'role',
         'photo',
         'usertype',
-        'readat',
+        'referral_code',
     ];
 
     /**
@@ -52,6 +53,31 @@ class User extends Authenticatable
             get: fn ($value) =>  ["bbmanager", "donor", "admin", "nurse", "technitian", "healthinstitute", "encoder"][$value],
         );
     }
+    //authogenerate referral code for user when they register
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($donor) {
+            $donor->referral_code = Str::random(10);
+        });
+    }
+
+    public function referredUsers()
+    {
+        return $this->hasMany(referralModel::class, 'referring_id', 'id')->with('user');
+    }
+    //relationship between user and referral table
+    public function referrals()
+    {
+        return $this->hasMany('App\Models\referralModel', 'referring_id');
+    }
+
+    public function referredBy()
+    {
+        return $this->belongsTo('App\Models\User', 'referred_id');
+    }
+
     public function posts()
     {
         //return $this->hasMany('App\hospitalPosts');

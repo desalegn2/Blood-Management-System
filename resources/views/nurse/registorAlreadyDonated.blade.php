@@ -1,4 +1,4 @@
-@extends('nurse.sidebar')
+@extends('nurse.side_bar')
 @section('content')
 
 <!DOCTYPE html>
@@ -9,12 +9,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>donor enrollment</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
     <style>
         /* =========== Google Fonts ============ */
@@ -306,36 +306,43 @@
     <!-- ======================= Cards ================== -->
 
 
-    <div class="main-block">
+    <div class="main-block mt-5 ml-5">
 
 
         <form action="{{url('/nurse/enrolldonor')}}" method="post" enctype="multipart/form-data">
 
             @csrf
             <h1>Blood Donor Enrollment Form</h1>
+
             <fieldset>
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
                 <legend>
                     <h3>Donor Information</h3>
                 </legend>
                 <div><input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required></div>
                 <div><input type="hidden" name="nursename" value="{{ Auth::user()->name }}" required></div>
+                <div><input type="hidden" name="id" value="{{$data->id}}" required></div>
                 <div class="account-details">
 
-                    <div><label>Full Name</label><input type="text" name="fullname" value="{{$data->fullname}}" required></div>
-                    <div><label>Age</label><input type="number" name="age" required></div>
-
+                    <div><label>First Name</label><input type="text" name="firstname" value="{{$data->firstname}}" required></div>
+                    <div><label>Age</label><input type="number" name="age" value="{{$data->age}}" required></div>
+                    <div><label>Last Name</label><input type="text" name="lastname" value="{{$data->lastname}}" required></div>
                     <div><label>Occupation</label><input type="text" name="occupation" value="{{$data->occupation}}" required></div>
                     <div><label>phone</label><input type="text" name="phone" value="{{$data->phone}}" required></div>
                     <div><label>Email</label><input type="text" name="email" value="{{$data->email}}" required></div>
                     <div><label>Weight</label><input type="text" name="weight" value="{{$data->weight}}" required></div>
-                    <div><label>Type of Donation</label><input type="text" name="typeofdonation" value="{{$data->typeofdonation}}" required></div>
+                    <div><label>Type of Donation</label><input type="text" name="typeofdonation" value="vountary" readonly required></div>
                     <div><label>Height</label><input type="text" name="height" value="{{$data->height}}" required></div>
                     <div><label>Image</label><input type="file" name="photo" value="{{$data->photo}}" required></div>
-                    <div>
-                        <label>Gendor</label>
-                        <div>Male <input type="radio" value="male" name="gender" required></div>
-                        <div>Female<input type="radio" value="female" name="gender" required></div>
-                    </div>
+
+                    <div><label>Gender</label><input type="text" name="gender" value="{{$data->gender}}" readonly required></div>
+                    <!-- <div>Male <input type="radio" value="{{$data->gender}}" name="gender" required></div>
+                        <div>Female<input type="radio" value="{{$data->gender}}" name="gender" required></div> -->
+
                 </div>
             </fieldset>
             <fieldset>
@@ -345,6 +352,7 @@
                 <div class="personal-details">
 
                     <div>
+                        <div><label>Country</label><input type="text" name="country" value="{{$data->country}}" required></div>
                         <div><label>State</label><input type="text" name="state" value="{{$data->state}}" required></div>
                         <div><label>City</label><input type="text" name="city" value="{{$data->city}}" required></div>
                         <div><label>Zone</label><input type="text" name="zone" value="{{$data->zone}}" required></div>
@@ -357,17 +365,15 @@
                             <label>Blood Group</label>
                             <select name="bloodtype" required>
                                 <option value="{{$data->bloodtype}}">{{$data->bloodtype}}</A></option>
-                                <option value="A+">A+</A></option>
-                                <option value="A-">A-</option>
-                                <option value="B+">B+</option>
-                                <option value="AB+">AB+</option>
-                                <option value="AB-">AB-</option>
-                                <option value="O+">O+</option>
-                                <option value="O-">O-</option>
                             </select>
                         </div>
-                        <div><label>Volume</label><input type="text" name="volume" value="{{ Auth::user()->id }}" required></div>
-                        <div><label>Pack No</label><input type="text" name="packno" required></div>
+                        <div><label>Volume</label><input type="text" name="volume"" required></div>
+                        @if(session('message'))
+                       <div class=" alert alert-info">
+                            {{ session('message') }}
+                        </div>
+                        @endif
+                        <div><label>Pack No</label><input type=" text" name="packno" required></div>
                         <div>
                             <label>Remark</label>
                             <textarea id="w3review" name="remark" rows="5" cols="30"></textarea>
@@ -381,7 +387,7 @@
 
 
     </div>
-    @include('sweetalert::alert')
+
 </body>
 
 </html>

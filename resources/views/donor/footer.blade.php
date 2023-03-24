@@ -1,176 +1,236 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Donor Enrollment Form</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        /* Style for the form container */
-        .form-container {
-
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px auto;
-            max-width: 800px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        .full {
+            width: 100%;
         }
 
-        /* Style for the form grid */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            grid-gap: 20px;
-        }
-
-        /* Style for the form label */
-        label {
+        .gap {
+            height: 70px;
+            width: 100%;
+            clear: both;
             display: block;
+        }
+
+        .footer {
+            background: #2C3333;
+            height: auto;
+            padding-bottom: 30px;
+            position: relative;
+            width: 100%;
+            border-bottom: 1px solid #CCCCCC;
+            border-top: 1px solid #DDDDDD;
+        }
+
+        .con {
+            width: 100%;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .footer img {
+            max-width: 100%;
+        }
+
+        .footer h3 {
+            /* border-bottom: 1px solid #BAC1C8; */
+            color: #54697E;
+            font-size: 18px;
             font-weight: 600;
-            margin-bottom: 5px;
+            line-height: 27px;
+            padding: 40px 0 10px;
+            text-transform: uppercase;
         }
 
-        /* Style for the form input */
-        input {
+        .footer ul {
+            font-size: 13px;
+            list-style-type: none;
+            margin-left: 0;
+            padding-left: 0;
+            margin-top: 15px;
+            color: #7F8C8D;
+        }
+
+        .footer ul li a {
+            padding: 0 0 5px 0;
+            display: block;
+            text-decoration: none;
+        }
+
+        .footer a {
+            font-size: large;
+            color: whitesmoke;
+            text-decoration: none;
+        }
+
+        .supportLi h4 {
+            font-size: 20px;
+            font-weight: lighter;
+            line-height: normal;
+            margin-bottom: 0 !important;
+            padding-bottom: 0;
+        }
+
+        .newsletter-box input#appendedInputButton {
+            background: #FFFFFF;
+            display: inline-block;
+            float: left;
+            height: 30px;
+            clear: both;
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
         }
 
-        /* Style for the submit button */
-        .submit-button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
+        .newsletter-box .btn {
+            border: medium none;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            -o-border-radius: 3px;
+            -ms-border-radius: 3px;
+            border-radius: 3px;
+            display: inline-block;
+            height: 40px;
+            padding: 0;
             width: 100%;
-            transition: all 0.3s ease;
+            color: #fff;
         }
 
-        .submit-button:hover {
-            background-color: #3e8e41;
+        .newsletter-box {
+            overflow: hidden;
+        }
+
+        .bg-gray {
+            background-image: -moz-linear-gradient(center bottom, #BBBBBB 0%, #F0F0F0 100%);
+            box-shadow: 0 1px 0 #B4B3B3;
+        }
+
+        .social li {
+            background: none repeat scroll 0 0 #03C988;
+            border: 2px solid #B5B5B5;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -o-border-radius: 50%;
+            -ms-border-radius: 50%;
+            border-radius: 50%;
+            float: left;
+            height: 40px;
+            line-height: 36px;
+            margin: 0 8px 0 0;
+            padding: 0;
+            text-align: center;
+            width: 40px;
+
+            transition: all 0.5s ease 0s;
+            -moz-transition: all 0.5s ease 0s;
+            -webkit-transition: all 0.5s ease 0s;
+            -ms-transition: all 0.5s ease 0s;
+            -o-transition: all 0.5s ease 0s;
+        }
+
+        .social li:hover {
+            transform: scale(1.15) rotate(360deg);
+            -webkit-transform: scale(1.1) rotate(360deg);
+            -moz-transform: scale(1.1) rotate(360deg);
+            -ms-transform: scale(1.1) rotate(360deg);
+            -o-transform: scale(1.1) rotate(360deg);
+        }
+
+        .social li a {
+            color: #EDEFF1;
+        }
+
+        .social li:hover {
+            border: 2px solid #2c3e50;
+            background: #2c3e50;
+        }
+
+        .social li a i {
+            font-size: 30px;
+            margin: 0 0 0 5px;
+            color: #EDEFF1 !important;
+        }
+
+        .footer-bottom {
+            background: #E3E3E3;
+            border-top: 1px solid #DDDDDD;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .footer-bottom p.pull-left {
+            padding-top: 6px;
+        }
+
+        .payments {
+            font-size: 1.5em;
         }
     </style>
 </head>
 
 <body>
-    <div class="container mt-5">
-        <div class="form-container">
-            <h1>Donor Enrollment Form</h1>
-            <form>
-                <div class="form-grid">
-                    <div>
-                        <label for="last_name">First Name:</label>
-                        <input type="text" id="last_name" name="last_name" required>
+
+    <footer>
+        <div class="footer" id="footer">
+            <div class="con">
+                <div class="row">
+                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                        <img class='mt-4' style="border-radius:59%; width: 100px; height:100px; float: left;" src="{{asset('assets/imgs/bblogo3.png')}}" alt="">
+                        <a href="#">
+
+                            <!-- Bahir Dar Blood Bank -->
+                        </a>
                     </div>
-                    <div>
-                        <label for="first_name">Last Name:</label>
-                        <input type="text" id="first_name" name="first_name" required>
+                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                        <h3> About Us</h3>
+                        <ul>
+                            <li> <a href="{{url('donor/aboutus')}}"> about us </a> </li>
+                            <li> <a href="{{url('donor/feedback')}}">FeedBack</a> </li>
+
+                        </ul>
+                    </div>
+                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                        <h3> Want To Donate</h3>
+                        <ul>
+                            <li> <a href="#">Blood Donation Camp </a> </li>
+                            <li> <a href="#">About Blood Donation </a> </li>
+
+                        </ul>
                     </div>
 
-                    <div>
-                        <label for="last_name">Phone:</label>
-                        <input type="text" id="last_name" name="last_name" required>
-                    </div>
-                    <div>
-                        <label for="first_name">Email:</label>
-                        <input type="text" id="first_name" name="first_name" required>
-                    </div>
-                    <div>
-                        <label for="last_name">gender:</label>
-                        <input type="text" id="last_name" name="last_name" required>
-                    </div>
-                    <div>
-                        <label for="first_name">Age:</label>
-                        <input type="text" id="first_name" name="first_name" required>
-                    </div>
-                    <div>
-                        <label for="last_name">Weight:</label>
-                        <input type="text" id="last_name" name="last_name" required>
-                    </div>
-                    <div>
-                        <label for="first_name">Height:</label>
-                        <input type="text" id="first_name" name="first_name" required>
-                    </div>
-                    <div>
-                        <label for="last_name">Occupation:</label>
-                        <input type="text" id="last_name" name="last_name" required>
-                    </div>
-                    <div>
-                        <label for="first_name">Photo:</label>
-                        <input type="file" id="first_name" name="first_name" required>
-                    </div>
-                    <div>
-                        <label for="last_name">Pack No:</label>
-                        <input type="text" id="last_name" name="last_name" required>
-                    </div>
-                </div>
-                <div style="color: red;">
-                    <hr>
-                </div>
-                <div class="form-grid">
+                    <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
+                        <h3> Contact Us </h3>
 
-                    <div>
-                        <label for="first_name">Blood Type:</label>
-                        <input type="text" id="first_name" name="first_name" required>
-                    </div>
-                    <div>
-                        <label for="last_name">Volume:</label>
-                        <input type="text" id="last_name" name="last_name" required>
-                    </div>
-                    <div>
-                        <label for="first_name">Country:</label>
-                        <input type="text" id="first_name" name="first_name" required>
-                    </div>
-                    <div>
-                        <label for="last_name">State:</label>
-                        <input type="text" id="last_name" name="last_name" required>
-                    </div>
-                    <div>
-                        <label for="first_name">City:</label>
-                        <input type="text" id="first_name" name="first_name" required>
-                    </div>
-                    <div>
-                        <label for="last_name">Zone:</label>
-                        <input type="text" id="last_name" name="last_name" required>
-                    </div>
-                    <div>
-                        <label for="first_name">Woreda:</label>
-                        <input type="text" id="first_name" name="first_name" required>
-                    </div>
-                    <div>
-                        <label for="last_name">Kebelie:</label>
-                        <input type="text" id="last_name" name="last_name" required>
-                    </div>
-                    <div>
-                        <label for="last_name">House Number:</label>
-                        <input type="text" id="last_name" name="last_name" required>
-                    </div>
-                    <div>
-                        <label for="last_name">Type Of Donation:</label>
-                        <input type="text" id="last_name" name="last_name" required>
-                    </div>
-                    <div>
-                        <label for="last_name">Remark:</label>
-                        <textarea id="w3review" name="remark" rows="5" cols="30"></textarea>
+                        <ul class="social" style="display:flex; justify-content: center; align-items: center; gap: 1rem;">
+                            <li> <a href="https://www.facebook.com/bdrbloodbank" value=""> <i class=" fa fa-facebook"> </i> </a> </li>
+                            <li> <a href="#"> <i class="fa fa-twitter"> </i> </a> </li>
+                            <li> <a href="#"> <i class="fa fa-google"> </i> </a> </li>
+                            <li> <a href="mailto:mikshif2001@gmail.com"> <i class="fa fa-envelope"> </i> </a> </li>
+                            <li> <a href="#"> <i class="fa fa-telegram"> </i> </a> </li>
+                        </ul>
+                        <br> <br> <br>
+                        <h1 style="color:white;">+058 2207515</h1>
+
                     </div>
                 </div>
 
-                <button type="submit" class="submit-button">Submit</button>
-            </form>
+            </div>
+
         </div>
-    </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+    </footer>
 </body>
 
 </html>

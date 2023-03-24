@@ -11,8 +11,7 @@ class enrollementModel extends Model
     use HasFactory, Notifiable;
     public $table = "enrolldonor";
     protected $fillable = [
-        'user_id',
-
+        'nurse_id',
         'firstname',
         'lastname',
         'age',

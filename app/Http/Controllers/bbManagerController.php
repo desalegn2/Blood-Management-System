@@ -20,6 +20,7 @@ use App\Models\feedbackModel;
 use App\Models\bbinformatiomModel;
 use App\Models\donorRequestModel;
 use App\Http\Requests\CreateaccountRequest;
+use App\Models\referralModel;
 
 class bbManagerController extends Controller
 {
@@ -89,7 +90,7 @@ class bbManagerController extends Controller
     {
         $startDate = $request->startdate;
         $endDate = $request->enddate;
-        
+
         $data = enrollementModel::whereBetween('created_at', [$startDate, $endDate])->get();
         $total = enrollementModel::whereBetween('created_at', [$startDate, $endDate])->sum('volume');
 
@@ -367,5 +368,18 @@ class bbManagerController extends Controller
         $abminus = addBloodModel::where('bloodgroup', 'AB-')->sum('volume');
 
         return view('bloodBankManager.home', compact('donors', 'numberof_message', 'recentdoner', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
+    }
+
+    function Referral()
+    {
+
+       // $referrals = User::whereHas('referrals')->with('referredUsers.user')->get();
+
+        // $list_referred = referralModel::select('u1.name as referring_name', 'u1.email as referring_email', 'u2.name as referred_name', 'u2.email as referred_email')
+        //     ->join('users as u1', 'referrals.referring_id', '=', 'u1.id')
+        //     ->join('users as u2', 'referrals.referred_id', '=', 'u2.id')->get();
+        $referrals = User::whereHas('referrals')->with('referredUsers.user')->paginate(2);
+
+        return view('bloodBankManager.referralProgram', compact('referrals'));
     }
 }

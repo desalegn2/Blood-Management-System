@@ -45,7 +45,7 @@
 
         /* Style for the submit button */
         .submit-button {
-            background-color: #4CAF50;
+            background-color: #3F497F;
             color: white;
             padding: 12px 20px;
             border: none;
@@ -59,6 +59,17 @@
 
         .submit-button:hover {
             background-color: #3e8e41;
+        }
+
+        #alert-danger {
+            color: #000000;
+            background-color: #913175;
+            border-color: #000000;
+            padding: .75rem 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: .25rem;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -81,61 +92,126 @@
 
         <div class="form-container">
             <h1>Send Reservation to Donate</h1>
+            @if (session('error'))
+            <div id="alert-danger" class="alert alert-danger">
+                <strong>{{ session('error') }} </strong>
+            </div>
+            @endif
+
             <form action=" {{url('/donor/reservation')}}" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div><input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required></div>
                 <div class="form-grid">
                     <div>
-                        <label for="last_name">First Name:</label>
-                        <input type="text" id="first_name" name="first_name" value="{{ Auth::user()->name }}" required>
+                        <label for="first_name">First Name:</label>
+                        <input type="text" id="first_name" name="firstname" value="{{ Auth::user()->name }}">
+
+                        <div style="color: red;">
+                            @error('firstname')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
                     <div>
-                        <label for="first_name">Last Name:</label>
-                        <input type="text" id="last_name" name="last_name" required>
+                        <label for="last_name">Last Name:</label>
+                        <input type="text" id="last_name" name="lastname">
+
+                        <div style="color: red;">
+                            @error('lastname')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
 
                     <div>
-                        <label for="last_name">Phone:</label>
-                        <input type="text" id="" name="phone" required>
+                        <label for="phone">Phone:</label>
+                        <input type="text" id="phone" name="phone">
+
+                        <div style="color: red;">
+                            @error('phone')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
                     <div>
                         <label for="first_name">Email:</label>
-                        <input type="text" id="first_name" name="email" value="{{ Auth::user()->email }}" required>
+                        <input type="text" id="email" name="email" value="{{ Auth::user()->email }}">
+
+                        <div style="color: red;">
+                            @error('email')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
                     <div>
-                        <label for="last_name">gender:</label>
+                        <label for="gender">gender:</label>
                         <select class="form-control" id="gender" name="gender">
                             <option value="">Select your gender</option>
                             <option value="male">female</option>
                             <option value="female">male</option>
                         </select>
+
+                        <div style="color: red;">
+                            @error('gender')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
                     <div>
-                        <label for="first_name">Age:</label>
-                        <input type="text" id="first_name" name="age" required>
+                        <label for="age">Age:</label>
+                        <input type="text" id="age" name="age">
+
+                        <div style="color: red;">
+                            @error('age')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
                     <div>
-                        <label for="last_name">Weight:</label>
-                        <input type="text" id="last_name" name="weight" required>
+                        <label for="weight">Weight:</label>
+                        <input type="text" id="weight" name="weight">
+
+                        <div style="color: red;">
+                            @error('weight')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
                     <div>
-                        <label for="first_name">Height:</label>
-                        <input type="text" id="first_name" name="height" required>
+                        <label for="height">Height:</label>
+                        <input type="text" id="height" name="height">
+
+                        <div style="color: red;">
+                            @error('height')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
                     <div>
-                        <label for="last_name">Occupation:</label>
-                        <input type="text" id="last_name" name="occupation" required>
+                        <label for="occupation">Occupation:</label>
+                        <input type="text" id="occupation" name="occupation">
+
+                        <div style="color: red;">
+                            @error('occupation')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
                     <div>
-                        <label for="">Health Status:</label><br>
-                        <select name="health" required>
+                        <label for="health">Health Status:</label><br>
+                        <select name="health">
                             <option value="">Choose health status</option>
                             <option value="normal">Normal</option>
-                            <option value="haveHIV">Have HIV</option>
-                            <option value="kenya">Kenya</option>
-                            <option value="sudan">Sudan</option>
+                            <option value="hiv">Have HIV</option>
+                            <option value="hepatite">Have Hepatitis</option>
                         </select>
+
+                        <div style="color: red;">
+                            @error('health')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
 
                 </div>
@@ -145,8 +221,8 @@
                 <div class="form-grid">
 
                     <div>
-                        <label for="first_name">Blood Type:</label><br>
-                        <select name="bloodtype" required>
+                        <label for="bloodtype">Blood Type:</label><br>
+                        <select name="bloodtype">
                             <option value="">choose blood type</option>
                             <option value="A+">unkown</option>
                             <option value="A+">A+</option>
@@ -157,59 +233,118 @@
                             <option value="O+">O+</option>
                             <option value="O-">O-</option>
                         </select>
+
+                        <div style="color: red;">
+                            @error('bloodtype')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
 
 
                     <div>
-                        <label for="">Country:</label><br>
-                        <select name="country" required>
+                        <label for="country">Country:</label><br>
+                        <select name="country">
                             <option value="">Choose country</option>
                             <option value="ethiopia">Ethiopia</option>
                             <option value="erthria">Erthria</option>
                             <option value="kenya">Kenya</option>
                             <option value="sudan">Sudan</option>
                         </select>
+
+                        <div style="color: red;">
+                            @error('country')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
 
                     <div>
-                        <label for="last_name">State:</label>
-                        <input type="text" id="last_name" name="state" required>
+                        <label for="state">State:</label>
+                        <input type="text" id="state" name="state">
+
+                        <div style="color: red;">
+                            @error('state')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
                     <div>
-                        <label for="first_name">City:</label>
-                        <input type="text" id="first_name" name="city" required>
+                        <label for="city">City:</label>
+                        <input type="text" id="city" name="city">
+
+                        <div style="color: red;">
+                            @error('city')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
                     <div>
-                        <label for="last_name">Zone:</label>
-                        <input type="text" id="last_name" name="zone" required>
+                        <label for="zone">Zone:</label>
+                        <input type="text" id="zone" name="zone">
+
+                        <div style="color: red;">
+                            @error('zone')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
                     <div>
-                        <label for="first_name">Woreda:</label>
-                        <input type="text" id="first_name" name="woreda" required>
+                        <label for="woreda">Woreda:</label>
+                        <input type="text" id="woreda" name="woreda">
+
+                        <div style="color: red;">
+                            @error('woreda')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
                     <div>
-                        <label for="last_name">Kebelie:</label>
-                        <input type="text" id="last_name" name="kebelie" required>
+                        <label for="kebelie">Kebelie:</label>
+                        <input type="text" id="kebelie" name="kebelie">
+
+                        <div style="color: red;">
+                            @error('kebelie')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
                     <div>
-                        <label for="last_name">House Number:</label>
-                        <input type="text" id="last_name" name="housenumber" required>
+                        <label for="housenumber">House Number:</label>
+                        <input type="text" id="housenumber" name="housenumber">
+
+                        <div style="color: red;">
+                            @error('housenumber')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
 
                     <div>
-                        <label for="last_name">Center:</label><br>
-                        <select name="center" required>
+                        <label for="center">Center:</label><br>
+                        <select name="center">
                             <option value="">Choose Hospital</option>
                             @foreach($data as $dat)
                             <option value="{{$dat->name}}">{{$dat->name}}</option>
                             @endforeach
                         </select>
+
+                        <div style="color: red;">
+                            @error('center')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
                     <div>
-                        <label for="last_name">Donation Date:</label>
-                        <input type="date" id="last_name" name="reservationdate" required>
-                    </div>
+                        <label for="reservationdate">Donation Date:</label>
+                        <input type="date" id="reservationdate" name="reservationdate">
 
+                        <div style="color: red;">
+                            @error('reservationdate')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
                 <button type="submit" class="submit-button">Send</button>
             </form>

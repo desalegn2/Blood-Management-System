@@ -1,4 +1,4 @@
-@extends('nurse.sidebar')
+@extends('nurse.side_bar')
 @section('content')
 
 <!DOCTYPE html>

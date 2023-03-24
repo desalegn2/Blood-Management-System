@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class reservationModel extends Model
 {
     use HasFactory;
-
+    
     public $table = "reservation";
 
     protected $fillable = [
@@ -23,8 +23,9 @@ class reservationModel extends Model
         'gender',
         'weight',
         'height',
-
+        'center',
         'bloodtype',
+        'reservationdate',
         'country',
         'state',
         'city',

@@ -64,7 +64,7 @@
                                                 @enderror
                                             </div>
                                             <input name="name" id="form2Example11" class="form-control" placeholder="Enter Full Name" />
-                                            <label class="form-label" for="form2Example11">Full Name</label>
+                                            <label class="form-label" for="form2Example11">User Name</label>
                                         </div>
 
 

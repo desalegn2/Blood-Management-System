@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {!! Form::model($accepts, [ 'method' => 'patch','url' => ['nurse.changereservation', $donors->id] ]) !!}
+                {!! Form::model($donors, [ 'method' => 'patch','url' => ['nurse.changereservation', $donors->id] ]) !!}
                 <div class="mb-3">
                     {!! Form::label('changedate', 'Change Date') !!}
                     {!! Form::date('changedate', $donors->reservationdate, ['class' => 'form-control']) !!}
@@ -31,7 +31,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {!! Form::model($accepts, [ 'method' => 'delete','url' => ['nurse/deletereservation', $donors->id] ]) !!}
+                {!! Form::model($donors, [ 'method' => 'delete','url' => ['nurse/deletereservation', $donors->id] ]) !!}
                 <h4 class="text-center">Are you sure you want to delete This Data?</h4>
                 <h5 class="text-center">Name: {{$donors->name}}</h5>
             </div>

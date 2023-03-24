@@ -1,5 +1,6 @@
-@extends('nurse.sidebar')
+@extends('nurse.side_bar')
 @section('content')
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,14 +13,12 @@
 </head>
 
 <body>
-    <div class="card">
+    <div class="card mt-5">
         <div class="card-header">
             <div class="row">
                 <div class="col col-md-6"><b>Donor Details</b></div>
                 <div class="col col-md-6">
-
-
-                    <a href="{{ URL::previous() }}" class="btn btn-primary btn-sm float-end">Back</a>
+                    <a href="{{ url()->previous() }}" class="btn btn-primary btn-sm float-end">Back</a>
                 </div>
             </div>
         </div>
@@ -87,7 +86,7 @@
                 <div class="row mb-4">
                     <label class="col-sm-2 col-label-form"><b>Status</b></label>
                     <div class="col-sm-10">
-                        {{ $donors->status }}
+                        {{ $donors->appointmentdate }}
                     </div>
                 </div>
 
@@ -95,7 +94,8 @@
                     <!-- <label class="col-sm-2 col-label-form"><b>Status</b></label> -->
                     <p class="col-sm-2 col-label-form"><a class="btn btn-success" href="{{url('/nurse/accept', $donors->id)}}">Accept</a></p>
                     <div class="col-sm-10">
-                        <a class="btn btn-danger" href="{{url('nurse/notaccept', $donors->id)}}">NotAccept</a>
+                        <a href="#resend{{$donors->id}}" data-bs-toggle="modal" class="btn btn-info"><i class='fa fa-edit'></i> Change Date</a>
+                        @include('nurse.resendReservation')
                     </div>
                 </div>
             </div>

@@ -43,9 +43,14 @@
                             @csrf
                             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
 
+                            @if(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                            @endif
                             <div class="form-outline mb-4">
-                                <input type="email" id="form2Example18" name="email" class="form-control form-control-lg" />
-                                <label class="form-label" for="form2Example18">Email address</label>
+                                <input type="email" id="email" name="email" class="form-control form-control-lg" />
+                                <label class="form-label" for="email">Email address</label>
                                 <div style="color: red;">
                                     @error('email')
                                     <strong>{{ $message }}</strong>
@@ -54,8 +59,8 @@
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input type="password" name="password" id="form2Example28" class="form-control form-control-lg" />
-                                <label class="form-label" for="form2Example28">Password</label>
+                                <input type="password" name="password" id="password" class="form-control form-control-lg" />
+                                <label class="form-label" for="password">Password</label>
                                 <div style="color: red;">
                                     @error('password')
                                     <strong>{{ $message }}</strong>
@@ -80,7 +85,7 @@
             </div>
         </div>
     </section>
-    @include('sweetalert::alert')
+
 </body>
 
 </html>

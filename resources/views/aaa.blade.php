@@ -3,293 +3,246 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-
-
-    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Responsive Sidebar with Navigation Links and Icons</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+        * {
+            margin: 0;
+            padding: 0;
 
-        :root {
-            --header-height: 3rem;
-            --nav-width: 68px;
-            --first-color: #4723D9;
-            --red-color: #FF8B13;
-            --first-color-black: #000000;
-            --white-color: #F7F6FB;
-            --body-font: 'Nunito', sans-serif;
-            --normal-font-size: 1rem;
-            --z-fixed: 100
-        }
-
-        *,
-        ::before,
-        ::after {
-            box-sizing: border-box
         }
 
         body {
-            position: relative;
-            margin: var(--header-height) 0 0 0;
-            padding: 0 1rem;
-            font-family: var(--body-font);
-            font-size: var(--normal-font-size);
-            transition: .5s
+            font-family: Arial, sans-serif;
         }
 
-        a {
-            text-decoration: none
-        }
-
-        .header {
-            width: 100%;
-            height: var(--header-height);
+        .sidebar {
             position: fixed;
             top: 0;
-            left: 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 1rem;
-            background-color: var(--white-color);
-            z-index: var(--z-fixed);
-            transition: .5s
-        }
-
-        .header_toggle {
-            color: var(--first-color);
-            font-size: 1.5rem;
-            cursor: pointer
-        }
-
-        .header_img {
-            width: 35px;
-            height: 35px;
-            display: flex;
-            justify-content: center;
-            border-radius: 50%;
-            overflow: hidden
-        }
-
-        .header_img img {
-            width: 40px
-        }
-
-        .l-navbar {
-            position: fixed;
-            top: 0;
-            left: -30%;
-            width: var(--nav-width);
-            height: 100vh;
-            background-color: var(--red-color);
-            padding: .5rem 1rem 0 0;
-            transition: .5s;
-            z-index: var(--z-fixed);
-
-        }
-
-        .nav {
+            left: -300px;
+            width: 300px;
             height: 100%;
+            background-color: #333;
+            padding: 20px;
+            transition: all 0.3s ease-in-out;
+            z-index: 999;
+            color: #fff;
+        }
+
+        .sidebar-header {
             display: flex;
-            flex-direction: column;
             justify-content: space-between;
-            /* overflow-y: scroll; */
-            overflow: hidden;
-
-
-        }
-
-        .nav_logo,
-        .nav_link {
-            display: grid;
-            grid-template-columns: max-content max-content;
             align-items: center;
-            column-gap: 1rem;
-            padding: .5rem 0 .5rem 1.5rem
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
         }
 
-        .nav_logo {
-            margin-bottom: 2rem
+        .sidebar-header h3 {
+            font-size: 24px;
+            font-weight: bold;
         }
 
-        .nav_logo-icon {
-            font-size: 1.25rem;
-            color: var(--white-color)
+        .sidebar .nav-link {
+            color: #fff;
+            padding: 10px 20px;
+            display: block;
+            transition: all 0.3s ease-in-out;
         }
 
-        .nav_logo-name {
-            color: var(--white-color);
-            font-weight: 700
+        .sidebar .nav-link:hover {
+            background-color: #555;
         }
 
-        .nav_link {
+        .toggle-btn {
             position: relative;
-            color: var(--white-color);
-            margin-bottom: 1.5rem;
-            transition: .3s
+
+
+            font-size: 24px;
+            color: #fff;
+            background-color: #333;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease-in-out;
         }
 
-        .nav_link:hover {
-            color: var(--first-color-black)
+        .toggle-btn:hover {
+            background-color: #555;
         }
 
-        .nav_icon {
-            font-size: 1.25rem
+        .close-btn {
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            outline: none;
         }
 
-        .show {
-            left: 0
+        .nav-links {
+            margin-top: 50px;
+            list-style: none;
         }
 
-        .body-pd {
-            padding-left: calc(var(--nav-width) + 1rem)
+        .nav-links li {
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
         }
 
-        .active {
-            color: var(--white-color)
+        .nav-links li a {
+            display: flex;
+            align-items: center;
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
         }
 
-        .active::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            width: 2px;
-            height: 32px;
-            background-color: var(--white-color)
+        .nav-links li a i {
+            margin-right: 10px;
         }
 
-        .height-100 {
-            height: 100vh
+        .content {
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin-left: 0;
+            /* initial margin */
+            transition: margin-left 0.3s ease-in-out;
+            /* added transition */
         }
 
-        @media screen and (min-width: 768px) {
-            body {
-                margin: calc(var(--header-height) + 1rem) 0 0 0;
-                padding-left: calc(var(--nav-width) + 1rem)
-            }
+        .content h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
 
-            .header {
-                height: calc(var(--header-height) + 0.5rem);
-                padding: 0 2rem 0 calc(var(--nav-width) + 1rem)
-            }
+        .open-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            color: #fff;
+            background-color: #333;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            z-index: 999;
+        }
 
-            .header_img {
-                width: 40px;
-                height: 40px
-            }
-
-            .header_img img {
-                width: 45px
-            }
-
-            .l-navbar {
-
-                /* width: 100%;
-                max-width: 400px;
-                background: #172b4d;
-                top: 90px;
-                right: 0;
-                display: none; */
+        @media (min-width: 992px) {
+            .sidebar {
                 left: 0;
-
-
-                padding: 1rem 1rem 0 0;
             }
 
-            .show {
-                width: calc(var(--nav-width) + 156px)
-            }
-
-            .body-pd {
-                padding-left: calc(var(--nav-width) + 188px)
+            .content {
+                margin-left: 300px;
             }
         }
     </style>
-
 </head>
 
 <body>
-    <!-- Note that you can also download the Bootstrap CSS file and include it in your Laravel project's public directory, and then reference it in your Blade file using a relative path. For example, if you put the file in public/css/bootstrap.min.css, you can include it in your Blade file like this:
+    <!-- Navigation Sidebar -->
+    <div class="sidebar">
 
-html
-Copy code
-<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-This approach can be useful if you want to customize the Bootstrap styles or if you need to work offline. -->
+        <div class="sidebar-header">
+            <button class="toggle-btn open-btn">
+                <i class="fas fa-bars"></i>
+            </button>
 
-    <body id="body-pd">
-        <header class="header" id="header">
-            <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-            <div class="header_img"> <img src="{{asset('assets/imgs/aboutus.png')}}" alt=""> </div>
-        </header>
-        <div class="l-navbar" id="nav-bar">
-            <nav class="nav">
-                <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Profile</span> </a>
-                    <div class="nav_list">
-                        <a href="#" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a>
-                        <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
-                        <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Messages</span> </a>
-                        <a href="#" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Bookmark</span> </a>
-                        <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Files</span> </a>
-                        <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a>
-
-
-                    </div>
-                </div> <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
-            </nav>
         </div>
-        <!--Container Main start-->
-        <div class="height-100 bg-light">
-            <h4>Main Components</h4>
-        </div>
-        <!--Container Main end-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function(event) {
+        <ul class="nav-links">
+            <li>
+                <a href="#">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-envelope"></i>
+                    Messages
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-bell"></i>
+                    Notifications
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-cog"></i>
+                    Settings
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-question"></i>
+                    Help
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Responsive Sidebar with Navigation Links and Icons</h1>
+        <p>Click on the button to open the navigation sidebar.</p>
+        <!-- <button class="open-btn">Open Sidebar</button> -->
+    </div>
+    <!-- Bootstrap JS and Fontawesome JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/js/all.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // const openBtn = document.querySelector('.open-btn');
+        // const closeBtn = document.querySelector('.close-btn');
+        // const sidebar = document.querySelector('.sidebar');
 
-                const showNavbar = (toggleId, navId, bodyId, headerId) => {
-                    const toggle = document.getElementById(toggleId),
-                        nav = document.getElementById(navId),
-                        bodypd = document.getElementById(bodyId),
-                        headerpd = document.getElementById(headerId)
+        // openBtn.addEventListener('click', () => {
+        //     sidebar.style.left = '0';
+        // });
 
-                    // Validate that all variables exist
-                    if (toggle && nav && bodypd && headerpd) {
-                        toggle.addEventListener('click', () => {
-                            // show navbar
-                            nav.classList.toggle('show')
-                            // change icon
-                            toggle.classList.toggle('bx-x')
-                            // add padding to body
-                            bodypd.classList.toggle('body-pd')
-                            // add padding to header
-                            headerpd.classList.toggle('body-pd')
-                        })
-                    }
-                }
+        // closeBtn.addEventListener('click', () => {
+        //     sidebar.style.left = '-300px';
+        // });
+        const toggleBtn = document.querySelector('.toggle-btn');
+        const sidebar = document.querySelector('.sidebar');
+        const mainContent = document.querySelector('.main-content');
 
-                showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header')
-
-                /*===== LINK ACTIVE =====*/
-                const linkColor = document.querySelectorAll('.nav_link')
-
-                function colorLink() {
-                    if (linkColor) {
-                        linkColor.forEach(l => l.classList.remove('active'))
-                        this.classList.add('active')
-                    }
-                }
-                linkColor.forEach(l => l.addEventListener('click', colorLink))
-
-                // Your code to run since DOM is loaded and ready
-            });
-        </script>
-
-
-    </body>
+        toggleBtn.addEventListener('click', () => {
+            if (sidebar.style.left === '-300px') {
+                sidebar.style.left = '0';
+                toggleBtn.classList.replace('open-btn', 'close-btn');
+                toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
+                mainContent.style.marginLeft = '300px'; /* added line */
+            } else {
+                sidebar.style.left = '-300px';
+                toggleBtn.classList.replace('close-btn', 'open-btn');
+                toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                mainContent.style.marginLeft = '0'; /* added line */
+            }
+        });
+    </script>
+</body>
 
 </html>

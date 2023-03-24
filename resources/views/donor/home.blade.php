@@ -200,7 +200,7 @@
                         he red blood cells are collected from a donor and processed to remove any white blood cells, platelets, or plasma.
                     </p>
 
-                    <div class="social"><a href="">View Detail</a></div>
+                    <!-- <div class="social"><a href="">View Detail</a></div> -->
 
                 </div>
             </div>
@@ -223,7 +223,7 @@
                         ሲባል ቀጣሪዎ በቢሮዎ ውስጥ የደም ግፊትን እንዲያስተናግድ ለማነሳሳት ሊያስቡበት ይችላሉ።
                     </p>
 
-                    <div class="social"><a href="">View Detail</a></div>
+                    <!-- <div class="social"><a href="">View Detail</a></div> -->
 
                 </div>
             </div>
@@ -242,7 +242,7 @@
                         ኢንፌክሽኖች ሊያዙ ይችላሉ ማለት ነው። አደገኛ ባህሪ ላይ ከተሰማራ አትለግስ።
                     </p>
 
-                    <div class="social"><a href="">View Detail</a></div>
+                    <!-- <div class="social"><a href="">View Detail</a></div> -->
 
                 </div>
             </div>
@@ -258,7 +258,7 @@
 
                     </p>
 
-                    <div class="social"><a href="">View Detail</a></div>
+                    <!-- <div class="social"><a href="">View Detail</a></div> -->
 
                 </div>
             </div>
@@ -271,7 +271,7 @@
                         Platelet transfusions are often used to treat conditions such as (low platelet count), leukemia, and other types of cancer that can affect the production or function of platelets in the body.
                     </p>
 
-                    <div class="social"><a href="">View Detail</a></div>
+                    <!-- <div class="social"><a href="">View Detail</a></div> -->
 
                 </div>
             </div>
@@ -283,7 +283,7 @@
                         Donor management is an essential aspect of nonprofit management that involves building and maintaining relationships with all your donors and tracking various donor details and interactions. Although it sounds simple, donor management requires paying close attention to your donors’ activity, habits, and experiences. As a nonprofit, you must be prepared to manage a large donor base that consists of all types of donors — recurring donors, one-time donors, major donors, or in-kind donors.
                     </p>
 
-                    <div class="social"><a href="">View Detail</a></div>
+                    <!-- <div class="social"><a href="">View Detail</a></div> -->
 
                 </div>
             </div>
@@ -315,7 +315,7 @@
 
                     <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fparse.com" target="_blank" rel="noopener">
                         <img class="YOUR_FB_CSS_STYLING_CLASS" src="{{asset('assets/imgs/fb2.png')}}" width="30px" height="30px" alt="Share on Facebook">
-                    </a>/donor/reservationhistory/59
+                    </a>
                 </div>
                 <div class="card-footer">
                     <small class="text-muted"></small>

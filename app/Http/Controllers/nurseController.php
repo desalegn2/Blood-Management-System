@@ -18,6 +18,7 @@ use PDF;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Notifications\sendNotification;
 use App\Models\addBloodModel;
+use App\Models\referralModel;
 
 class nurseController extends Controller
 {
@@ -123,16 +124,10 @@ class nurseController extends Controller
         return redirect('nurse/home');
     }
 
-    function displayapproved()
-    {
-        $xy = approvedViewModel::all()->where('status', '=', 'Approved');
-        return view('nurse.approvedDonor', ['xy' => $xy]);
-    }
-
-
     function manageReservation()
     {
-        $accepts = reservationModel::all();
+        $accepts = reservationModel::where('appointmentdate', '!=', 'Donated')
+        ->get();
         return view('nurse.reserationManagement', ['accepts' => $accepts]);
     }
 
@@ -141,24 +136,12 @@ class nurseController extends Controller
         $donors = reservationModel::find($id);
         return view('nurse.reservationDetail', ['donors' => $donors]);
     }
-    // public function reservationstatus(Request $request, $id)
-    // {
-    //     $user = reservationModel::find($id);
 
-    //     $status = $user->status == 'Approve' ? 'DisApprove' : 'Approve';
-
-    //     reservationModel::where('id', $id)
-    //         ->update([
-    //             'status' => $status
-    //         ]);
-
-    //     if ($status == 1)
-    //         $msg = 'User blocked successfully';
-    //     else
-    //         $msg = 'User unblocked successfully';
-    //     // return redirect()->previous();
-    //     return redirect()->back();
-    // }
+    function getReservation($id)
+    {
+        $donors = reservationModel::find($id);
+        return view('nurse.registorAlreadyDonated', ['data' => $donors]);
+    }
 
     function deleteRes($id)
     {
@@ -170,20 +153,13 @@ class nurseController extends Controller
     function accept($id)
     {
         $res = reservationModel::find($id);
-        $res->status = "Accepted";
+        $res->appointmentdate = "Accepted";
         $res->save();
         return redirect()->back();
     }
-    function notAccept($id)
-    {
-        $res = reservationModel::find($id);
-        $res->status = "Disapproved";
-        $res->save();
-        return redirect()->back();
-    }
+
     function changeReservation(Request $req, $id)
     {
-
         $res = reservationModel::find($id);
         $var = $req->changedate;
         $res->appointmentdate = $var;
@@ -192,38 +168,58 @@ class nurseController extends Controller
     }
     function enrollDonor(Request $req)
     {
-        $var = new enrollementModel;
-        $var->user_id = $req->user_id;
-        $var->firstname = $req->first_name;
-        $var->lastname = $req->last_name;
-        $var->packno = $req->packno;
-        $var->occupation = $req->occupation;
-        $var->email = $req->email;
-        $var->phone = $req->phone;
-        $var->gender = $req->gender;
-        $var->bloodtype = $req->bloodtype;
-        $var->volume = $req->volume;
-        $var->remark = $req->remark;
-        $var->weight = $req->weight;
-        $var->height = $req->height;
-        $var->age = $req->age;
-        $var->country = $req->country;
-        $var->state = $req->state;
-        $var->city = $req->city;
-        $var->zone = $req->zone;
-        $var->woreda = $req->woreda;
-        $var->kebelie = $req->kebelie;
-        $var->housenumber = $req->housenumber;
-        $var->typeofdonation = $req->typeofdonation;
-        if ($req->hasfile('photo')) {
-            $file = $req->file('photo');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
-            $file->move('uploads/registers', $filename);
-            $var->photo =  $filename;
+        if ($req->volume < 250 || $req->volume > 450) {
+            return redirect()->back()->with('message', 'We are unable to accept your blood donation at this time, as the volume of your blood donation is not within the acceptable range. Thank you for your understanding and support.');
+        } else {
+            $var = new enrollementModel;
+            
+            $var->nurse_id = $req->user_id;
+            $var->firstname = $req->firstname;
+            $var->lastname = $req->lastname;
+            $var->packno = $req->packno;
+            $var->occupation = $req->occupation;
+            $var->email = $req->email;
+            $var->phone = $req->phone;
+            $var->gender = $req->gender;
+            $var->bloodtype = $req->bloodtype;
+            $var->volume = $req->volume;
+            $var->remark = $req->remark;
+            $var->weight = $req->weight;
+            $var->height = $req->height;
+            $var->age = $req->age;
+            $var->country = $req->country;
+            $var->state = $req->state;
+            $var->city = $req->city;
+            $var->zone = $req->zone;
+            $var->woreda = $req->woreda;
+            $var->kebelie = $req->kebelie;
+            $var->housenumber = $req->housenumber;
+            $var->typeofdonation = $req->typeofdonation;
+            if ($req->hasfile('photo')) {
+                $file = $req->file('photo');
+                $extention = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extention;
+                $file->move('uploads/registers', $filename);
+                $var->photo =  $filename;
+            }
+            $var->save();
+
+            if ($var) {
+
+                $isExist = reservationModel::select("*")
+
+                    ->where("id", $req->id)
+                    ->exists();
+                if ($isExist) {
+                    $res = reservationModel::where("id", $req->id)->first();
+                    $res->appointmentdate = "Donated";
+                    $res->save();
+                    return redirect()->back()->with('success', 'Thank you for your donation!');
+                } else {
+                    return redirect()->back()->with('success', 'Status Not Changed!');
+                }
+            }
         }
-        $var->save();
-        return redirect()->back()->with('success', 'Task Added Successfully!');
     }
 
     function listofDonor()

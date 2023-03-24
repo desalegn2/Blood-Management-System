@@ -71,37 +71,7 @@
 </head>
 
 <body>
-
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Orders
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Products
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-                <h1>Responsive Sidebar Example</h1>
-                <p>Resize the browser window to see the effect.</p>
-            </main>
-        </div>
-    </div>
-
+<p>hi</p>
 </body>
 
 </html>

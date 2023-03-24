@@ -47,8 +47,11 @@ Route::match(['get', 'post'], 'botman', [botController::class, 'handle']);
 Route::view('create_account', 'createAccount');
 Route::post('create_acc', [donorController::class, 'createAccount']);
 
+Route::get('create_account_r/{referral_code}', [donorController::class, 'createAccount_Reffered']);
+Route::post('create_account_referred', [donorController::class, 'Account_Reffered']);
+
 Route::view('about', 'aboutus');
-Route::view('aa', 'index');
+Route::view('aa', 'aaa');
 
 Route::get('bb', function () {
     return view('index');
@@ -71,20 +74,14 @@ All Normal Users Routes List
 --------------------------------------------*/
     Route::middleware(['auth', 'user-role:donor'])->group(function () {
         Route::get('/donor/home', [HomeController::class, 'donorHome'])->name('donor.home');
-        Route::view('donor/asks', 'donor.chatbot');
-
-
-        Route::view('donor/donorregister', 'donor.Register');
-        Route::post('donor/donorregister', [donorController::class, 'register']);
-
-
+        Route::view('/donor/asks', 'donor.chatbot');
+        Route::view('/donor/refer', 'donor.referring');
+        Route::get('/donor/refer/{user_id}', [donorController::class, 'ReferrdedDonor']);
+     //reservation
         Route::get('/donor/reservationform', [donorController::class, 'ReservationForm']);
         Route::post('/donor/reservation/', [donorController::class, 'reservation']);
-        Route::get('/donor/history/{id}', [donorController::class, 'history']);
         Route::get('/donor/reservationhistory/{id}', [donorController::class, 'reservationHistory']);
-
-        Route::view('/donor/insert', 'donor.profileInsert');
-        Route::post('/donor/insertprofiles', [donorController::class, 'insertprofile']);
+//profile
         Route::get('/donor/profile/{id}', [donorController::class, 'Profile']);
         Route::post('/donor/updateprofile/{id}', [donorController::class, 'updateProfile']);
         Route::post('/donor/updatephoto/{id}', [donorController::class, 'updatephoto']);
@@ -92,8 +89,6 @@ All Normal Users Routes List
 
         Route::view('donor/view', 'donor.viewP');
         Route::get('donor/seeker', [donorController::class, 'view']);
-        // Route::get('donor/seeker', [donorViewseeker::class, 'viewS']);
-        Route::post('/donor/comment', [donorController::class, 'comments']);
 
         Route::get('donor/news', [donorController::class, 'viewNews']);
         Route::get('donor/information', [donorController::class, 'viewInfo']);
@@ -111,50 +106,22 @@ All Admin Routes List
 --------------------------------------------*/
     Route::middleware(['auth', 'user-role:admin'])->group(function () {
         Route::get('/admin/home', [HomeController::class, 'dashboard'])->name('admin.home');
-        //  Route::get('/admin/send/{id}', [adminnotificationController::class, 'sendnotification']);
         Route::get('/admin/home', [AdminController::class, 'bloodavailability'])->name('admin.home');
 
         Route::get('/admin/search_user', [AdminController::class, 'searchUser']);
         Route::get('/admin/alluser', [AdminController::class, 'getUser']);
         Route::patch('/admin/updateuser/{id}', [AdminController::class, 'updateTech']);
         Route::delete('/admin/deleteuser/{id}', [AdminController::class, 'deleteTech']);
-
-
-        Route::get('/admin/aa', [AdminController::class, 'aa']);
         Route::view('/admin/user', 'admin.block_user');
-        Route::get('/admin/user', [AdminController::class, 'index']);
         Route::post('/ admin.block/{id}', [AdminController::class, 'blocks']);
-        //Route::view('/admin/aa', 'admin.navbar');
-        //users  Notification1
 
-        Route::get('/admin/img', [AdminController::class, 'imgup']);
-        Route::post('/admin/imgs', [AdminController::class, 'imgups']);
+        Route::get('/admin/user', [AdminController::class, 'index']);
+        
+    
         Route::view('/admin/add', 'admin.addUser');
         Route::post('/admin/add', [AdminController::class, 'register']);
 
-
-        Route::get('/admin/viewnurse', [AdminController::class, 'getNurse']);
-
-        Route::get('/admin/hospitalrequest', [hospitalRequestController::class, 'viewHospitalRequest']);
-
-        Route::get('/admin/approved/{id}', [hospitalRequestController::class, 'approved']);
-        Route::get('/admin/canceled/{id}', [hospitalRequestController::class, 'canceled']);
-        Route::post('/admin/sendb/{id}', [AdminController::class, 'send']);
-        Route::get('/admin/read/{id}', [AdminController::class, 'read']);
-
-
         Route::get('/admin/users/{id}', [hospitalRequestController::class, 'show']);
-
-        Route::get('/admin/sendtoTechnician', [hospitalRequestController::class, 'adminmessageT']);
-
-        Route::view('/admin/viewnewusers', 'admin.viewNewUser');
-        Route::get('/admin/viewnewusers', [AdminController::class, 'viewnew_user']);
-
-
-
-        Route::get('/admin/usernotification', [AdminController::class, 'userNotification']);
-
-
         //profile
         Route::get('/admin/profile/{id}', [AdminController::class, 'Profile']);
         Route::post('/admin/updateprofile/{id}', [AdminController::class, 'updateProfile']);
@@ -178,16 +145,6 @@ All Admin Routes List
 
         Route::view('/nurse/advertise', 'nurse.advertise');
         Route::post('/nurse/advertise', [nurseController::class, 'advertise']);
-        Route::get('/nurse/display', [donorReq::class, 'display']);
-        Route::get('/nurse/displayapproved', [donorReq::class, 'displayapproved']);
-        Route::get('/nurse/viewdetail/{id}', [donorReq::class, 'viewdetail']);
-
-        Route::get('/nurse/approved/{id}', [donorReq::class, 'approved']);
-        Route::get('/nurse/canceled/{id}', [donorReq::class, 'canceled']);
-        Route::delete('/nurse/delete/{id}', [donorReq::class, 'delete']);
-
-        Route::get('/nurse/listofapproved', [nurseController::class, 'displayapproved']);
-
 
         Route::view('/nurse/reservation', 'nurse.reserationManagement');
         Route::get('/nurse/reservation', [nurseController::class, 'manageReservation']);
@@ -197,7 +154,6 @@ All Admin Routes List
 
         Route::delete('/nurse/deletereservation/{id}', [nurseController::class, 'deleteRes']);
         Route::get('/nurse/accept/{id}', [nurseController::class, 'accept']);
-        Route::get('/nurse/notaccept/{id}', [nurseController::class, 'notAccept']);
         Route::patch('/nurse.changereservation/{id}', [nurseController::class, 'changeReservation']);
 
         Route::get('/nurse/donorbybloodtype', [nurseController::class, 'search_donors']);
@@ -208,6 +164,8 @@ All Admin Routes List
         Route::get('/nurse/listofdonor', [nurseController::class, 'listofDonor']);
         Route::post('/nurse/search_donor', [nurseController::class, 'searchDonor']);
         Route::get('/nurse/registordon/{id}', [nurseController::class, 'getDonor']);
+        Route::get('/nurse/reservationregister/{id}', [nurseController::class, 'getReservation']);
+        
     });
     Route::middleware(['auth', 'user-role:technitian'])->group(function () {
 
@@ -314,6 +272,9 @@ All Admin Routes List
         Route::get('/bbmanager/read/{id}', [bbManagerController::class, 'Read']);
         Route::get('/bbmanager/approve/{id}', [bbManagerController::class, 'Approve']);
         Route::get('/bbmanager/disapprove/{id}', [bbManagerController::class, 'DisApprove']);
+
+        Route::get('/bbmanager/referral', [bbManagerController::class, 'Referral']);
+
     });
     Route::middleware(['auth', 'user-role:encoder'])->group(function () {
 
@@ -334,4 +295,5 @@ All Admin Routes List
         // Route::view('/encoder/addbloods', 'encoder.add');
         Route::view('/encoder/handling', 'encoder.handling');
     });
+    
 });//prevent back middllewire

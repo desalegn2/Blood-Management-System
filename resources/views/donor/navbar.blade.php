@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Coding by MultiWebPress /////// https://multiwebpress.com/ -->
+
 <html lang="en" dir="ltr">
 
 <head>
@@ -19,9 +19,48 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        /* drop down css */
+        .dropbtn {
+
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: black;
+            min-width: 250px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #FF7B54;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
         header {
-            height: 90px;
-            background: #FF7B54;
+            position: fixed;
+            height: 100px;
+            background: #245953;
             position: fixed;
             width: 100%;
             top: 0;
@@ -49,7 +88,7 @@
         }
 
         .navigation-menu {
-            float: right;
+            float: left;
             display: flex;
             align-items: center;
             min-height: 90px;
@@ -84,14 +123,15 @@
             color: #fff;
         }
 
-        a.aj_btn {
+        a.profile {
             background: #273b91;
             color: #fff;
+            /* border-radius: 50%; */
             font-weight: 500;
             letter-spacing: 2px;
         }
 
-        a.aj_btn:hover {
+        a.profile:hover {
             background: #fff;
             color: #273b91;
             font-weight: 500;
@@ -117,7 +157,6 @@
 
             .navigation-menu {
                 position: fixed;
-
                 width: 100%;
                 max-width: 400px;
                 background: #172b4d;
@@ -160,22 +199,29 @@
 
         <header>
 
-            <!-- <div class="inner-width" style="width: 90vw; height: 8px;"> -->
+            <!-- <div class="inner-width" style="width: 90vw; height: 8px;">  -->
 
             <i class="menu-toggle-btn fas fa-bars" style="margin-right: 2rem;"></i>
             <nav class="navigation-menu" style="margin: auto;">
-                <a href="{{url('/donor/profile',Auth::user()->id)}}" class="aj_btn">
+                <a href="{{url('/donor/profile',Auth::user()->id)}}" class="profile">
                     {{ Auth::user()->name }}
                 </a>
                 <a href="{{url('/donor/home')}}">Home</a>
                 <a href="{{url('/donor/news')}}"></i> News</a>
                 <a href="{{url('/donor/information')}}"></i> Blood Bank Information</a>
                 <a href="{{url('/donor/seeker')}}"></i> View Seeker</a>
-                <a href="{{url('/donor/donorregister')}}"></i> Registor</a>
-                <a href="{{url('/donor/history',Auth::user()->id)}}"></i> Rigstration Status</a>
-                <a href="{{url('/donor/reservationform')}}"></i> Reservation</a>
-                <a href="{{url('/donor/asks')}}"></i> Ask</a>
-                <a href="{{url('/donor/reservationhistory',Auth::user()->id)}}"></i> Reservation Status</a>
+                <!-- <a href="{{url('/donor/donorregister')}}"></i> Registor</a>
+                <a href="{{url('/donor/history',Auth::user()->id)}}"></i> Rigstration Status</a> -->
+                <div class="dropdown">
+                    <a href="" class="dropbtn"></i> Reservation</a>
+                    <div class="dropdown-content">
+                        <a href="{{url('/donor/reservationform')}}">Send Reservation</a>
+                        <a href="{{url('/donor/reservationhistory',Auth::user()->id)}}">View Reservation Status</a>
+                    </div>
+                </div>
+                <a href="{{url('/donor/asks')}}"></i>Chatbot</a>
+                <a href="{{url('/donor/refer',Auth::user()->id)}}"></i> Refere Others</a>
+                <!-- <a href=""></i> Reservation Status</a> -->
                 <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
 
@@ -184,7 +230,7 @@
                     @csrf
                 </form>
             </nav>
-            <!-- </div> -->
+            <!-- </div>  -->
         </header>
 
     </div>
@@ -193,7 +239,7 @@
         @yield('content')
     </div>
 
-    @include('donor.footer2')
+    @include('donor.footer')
     <script>
         $(".menu-toggle-btn").click(function() {
             $(this).toggleClass("fa-times");

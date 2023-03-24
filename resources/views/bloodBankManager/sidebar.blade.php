@@ -9,9 +9,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-    <!-- ======= Styles ====== -->
+    
 
     <style>
+
         /* =========== Google Fonts ============ */
         @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 
@@ -45,7 +46,7 @@
             position: fixed;
             width: 160px;
             height: 100%;
-            background: #FF7B54;
+            background: #C1AEFC;
             border-left: 0px solid var(--blue);
             transition: 0.5s;
             overflow-x: scroll;
@@ -355,6 +356,15 @@
                             <ion-icon name="bag-remove-outline"></ion-icon>
                         </span>
                         <span class="title">Add Hospital</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{url('/bbmanager/referral')}}">
+                        <span class="icon">
+                            <ion-icon name="bag-remove-outline"></ion-icon>
+                        </span>
+                        <span class="title">Referral</span>
                     </a>
                 </li>
 
