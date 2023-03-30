@@ -13,19 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('hospitalrequests', function (Blueprint $table) {
+        Schema::create('bloodbankinfo', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('hospitalname');
-            $table->string('date');
-            $table->string('phone');
-            $table->string('email');
-            $table->string('bloodgroup');
-            $table->string('volume');
-            $table->string('reason');
-            $table->string('status')->default("in progress");
-            $table->string('readat')->default("unread");
+            $table->string('title');
+            $table->string('description');
+            $table->string('image');
+            $table->string('type')->default('info');
+
             $table->timestamps();
         });
     }
@@ -37,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hospitalrequests');
+        Schema::dropIfExists('bloodbankinfo');
     }
 };

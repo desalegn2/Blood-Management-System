@@ -560,20 +560,7 @@
         <!-- ================= New Customers ================ -->
         <div class="recentCustomers">
             <div class="cardHeader">
-                <h2>Recent Donor Joined</h2>
-
-                @foreach($recentdoner as $stat)
-                <table>
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="{{asset('uploads/registers/'.$stat->photo)}}" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>{{$stat->name}} <br> <span>{{$stat->city}}</span></h4>
-                        </td>
-                    </tr>
-                </table>
-                @endforeach
+                
             </div>
         </div>
 

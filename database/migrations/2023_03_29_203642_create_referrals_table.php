@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('referrals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('referring_id');
-            $table->foreign('referring_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('referring_id')->references('donor_id')->on('donors')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('referred_id');
-            $table->foreign('referred_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('referred_id')->references('donor_id')->on('donors')->onDelete('cascade')->onUpdate('cascade');
             $table->string('status')->default("crete account");
             $table->timestamps();
         });
@@ -34,3 +34,4 @@ return new class extends Migration
         Schema::dropIfExists('referrals');
     }
 };
+

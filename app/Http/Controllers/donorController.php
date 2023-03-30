@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Exceptions\PostTooLargeException;
 use App\Models\referralModel;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Donor;
 
 class donorController extends Controller
 {
@@ -25,83 +26,142 @@ class donorController extends Controller
     {
 
         $req->validate([
-            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'role' => ['required', 'int', 'max:5'],
+            'role' => ['required', 'int', 'max:6'],
             'password' => 'required|string|min:8|confirmed',
+            //'photo' => 'required|image|mimes:jpeg,jpg,png,gif,bmp,svg|max:10240',
+            //'max' => 'The :attribute may not be greater than :max kilobytes.',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'occupation' => 'required|string|max:255',
+            'phone' => 'required|numeric|digits:10',
+            //'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:13',
+            'gender' => 'required|string|max:25',
+            'bloodtype' => 'required|string|max:25',
+            'age' => 'required|numeric|min:17|max:65',
+            'weight' => 'required|numeric|min:48',
+            'height' => 'required|numeric',
+            'country' => 'required|string|max:25',
+            'state' => 'required|string|max:25',
+            'city' => 'required|string|max:25',
+            'zone' => 'required|string|max:25',
+            'woreda' => 'required|string|max:25',
+            'kebelie' => 'required|string|max:25',
+            'housenumber' => 'required|numeric|digits:5',
         ]);
-        if ($req->hasfile('photo')) {
-            $file = $req->file('photo');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
-            $file->move('uploads/registers', $filename);
-        }
         $var = new User;
-        $var->photo = $req->hasfile('photo') ? $filename : '0.png';
-        $var->name = $req->name;
         $var->email = $req->email;
         $var->password = Hash::make($req->password);
         $var->role = $req->role;
-        $var->referral_code = $req->referral_code;
         $var->save();
-        return redirect('login')->with('success', 'register Successfully!');
+        if ($var) {
+            
+            $donor = new Donor;
+            $donor->donor_id = $var->id;
+            $donor->firstname = $req->firstname;
+            $donor->lastname = $req->lastname;
+            $donor->occupation = $req->occupation;
+            $donor->phone = $req->phone;
+            $donor->gender = $req->gender;
+            $donor->bloodtype = $req->bloodtype;
+            $donor->typeofdonation = $req->typeofdonation;
+            $donor->weight = $req->weight;
+            $donor->height = $req->height;
+            $donor->age = $req->age;
+            $donor->country = $req->country;
+            $donor->state = $req->state;
+            $donor->city = $req->city;
+            $donor->zone = $req->zone;
+            $donor->woreda = $req->woreda;
+            $donor->kebelie = $req->kebelie;
+            $donor->housenumber = $req->housenumber;
+
+            $donor->save();
+
+           return redirect('login')->with('success', 'register Successfully!');
+        }
     }
     function createAccount_Reffered($referral_code)
 
     {
-        $referring = User::where('referral_code', $referral_code)->get()->first();
+       // $referring = Donor::where('referral_code', $referral_code)->get()->first();
         //$referring_id = $referring->id;
         return view('createAccountReffered', ['referral_code' => $referral_code]);
     }
     function Account_Reffered(Request $req)
     {
-
-        $user = Auth::user();
+        //$user = Auth::user();
         $referral_code = $req->referral_code;
-        $referrer = User::where('referral_code', $referral_code)->first();
-        //$referralLink = url('create_account', ['referral_code' => $user->referral_code]);
-
+        $referrer = Donor::where('referral_code', $referral_code)->first();
         $req->validate([
-            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'role' => ['required', 'int', 'max:5'],
+            'role' => ['required', 'int', 'max:6'],
             'password' => 'required|string|min:8|confirmed',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'occupation' => 'required|string|max:255',
+            'phone' => 'required|numeric|digits:10',
+            'gender' => 'required|string|max:25',
+            'bloodtype' => 'required|string|max:25',
+            'age' => 'required|numeric|min:17|max:65',
+            'weight' => 'required|numeric|min:48',
+            'height' => 'required|numeric',
+            'country' => 'required|string|max:25',
+            'state' => 'required|string|max:25',
+            'city' => 'required|string|max:25',
+            'zone' => 'required|string|max:25',
+            'woreda' => 'required|string|max:25',
+            'kebelie' => 'required|string|max:25',
+            'housenumber' => 'required|numeric|digits:5',
         ]);
-        if ($req->hasfile('photo')) {
-            $file = $req->file('photo');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
-            $file->move('uploads/registers', $filename);
-        }
         $var = new User;
-        $var->photo = $req->hasfile('photo') ? $filename : '0.png';
-        $var->name = $req->name;
         $var->email = $req->email;
         $var->password = Hash::make($req->password);
         $var->role = $req->role;
-        $var->referral_code = $req->referral_code;
         $var->save();
         if ($var) {
+
+            $donor = new Donor;
+            $donor->donor_id = $var->id;
+            $donor->firstname = $req->firstname;
+            $donor->lastname = $req->lastname;
+            $donor->occupation = $req->occupation;
+            $donor->phone = $req->phone;
+            $donor->gender = $req->gender;
+            $donor->bloodtype = $req->bloodtype;
+            $donor->typeofdonation = $req->typeofdonation;
+            $donor->weight = $req->weight;
+            $donor->height = $req->height;
+            $donor->age = $req->age;
+            $donor->country = $req->country;
+            $donor->state = $req->state;
+            $donor->city = $req->city;
+            $donor->zone = $req->zone;
+            $donor->woreda = $req->woreda;
+            $donor->kebelie = $req->kebelie;
+            $donor->housenumber = $req->housenumber;
+            $donor->save();
+
+        if ($donor) {
+           
             referralModel::create([
-                'referring_id' => $referrer->id,
-                'referred_id' => $var->id,
+                'referring_id' => $referrer->donor_id,
+                'referred_id' => $donor->donor_id,
             ]);
             return redirect('login')->with('success', 'register Successfully!');
-        } else {
-            return redirect('login')->with('warnig', 'referral not working!');
-        }
+        } 
     }
+}
 
-    function ReferrdedDonor($user_id)
+    function ReferrdedDonor($donor_id)
     {
-
-        $user = User::find($user_id);
+        $user = Donor::where('donor_id',$donor_id)->first();
+        $referral_code=$user->referral_code;
         // $don=referralModel::find($user_id);
         $num_referred = $user->referrals()->count();
+        $list_referred = $user->referrals()->with('referringDonor')->get();
 
-        $list_referred = $user->referrals()->with('referringUser')->get();
-
-        return view('donor.referring', compact('num_referred', 'list_referred'));
+        return view('donor.referring', compact('num_referred', 'list_referred','referral_code'));
     }
 
     function getAdvertise()

@@ -102,7 +102,7 @@
             /* padding: 20px; */
             background-color: #6D67E4;
             max-width: 800px;
-             /* margin: 0 auto; */
+            /* margin: 0 auto; */
         }
 
         .header {
@@ -127,6 +127,74 @@
         p {
             margin: 0;
         }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+            width: 100%;
+
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        @media only screen and (max-width: 600px) {
+
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                border: 1px solid #ddd;
+            }
+
+            td {
+                border: none;
+                border-bottom: 1px solid #ddd;
+                position: relative;
+                padding-left: 50%;
+            }
+
+            td:before {
+                position: absolute;
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                content: attr(data-label);
+                font-weight: bold;
+            }
+        }
     </style>
 </head>
 
@@ -137,7 +205,7 @@
         <div class="copy-cont">
             <div class="header">
                 <p class="t">Referral Link</p>
-                <a href="{{ url('create_account_r',Auth::user()->referral_code) }}" id="copy-link"><i class="far fa-copy"></i>Copy</a>
+                <a href="{{ url('create_account_r',$referral_code) }}" id="copy-link"><i class="far fa-copy"></i>Copy</a>
 
             </div>
             <p style="color: white;">This is Your Referrel Link copy it and share to you friend,families and relatives to donate blood </p>
@@ -147,7 +215,7 @@
                 <label for="fname">Number of Referral You Made</label>
             </div>
             <div class="col-75">
-                <label for="fname">{{$num_referred}}</label>
+                <label>{{$num_referred}}</label>
             </div>
         </div>
 
@@ -164,20 +232,31 @@
                 <label for="fname">list of Referred Donor</label>
             </div>
             <div class="col-75">
-                <table>
-                    <tr>
-                        <th>User Name </th>
-                        <th>User Email </th>
-                        <th>Status </th>
-                    </tr>
-                    @foreach($list_referred as $referral)
-                    <tr>
-                        <td>{{$referral->referredUser->name}}</td>
-                        <td>{{$referral->referredUser->email}}</td>
-                        <td>{{$referral->status}}</td>
-                    </tr>
-                    @endforeach
-                </table>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>First Name </th>
+
+                                <th>Last Name </th>
+                                <th> phone </th>
+
+                                <th>Status </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($list_referred as $referral)
+                            <tr>
+                                <td>{{$referral->referredDonor->firstname}}</td>
+                                <td>{{$referral->referredDonor->lastname}}</td>
+                                <td>{{$referral->referredDonor->phone}}</td>
+                                <td>{{$referral->status}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>

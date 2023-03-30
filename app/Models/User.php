@@ -20,13 +20,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
         'role',
-        'photo',
-        'usertype',
-        'referral_code',
+        'isBlocked',
     ];
 
     /**
@@ -50,34 +47,10 @@ class User extends Authenticatable
     protected function role(): Attribute
     {
         return new Attribute(
-            get: fn ($value) =>  ["bbmanager", "donor", "admin", "nurse", "technitian", "healthinstitute", "encoder"][$value],
+            get: fn ($value) =>  ["bbmanager", "admin", "donor", "nurse", "technitian", "healthinstitute", "doctor"][$value],
         );
     }
-    //authogenerate referral code for user when they register
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($donor) {
-            $donor->referral_code = Str::random(10);
-        });
-    }
-
-    public function referredUsers()
-    {
-        return $this->hasMany(referralModel::class, 'referring_id', 'id')->with('user');
-    }
-    //relationship between user and referral table
-    public function referrals()
-    {
-        return $this->hasMany('App\Models\referralModel', 'referring_id');
-    }
-
-    public function referredBy()
-    {
-        return $this->belongsTo('App\Models\User', 'referred_id');
-    }
-
+  
     public function posts()
     {
         //return $this->hasMany('App\hospitalPosts');

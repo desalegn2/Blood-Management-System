@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('hospitalrequest', function (Blueprint $table) {
-            $table->id();
+        Schema::create('hospitals', function (Blueprint $table) {
+            $table->unsignedBigInteger('hospital_id');
+            $table->foreign('hospital_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('hospitalname');
-            $table->string('date');
+            $table->string('manager_fname');
+            $table->string('manager_lname');
             $table->string('phone');
-            $table->string('email');
-            $table->string('bloodgroup');
-            $table->string('volume');
-            $table->string('reason');
-
             $table->timestamps();
         });
     }
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hospitalrequest');
+        Schema::dropIfExists('hospitals');
     }
 };

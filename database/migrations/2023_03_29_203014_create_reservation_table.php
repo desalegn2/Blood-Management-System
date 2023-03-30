@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('discardblood', function (Blueprint $table) {
+        Schema::create('reservation', function (Blueprint $table) {
             $table->id();
-            $table->string('bloodGroup');
-            $table->string('unitdiscarded');
-            $table->string('discarddate');
-            $table->string('centerid');
-            $table->string('reason');
+            $table->unsignedBigInteger('donor_id');
+            $table->foreign('donor_id')->references('donor_id')->on('donors')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('center');
+            $table->string('reservationdate');
+            $table->string('status')->default('in progress');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('discardblood');
+        Schema::dropIfExists('reservation');
     }
 };

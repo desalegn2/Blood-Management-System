@@ -9,9 +9,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Nurse Page</title>
+    <title>Technician page</title>
     <style>
-
         @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 
         :root {
@@ -185,6 +184,13 @@
             }
 
             .l-navbar {
+
+                /* width: 100%;
+                max-width: 400px;
+                background: #172b4d;
+                top: 90px;
+                right: 0;
+                display: none; */
                 left: 0;
                 padding: 1rem 1rem 0 0;
             }
@@ -206,18 +212,26 @@
     <body id="body-pd">
         <header class="header" id="header">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-            <div class="header_img"> <img src="{{asset('assets/imgs/aboutus.png')}}" alt=""> </div>
+         
+            <img class="header_img" src="{{asset('uploads/registers/'. Auth::user()->photo )}}" alt="">
         </header>
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
-                <div> <a href="{{url('/nurse/profile',Auth::user()->id)}}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Profile</span> </a>
+                <div> <a href="{{url('/technitian/profile',Auth::user()->id)}}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Profile</span> </a>
                     <div class="nav_list">
-                        <a href="{{url('/nurse/home')}}" class="nav_link active"><span class="bx nav_icon"><i class='bx bx-home'></i></span><span class="bx nav_name">Dashboard</span> </a>
-                        <a href="{{url('/nurse/reservation')}}" class="nav_link"> <span class="bx nav_icon"><i class='bx bx-calendar'></i></span><span class="bx nav_name">Reservation</span> </a>
-                        <a href="{{url('/nurse/advertise')}}" class="nav_link"> <span class="bx nav_icon"><i class='bx bx-microphone'></i></span><span class="bx nav_name">Add Advertise</span> </a>
-                        <a href="{{url('/nurse/notify')}}" class="nav_link"> <span class="bx nav_icon"><i class='bx bx-bell'></i></span><span class="bx nav_name">Notify</span> </a>
-                        <a href="{{url('/nurse/enroll')}}" class="nav_link"> <span class="bx nav_icon"><i class='bx bx-user-plus'></i></span><span class="bx nav_name">Enroll Donor</span> </a>
-                        <a href="{{url('/nurse/display')}}" class="nav_link"> <span class="bx nav_icon"><i class='bx bx-show'></i></span><span class="bx nav_name">Manage Donor</span> </a>
+                        <a href="{{url('/technitian/home')}}" class="nav_link active"><span class="bx nav_icon"><i class='bx bx-home'></i></span><span class="bx nav_name">Dashboard</span> </a>
+                        <a href="{{url('/technitian/test')}}" class="nav_link">
+                            <span class="bx nav_icon"><box-icon type='solid' name='flask'></box-icon></span>
+                            <span class="bx nav_name">Test Blood</span>
+                        </a>
+                        <a href="{{url('/technitian/viewstoredblood')}}" class="nav_link">
+                            <span class="bx nav_icon"><i class='bx bx-droplet'></i></span>
+                            <span class="bx nav_name">Manage Stored Blood</span>
+                        </a>
+                        <a href="{{url('/technitian/handling')}}" class="nav_link">
+                            <span class="bx nav_icon"><i class='bx bx-info-circle'></i></span>
+                            <span class="bx nav_name">Rules</span>
+                        </a>
 
                     </div>
                 </div> <a href="{{ route('logout') }}" onclick="event.preventDefault();

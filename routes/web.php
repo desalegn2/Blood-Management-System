@@ -12,7 +12,6 @@ use App\Http\Controllers\donorViewseeker;
 use App\Http\Controllers\listofApproved;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\addBloodController;
-
 use App\Http\Controllers\viewBloodStore;
 use App\Http\Controllers\discardBloodControlle;
 use App\Http\Controllers\hospitalRequestController;
@@ -28,16 +27,6 @@ use App\Http\Controllers\bbManagerController;
 use App\Http\Controllers\botController;
 use App\Http\Controllers\encoderController;
 use Illuminate\Support\Facades\Auth;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('HomePage');
@@ -59,29 +48,20 @@ Route::get('bb', function () {
 
 Route::group(['middleware' => 'prevent-back-history'], function () {
 
-
-
-
     Auth::routes(['verify' => true]);
-
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    /*------------------------------------------
---------------------------------------------
-All Normal Users Routes List
---------------------------------------------
---------------------------------------------*/
     Route::middleware(['auth', 'user-role:donor'])->group(function () {
         Route::get('/donor/home', [HomeController::class, 'donorHome'])->name('donor.home');
         Route::view('/donor/asks', 'donor.chatbot');
         Route::view('/donor/refer', 'donor.referring');
         Route::get('/donor/refer/{user_id}', [donorController::class, 'ReferrdedDonor']);
-     //reservation
+        //reservation
         Route::get('/donor/reservationform', [donorController::class, 'ReservationForm']);
         Route::post('/donor/reservation/', [donorController::class, 'reservation']);
         Route::get('/donor/reservationhistory/{id}', [donorController::class, 'reservationHistory']);
-//profile
+        //profile
         Route::get('/donor/profile/{id}', [donorController::class, 'Profile']);
         Route::post('/donor/updateprofile/{id}', [donorController::class, 'updateProfile']);
         Route::post('/donor/updatephoto/{id}', [donorController::class, 'updatephoto']);
@@ -99,11 +79,6 @@ All Normal Users Routes List
         Route::view('donor/blood', 'donor.bloodtype');
     });
 
-    /*------------------------------------------
---------------------------------------------
-All Admin Routes List
---------------------------------------------
---------------------------------------------*/
     Route::middleware(['auth', 'user-role:admin'])->group(function () {
         Route::get('/admin/home', [HomeController::class, 'dashboard'])->name('admin.home');
         Route::get('/admin/home', [AdminController::class, 'bloodavailability'])->name('admin.home');
@@ -116,8 +91,8 @@ All Admin Routes List
         Route::post('/ admin.block/{id}', [AdminController::class, 'blocks']);
 
         Route::get('/admin/user', [AdminController::class, 'index']);
-        
-    
+
+
         Route::view('/admin/add', 'admin.addUser');
         Route::post('/admin/add', [AdminController::class, 'register']);
 
@@ -165,38 +140,29 @@ All Admin Routes List
         Route::post('/nurse/search_donor', [nurseController::class, 'searchDonor']);
         Route::get('/nurse/registordon/{id}', [nurseController::class, 'getDonor']);
         Route::get('/nurse/reservationregister/{id}', [nurseController::class, 'getReservation']);
-        
     });
     Route::middleware(['auth', 'user-role:technitian'])->group(function () {
 
         Route::get('/technitian/home', [HomeController::class, 'technitanHome'])->name('technitian.home');
-
-        Route::get('/technitian/expired', [techController::class, 'ExpiredBlood']);
+        Route::get('/technitian/home', [techController::class, 'viewblood'])->name('technitian.home');
+        //profile
         Route::get('/technitian/profile/{id}', [techController::class, 'Profile']);
         Route::post('/technitian/updateprofile/{id}', [techController::class, 'updateProfile']);
         Route::post('/technitian/updatephoto/{id}', [techController::class, 'updatephoto']);
         Route::post('/technitian/changepassword', [techController::class, 'changepassword']);
 
+        Route::get('/technitian/expired', [techController::class, 'ExpiredBlood']);
         Route::view('/technitian/addbloods', 'technitian.addBlood');
         Route::post('/technitian/addbloods', [techController::class, 'addblood']);
 
-        Route::get('/technitian/home', [techController::class, 'viewblood'])->name('technitian.home');
         Route::get('/technitian/viewstoredblood', [techController::class, 'view']);
-        Route::view('technitian/discardblood', 'technitian.discardBlood');
-        Route::post('/technitian/discardblood', [techController::class, 'discardblood']);
-        Route::view('technitian/distributeblood', 'technitian.distributeBlood');
-        Route::get('/technitian/distributetohospital', [techController::class, 'distribute']);
-        // Route::get('/technitian/setexpaired', [discardBloodControlle::class, 'distribute']);
-        Route::get('/technitian/read/{id}', [techController::class, 'read']);
-        Route::get('/technitian/discard2/{id}', [techController::class, 'discard']);
-        //  Route::view('technitian/distributetohospital', 'technitian.distributeToHospital');
-        // Route::view('technitian/savedistribute', 'technitian.distributeBlood');
         Route::get('/technitian/filldiscard/{id}', [techController::class, 'filldiscard']);
-        Route::post('/technitian/savedistribute', [techController::class, 'saveddistribute']);
-        //Route::get('/technitian/notification', [HomeController::class, 'sendOfferNotification']);
+        //test 
         Route::get('/technitian/test', [techController::class, 'testBlood']);
-        Route::get('/technitian/approve/{id}', [techController::class, 'approved']);
-        Route::get('/technitian/discard/{id}', [techController::class, 'discards']);
+        Route::get('/technitian/testblood/{id}', [techController::class, 'testBloodDetail']);
+        Route::get('/technitian/blooddetail', [techController::class, 'bloodDetail']);
+        Route::post('/technitian/stock', [techController::class, 'storeStock'])->name('technitian.stock');
+
         Route::get('/technitian/handling', [techController::class, 'handling']);
     });
 
@@ -274,7 +240,6 @@ All Admin Routes List
         Route::get('/bbmanager/disapprove/{id}', [bbManagerController::class, 'DisApprove']);
 
         Route::get('/bbmanager/referral', [bbManagerController::class, 'Referral']);
-
     });
     Route::middleware(['auth', 'user-role:encoder'])->group(function () {
 
@@ -295,5 +260,4 @@ All Admin Routes List
         // Route::view('/encoder/addbloods', 'encoder.add');
         Route::view('/encoder/handling', 'encoder.handling');
     });
-    
 });//prevent back middllewire

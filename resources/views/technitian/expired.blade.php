@@ -1,4 +1,4 @@
-@extends('technitian.sidebar')
+@extends('technitian.side_bar')
 @section('content')
 <!DOCTYPE html>
 <html>

@@ -355,8 +355,8 @@ class bbManagerController extends Controller
         $donors = enrollementModel::paginate(10);
         $numberof_message = hospitalRequestModel::where('readat', 'unread')->count();
 
-        $date = \Carbon\Carbon::today()->subDays(1);
-        $recentdoner = donorRequestModel::where('created_at', '>=', $date)->get();
+        //$date = \Carbon\Carbon::today()->subDays(1);
+        //$recentdoner = donorRequestModel::where('created_at', '>=', $date)->get();
 
         $aplus = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
         $aminus = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
@@ -367,7 +367,7 @@ class bbManagerController extends Controller
         $abplus = addBloodModel::where('bloodgroup', 'AB+')->sum('volume');
         $abminus = addBloodModel::where('bloodgroup', 'AB-')->sum('volume');
 
-        return view('bloodBankManager.home', compact('donors', 'numberof_message', 'recentdoner', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
+        return view('bloodBankManager.home', compact('donors', 'numberof_message', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
 
     function Referral()

@@ -48,15 +48,12 @@
             text-decoration: none;
             display: block;
         }
-
         .dropdown-content a:hover {
             background-color: #FF7B54;
         }
-
         .dropdown:hover .dropdown-content {
             display: block;
         }
-
         header {
             position: fixed;
             height: 100px;
@@ -67,7 +64,6 @@
             left: 0;
             z-index: 9999;
             /* overflow-y: scroll; */
-
 
         }
 
@@ -124,11 +120,18 @@
         }
 
         a.profile {
-            background: #273b91;
+            background: #000000;
             color: #fff;
-            /* border-radius: 50%; */
             font-weight: 500;
             letter-spacing: 2px;
+
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         a.profile:hover {
@@ -203,8 +206,9 @@
 
             <i class="menu-toggle-btn fas fa-bars" style="margin-right: 2rem;"></i>
             <nav class="navigation-menu" style="margin: auto;">
+
                 <a href="{{url('/donor/profile',Auth::user()->id)}}" class="profile">
-                    {{ Auth::user()->name }}
+                    Profile
                 </a>
                 <a href="{{url('/donor/home')}}">Home</a>
                 <a href="{{url('/donor/news')}}"></i> News</a>

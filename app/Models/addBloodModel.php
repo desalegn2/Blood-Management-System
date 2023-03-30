@@ -9,21 +9,14 @@ use Illuminate\Notifications\Notifiable;
 class addBloodModel extends Model
 {
   use HasFactory, Notifiable;
-  public $table = "storeblood";
+  public $table = "bloodstock";
   protected $fillable = [
-    'user_id',
-    'fullname',
-    'email',
-    'phone',
-    'state',
-    'city',
-    'kebelie',
+    'tech_id',
+    'donor_id',
+    'packno',
     'bloodgroup',
     'volume',
-    'donationtype',
-    'status',
     'rh',
-    'hct',
-    'bloodpressure',
+    'status',
   ];
 }

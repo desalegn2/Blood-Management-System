@@ -1,77 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
+Sure! Here's an example code snippet for steps 6, 7, and 8:
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Form Template</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>
-        /* Additional custom styles */
-        /* Custom sidebar styles */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 100;
-            /* Behind the navbar */
-            padding: 48px 0 0;
-            /* Height of navbar */
-            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+Create routes for the storeDiscard and storeStock methods:
+php
+Copy code
+// routes/web.php
+
+Route::post('/blood/storeDiscard', [BloodController::class, 'storeDiscard'])->name('blood.storeDiscard');
+Route::post('/blood/storeStock', [BloodController::class, 'storeStock'])->name('blood.storeStock');
+Create a view with a form that contains input fields for weight, iron level, diseases, blood type, and rh, and two buttons: discard and store:
+html
+Copy code
+<!-- resources/views/blood.blade.php -->
+
+<form id="blood-form">
+  <label for="weight">Weight:</label>
+  <input type="number" name="weight" id="weight" required>
+
+  <label for="iron_level">Iron Level:</label>
+  <input type="number" name="iron_level" id="iron_level" required>
+
+  <label for="diseases">Diseases:</label>
+  <input type="text" name="diseases" id="diseases" required>
+
+  <label for="blood_type">Blood Type:</label>
+  <input type="text" name="blood_type" id="blood_type" required>
+
+  <label for="rh">Rh:</label>
+  <input type="text" name="rh" id="rh" required>
+
+  <button type="button" id="discard-btn">Discard</button>
+  <button type="button" id="store-btn">Store</button>
+</form>
+Add JavaScript code to the view to handle the button clicks and send an AJAX request to the appropriate route:
+html
+Copy code
+<!-- resources/views/blood.blade.php -->
+
+<script>
+  $(function() {
+    $('#discard-btn').click(function() {
+      var form = $('#blood-form').serialize();
+      var url = "{{ route('blood.storeDiscard') }}";
+
+      $.post(url, form, function(response) {
+        if (response.success) {
+          alert('Blood data discarded successfully!');
         }
+      });
+    });
 
-        .sidebar-sticky {
-            position: relative;
-            top: 0;
-            height: calc(100vh - 48px);
-            padding-top: .5rem;
-            overflow-x: hidden;
-            overflow-y: auto;
-            /* Scrollable contents if viewport is shorter than content. */
+    $('#store-btn').click(function() {
+      var form = $('#blood-form').serialize();
+      var url = "{{ route('blood.storeStock') }}";
+
+      $.post(url, form, function(response) {
+        if (response.success) {
+          alert('Blood data stored successfully!');
         }
+      });
+    });
+  });
+</script>
+Make sure to include the jQuery library in your view to use the $.post function. You can add the following line to your view:
 
-        /* Style page content */
-        .main {
-            padding: 20px;
-            margin-left: 160px;
-            /* Same as the width of the sidebar */
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                padding: 48px 0 0;
-                position: fixed;
-                top: 0;
-                left: -100%;
-                z-index: 100;
-                transition: all 0.5s ease-in-out;
-                background-color: #343a40;
-            }
-
-            .sidebar.active {
-                left: 0;
-            }
-
-            .sidebar-sticky {
-                position: relative;
-                top: 0;
-                height: auto;
-                padding-top: .5rem;
-                overflow-x: hidden;
-                overflow-y: auto;
-                /* Scrollable contents if viewport is shorter than content. */
-            }
-
-            .main {
-                margin: 0;
-            }
-        }
-    </style>
-</head>
-
-<body>
-<p>hi</p>
-</body>
-
-</html>
+html
+Copy code
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+That's it! You should now be able to submit blood data to either the discard or stock table by clicking the corresponding button on the form.

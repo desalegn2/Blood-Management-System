@@ -10,30 +10,58 @@ use App\Models\distributeBloodModel;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\enrollementModel;
+use App\Models\donorHealthModel;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class techController extends Controller
 {
-    function discardblood(Request $req)
-    {
- 
-    }
-
-    function distribute()
-    {
-        $dist = hospitalRequestModel::all()->where('readat', '=', 'unread');
-        return view('technitian.distributeToHospital', ['dist' => $dist]);
-    }
-
-    function saveddistribute(Request $req)
-    {
-
-     
-    }
-
     function testBlood()
     {
         $data = enrollementModel::where('status', '=', 'in progress')->get();
         return view('technitian.testBlood', ['data' => $data]);
+    }
+
+    function testBloodDetail($id)
+    {
+        $data = enrollementModel::find($id);
+        return view('technitian.testbloodDetail', ['data' => $data]);
+    }
+
+    function storeDiscard(Request $req)
+    {
+        $data = $req->validate([
+            'tech_id' => 'required|numeric',
+            'donor_id' => 'required|integer',
+            'bloodgroup' => 'required|string',
+            'volume' => 'required|string',
+            'packno' => ['required', 'unique:bloodstock'],
+            'rh' => 'required|string',
+            'reason' => 'required|string',
+        ]);
+        discardBloodModel::create($data);
+        if ($data) {
+            $health = $req->validate([
+                'tech_id' => 'required|numeric',
+                'donor_id' => 'required|integer',
+                'blood_pressure' => 'required|string',
+                'pulse_rate' => 'required|string',
+                'homoglobin_level' => ['required', 'unique:bloodstock'],
+                'blood_temprature' => 'required|string',
+                'cholesterol_level' => 'required|string',
+                'iron_level' => 'required|string',
+                'blood_glucose_level' => 'required|string',
+                'blood_viscosity' => ['required', 'unique:bloodstock'],
+                'hct' => 'required|string',
+                'Weight' => 'required|string',
+            ]);
+            donorHealthModel::create($health);
+        }
+        if ($health) {
+            enrollementModel::where("id", $req->donor_id)
+                ->update(["status" => 'discard', "bloodtype" => $req->bloodtype]);
+            return response()->json(['success' => true]);
+        }
     }
 
     function approved($id)
@@ -45,46 +73,76 @@ class techController extends Controller
         return redirect()->back();
     }
 
-    function discards(Request $req, $id)
+    function storeStock(Request $request)
     {
-        $var = new discardBloodModel;
-        $var->user_id = $req->user_id;
-        $var->bloodGroup = $req->bloodtype;
-        $var->unitdiscarded = $req->volume;
-        $var->reason = $req->reason;
+        $validator = Validator::make($request->all(), [
+            'status' => ['required', Rule::in(['accept', 'discard'])],
+            'diseases' =>['required'],
+
+            'bloodgroup' => 'required|string|max:5',
+            'volume' => 'required|string|max:255',
+            'rh' => 'required|string|max:25',
+            'blood_pressure' => 'required|string|max:255',
+            'pulse_rate' => 'required|string|max:255',
+            'homoglobin_level' => 'required|string|max:255',
+            'blood_temprature' => 'required|string|max:255',
+            'cholesterol_level' => 'required|string|max:255',
+            'blood_glucose_level' => 'required|string|max:255',
+            'iron_level' => 'required|string|max:255',
+            'blood_viscosity' => 'required|string|max:255',
+            'hct' => 'required|string|max:255',
+        ]);
+
+        $validator->after(function ($validator) use ($request) {
+            $status = $request->input('status');
+            $diseases = $request->input('diseases');
+            if ($status === 'discard' && $diseases === 'none') {
+                $validator->errors()->add('diseases', 'The diseases field is required when status is discard.');
+            } elseif ($status === 'accept' && $diseases !== 'none') {
+                $validator->errors()->add('diseases', 'The diseases field must be "none" when status is accept.');
+            }
+        });
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $var = new addBloodModel;
+        $var->tech_id = $request->user_id;
+        $var->donor_id = $request->donor_id;
+        $var->bloodgroup = $request->bloodgroup;
+        $var->volume = $request->volume;
+        $var->packno = $request->packno;
+        $var->rh = $request->rh;
+        $var->status = $request->status;
         $var->save();
         if ($var) {
-
-            $data = enrollementModel::find($id);
-            $data->delete();
-            return redirect()->back();
+            $health = new donorHealthModel;
+            $health->tech_id = $request->user_id;
+            $health->donor_id = $request->donor_id;
+            $health->infectious_disease = $request->diseases;
+            $health->blood_pressure = $request->blood_pressure;
+            $health->pulse_rate = $request->pulse_rate;
+            $health->homoglobin_level = $request->homoglobin_level;
+            $health->blood_temprature = $request->blood_temprature;
+            $health->cholesterol_level = $request->cholesterol_level;
+            $health->blood_glucose_level = $request->blood_glucose_level;
+            $health->iron_level = $request->iron_level;
+            $health->blood_viscosity = $request->blood_viscosity;
+            $health->hct = $request->hct;
+            $health->save();
         }
-    }
-    function addblood(Request $req)
-    {
-        $var = new addBloodModel;
-        $var->user_id = $req->user_id;
-        $var->bloodgroup = $req->bloodtype;
-        $var->volume = $req->volume;
-        $var->packno = $req->packno;
-        $var->donationtype = $req->donationtype;
-        $var->save();
-        return redirect()->back()->with('success', 'Task Added Successfully!');
-        //return redirect()->with('success', 'Task Added Successfully!');
+        if ($health) {
+            enrollementModel::where("id", $request->donor_id)
+                ->update(["status" => 'recorded', "bloodtype" => $request->bloodgroup]);
+            return redirect()->back()->with('success', 'Task Added Successfully!');
+        }
     }
 
     function view()
     {
-        $blood = addBloodModel::all()->where('status', '=', 'notexpired');
+        $blood = addBloodModel::all()->where('status', '=', 'accept');
         return view('technitian.viewStoredBlood', ['blood' => $blood]);
-    }
-    function discard($id)
-    {
-
-        $blood = addBloodModel::find($id);
-        $blood->status = "discard";
-        $blood->save();
-        return redirect()->back();
     }
 
     function setExpaired()
@@ -96,9 +154,8 @@ class techController extends Controller
     function filldiscard(Request $req, $id)
     {
         $var = new discardBloodModel;
-        $var->user_id = $req->user_id;
-        $var->bloodGroup = $req->bloodtype;
-        $var->unitdiscarded = $req->volume;
+        $var->tech_id = $req->user_id;
+        $var->donor_id = $req->donor_id;
         $var->reason = $req->reason;
         $var->save();
         if ($var) {
@@ -106,7 +163,6 @@ class techController extends Controller
             $data->delete();
             return redirect()->back()->with('success', 'Task Added Successfully!');
         }
-        //return redirect('technitian/viewstoredblood')->with('success', 'Task Added Successfully!');
     }
     function read($id)
     {

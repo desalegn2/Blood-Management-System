@@ -1,119 +1,509 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <title>Donor Home Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>create account</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <style>
-        .gradient-custom-2 {
-
-            background: #fccb90;
-
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+        header {
+            height: 90px;
+            background: #FF7B54;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9999;
         }
 
-        @media (min-width: 768px) {
-            .gradient-form {
-                height: 100vh !important;
+        .inner-width {
+            max-width: 1000px;
+            padding: 0 10px;
+            margin: auto;
+        }
+
+        .navigation-menu {
+            float: right;
+            display: flex;
+            align-items: center;
+            min-height: 90px;
+
+        }
+
+        .navigation-menu a {
+            margin-left: 10px;
+            color: white;
+            text-transform: uppercase;
+            font-size: 14px;
+            padding: 12px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: .3s linear;
+
+        }
+
+        .navigation-menu a:hover {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .navigation-menu i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .home {
+            color: #fff;
+        }
+
+        a.aj_btn {
+            background: #273b91;
+            color: #fff;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .menu-toggle-btn {
+            float: right;
+            height: 90px;
+            line-height: 90px !important;
+            color: #fff;
+            font-size: 26px;
+            display: none !important;
+            cursor: pointer;
+        }
+
+
+        @media screen and (max-width:900px) {
+            .menu-toggle-btn {
+                display: block !important;
+
+            }
+
+            .navigation-menu {
+                position: fixed;
+
+                width: 100%;
+                max-width: 400px;
+                background: #172b4d;
+                top: 90px;
+                right: 0;
+                display: none;
+                padding: 20px 40px;
+                box-sizing: border-box;
+                z-index: 99;
+
+            }
+
+            .navigation-menu::before {
+                content: "";
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+                border-bottom: 10px solid #172b4d;
+                position: absolute;
+                top: -10px;
+                right: 10px;
+            }
+
+            .navigation-menu a {
+                display: block;
+                margin: 1px 0;
+
+
+            }
+
+            .navigation-menu.active {
+                display: block;
             }
         }
 
-        @media (min-width: 769px) {
-            .gradient-custom-2 {
-                border-top-right-radius: .3rem;
-                border-bottom-right-radius: .3rem;
+        /* create account */
+        html,
+        body {
+            min-height: 100%;
+        }
+
+        body,
+        div,
+        form,
+        input,
+        select,
+        p {
+            padding: 0;
+            margin: 0;
+            outline: none;
+            font-family: Roboto, Arial, sans-serif;
+            font-size: 14px;
+            color: #666;
+        }
+
+        h1 {
+            margin: 0;
+            font-weight: 400;
+        }
+
+        h3 {
+            margin: 12px 0;
+            color: #8ebf42;
+        }
+
+        .main-block {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff;
+        }
+
+        form {
+            width: 100%;
+            padding: 20px;
+        }
+
+        fieldset {
+            border: none;
+            border-top: 1px solid #8ebf42;
+        }
+
+        .account-details,
+        .personal-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .account-details>div,
+        .personal-details>div>div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .account-details>div,
+        .personal-details>div,
+        input,
+        label {
+            width: 100%;
+        }
+
+        label {
+            padding: 10px 10px 10px 10px;
+            text-align: right;
+            vertical-align: middle;
+        }
+
+        input {
+            padding: 10px;
+            align-items: left;
+            vertical-align: middle;
+        }
+
+        .checkbox {
+            margin-bottom: 10px;
+        }
+
+        select,
+        .children,
+        .gender,
+        .bdate-block {
+            width: calc(100% + 26px);
+            padding: 7px 0;
+        }
+
+        select {
+            background: transparent;
+        }
+
+        .gender input {
+            width: auto;
+        }
+
+        .gender label {
+            padding: 0 5px 0 0;
+        }
+
+        .bdate-block {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .birthdate select.day {
+            width: 35px;
+        }
+
+        .birthdate select.mounth {
+            width: calc(100% - 94px);
+        }
+
+        .birthdate input {
+            width: 38px;
+            vertical-align: unset;
+        }
+
+        .checkbox input,
+        .children input {
+            width: auto;
+            margin: -2px 10px 0 0;
+        }
+
+        .checkbox a {
+            color: #8ebf42;
+        }
+
+        .checkbox a:hover {
+            color: #82b534;
+        }
+
+        button {
+            width: 10%;
+            padding: 10px 0;
+            margin: 10px auto;
+            border-radius: 5px;
+            border: none;
+            background: #19376D;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        button:hover {
+            background: #82b534;
+        }
+
+        @media (min-width: 568px) {
+
+            .account-details>div,
+            .personal-details>div {
+                width: 50%;
+            }
+
+            label {
+                width: 40%;
+            }
+
+            input {
+                width: 60%;
+            }
+
+            select,
+            .children,
+            .gender,
+            .bdate-block {
+                width: calc(60% + 16px);
             }
         }
     </style>
 </head>
 
-<body style="background-color: #eee;">
-    <section class="h-100 gradient-form">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-xl-10">
-                    <div class="card rounded-3 text-black">
-                        <div class="row g-0">
-                            <div class="col-lg-6">
-                                <div class="card-body p-md-5 mx-md-4">
+<body>
 
-                                    <div class="text-center">
-                                        <img src="{{asset('assets/imgs/bblogo3.png')}}" style="width: 185px;  border-radius: 50%;" alt="logo">
-                                        <h4 class="mt-1 mb-5 pb-1">Bahir Dar Blood Bank</h4>
-                                    </div>
+    <div>
 
-                                    <form action="{{url('create_account_referred')}}" method="post" enctype=" multipart/form-data">
-                                        @csrf
-                                        <input type="hidden" name="referral_code" class="form-control" value="{{$referral_code}}" required>
-                                        <input type="hidden" name="role" class="form-control" value="1" required>
-                                        <input type="hidden" name="photo" class="form-control" value="0.png" required>
-                                        <div class="form-outline mb-4">
-                                            <div style="color: red;">
-                                                @error('name')
-                                                <strong>{{ $message }}</strong>
-                                                @enderror
-                                            </div>
-                                            <input name="name" id="form2Example11" class="form-control" placeholder="Enter Full Name" />
-                                            <label class="form-label" for="form2Example11">User Name</label>
-                                        </div>
+        <header>
 
+            <div class="inner-width">
 
-                                        <div class="form-outline mb-4">
-                                            <div style="color: red;">
-                                                @error('email')
-                                                <strong>{{ $message }}</strong>
-                                                @enderror
-                                            </div>
-                                            <input type="email" name="email" id="form2Example22" class="form-control" placeholder="Enter Your Email" />
-                                            <label class="form-label" for="form2Example22">Email</label>
+                <i class="menu-toggle-btn fas fa-bars"></i>
+                <nav class="navigation-menu">
+                    <a href="/">Home</a>
+                    <a href="{{ route('login') }}">Login</a>
+                </nav>
+            </div>
+        </header>
 
-                                        </div>
-                                        <div class="form-outline mb-4">
-                                            <div style="color: red;">
-                                                @error('password')
-                                                <strong>{{ $message }}</strong>
-                                                @enderror
-                                            </div>
-                                            <input type="password" name="password" id="form2Example11" class="form-control" placeholder="Enter Password" />
-                                            <label class="form-label" for="form2Example11">Password</label>
-                                        </div>
+    </div>
+    <br><br>
 
-                                        <div class="form-outline mb-4">
-                                            <input type="password" name="password_confirmation" id="form2Example22" class="form-control" placeholder="Confirm" />
-                                            <label class="form-label" for="form2Example22">Confirm Password</label>
-                                        </div>
-                                        <div class="text-center pt-1 mb-5 pb-1">
-                                            <button class="btn btn-info btn-lg btn-block" type="submit">Create</button>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-center pb-4">
-                                            <a>I already have a membership</a>
-                                            <button type="button" class="btn btn-outline-danger"><a href="{{ route('login') }}" class="text-center">Login</a></button>
-                                        </div>
-                                    </form>
-                                </div>
+    <div class="main-block mt-6 ml-5" style="margin-top: 50px;">
+
+        <form action="{{url('create_account_referred')}}" method="post" enctype=" multipart/form-data">
+            @csrf
+            <h1>Blood Donor Enrollment Form</h1>
+
+            <fieldset>
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+                <legend>
+                    <h3>Donor Information</h3>
+                </legend>
+                <input type="hidden" name="role" value="2" required>
+                <input type="hidden" name="referral_code" value="{{$referral_code}}" required>
+                <div class="account-details">
+                    <div><label>First Name</label><input type="text" name="firstname" value="">
+                        <div style="color: red;">
+                            @error('firstname')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+                    <div><label>Email</label><input type="text" name="email" value="">
+                        <div style="color: red;">
+                            @error('email')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+                    <div><label>Last Name</label><input type="text" name="lastname" value="">
+                        <div style="color: red;">
+                            @error('lastname')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+                    <div><label>Password</label><input type="password" name="password" value="">
+                        <div style="color: red;">
+                            @error('password')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+                    <div><label>Age</label><input type="number" name="age" value="">
+                        <div style="color: red;">
+                            @error('age')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+                    <div><label>Confirm Password</label> <input type="password" name="password_confirmation" /></div>
+                    <div><label>Occupation</label><input type="text" name="occupation" value="">
+                        <div style="color: red;">
+                            @error('occupation')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+                    <div><label>phone</label><input type="text" name="phone" value="">
+                        <div style="color: red;">
+                            @error('phone')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+                    <div><label>Image</label><input type="file" name="photo">
+                        <div style="color: red;">
+                            @error('photo')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+                    <div><label>Gender</label><input type="text" name="gender" value="">
+                        <div style="color: red;">
+                            @error('gender')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    <h3>Contact Information</h3>
+                </legend>
+                <div class="personal-details">
+                    <div>
+                        <div><label>Country</label><input type="text" name="country" value="">
+                            <div style="color: red;">
+                                @error('country')
+                                <strong>{{ $message }}</strong>
+                                @enderror
                             </div>
-                            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-                                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                                    <h4 class="mb-4">Bahir Dar Blood Bank you create by reffered by other</h4>
-                                </div>
+                        </div>
+                        <div><label>State</label><input type="text" name="state" value="">
+                            <div style="color: red;">
+                                @error('state')
+                                <strong>{{ $message }}</strong>
+                                @enderror
+                            </div>
+                        </div>
+                        <div><label>City</label><input type="text" name="city" value="">
+                            <div style="color: red;">
+                                @error('city')
+                                <strong>{{ $message }}</strong>
+                                @enderror
+                            </div>
+                        </div>
+                        <div><label>Zone</label><input type="text" name="zone" value="">
+                            <div style="color: red;">
+                                @error('zone')
+                                <strong>{{ $message }}</strong>
+                                @enderror
+                            </div>
+                        </div>
+                        <div><label>Woreda</label><input type="text" name="woreda" value="">
+                            <div style="color: red;">
+                                @error('woreda')
+                                <strong>{{ $message }}</strong>
+                                @enderror
+                            </div>
+                        </div>
+                        <div><label>Kebele</label><input type="text" name="kebelie" value="">
+                            <div style="color: red;">
+                                @error('kebelie')
+                                <strong>{{ $message }}</strong>
+                                @enderror
+                            </div>
+                        </div>
+                        <div><label>House Number</label><input type="text" name="housenumber" value="">
+                            <div style="color: red;">
+                                @error('housenumber')
+                                <strong>{{ $message }}</strong>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label>Blood Group</label>
+                            <select name="bloodtype">
+                                <option value="">choose</option>
+                                <option value="unknown">I don't Know</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                            <div style="color: red;">
+                                @error('bloodtype')
+                                <strong>{{ $message }}</strong>
+                                @enderror
+                            </div>
+                        </div>
+                        <div><label>Type of Donation</label><input type="text" name="typeofdonation" value="vountary" readonly></div>
+                        <div><label>Height</label><input type="text" name="height" value="">
+                            <div style="color: red;">
+                                @error('height')
+                                <strong>{{ $message }}</strong>
+                                @enderror
+                            </div>
+                        </div>
+                        <div><label>Weight</label><input type="text" name="weight" value="">
+                            <div style="color: red;">
+                                @error('weight')
+                                <strong>{{ $message }}</strong>
+                                @enderror
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </fieldset>
+            <center> <button type="submit">Registaer</button></center>
+        </form>
+    </div>
+    <script>
+        $(".menu-toggle-btn").click(function() {
+            $(this).toggleClass("fa-times");
+            $(".navigation-menu").toggleClass("active");
+        });
+    </script>
 </body>
 
 </html>

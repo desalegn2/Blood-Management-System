@@ -48,12 +48,8 @@
 
 
                                 <input type="hidden" id="date" name="user_id" value="{{Auth::user()->id}}" required>
-                                <input type="hidden" id="date" name="fullname" value="{{$data->fullname}}" required>
-                                <input type="hidden" id="date" name="email" value="{{$data->email}}" required>
-                                <input type="hidden" id="date" name="phone" value="{{$data->phone}}" required>
-                                <input type="hidden" id="date" name="state" value="{{$data->state}}" required>
-                                <input type="hidden" id="date" name="city" value="{{$data->city}}" required>
-                                <input type="hidden" id="date" name="kebelie" value="{{$data->kebelie}}" required>
+                                <input type="hidden" id="date" name="donor_id" value="{{$data->id}}" required>
+                                <input type="hidden" id="date" name="Weight" value="{{$data->weight}}" required>
                                 <div class="row">
                                     <div class="row">
                                         <div class="col-12">
@@ -92,30 +88,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-md-6 mb-4">
 
-                                        <div class="form-outline">
-                                            <input type="text" name="donationtype" id="" value="{{$data->donationtype}}" class="form-control form-control-lg" />
-                                            <label class="form-label" for="firstName">Donation Type</label>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-6 mb-4">
-
-                                        <div class="form-outline">
-                                            <input type="text" name="bloodpressure" id="firstName" value="" class="form-control form-control-lg" />
-                                            <label class="form-label" for="firstName">Blood Pressure</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-4">
-                                        <div class="form-outline">
-                                            <input type="text" name="hct" id="" value="" class="form-control form-control-lg" />
-                                            <label class="form-label" for="lastName">Hct Level</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
                                             <label class="form-label" for="lastName">RH</label>
@@ -134,29 +107,79 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- <div class="row">
-                                        <div class="col-md-6 mb-4 pb-2">
-
-                                            <div class="form-outline">
-                                                <input type="email" id="emailAddress" class="form-control form-control-lg" />
-                                                <label class="form-label" for="emailAddress">Email</label>
-                                            </div>
-
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" name="hct" id="hct" value="" class="form-control form-control-lg" />
+                                            <label class="form-label" for="hct">Hct Level</label>
                                         </div>
-                                        <div class="col-md-6 mb-4 pb-2">
-
-                                            <div class="form-outline">
-                                                <input type="tel" id="phoneNumber" class="form-control form-control-lg" />
-                                                <label class="form-label" for="phoneNumber">Phone Number</label>
-                                            </div>
-
-                                        </div>
-                                    </div> -->
-                                    <div class="mt-4 pt-2">
-                                        <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
-                                        <input class="btn btn-primary btn-lg" type="reset" value="Reset" />
                                     </div>
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="text" name="blood_pressure" id="blood_pressure" value="" class="form-control form-control-lg" />
+                                            <label class="form-label" for="blood_pressure">Blood Pressure</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="text" name="pulse_rate" id="pulse_rate" value="" class="form-control form-control-lg" />
+                                            <label class="form-label" for="pulse_rate">Pulse Rate</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" name="homoglobin_level" id="homoglobin_level" value="" class="form-control form-control-lg" />
+                                            <label class="form-label" for="homoglobin_level">Homoglobin Level</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="text" name="blood_temprature" id="blood_temprature" value="" class="form-control form-control-lg" />
+                                            <label class="form-label" for="blood_temprature">Blood Temprature</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="text" name="cholesterol_level" id="cholesterol_level" value="" class="form-control form-control-lg" />
+                                            <label class="form-label" for="cholesterol_level">Cholesterol Level</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="text" name="blood_glucose_level" id="blood_glucose_level" value="" class="form-control form-control-lg" />
+                                            <label class="form-label" for="blood_glucose_level">Blood Glucose Level</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="text" name="blood_viscosity" id="blood_viscosity" value="" class="form-control form-control-lg" />
+                                            <label class="form-label" for="blood_viscosity">Blood Viscosity</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="text" name="iron_level" id="iron_level" value="" class="form-control form-control-lg" />
+                                            <label class="form-label" for="iron_level">Iron Level</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 pt-2">
+                                    <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+                                    <input class="btn btn-primary btn-lg" type="reset" value="Reset" />
+                                </div>
 
                             </form>
                         </div>

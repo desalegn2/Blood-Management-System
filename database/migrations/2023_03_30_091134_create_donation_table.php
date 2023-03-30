@@ -13,17 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bloodstock', function (Blueprint $table) {
+        Schema::create('donation', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tech_id');
-            $table->foreign('tech_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('nurse_id');
+            $table->foreign('nurse_id')->references('staff_id')->on('staffs')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('donor_id');
-            $table->foreign('donor_id')->references('id')->on('enrolldonor')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('donor_id')->references('donor_id')->on('donors')->onDelete('cascade')->onUpdate('cascade');
             $table->string('packno');
-            $table->string('bloodgroup');
             $table->string('volume');
-            $table->string('rh');
-            $table->string('status')->default("notexpired");
+            $table->string('weight');
+            $table->string('status')->default("in progress");
+            $table->string('remark');
             $table->timestamps();
         });
     }
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bloodstock');
+        Schema::dropIfExists('donation');
     }
 };

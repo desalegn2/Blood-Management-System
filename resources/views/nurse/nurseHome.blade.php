@@ -340,6 +340,7 @@
     <!-- ======================= body ================== -->
 
     <form action="{{url('/nurse/donorbybloodtype')}}" method="get">
+        
         @csrf
         <div style="float: right;">
             Search Donor by Blood Type <input type="text" name="bloodtype" style="width: 200px;" placeholder="enter blood group" required>

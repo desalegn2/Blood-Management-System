@@ -16,18 +16,19 @@ class referralModel extends Model
         'referring_id',
         'referred_id',
     ];
-    public function user()
+
+    /*The referringDonor() and referredDonor() functions define the relationships 
+    between the referralModel and Donor models. They specify that the referralModel 
+    model belongs to a Donor model, and that the foreign key for the relationship is 
+    the referring_id or referred_id field in the referralModel table, respectively.*/
+
+    public function referringDonor()
     {
-        return $this->belongsTo(User::class, 'referred_id', 'id');
+        return $this->belongsTo(Donor::class, 'referring_id');
     }
 
-    public function referringUser()
+    public function referredDonor()
     {
-        return $this->belongsTo('App\Models\User', 'referring_id');
-    }
-
-    public function referredUser()
-    {
-        return $this->belongsTo('App\Models\User', 'referred_id');
+        return $this->belongsTo(Donor::class, 'referred_id');
     }
 }

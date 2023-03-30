@@ -26,7 +26,7 @@ class nurseController extends Controller
     {
         //$stats = donorRequestModel::all()->orderBy('created_at', 'desc')->take(4);
         $donors_enrolled = enrollementModel::count();
-        $donor = donorRequestModel::count();
+        $donor = reservationModel::count();
         //  $donors_enrolled = enrollementModel::distinct()->count('fullname');
 
         //  $a = enrollementModel::where('bloodtype', 'A-')->distinct()->count('fullname');
@@ -41,18 +41,13 @@ class nurseController extends Controller
         $oplus = enrollementModel::where('bloodtype', 'O+')->count();
 
         $date = \Carbon\Carbon::today()->subDays(1);
-        $stats = donorRequestModel::where('created_at', '>=', $date)->get();
+        $stats = reservationModel::where('created_at', '>=', $date)->get();
         $display1 = reservationModel::all();
 
         return view('nurse.nurseHome', compact('display1', 'stats', 'donor', 'donors_enrolled', 'aminus', 'aplus', 'bminus', 'bplus', 'abminus', 'abplus', 'ominus', 'oplus'));
     }
 
 
-    function aminusDonor()
-    {
-        $aminus = donorRequestModel::all()->where('bloodtype', '=', 'A-');
-        return view('nurse.aminusDonor', ['aminusdonors' => $aminus]);
-    }
     function Profile($id)
     {
         $isExist = User::select("*")

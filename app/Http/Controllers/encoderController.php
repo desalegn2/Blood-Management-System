@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\enrollementModel;
 use App\Models\discardBloodModel;
 use App\Models\distributeBloodModel;
+use App\Models\donorHealthModel;
 
 class encoderController extends Controller
 {
@@ -27,29 +28,35 @@ class encoderController extends Controller
     function addblood(Request $req, $id)
 
     {
+        
         $req->validate([
-            'packno' => ['required', 'unique:storeblood'],
+            'packno' => ['required', 'unique:bloodstock'],
         ]);
-        // $enr = new enrollementModel;
-        // $id = $enr->donor_id;
-
         $var = new addBloodModel;
-        $var->user_id = $req->user_id;
-        $var->fullname = $req->fullname;
-        $var->email = $req->email;
-        $var->phone = $req->phone;
-        $var->state = $req->state;
-        $var->city = $req->city;
-        $var->kebelie = $req->kebelie;
+        $var->tech_id = $req->user_id;
+        $var->donor_id = $req->donor_id;
         $var->bloodgroup = $req->bloodtype;
         $var->volume = $req->volume;
         $var->packno = $req->packno;
-        $var->donationtype = $req->donationtype;
         $var->rh = $req->rh;
-        $var->hct = $req->hct;
-        $var->bloodpressure = $req->bloodpressure;
         $var->save();
         if ($var) {
+            $health = new donorHealthModel;
+            $health->tech_id = $req->user_id;
+            $health->donor_id = $req->donor_id;
+            $health->blood_pressure = $req->blood_pressure;
+            $health->pulse_rate = $req->pulse_rate;
+            $health->homoglobin_level = $req->homoglobin_level;
+            $health->blood_temprature = $req->blood_temprature;
+            $health->cholesterol_level = $req->cholesterol_level;
+            $health->blood_glucose_level = $req->blood_glucose_level;
+            $health->iron_level = $req->iron_level;
+            $health->blood_viscosity = $req->blood_viscosity;
+            $health->hct = $req->hct;
+            $health->Weight = $req->Weight;
+            $health->save();
+        }
+        if ($health) {
             enrollementModel::where("id", $id)
                 ->update(["status" => 'recorded', "bloodtype" => $req->bloodtype]);
             return redirect('encoder/record')->with('success', 'Task Added Successfully!');
