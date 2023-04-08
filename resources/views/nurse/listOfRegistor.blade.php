@@ -19,12 +19,12 @@
 </head>
 
 <body>
-    <div id="page-wrap">
+    <div id="page-wrap" style="margin-top: 60px; margin-right:30px;">
         <form action="{{url('/nurse/search_donor')}}" method="post">
             @csrf
             <div style="float: right;">
                 <input type="text" name="fullname" style="width: 200px;" placeholder="enter name.email,phone" required>
-                <input type="submit" style="width: 50px;">
+                <input type="submit" >
             </div>
         </form>
         <br> <br>
@@ -35,8 +35,8 @@
             <thead>
                 <tr>
                     <th>photo</th>
-                    <th>Full Name</th>
-                    <th>email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>Phone</th>
                     <th>Duration</th>
                     <th>Operation</th>
@@ -49,12 +49,12 @@
                     <td>
                         <img src="{{asset('uploads/registers/'.$donor->photo)}}" width="80" height="80">
                     </td>
-                    <td>{{$donor->fullname}}</td>
-                    <td>{{$donor->email}}</td>
+                    <td>{{$donor->firstname}}</td>
+                    <td>{{$donor->lastname}}</td>
                     <td>{{$donor->phone}}</td>
                     <td>{{ $donor->created_at->diffInDays(\Carbon\Carbon::now()) }} days ago</td>
                     <td>
-                        <a href="{{url('nurse/registordon',$donor->id)}}"><i class='fa fa-edit'></i> Registor</a>
+                        <a href="{{url('nurse/registordon',$donor->donor_id)}}"><i class='fa fa-edit'></i> Registor</a>
                     </td>
                 </tr>
                 @endforeach

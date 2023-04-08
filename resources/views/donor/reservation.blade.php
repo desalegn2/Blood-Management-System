@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        /* Style for the form container */
         .form-container {
 
             padding: 20px;
@@ -19,21 +18,17 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Style for the form grid */
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit);
             grid-gap: 20px;
         }
-
-        /* Style for the form label */
         label {
             display: block;
             font-weight: 600;
             margin-bottom: 5px;
         }
 
-        /* Style for the form input */
         input {
             width: 100%;
             padding: 10px;
@@ -43,7 +38,6 @@
             box-sizing: border-box;
         }
 
-        /* Style for the submit button */
         .submit-button {
             background-color: #3F497F;
             color: white;
@@ -56,20 +50,19 @@
             width: 100%;
             transition: all 0.3s ease;
         }
-
         .submit-button:hover {
             background-color: #3e8e41;
         }
 
         #alert-danger {
-            color: #000000;
-            background-color: #913175;
+            color: white;
+            background-color: #245953;
             border-color: #000000;
             padding: .75rem 1.25rem;
             margin-bottom: 1rem;
             border: 1px solid transparent;
             border-radius: .25rem;
-            font-weight: bold;
+           font-weight: lighter;
         }
     </style>
 </head>
@@ -94,7 +87,10 @@
             <h1>Send Reservation to Donate</h1>
             @if (session('error'))
             <div id="alert-danger" class="alert alert-danger">
-                <strong>{{ session('error') }} </strong>
+                <strong>ህይወትን ለማዳን ደም ለመለገስ ላሳዩት ፍላጎት እና ቁርጠኝነት እናመሰግናለን። <br>
+                    ነገር ግን ተላላፊ በሽታ ካለባቸዉ ግለሰቦች የደም ልገሳን መቀበል አንችልም <br>
+                     ምክንያቱም ለለጋሹም ሆነ ለተቀባዩ አደጋ ያስከትላል. <br>
+                     የደም ልገ ሳን አስፈላጊነት ግንዛቤ በማስጨበጥ እና ሌሎችም እንዲለግሱ በማበረታታት የዓላማችንን ድጋፍ እንድትቀጥሉ እናሳስባለን። </strong>
             </div>
             @endif
 
@@ -103,101 +99,7 @@
 
                 <div><input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required></div>
                 <div class="form-grid">
-                    <div>
-                        <label for="first_name">First Name:</label>
-                        <input type="text" id="first_name" name="firstname" value="{{ Auth::user()->name }}">
 
-                        <div style="color: red;">
-                            @error('firstname')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
-                    <div>
-                        <label for="last_name">Last Name:</label>
-                        <input type="text" id="last_name" name="lastname">
-
-                        <div style="color: red;">
-                            @error('lastname')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="phone">Phone:</label>
-                        <input type="text" id="phone" name="phone">
-
-                        <div style="color: red;">
-                            @error('phone')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
-                    <div>
-                        <label for="first_name">Email:</label>
-                        <input type="text" id="email" name="email" value="{{ Auth::user()->email }}">
-
-                        <div style="color: red;">
-                            @error('email')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
-                    <div>
-                        <label for="gender">gender:</label>
-                        <select class="form-control" id="gender" name="gender">
-                            <option value="">Select your gender</option>
-                            <option value="male">female</option>
-                            <option value="female">male</option>
-                        </select>
-
-                        <div style="color: red;">
-                            @error('gender')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
-                    <div>
-                        <label for="age">Age:</label>
-                        <input type="text" id="age" name="age">
-
-                        <div style="color: red;">
-                            @error('age')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
-                    <div>
-                        <label for="weight">Weight:</label>
-                        <input type="text" id="weight" name="weight">
-
-                        <div style="color: red;">
-                            @error('weight')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
-                    <div>
-                        <label for="height">Height:</label>
-                        <input type="text" id="height" name="height">
-
-                        <div style="color: red;">
-                            @error('height')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
-                    <div>
-                        <label for="occupation">Occupation:</label>
-                        <input type="text" id="occupation" name="occupation">
-
-                        <div style="color: red;">
-                            @error('occupation')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
                     <div>
                         <label for="health">Health Status:</label><br>
                         <select name="health">
@@ -214,127 +116,22 @@
                         </div>
                     </div>
 
-                </div>
-                <div style="color: red;">
-                    <hr>
-                </div>
-                <div class="form-grid">
-
-                    <div>
-                        <label for="bloodtype">Blood Type:</label><br>
-                        <select name="bloodtype">
-                            <option value="">choose blood type</option>
-                            <option value="A+">unkown</option>
-                            <option value="A+">A+</option>
-                            <option value="A-">A-</option>
-                            <option value="B+">B+</option>
-                            <option value="AB+">AB+</option>
-                            <option value="AB-">AB-</option>
-                            <option value="O+">O+</option>
-                            <option value="O-">O-</option>
-                        </select>
-
-                        <div style="color: red;">
-                            @error('bloodtype')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
-
-
-                    <div>
-                        <label for="country">Country:</label><br>
-                        <select name="country">
-                            <option value="">Choose country</option>
-                            <option value="ethiopia">Ethiopia</option>
-                            <option value="erthria">Erthria</option>
-                            <option value="kenya">Kenya</option>
-                            <option value="sudan">Sudan</option>
-                        </select>
-
-                        <div style="color: red;">
-                            @error('country')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="state">State:</label>
-                        <input type="text" id="state" name="state">
-
-                        <div style="color: red;">
-                            @error('state')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
-                    <div>
-                        <label for="city">City:</label>
-                        <input type="text" id="city" name="city">
-
-                        <div style="color: red;">
-                            @error('city')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
-                    <div>
-                        <label for="zone">Zone:</label>
-                        <input type="text" id="zone" name="zone">
-
-                        <div style="color: red;">
-                            @error('zone')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
-                    <div>
-                        <label for="woreda">Woreda:</label>
-                        <input type="text" id="woreda" name="woreda">
-
-                        <div style="color: red;">
-                            @error('woreda')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
-                    <div>
-                        <label for="kebelie">Kebelie:</label>
-                        <input type="text" id="kebelie" name="kebelie">
-
-                        <div style="color: red;">
-                            @error('kebelie')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
-                    <div>
-                        <label for="housenumber">House Number:</label>
-                        <input type="text" id="housenumber" name="housenumber">
-
-                        <div style="color: red;">
-                            @error('housenumber')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
-                    </div>
-
                     <div>
                         <label for="center">Center:</label><br>
                         <select name="center">
                             <option value="">Choose Hospital</option>
                             @foreach($data as $dat)
-                            <option value="{{$dat->name}}">{{$dat->name}}</option>
+                            <option value="{{$dat->centor_name}}">{{$dat->centor_name}}</option>
                             @endforeach
                         </select>
 
                         <div style="color: red;">
                             @error('center')
-                            <strong>{{ $message }}</strong>
+                            <strong>Center አልመረጡም</strong>
                             @enderror
                         </div>
                     </div>
+
                     <div>
                         <label for="reservationdate">Donation Date:</label>
                         <input type="date" id="reservationdate" name="reservationdate">
@@ -345,7 +142,9 @@
                             @enderror
                         </div>
                     </div>
+
                 </div>
+                
                 <button type="submit" class="submit-button">Send</button>
             </form>
         </div>

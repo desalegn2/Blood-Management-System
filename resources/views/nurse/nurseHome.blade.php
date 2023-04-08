@@ -350,6 +350,7 @@
 
     <br><br><br>
     <div class="grey-bg container-fluid">
+        
 
         <section id="minimal-statistics">
 
@@ -540,7 +541,7 @@
                                         <span></span>
                                     </div>
                                     <div class="align-self-center">
-                                        <h1>{{$donor}}</h1>
+                                        <h1>{{$donors_enrolled}}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -561,7 +562,7 @@
                                         <span>Person who Give Blood</span>
                                     </div>
                                     <div class="align-self-center">
-                                        <h1>{{$donors_enrolled}}</h1>
+                                        <h1>{{$donor}}</h1>
                                     </div>
                                 </div>
                             </div>

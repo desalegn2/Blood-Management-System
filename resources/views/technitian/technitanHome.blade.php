@@ -339,16 +339,12 @@
 </head>
 
 <body>
-
-
-
     <!-- ======================= Total Blood Availability ================== -->
-
     <div class="grey-bg container-fluid mt-1">
         <section id="minimal-statistics">
             <div class="row">
                 <div class="col-12 mt-3 mb-1">
-                    <a href="{{url('/technitian/expired')}}" style="float: right;">
+                    <a href="{{url('/technitian/expiredblood')}}" style="float: right;">
                         <i style="margin-top: 0;" class="fa fa-bell"></i>
                         <span style="margin-top: 0;" class="badge text-bg-secondary"> {{$notification}}Expired Pack</span>
                     </a>

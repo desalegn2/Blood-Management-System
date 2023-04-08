@@ -34,4 +34,9 @@ class reservationModel extends Model
         'kebelie',
         'housenumber',
     ];
+
+    public function donors()
+    {
+        return $this->belongsTo(Donor::class, 'donor_id');
+    }
 }

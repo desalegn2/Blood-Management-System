@@ -61,8 +61,9 @@
                             <form action="{{ route('technitian.stock') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}" required>
-                                <input type="hidden" name="donor_id" value="{{$data->id}}" required>
+                                <input type="hidden" name="donor_id" value="{{$data->donor_id}}" required>
                                 <div class="row">
+
                                     <div class="row">
                                         <div class="col-12">
 
@@ -185,19 +186,6 @@
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form-outline">
-                                            <input type="text" name="blood_temprature" value="" class="form-control form-control-lg" />
-                                            <label class="form-label">Blood Temprature</label>
-                                        </div>
-                                        <div style="color: red;">
-                                            @error('blood_temprature')
-                                            <strong>{{ $message }}</strong>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mb-4">
-
-                                        <div class="form-outline">
                                             <input type="text" name="cholesterol_level" value="" class="form-control form-control-lg" />
                                             <label class="form-label">Cholesterol Level</label>
                                         </div>
@@ -207,7 +195,18 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="col-md-6 mb-4">
 
+                                        <div class="form-outline">
+                                            <input type="text" name="ast" value="" class="form-control form-control-lg" />
+                                            <label class="form-label">AST Level</label>
+                                        </div>
+                                        <div style="color: red;">
+                                            @error('blood_temprature')
+                                            <strong>{{ $message }}</strong>
+                                            @enderror
+                                        </div>
+                                    </div>
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form-outline">
@@ -223,8 +222,8 @@
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form-outline">
-                                            <input type="text" name="blood_viscosity" value="" class="form-control form-control-lg" />
-                                            <label class="form-label">Blood Viscosity</label>
+                                            <input type="text" name="alt" value="" class="form-control form-control-lg" />
+                                            <label class="form-label">ALT Level</label>
                                         </div>
                                         <div style="color: red;">
                                             @error('blood_viscosity')

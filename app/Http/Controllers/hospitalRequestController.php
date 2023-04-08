@@ -149,13 +149,10 @@ class hospitalRequestController extends Controller
     }
     public function search(Request $request)
     {
-        //$var= new donorRequestModel;
         $blood = $request->bloodtype;
         $city = $request->city;
         $data = addBloodModel::where('bloodgroup', $blood)->Where('city', $city)->get();
         return view('healthinstitute.donor',  ['data' => $data]);
-        //echo($dat->name);
-        //echo($dat->email);
     }
     function viewblood()
     {

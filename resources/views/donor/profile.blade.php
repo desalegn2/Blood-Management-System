@@ -111,10 +111,12 @@
 
                                     <div class="col-sm-9 text-secondary">
                                         <input type="file" name="photo" required>
-                                        <input type="submit" value="save">
+                                        <br><br>
+                                        <input type="submit" value="save" class="btn btn-primary">
                                     </div>
                                 </div>
                                 <hr>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-left"><i class='fa fa-edit'></i>Change Password</button>
                             </div>
                         </div>
                     </form>
@@ -128,43 +130,74 @@
                                     <h6 class="mb-0"></h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-
                                 </div>
                             </div>
                             <form action="  {{url('/donor/updateprofile',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
                                 @csrf
-
                                 <hr>
-
-
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0"> User ID</h6>
+                                        <h6 class="mb-0">Donation Frequency</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name=" user_id" value=" {{ Auth::user()->id }}" readonly>
+                                        <label><b>{{$frequency}} ጊዜ ደም ለግሰዋል</b></label>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Full name</h6>
+                                        <h6 class="mb-0">Blood Type</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="name" value="{{$dataprofil->name}}">
+                                        <label><b>{{$dataprofil->bloodtype}}</b></label>
+
                                     </div>
                                 </div>
                                 <hr>
-
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Email</h6>
+                                        <h6 class="mb-0">First Name</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="email" value="{{$dataprofil->email}}" readonly>
+                                        <input type="text" name="firstname" value="{{$dataprofil->firstname}}">
                                     </div>
                                 </div>
-
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Last Name</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" name="lastname" value="{{$dataprofil->lastname}}">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Age</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" name="lastname" value="{{$dataprofil->age}}">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Occupation</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" name="lastname" value="{{$dataprofil->occupation}}">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Gender</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" name="lastname" value="{{$dataprofil->gender}}">
+                                    </div>
+                                </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
@@ -179,11 +212,8 @@
                                         <input type="submit" value="edit">
                                     </div>
                                 </div>
-
                         </div>
                     </div>
-                    <br><br><br><br>
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-left"><i class='fa fa-edit'></i>Change Password</button>
                 </div>
                 </form>
                 @endforeach

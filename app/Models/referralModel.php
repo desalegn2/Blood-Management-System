@@ -31,4 +31,9 @@ class referralModel extends Model
     {
         return $this->belongsTo(Donor::class, 'referred_id');
     }
+//to display all referral table for manager
+    public function donor()
+{
+    return $this->belongsTo(Donor::class, 'referred_id', 'donor_id');
+}
 }

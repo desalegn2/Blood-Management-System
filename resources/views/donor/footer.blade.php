@@ -182,9 +182,9 @@
     <footer>
         <div class="footer" id="footer">
             <div class="con">
-                <div class="row">
+                <div class="row" style=" text-align: center;">
                     <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                        <img class='mt-4' style="border-radius:59%; width: 100px; height:100px; float: left;" src="{{asset('assets/imgs/bblogo3.png')}}" alt="">
+                        <img class='mt-4' style="border-radius:59%; width: 100px; height:100px; float: center;" src="{{asset('assets/imgs/bblogo3.png')}}" alt="">
                         <a href="#">
 
                             <!-- Bahir Dar Blood Bank -->

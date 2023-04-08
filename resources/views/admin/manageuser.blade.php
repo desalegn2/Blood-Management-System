@@ -1,4 +1,4 @@
-@extends('admin.sidebars')
+@extends('admin.sidebar')
 @section('content')
 
 <!DOCTYPE html>
@@ -13,9 +13,10 @@
 </head>
 
 <body>
-    <div class="container">
+   
+    <div class="container mt-5">
 
-        <h1 class="page-header text-center"></h1>
+        <h1 class="page-header text-center"> Choose user </h1>
         <div class="row">
             <form action="{{url('/admin/search_user')}}" method="get">
                 @csrf

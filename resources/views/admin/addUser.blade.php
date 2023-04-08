@@ -1,145 +1,180 @@
-@extends('admin.sidebars')
+@extends('admin.sidebar')
 @section('content')
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Donor Enrollment Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        .gradient-custom-2 {
+        /* Style for the form container */
+        .form-container {
 
-            background: #fccb90;
-
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
-        @media (min-width: 768px) {
-            .gradient-form {
-                height: 100vh !important;
-            }
+        /* Style for the form grid */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-gap: 20px;
         }
 
-        @media (min-width: 769px) {
-            .gradient-custom-2 {
-                border-top-right-radius: .3rem;
-                border-bottom-right-radius: .3rem;
-            }
+        /* Style for the form label */
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        /* Style for the form input */
+        input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        select {
+            padding: 10px;
+        }
+
+        /* Style for the submit button */
+        .submit-button {
+            background-color: #19376D;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #000000;
         }
     </style>
 </head>
 
-<body style="background-color: #eee;">
-    <section class="h-100 gradient-form">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-xl-10">
-                    <div class="card rounded-3 text-black">
-                        <div class="row g-0">
-                            <div class="col-lg-6">
-                                <div class="card-body p-md-5 mx-md-4">
+<body>
 
-                                    <div class="text-center">
-                                        <img src="{{asset('assets/imgs/IMG_20230213_050749_651.jpg')}}" style="width: 185px;" alt="logo">
-                                        <h4 class="mt-1 mb-5 pb-1">Bahir Dar Blood Bank</h4>
-                                    </div>
+    <div class="container mt-5">
 
-                                    <form action="add" method="post" enctype="multipart/form-data">
-                                        @csrf
+        <div class="form-container">
+            <h1>Add Blood Bank Staff</h1>
+            <form action="add" method="post" enctype="multipart/form-data">
+                @csrf
+                <div><input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required></div>
+                <div class="form-grid">
+                    <div>
+                        <label for="firstname">First Name:</label>
+                        <input type="text" id="firstname" name="firstname">
+                        <p style="color: red;">
+                            @error('firstname')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </p>
+                    </div>
 
-                                        <div class="form-outline mb-4">
-                                            <div style="color: red;">
-                                                @error('name')
-                                                <strong>{{ $message }}</strong>
-                                                @enderror
-                                            </div>
-                                            <input name="name" id="form2Example11" class="form-control" placeholder="Enter Full Name" />
-                                            <label class="form-label" for="form2Example11">Full Name</label>
-                                        </div>
-
-
-                                        <div class="form-outline mb-4">
-                                            <div style="color: red;">
-                                                @error('email')
-                                                <strong>{{ $message }}</strong>
-                                                @enderror
-                                            </div>
-                                            <input type="email" name="email" id="form2Example22" class="form-control" placeholder="Enter Your Email" />
-                                            <label class="form-label" for="form2Example22">Email</label>
-
-                                        </div>
-                                        <div class="form-outline mb-4">
-                                            <div style="color: red;">
-                                                @error('photo')
-                                                <strong>{{ $message }}</strong>
-                                                @enderror
-                                            </div>
-                                            <input type="file" name="photo" id="form2Example11" class="form-control" />
-                                            <label class="form-label" for="form2Example11">Photo</label>
-                                        </div>
-                                        <div class="form-outline mb-4">
-                                            <div style="color: red;">
-                                                @error('role')
-                                                <strong>{{ $message }}</strong>
-                                                @enderror
-                                            </div>
-                                            <select name="role" class="form-control">
-                                                <option value="">choose usertype</option>
-                                                <option value="3">Nurse</option>
-                                                <option value="4">Technician</option>
-
-                                                <option value="6">Encoder</option>
-                                                <option value="0">Manager</option>
-                                                <option value="2">admin</option>
-                                            </select>
-                                            <label class="form-label" for="form2Example11">Choose User Type</label>
-                                        </div>
-
-                                        <div class="form-outline mb-4">
-                                            <div style="color: red;">
-                                                @error('password')
-                                                <strong>{{ $message }}</strong>
-                                                @enderror
-                                            </div>
-                                            <input type="password" name="password" id="form2Example11" class="form-control" placeholder="Enter Password" />
-                                            <label class="form-label" for="form2Example11">Password</label>
-                                        </div>
-
-                                        <div class="form-outline mb-4">
-                                            <input type="password" name="password_confirmation" id="form2Example22" class="form-control" placeholder="Confirm" />
-                                            <label class="form-label" for="form2Example22">Confirm Password</label>
-                                        </div>
-                                        <div class="text-center pt-1 mb-5 pb-1">
-                                            <button class="btn btn-info btn-lg btn-block" type="submit">Create</button>
-                                        </div>
-
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-                                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                                    <h4 class="mb-4">Bahir Dar Blood Bank</h4>
-
-                                </div>
-                            </div>
+                    <div>
+                        <label for="lastname">Last Name:</label>
+                        <input type="text" id="last_name" name="lastname" required>
+                        <div style="color: red;">
+                            @error('lastname')
+                            <strong>{{ $message }}</strong>
+                            @enderror
                         </div>
                     </div>
+
+                    <div>
+                        <label for="phone">Phone:</label>
+                        <input type="text" id="phone" name="phone" required>
+                        <div style="color: red;">
+                            @error('phone')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                        <div style="color: red;">
+                            @error('email')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                        <div style="color: red;">
+                            @error('password')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="gender">Gender:</label>
+                        <select class="form-control" id="gender" name="gender">
+                            <option value="">Select</option>
+                            <option value="male">female</option>
+                            <option value="female">male</option>
+                        </select>
+                        <div style="color: red;">
+                            @error('gender')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="password_confirmation">Confirm Password:</label>
+                        <input type="password" id="password_confirmation" name="password_confirmation" required>
+                    </div>
+                    <!-- <div>
+                        <label for="photo">Photo:</label>
+                        <input type="file" id="photo" name="photo" required>
+                    </div> -->
+                    <div>
+                        <label for="role">Staff Type:</label>
+                        <select class="form-control" id="role" name="role">
+                            <option value="">Select</option>
+                            <option value="3">Nurse</option>
+                            <option value="4">Technician</option>
+                            <option value="0">Manager</option>
+                        </select>
+                        <div style="color: red;">
+                            @error('role')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+
                 </div>
-            </div>
+
+
+                <button type="submit" class="submit-button">Register</button>
+            </form>
         </div>
-    </section>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     @include('sweetalert::alert')
 </body>
 

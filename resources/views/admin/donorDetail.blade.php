@@ -1,4 +1,4 @@
-@extends('admin.sidebars')
+@extends('admin.sidebar')
 @section('content')
 
 <!DOCTYPE html>

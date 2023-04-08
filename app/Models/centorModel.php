@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class aaa extends Model
+class centorModel extends Model
 {
     use HasFactory;
-    public $timestamps = false;
-    public $table = "aaa";
-
+    public $table = "donationcentor";
     protected $fillable = [
-        'imgage',
+        'centor_name',
+        'address',
+        'maximum_donation',
     ];
+
 }

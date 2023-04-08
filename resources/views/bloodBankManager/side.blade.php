@@ -5,14 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- ======= Styles ====== -->
+    <title>Manager Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <style>
+        
+
         /* =========== Google Fonts ============ */
         @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 
@@ -34,7 +33,6 @@
         body {
             min-height: 100vh;
             overflow-x: hidden;
-
         }
 
         .container {
@@ -47,10 +45,10 @@
             position: fixed;
             width: 160px;
             height: 100%;
-            background: #FF7B54;
+            background: #C1AEFC;
             border-left: 0px solid var(--blue);
             transition: 0.5s;
-            overflow-y: scroll;
+            overflow-x: scroll;
         }
 
         .navigation.active {
@@ -58,7 +56,6 @@
         }
 
         .navigation ul {
-
             position: absolute;
             top: 0;
             left: 0;
@@ -66,7 +63,6 @@
         }
 
         .navigation ul li {
-
             position: relative;
             width: 100%;
             list-style: none;
@@ -74,6 +70,10 @@
             border-bottom-left-radius: 30px;
         }
 
+        /* .navigation ul li:hover,
+        .navigation ul li.hovered {
+            background-color: var(--white);
+        } */
 
         .navigation ul li:nth-child(1) {
             margin-bottom: 40px;
@@ -81,7 +81,6 @@
         }
 
         .navigation ul li a {
-
             position: relative;
             display: block;
             width: 100%;
@@ -90,7 +89,10 @@
             color: var(--white);
         }
 
-
+        /* .navigation ul li:hover a,
+        .navigation ul li.hovered a {
+            color: var(--blue);
+        } */
 
         .navigation ul li a .icon {
             position: relative;
@@ -122,7 +124,7 @@
         /* ===================== Main ===================== */
         .main {
             position: absolute;
-            width: calc(100% - 150px);
+            width: calc(100% - 30px);
             left: 100px;
             min-height: 50vh;
             background: var(--white);
@@ -130,7 +132,7 @@
         }
 
         .main.active {
-            width: calc(100% - 80px);
+            width: calc(100% - 300px);
             left: 80px;
         }
 
@@ -145,8 +147,8 @@
 
         .toggle {
             position: relative;
-            width: 60px;
-            height: 60px;
+            width: 30px;
+            height: 30px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -282,33 +284,86 @@
             <ul>
                 <li>
                 <li class="nav-item dropdown">
-                    <a href="{{url('/admin/profile',Auth::user()->id)}}">
+                    <a href="{{url('/bbmanager/profile',Auth::user()->id)}}">
                         {{ Auth::user()->name }}
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{url('/admin/home')}}">
+                    <a href="{{url('/bbmanager/home')}}">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
-                        <span class="title">Home</span>
+                        <span class="title">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('/admin/add')}}">
+                    <a href="{{url('/bbmanager/bbinfo')}}">
                         <span class="icon">
-                            <ion-icon name="person-add-outline"></ion-icon>
+                            <ion-icon name="bag-remove-outline"></ion-icon>
                         </span>
-                        <span class="title">Add user</span>
+                        <span class="title">&nbsp; &nbsp;Post Information</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{url('/bbmanager/bloods')}}">
+                        <span class="icon">
+                            <ion-icon name="bag-remove-outline"></ion-icon>
+                        </span>
+                        <span class="title">&nbsp; &nbsp;Distribute Blood</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{url('/bbmanager/request')}}">
+                        <span class="icon">
+                            <ion-icon name="swap-horizontal-outline"></ion-icon>
+                        </span>
+                        <span class="title">&nbsp; &nbsp;Blood Request</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{url('/bbmanager/generatereport')}}">
+                        <span class="icon">
+                            <ion-icon name="swap-horizontal-outline"></ion-icon>
+                        </span>
+                        <span class="title">Report</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('/admin/alluser')}}">
+                    <a href="{{url('/bbmanager/donorhistory')}}">
                         <span class="icon">
-                            <ion-icon name="person-add-outline"></ion-icon>
+                            <ion-icon name="bag-remove-outline"></ion-icon>
                         </span>
-                        <span class="title">&nbsp; &nbsp;Manage User</span>
+                        <span class="title">&nbsp; &nbsp;Donor History</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('/bbmanager/feedback')}}">
+                        <span class="icon">
+                            <ion-icon name="bag-remove-outline"></ion-icon>
+                        </span>
+                        <span class="title">Feed Backs</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{url('/bbmanager/addhospital')}}">
+                        <span class="icon">
+                            <ion-icon name="bag-remove-outline"></ion-icon>
+                        </span>
+                        <span class="title">Add Hospital</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{url('/bbmanager/referral')}}">
+                        <span class="icon">
+                            <ion-icon name="bag-remove-outline"></ion-icon>
+                        </span>
+                        <span class="title">Referral</span>
                     </a>
                 </li>
 
@@ -327,29 +382,25 @@
                         @csrf
                     </form>
                 </li>
-
                 </li>
             </ul>
+
         </div>
-
-
         <!-- ========================= Main ==================== -->
         <div class="main">
             <div class="topbar">
                 <div class="toggle">
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
-
-
                 <div class="user">
-                    <img src="{{asset('uploads/registers/'. Auth::user()->photo )}}" alt="">
+
                 </div>
             </div>
-            @yield('content')
-            <div class="footer">
-                @include('admin.footer')
-            </div>
 
+            @yield('content')
+            <!-- <div>
+                @include('bloodBankManager.footer')
+            </div> -->
         </div>
 
     </div>

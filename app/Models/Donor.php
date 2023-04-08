@@ -43,7 +43,6 @@ class Donor extends Model
             $donor->referral_code = Str::random(10);
         });
     }
-
     //relationship between donor and referral table
     
     /*The referrals() function defines a one-to-many relationship between the Donor 
@@ -51,8 +50,25 @@ class Donor extends Model
     models, and that the foreign key for the relationship is the referring_id field 
     in the referralModel table.
     */
+
     public function referrals()
     {
         return $this->hasMany(referralModel::class, 'referring_id');
+    }
+
+//to display all referral table for manager
+public function referredUsers()
+{
+    return $this->hasMany(referralModel::class, 'referring_id', 'donor_id')->with('donor');
+}
+
+    public function reservations()
+    {
+        return $this->hasMany(reservationModel::class, 'donor_id');
+    }
+
+    public function donation()
+    {
+        return $this->hasMany(donationModel::class, 'donor_id');
     }
 }

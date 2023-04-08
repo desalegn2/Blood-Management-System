@@ -383,7 +383,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div><label>Image</label><input type="file" name="photo">
+                    <div><label>Image</label><input type="file" accept="image/png/jpeg/svg/jpg" name="photo">
                         <div style="color: red;">
                             @error('photo')
                             <strong>{{ $message }}</strong>
@@ -405,14 +405,14 @@
                 </legend>
                 <div class="personal-details">
                     <div>
-                        <div><label>Country</label><input type="text" name="country" value="">
+                        <div><label>Country</label><input type="text" name="country" value="Ethiopia" readonly>
                             <div style="color: red;">
                                 @error('country')
                                 <strong>{{ $message }}</strong>
                                 @enderror
                             </div>
                         </div>
-                        <div><label>State</label><input type="text" name="state" value="">
+                        <div><label>State</label><input type="text" name="state">
                             <div style="color: red;">
                                 @error('state')
                                 <strong>{{ $message }}</strong>
@@ -484,7 +484,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div><label>Weight</label><input type="text" name="weight" value="">
+                        <div><label>Weight</label><input type="number" name="weight" value="">
                             <div style="color: red;">
                                 @error('weight')
                                 <strong>{{ $message }}</strong>

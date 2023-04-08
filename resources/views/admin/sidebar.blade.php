@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Manager Page</title>
+    <title>Nurse Page</title>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 
@@ -28,14 +28,8 @@
         *,
         ::before,
         ::after {
-            box-sizing: border-box
-        }
-
-        .nav_list {
-            overflow-y: auto;
-            /* adds vertical scrollbar when needed */
-            max-height: calc(100vh - 220px);
-            /* set the max-height to the viewport height minus some margin */
+            box-sizing: border-box;
+            text-decoration: none;
         }
 
         body {
@@ -63,10 +57,7 @@
             padding: 0 1rem;
             background-color: var(--white-color);
             z-index: var(--z-fixed);
-            transition: .5s;
-            overflow-y: scroll;
-
-
+            transition: .5s
         }
 
         .header_toggle {
@@ -98,8 +89,6 @@
             padding: .5rem 1rem 0 0;
             transition: .5s;
             z-index: var(--z-fixed);
-            overflow-y: auto;
-            height: 100%;
 
         }
 
@@ -132,18 +121,19 @@
 
         .nav_logo-name {
             color: var(--white-color);
-            font-weight: 700
+            font-weight: 700; 
         }
 
         .nav_link {
             position: relative;
             color: var(--white-color);
             margin-bottom: 1.5rem;
-            transition: .3s;
+            transition: .3s
         }
 
         .nav_link:hover {
-            color: var(--first-color-black)
+            color: var(--first-color-black);
+            text-decoration: none;
         }
 
         .nav_icon {
@@ -217,24 +207,17 @@
     <body id="body-pd">
         <header class="header" id="header">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-
             <div class="header_img"> <img src="{{asset('assets/imgs/aboutus.png')}}" alt=""> </div>
         </header>
         <div class="l-navbar" id="nav-bar">
-
             <nav class="nav">
-                <div> <a href="{{url('/bbmanager/profile',Auth::user()->id)}}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Profile</span> </a>
+                <div> <a href="{{url('/admin/profile',Auth::user()->id)}}" class="nav_logo"> <box-icon type='solid' name='layer'></box-icon><span class="nav_logo-name">Profile</span> </a>
                     <div class="nav_list">
-                        <a href="{{url('/bbmanager/home')}}" class="nav_link active"><span class="bx bx-home nav_icon"></span><span class="bx nav_name">Dashboard</span> </a>
-                        <a href="{{url('/bbmanager/bbinfo')}}" class="nav_link"> <span class="bx bx-info-circle nav_icon"></span><span class="bx nav_name">Add Information</span> </a>
-                        <a href="{{url('/bbmanager/bloods')}}" class="nav_link"> <span class="bx bx-droplet nav_icon"></span><span class="bx nav_name">Blood Store</span> </a>
-                        <a href="{{url('/bbmanager/request')}}" class="nav_link"> <span class="bx bx-message-square-detail nav_icon"></span><span class="bx nav_name">Blood Request</span> </a>
-                        <a href="{{url('/bbmanager/generatereport')}}" class="nav_link"> <span class="bx bx-bar-chart nav_icon"></span><span class="bx nav_name">Report</span> </a>
-                        <a href="{{url('/bbmanager/donorhistory')}}" class="nav_link"> <span class="bx bx-user nav_icon"></span><span class="bx nav_name">Donor History</span> </a>
-                        <a href="{{url('/bbmanager/feedback')}}" class="nav_link"> <span class="bx bx-message-square-edit nav_icon"></span><span class="bx nav_name">Feedback</span> </a>
-                        <a href="{{url('/bbmanager/addhospital')}}" class="nav_link"> <box-icon name='plus-medical'></box-icon><span class="bx nav_name">Add Hospital</span> </a>
+                        <a href="{{url('/admin/home')}}" class="nav_link active"><span class="bx nav_icon"><box-icon type='solid' name='home'></box-icon></span><span class="bx nav_name">Dashboard</span> </a>
+                    
+                        <a href="{{url('/admin/add')}}" class="nav_link"> <span class="bx nav_icon"><box-icon type='solid' name='user-plus'></box-icon></span><span class="bx nav_name">Add User</span> </a>
+                        <a href="{{url('/admin/alluser')}}" class="nav_link"> <span class="bx nav_icon"><box-icon type='solid' name='user-account'></box-icon></span><span class="bx nav_name">Manage user</span> </a>
 
-                        <a href="{{url('/bbmanager/referral')}}" class="nav_link"> <span class="bx bx-link-external nav_icon"></span><span class="bx nav_name">Referral</span> </a>
                     </div>
                 </div> <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" class="nav_link">
@@ -247,9 +230,11 @@
                 </form>
             </nav>
         </div>
+        <!--Container Main start-->
         <div class="height-100 bg-light">
             @yield('content')
         </div>
+        <!--Container Main end-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
         <script>
@@ -260,17 +245,25 @@
                         nav = document.getElementById(navId),
                         bodypd = document.getElementById(bodyId),
                         headerpd = document.getElementById(headerId)
+
+                    // Validate that all variables exist
                     if (toggle && nav && bodypd && headerpd) {
                         toggle.addEventListener('click', () => {
+                            // show navbar
                             nav.classList.toggle('show')
+                            // change icon
                             toggle.classList.toggle('bx-x')
+                            // add padding to body
                             bodypd.classList.toggle('body-pd')
+                            // add padding to header
                             headerpd.classList.toggle('body-pd')
                         })
                     }
                 }
 
                 showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header')
+
+                /*===== LINK ACTIVE =====*/
                 const linkColor = document.querySelectorAll('.nav_link')
 
                 function colorLink() {
@@ -280,8 +273,12 @@
                     }
                 }
                 linkColor.forEach(l => l.addEventListener('click', colorLink))
+
+                // Your code to run since DOM is loaded and ready
             });
         </script>
+
+
     </body>
 
 </html>

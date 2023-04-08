@@ -77,6 +77,25 @@
             <h1>Reservation Stastus</h1>
             <h3>Your Reservation are {{$stat}}</h3>
 
+            <h2>Requirements:</h2>
+            <ul>
+                <li>Fasting or refraining from certain foods or drinks prior to the donation</li>
+                <li>Bringing a form of identification or a blood donor card</li>
+                <li>Refraining from certain activities, such as heavy exercise or alcohol consumption, prior to the donation</li>
+                <li>Providing health history information, including recent travel, vaccinations, or illnesses</li>
+                <li>Waiting a certain period of time between blood donations</li>
+            </ul>
+
+            <h2>የዝግጅት መመሪያዎች:</h2>
+            <ul>
+                <li>ከመለገስወ በፊት ብዙ ውሃ ወይም ፈሳሽ ይጠጡ</li>
+                <li>Eat a healthy meal or snack prior to the donation</li>
+                <li>Dress comfortably and wear clothing with sleeves that can be rolled up</li>
+                <li>Bring a book or other entertainment to occupy the time during the donation process</li>
+                <li>Plan to rest and avoid strenuous activity for several hours after the donation</li>
+            </ul>
+
+
         </div>
     </div>
 </body>

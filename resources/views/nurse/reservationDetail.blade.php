@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="card-body">
-
+            @foreach($donor as $donors)
             <div class="row mb-3">
                 <label class="col-sm-2 col-label-form"><b>Donor Name</b></label>
                 <div class="col-sm-10">
@@ -36,12 +36,7 @@
                     {{ $donors->lastname }}
                 </div>
             </div>
-            <div class="row mb-3">
-                <label class="col-sm-2 col-label-form"><b>Email</b></label>
-                <div class="col-sm-10">
-                    {{ $donors->email }}
-                </div>
-            </div>
+
             <div class="row mb-3">
                 <label class="col-sm-2 col-label-form"><b> Phone</b></label>
                 <div class="col-sm-10">
@@ -65,12 +60,7 @@
                         {{ $donors->weight }}
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-label-form"><b>Donor Halth Status</b></label>
-                    <div class="col-sm-10">
-                        {{ $donors->health}}
-                    </div>
-                </div>
+
                 <div class="row mb-4">
                     <label class="col-sm-2 col-label-form"><b>Age</b></label>
                     <div class="col-sm-10">
@@ -84,9 +74,15 @@
                     </div>
                 </div>
                 <div class="row mb-4">
+                    <label class="col-sm-2 col-label-form"><b>Reservation Date</b></label>
+                    <div class="col-sm-10">
+                        {{ $donors->reservationdate }}
+                    </div>
+                </div>
+                <div class="row mb-4">
                     <label class="col-sm-2 col-label-form"><b>Status</b></label>
                     <div class="col-sm-10">
-                        {{ $donors->appointmentdate }}
+                        {{ $donors->status }}
                     </div>
                 </div>
 
@@ -99,6 +95,7 @@
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
 
 </body>

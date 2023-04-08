@@ -21,6 +21,9 @@ use App\Models\bbinformatiomModel;
 use App\Models\donorRequestModel;
 use App\Http\Requests\CreateaccountRequest;
 use App\Models\referralModel;
+use App\Models\donationModel;
+use App\Models\bloodStock;
+use App\Models\Donor;
 
 class bbManagerController extends Controller
 {
@@ -352,22 +355,22 @@ class bbManagerController extends Controller
 
     function HomePage()
     {
-        $donors = enrollementModel::paginate(10);
-        $numberof_message = hospitalRequestModel::where('readat', 'unread')->count();
+        $donors = donationModel::paginate(10);
+       // $numberof_message = hospitalRequestModel::where('readat', 'unread')->count();
 
         //$date = \Carbon\Carbon::today()->subDays(1);
         //$recentdoner = donorRequestModel::where('created_at', '>=', $date)->get();
 
-        $aplus = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
-        $aminus = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
-        $oplus = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
-        $ominus = addBloodModel::where('bloodgroup', 'O-')->sum('volume');
-        $bplus = addBloodModel::where('bloodgroup', 'B+')->sum('volume');
-        $bminus = addBloodModel::where('bloodgroup', 'B-')->sum('volume');
-        $abplus = addBloodModel::where('bloodgroup', 'AB+')->sum('volume');
-        $abminus = addBloodModel::where('bloodgroup', 'AB-')->sum('volume');
+        $aplus = bloodStock::where('bloodgroup', 'A+')->sum('volume');
+        $aminus = bloodStock::where('bloodgroup', 'A-')->sum('volume');
+        $oplus = bloodStock::where('bloodgroup', 'O+')->sum('volume');
+        $ominus = bloodStock::where('bloodgroup', 'O-')->sum('volume');
+        $bplus = bloodStock::where('bloodgroup', 'B+')->sum('volume');
+        $bminus = bloodStock::where('bloodgroup', 'B-')->sum('volume');
+        $abplus = bloodStock::where('bloodgroup', 'AB+')->sum('volume');
+        $abminus = bloodStock::where('bloodgroup', 'AB-')->sum('volume');
 
-        return view('bloodBankManager.home', compact('donors', 'numberof_message', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
+        return view('bloodBankManager.home', compact('donors','aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
 
     function Referral()
@@ -378,7 +381,7 @@ class bbManagerController extends Controller
         // $list_referred = referralModel::select('u1.name as referring_name', 'u1.email as referring_email', 'u2.name as referred_name', 'u2.email as referred_email')
         //     ->join('users as u1', 'referrals.referring_id', '=', 'u1.id')
         //     ->join('users as u2', 'referrals.referred_id', '=', 'u2.id')->get();
-        $referrals = User::whereHas('referrals')->with('referredUsers.user')->paginate(2);
+        $referrals = Donor::whereHas('referrals')->with('referredUsers.donor')->paginate(2);
 
         return view('bloodBankManager.referralProgram', compact('referrals'));
     }

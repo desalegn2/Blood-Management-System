@@ -18,48 +18,71 @@ use Illuminate\Http\Exceptions\PostTooLargeException;
 use App\Models\referralModel;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Donor;
+use App\Models\centorModel;
+use App\Models\donationModel;
 
 class donorController extends Controller
 {
 
     function createAccount(Request $req)
     {
+        $messages = [
+            'regex' => 'ትክክለኛ ስም ያስገቡ',
+            'phone.regex' => 'ትክክለኛ ስልክ ቁጥር ያስገቡ',
+            //'photo.max' => 'The :attribute may not be greater than :max kilobytes.',
+            'weight.min' => 'ክብደትወት ከ 48 ኪ.ግ በታች ከሆነ ደም መለገስ አይችሉም',
+            'age.min' => 'ከ 17 አመት በታች መለገስ አይቻልም',
+            'age.max' => 'ከ 65 አመት በላይ መለገስ አይቻልም',
 
-        $req->validate([
-            'email' => 'required|string|email|max:255|unique:users',
-            'role' => ['required', 'int', 'max:6'],
-            'password' => 'required|string|min:8|confirmed',
-            //'photo' => 'required|image|mimes:jpeg,jpg,png,gif,bmp,svg|max:10240',
-            //'max' => 'The :attribute may not be greater than :max kilobytes.',
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'occupation' => 'required|string|max:255',
-            'phone' => 'required|numeric|digits:10',
-            //'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:13',
-            'gender' => 'required|string|max:25',
-            'bloodtype' => 'required|string|max:25',
-            'age' => 'required|numeric|min:17|max:65',
-            'weight' => 'required|numeric|min:48',
-            'height' => 'required|numeric',
-            'country' => 'required|string|max:25',
-            'state' => 'required|string|max:25',
-            'city' => 'required|string|max:25',
-            'zone' => 'required|string|max:25',
-            'woreda' => 'required|string|max:25',
-            'kebelie' => 'required|string|max:25',
-            'housenumber' => 'required|numeric|digits:5',
-        ]);
+            'photo.required' => 'Please upload a photo.',
+            'photo.image' => 'The file must be a valid image.',
+            'photo.mimes' => 'The photo must be in JPEG or PNG format.',
+            'photo.max' => 'The photo may not be larger than 2 MB.',
+        ];
+
+        $req->validate(
+            [
+                'email' => 'required|string|email|max:255|unique:users',
+                'role' => ['required', 'int', 'max:6'],
+                'password' => 'required|string|min:8|confirmed',
+                //'photo' => ['required', 'image', 'mimes:jpeg,jpg,png,gif,bmp,svg', 'max:2048'],
+                // 'photo' => 'required|mimes:jpeg,jpg,png,gif,bmp,svg|max:10240',
+                'firstname' => ['required', 'regex:/^[\p{L}\s]+$/u', 'max:255'],
+                'lastname' => ['required', 'regex:/^[a-zA-Z\s]+$/', 'max:255'],
+                'occupation' => 'required|string|max:255',
+                'phone' => ['required', 'regex:/^(09|07)\d{8}$/'],
+                'gender' => 'required|string|max:25',
+                'bloodtype' => 'required|string|max:25',
+                'age' => 'required|numeric|min:17|max:65',
+                'weight' => 'required|numeric|min:48',
+                'height' => 'required|numeric',
+                'country' => 'required|string|max:25',
+                'state' => 'required|string|max:25',
+                'city' => 'required|string|max:25',
+                'zone' => 'required|string|max:25',
+                'woreda' => 'required|string|max:25',
+                'kebelie' => 'required|string|max:25',
+                'housenumber' => 'required|numeric|digits:5',
+            ],
+            $messages
+        );
         $var = new User;
         $var->email = $req->email;
         $var->password = Hash::make($req->password);
         $var->role = $req->role;
         $var->save();
         if ($var) {
-            
+            if ($req->hasfile('photo')) {
+                $file = $req->file('photo');
+                $extention = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extention;
+                $file->move('uploads/registers', $filename);
+            }
             $donor = new Donor;
+            $donor->photo = $req->hasfile('photo') ? $var->filename : '0.png';
             $donor->donor_id = $var->id;
-            $donor->firstname = $req->firstname;
-            $donor->lastname = $req->lastname;
+            $donor->firstname = ucfirst($req->input('firstname'));
+            $donor->lastname = ucfirst($req->input('lastname'));
             $donor->occupation = $req->occupation;
             $donor->phone = $req->phone;
             $donor->gender = $req->gender;
@@ -69,6 +92,7 @@ class donorController extends Controller
             $donor->height = $req->height;
             $donor->age = $req->age;
             $donor->country = $req->country;
+            $donor->country = ucfirst($req->input('country'));
             $donor->state = $req->state;
             $donor->city = $req->city;
             $donor->zone = $req->zone;
@@ -78,13 +102,13 @@ class donorController extends Controller
 
             $donor->save();
 
-           return redirect('login')->with('success', 'register Successfully!');
+            return redirect('login')->with('success', 'register Successfully!');
         }
     }
     function createAccount_Reffered($referral_code)
 
     {
-       // $referring = Donor::where('referral_code', $referral_code)->get()->first();
+        // $referring = Donor::where('referral_code', $referral_code)->get()->first();
         //$referring_id = $referring->id;
         return view('createAccountReffered', ['referral_code' => $referral_code]);
     }
@@ -97,6 +121,7 @@ class donorController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'role' => ['required', 'int', 'max:6'],
             'password' => 'required|string|min:8|confirmed',
+
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'occupation' => 'required|string|max:255',
@@ -142,39 +167,28 @@ class donorController extends Controller
             $donor->housenumber = $req->housenumber;
             $donor->save();
 
-        if ($donor) {
-           
-            referralModel::create([
-                'referring_id' => $referrer->donor_id,
-                'referred_id' => $donor->donor_id,
-            ]);
-            return redirect('login')->with('success', 'register Successfully!');
-        } 
+            if ($donor) {
+
+                referralModel::create([
+                    'referring_id' => $referrer->donor_id,
+                    'referred_id' => $donor->donor_id,
+                ]);
+                return redirect('login')->with('success', 'register Successfully!');
+            }
+        }
     }
-}
 
     function ReferrdedDonor($donor_id)
     {
-        $user = Donor::where('donor_id',$donor_id)->first();
-        $referral_code=$user->referral_code;
+        $user = Donor::where('donor_id', $donor_id)->first();
+        $referral_code = $user->referral_code;
         // $don=referralModel::find($user_id);
         $num_referred = $user->referrals()->count();
         $list_referred = $user->referrals()->with('referringDonor')->get();
 
-        return view('donor.referring', compact('num_referred', 'list_referred','referral_code'));
+        return view('donor.referring', compact('num_referred', 'list_referred', 'referral_code'));
     }
 
-    function getAdvertise()
-    {
-        $advert = advertises::all();
-        return view('donor.donorHome', ['advert' => $advert]);
-    }
-
-    function viewNews()
-    {
-        $advert = advertises::all();
-        return view('donor.blog', ['advert' => $advert]);
-    }
 
     function viewInfo()
     {
@@ -183,62 +197,23 @@ class donorController extends Controller
     }
     function ReservationForm()
     {
-        $data = User::where('role', 5)->get();
+        $data = centorModel::all();
         return view('donor.reservation', ['data' => $data]);
     }
     function reservation(Request $req)
     {
         $req->validate([
-            'email' => 'required|string|email|max:255',
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'occupation' => 'required|string|max:255',
-            'phone' => 'required|numeric|digits:10',
-            //'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:13',
-            'gender' => 'required|string|max:25',
-            'bloodtype' => 'required|string|max:5',
-            'age' => 'required|numeric|min:17|max:65',
-            'weight' => 'required|numeric|min:48',
             'health' => 'required|string|max:255',
             'center' => 'required|string|max:255',
-
-            'country' => 'required|string|max:25',
-            'state' => 'required|string|max:25',
-            'city' => 'required|string|max:25',
-            'zone' => 'required|string|max:25',
-            'woreda' => 'required|string|max:25',
-            'kebelie' => 'required|string|max:25',
-            'housenumber' => 'required|numeric|digits:5',
             'reservationdate' => 'required|date_format:Y-m-d|after_or_equal:today'
         ]);
         if ($req->health == "hiv" || $req->health == 'hepatite') {
-            $message = 'ህይወትን ለማዳን ደም ለመለገስ ላሳዩት ፍላጎት እና ቁርጠኝነት እናመሰግናለን። እንደ አለመታደል ሆኖ ተላላፊ በሽታ ካለባቸዉ ግለሰቦች የደም ልገሳን መቀበል አንችልም ምክንያቱም ለለጋሹም ሆነ ለተቀባዩ አደጋ ሊያስከትል ይችላል. የደም ልገሳን አስፈላጊነት ግንዛቤ በማስጨበጥ እና ሌሎችም እንዲለግሱ በማበረታታት የዓላማችንን ድጋፍ እንድትቀጥሉ እናሳስባለን።';
-            return redirect()->back()->with('error', $message);
+            $message = 'ህይወትን ለማዳን ደም ለመለገስ ላሳዩት ፍላጎት እና ቁርጠኝነት እናመሰግናለን። ነገር ግን ተላላፊ በሽታ ካለባቸዉ ግለሰቦች የደም ልገሳን መቀበል አንችልም ምክንያቱም ለለጋሹም ሆነ ለተቀባዩ አደጋ ያስከትላል.የደም ልገ ሳን አስፈላጊነት ግንዛቤ በማስጨበጥ እና ሌሎችም እንዲለግሱ በማበረታታት የዓላማችንን ድጋፍ እንድትቀጥሉ እናሳስባለን።';
+            return redirect()->back()->with('error',$message);
         } else {
 
             $var = new reservationModel;
-            $var->user_id = $req->user_id;
-            $var->firstname = $req->firstname;
-            $var->lastname = $req->lastname;
-
-            $var->occupation = $req->occupation;
-            $var->email = $req->email;
-            $var->phone = $req->phone;
-            $var->gender = $req->gender;
-            $var->bloodtype = $req->bloodtype;
-
-            $var->weight = $req->weight;
-            $var->height = $req->height;
-            $var->health = $req->health;
-
-            $var->age = $req->age;
-            $var->country = $req->country;
-            $var->state = $req->state;
-            $var->city = $req->city;
-            $var->zone = $req->zone;
-            $var->woreda = $req->woreda;
-            $var->kebelie = $req->kebelie;
-            $var->housenumber = $req->housenumber;
+            $var->donor_id = $req->user_id;
             $var->reservationdate = $req->reservationdate;
             $var->center = $req->center;
             $var->save();
@@ -263,13 +238,13 @@ class donorController extends Controller
     {
         $isExist = reservationModel::select("*")
 
-            ->where("user_id", $id)
+            ->where("donor_id", $id)
             ->exists();
         if ($isExist) {
 
-            $stats = reservationModel::where('user_id', '=', $id)->orderBy('created_at', 'desc')->get(['appointmentdate'])->first();
+            $stats = reservationModel::where('donor_id', '=', $id)->orderBy('created_at', 'desc')->get(['status'])->first();
             //$stat = donorRequestModel::where('user_id', $id)->get(['status']);
-            $stat = $stats->appointmentdate;
+            $stat = $stats->status;
 
             return view('donor.reservationHistory', compact('stat'));
         } else {
@@ -289,27 +264,30 @@ class donorController extends Controller
 
     function Profile($id)
     {
-        $isExist = User::select("*")
-            ->where("id", $id)
+        $isExist = Donor::select("*")
+            ->where("donor_id", $id)
             ->exists();
+
         if ($isExist) {
-            $data = User::all()->where('id', '=', $id);
-            //return view('nurse.profile', ['data' => $data]);
-            return view('donor.profile', ['data' => $data]);
+            $data = Donor::all()->where('donor_id', '=', $id);
+            $frequency = donationModel::all()->where('donor_id', '=', $id)->count('donor_id');
+
+
+            return view('donor.profile', ['data' => $data, 'frequency' => $frequency]);
         }
     }
     function updateProfile(Request $req, int $id)
     {
 
-        User::where("id", $id)
-            ->update(["name" => $req->name, "email" => $req->email, "phone" => $req->phone]);
+        Donor::where("donor_id", $id)
+            ->update(["firstname" => $req->firstname, "phone" => $req->phone]);
         return redirect()->back()->with('success', 'your Profile,Changed');
     }
 
     function updatephoto(Request $req, int $id)
     {
 
-        $var = User::all()->where('id', '=', $id);
+        $var = Donor::all()->where('donor_id', '=', $id);
         if ($req->hasfile('photo')) {
             $file = $req->file('photo');
             $extention = $file->getClientOriginalExtension();
@@ -317,7 +295,7 @@ class donorController extends Controller
             $file->move('uploads/registers', $filename);
             $var->photo = $filename;
         }
-        User::where("id", $id)
+        Donor::where("donor_id", $id)
             ->update(["photo" => $filename]);
         return redirect()->back()->with('success', 'your Image,Changed');
     }

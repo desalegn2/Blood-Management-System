@@ -15,6 +15,8 @@ use App\Http\Requests\CreateaccountRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\aaa;
 use App\Models\feedbackModel;
+use App\Models\staffModel;
+
 
 class AdminController extends Controller
 {
@@ -34,32 +36,36 @@ class AdminController extends Controller
     function register(Request $req)
     {
         $req->validate([
-            'photo' => 'required|mimes:jpeg,png,jpg,gif',
-            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'role' => ['required', 'int', 'max:6'],
             'password' => 'required|string|min:8|confirmed',
 
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'phone' => 'required|numeric|digits:10',
+            'gender' => 'required|string|max:25',
         ]);
         try {
 
-            // $password = $req->password;
-            // $pass = bcrypt($password);
-            if ($req->hasfile('photo')) {
-                $file = $req->file('photo');
-                $extention = $file->getClientOriginalExtension();
-                $filename = time() . '.' . $extention;
-                $file->move('uploads/registers', $filename);
-            }
-
-            User::create([
-                'photo' => $req->hasfile('photo') ? $filename : '0.png',
-                'name' => $req->name,
+            $user = User::create([
                 'email' => $req->email,
                 'password' => Hash::make($req->password),
                 'role' => $req->role,
             ]);
-            return redirect()->back()->with('success', 'Task Added Successfully!');
+
+            if ($user) {
+                $staff = staffModel::create([
+                    'staff_id' => $user->id,
+                    'firstname' => $req->firstname,
+                    'lastname' => $req->lastname,
+                    'phone' => $req->phone,
+                    'gender' => $req->gender,
+                    'photo' => '0.png',
+
+                ]);
+                return redirect()->back()->with('success', 'Task Added Successfully!');
+            }
+            
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Something went wrong in AdminController.register',
@@ -83,11 +89,11 @@ class AdminController extends Controller
         $donors->save();
         return redirect()->back();
     }
-   
 
-    
 
-    
+
+
+
     public function updateNurse(Request $request, $id)
     {
         $member = User::find($id);
@@ -104,10 +110,6 @@ class AdminController extends Controller
 
         return redirect()->back();
     }
-    
-
-    
-   
 
     function userNotification()
     {
@@ -127,7 +129,7 @@ class AdminController extends Controller
     function bloodavailability()
     {
         $numberof_user = User::count();
-        $numberof_donor = User::where('role', 1)->count();
+        $numberof_donor = User::where('role', 2)->count();
         $numberof_nurse = User::where('role', 3)->count();
         $numberof_manager = User::where('role', 0)->count();
         $numberof_tech = User::where('role', 4)->count();

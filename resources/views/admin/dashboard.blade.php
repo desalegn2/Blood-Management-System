@@ -1,4 +1,4 @@
-@extends('admin.sidebars')
+@extends('admin.sidebar')
 @section('content')
 
 <!DOCTYPE html>
@@ -344,7 +344,7 @@
 
 
 
-    <div class="grey-bg container-fluid">
+    <div class="grey-bg container-fluid mt-5">
         <form action="{{url('/admin/search_user')}}" method="get">
             @csrf
             <div style="float: right;">

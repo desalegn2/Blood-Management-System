@@ -51,14 +51,14 @@
     <tbody>
         @foreach ($referrals->groupBy('id') as $referral)
         <tr>
-            <td rowspan="{{ count($referral[0]->referredUsers) }}">{{ $referral[0]->name }}</td>
+            <td rowspan="{{ count($referral[0]->referredUsers) }}">{{ $referral[0]->firstname  }} {{ $referral[0]->lastname  }}</td>
             @foreach ($referral[0]->referredUsers as $key => $referredUser)
             @if ($key > 0)
         </tr>
         <tr>
             @endif
-            <td data-label="Referred User">{{ $referredUser->user->name }}</td>
-            <td data-label="Email">{{ $referredUser->user->email }}</td>
+            <td data-label="Referred User">{{ $referredUser->donor->firstname }}</td>
+            <td data-label="Email">{{ $referredUser->donor->lastname }}</td>
             <td data-label="Status">{{ $referredUser->status }}</td>
             @if ($key == 0)
             <td rowspan="{{ count($referral[0]->referredUsers) }}" data-label="Number of Referrals">{{ count($referral[0]->referredUsers) }}</td>

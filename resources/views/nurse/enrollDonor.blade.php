@@ -155,7 +155,7 @@
                         <label for="first_name">City:</label>
                         <input type="text" id="first_name" name="city" required>
                     </div>
-                    <div>
+                    <div>alm@gmail.com
                         <label for="last_name">Zone:</label>
                         <input type="text" id="last_name" name="zone" required>
                     </div>

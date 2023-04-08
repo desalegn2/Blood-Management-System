@@ -48,15 +48,12 @@
             text-decoration: none;
             display: block;
         }
-
         .dropdown-content a:hover {
             background-color: #FF7B54;
         }
-
         .dropdown:hover .dropdown-content {
             display: block;
         }
-
         header {
             position: fixed;
             height: 100px;
@@ -67,7 +64,6 @@
             left: 0;
             z-index: 9999;
             /* overflow-y: scroll; */
-
 
         }
 
@@ -129,13 +125,6 @@
             font-weight: 500;
             letter-spacing: 2px;
 
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
         }
 
         a.profile:hover {
@@ -173,9 +162,10 @@
                 padding: 20px 40px;
                 box-sizing: border-box;
                 z-index: 99;
+           
 
             }
-
+            
             .navigation-menu::before {
                 content: "";
                 border-left: 10px solid transparent;

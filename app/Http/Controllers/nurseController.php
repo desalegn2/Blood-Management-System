@@ -11,34 +11,42 @@ use App\Models\advertises;
 use App\Models\reservationModel;
 use App\Models\donorRequestModel;
 use Illuminate\Support\Facades\Hash;
-use App\Models\enrollementModel;
+use App\Models\Donor;
 
 use \Notification;
 use PDF;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Notifications\sendNotification;
-use App\Models\addBloodModel;
+use App\Models\bloodStock;
 use App\Models\referralModel;
+use App\Models\donationModel;
+
+use Vonage\Client;
+use Vonage\Client\Credentials\Basic;
+use Vonage\SMS\Message\SMS;
+use Illuminate\Support\Facades\DB;
+
 
 class nurseController extends Controller
 {
+
     function ReturntoHome()
     {
         //$stats = donorRequestModel::all()->orderBy('created_at', 'desc')->take(4);
-        $donors_enrolled = enrollementModel::count();
-        $donor = reservationModel::count();
+        $donors_enrolled = Donor::count();
+        $donor = donationModel::count();
         //  $donors_enrolled = enrollementModel::distinct()->count('fullname');
 
         //  $a = enrollementModel::where('bloodtype', 'A-')->distinct()->count('fullname');
 
-        $aplus = enrollementModel::where('bloodtype', 'A+')->count();
-        $aminus = enrollementModel::where('bloodtype', 'A-')->count();
-        $bplus = enrollementModel::where('bloodtype', 'B+')->count();
-        $bminus = enrollementModel::where('bloodtype', 'B-')->count();
-        $abminus = enrollementModel::where('bloodtype', 'AB-')->count();
-        $abplus = enrollementModel::where('bloodtype', 'AB+')->count();
-        $ominus = enrollementModel::where('bloodtype', 'O-')->count();
-        $oplus = enrollementModel::where('bloodtype', 'O+')->count();
+        $aplus = bloodStock::where('bloodgroup', 'A+')->count();
+        $aminus = bloodStock::where('bloodgroup', 'A-')->count();
+        $bplus = bloodStock::where('bloodgroup', 'B+')->count();
+        $bminus = bloodStock::where('bloodgroup', 'B-')->count();
+        $abminus = bloodStock::where('bloodgroup', 'AB-')->count();
+        $abplus = bloodStock::where('bloodgroup', 'AB+')->count();
+        $ominus = bloodStock::where('bloodgroup', 'O-')->count();
+        $oplus = bloodStock::where('bloodgroup', 'O+')->count();
 
         $date = \Carbon\Carbon::today()->subDays(1);
         $stats = reservationModel::where('created_at', '>=', $date)->get();
@@ -46,7 +54,6 @@ class nurseController extends Controller
 
         return view('nurse.nurseHome', compact('display1', 'stats', 'donor', 'donors_enrolled', 'aminus', 'aplus', 'bminus', 'bplus', 'abminus', 'abplus', 'ominus', 'oplus'));
     }
-
 
     function Profile($id)
     {
@@ -101,58 +108,58 @@ class nurseController extends Controller
         }
     }
 
-    function advertise(Request $req)
-    {
-
-        $var = new advertises;
-        $var->title = $req->title;
-        $var->description = $req->discription;
-
-        if ($req->hasfile('image')) {
-            $file = $req->file('image');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
-            $file->move('uploads/registers', $filename);
-            $var->image = $filename;
-        }
-        $var->save();
-        return redirect('nurse/home');
-    }
-
     function manageReservation()
     {
-        $accepts = reservationModel::where('appointmentdate', '!=', 'Donated')
-        ->get();
-        return view('nurse.reserationManagement', ['accepts' => $accepts]);
+
+        $reservations = reservationModel::join('donors', 'reservation.donor_id', '=', 'donors.donor_id')->where('reservation.status', 'in progress')
+            ->select('reservation.*', 'donors.*')
+            ->get();
+        return view('nurse.reserationManagement', ['reservations' => $reservations]);
     }
 
     function reservationDetail($id)
     {
-        $donors = reservationModel::find($id);
-        return view('nurse.reservationDetail', ['donors' => $donors]);
+        // $donors = Donor::find($donor_id);
+        // $reservation = reservationModel::where('donor_id',$donor_id);
+
+        $donor = reservationModel::join('donors', 'reservation.donor_id', '=', 'donors.donor_id')
+            ->where('reservation.id', $id)
+            ->select('reservation.*', 'donors.*')
+            ->get();
+
+
+        return view('nurse.reservationDetail', compact('donor'));
+    }
+    function findReservation(Request $req)
+    {
+        $req->validate([
+            'date' => 'required|date_format:Y-m-d|after_or_equal:today'
+        ]);
+
+        $date = $req->date;
+        $center = $req->center;
+        $reservations = reservationModel::join('donors', 'reservation.donor_id', '=', 'donors.donor_id')
+            ->where('center', $center)->whereDate('reservationdate', $date)
+            ->where('status', 'Accepted')
+            ->select('reservation.*', 'donors.*')
+            ->get();
+
+        return view('nurse.reserationManagement', ['reservations' => $reservations]);
     }
 
     function getReservation($id)
     {
-        $donors = reservationModel::find($id);
+        $donors = Donor::find($id);
         return view('nurse.registorAlreadyDonated', ['data' => $donors]);
     }
 
-    function deleteRes($id)
-    {
-        $res = reservationModel::find($id);
-        $res->delete();
-
-        return redirect()->back();
-    }
     function accept($id)
     {
         $res = reservationModel::find($id);
-        $res->appointmentdate = "Accepted";
+        $res->status = "Accepted";
         $res->save();
         return redirect()->back();
     }
-
     function changeReservation(Request $req, $id)
     {
         $res = reservationModel::find($id);
@@ -163,55 +170,31 @@ class nurseController extends Controller
     }
     function enrollDonor(Request $req)
     {
+        $req->validate([
+            'packno' => 'required|unique:donation|numeric',
+            'weight' => 'required|numeric|min:48',
+        ]);
         if ($req->volume < 250 || $req->volume > 450) {
             return redirect()->back()->with('message', 'We are unable to accept your blood donation at this time, as the volume of your blood donation is not within the acceptable range. Thank you for your understanding and support.');
         } else {
-            $var = new enrollementModel;
-            
-            $var->nurse_id = $req->user_id;
-            $var->firstname = $req->firstname;
-            $var->lastname = $req->lastname;
+            $var = new donationModel;
+            $var->nurse_id = $req->nurse_id;
+            $var->donor_id = $req->donor_id;
             $var->packno = $req->packno;
-            $var->occupation = $req->occupation;
-            $var->email = $req->email;
-            $var->phone = $req->phone;
-            $var->gender = $req->gender;
-            $var->bloodtype = $req->bloodtype;
             $var->volume = $req->volume;
-            $var->remark = $req->remark;
             $var->weight = $req->weight;
-            $var->height = $req->height;
-            $var->age = $req->age;
-            $var->country = $req->country;
-            $var->state = $req->state;
-            $var->city = $req->city;
-            $var->zone = $req->zone;
-            $var->woreda = $req->woreda;
-            $var->kebelie = $req->kebelie;
-            $var->housenumber = $req->housenumber;
-            $var->typeofdonation = $req->typeofdonation;
-            if ($req->hasfile('photo')) {
-                $file = $req->file('photo');
-                $extention = $file->getClientOriginalExtension();
-                $filename = time() . '.' . $extention;
-                $file->move('uploads/registers', $filename);
-                $var->photo =  $filename;
-            }
+            $var->remark = $req->remark;
             $var->save();
 
             if ($var) {
-
                 $isExist = reservationModel::select("*")
-
-                    ->where("id", $req->id)
+                    ->where("donor_id", $req->donor_id)
                     ->exists();
                 if ($isExist) {
-                    $res = reservationModel::where("id", $req->id)->first();
-                    $res->appointmentdate = "Donated";
+                    $res = reservationModel::where("donor_id", $req->donor_id)->first();
+                    $res->status = "Donated";
                     $res->save();
                     return redirect()->back()->with('success', 'Thank you for your donation!');
-                } else {
-                    return redirect()->back()->with('success', 'Status Not Changed!');
                 }
             }
         }
@@ -219,43 +202,69 @@ class nurseController extends Controller
 
     function listofDonor()
     {
-        $data = enrollementModel::paginate(5);
+        // $data = donationModel::paginate(5);
+
+        $data = donationModel::join('donors', 'donation.donor_id', '=', 'donors.donor_id')
+            ->select('donors.*', 'donation.created_at')
+            ->paginate(5);
+
         return view('nurse.listOfRegistor', compact('data'));
     }
     function searchDonor(Request $req)
     {
         $a = $req->fullname;
-        $data = enrollementModel::where('fullname', $a)->orWhere('phone', $a)->orWhere('email', $a)->paginate(5);
+        $data = donationModel::where('fullname', $a)->orWhere('phone', $a)->orWhere('email', $a)->paginate(5);
         return view('nurse.listOfRegistor', compact('data'));
     }
-    function getDonor($id)
+    function getDonor($donor_id)
     {
-        $isExist = enrollementModel::select("*")
-            ->where("id", $id)
+        $isExist = Donor::select("*")
+            ->where("donor_id", $donor_id)
             ->exists();
         if ($isExist) {
-            $donors = enrollementModel::find($id);
+            $donors = Donor::find($donor_id);
             return view('nurse.registorAlreadyDonated', ['data' => $donors]);
         }
     }
     function notifys()
     {
-        $date = \Carbon\Carbon::today()->subDays(15);
-        $var = enrollementModel::where('created_at', '<=', $date)->get();
+        $date = \Carbon\Carbon::today()->subDays(5);
+        // $var = donationModel::where('created_at', '<=', $date)->get();
+        // $donor = donationModel::join('donors', 'donation.donor_id', '=', 'donors.donor_id')
+        //     ->where('donation.created_at', '<=', $date)
+        //     ->where('donation.status', 'accept')
+        //     ->select('donors.*', 'donation.created_at', 'donation.packno')
+        //     ->latest()->first();
 
-        //  $var = enrollementModel::all();
-        return view('nurse.notify', ['donors' => $var]);
+        $donor = Donor::join('donation', 'donors.donor_id', '=', 'donation.donor_id')
+                ->select('donors.*', 'donation.created_at','donation.packno')
+                ->whereRaw('DATEDIFF(NOW(), (SELECT MAX(donation.created_at) FROM donation WHERE donation.donor_id = donors.donor_id)) >= 6')
+                ->orderBy('donation.created_at', 'desc')
+                ->get();
+
+        // $donor = DB::table('donors')
+        // ->select('donors.donor_id', 'donors.firstname', 'donors.lastname', DB::raw('MAX(donation.created_at) as last_donation_date'), DB::raw('MAX(donors.phone) as phone'))
+        // ->leftJoin('donation', 'donors.donor_id', '=', 'donation.donor_id')
+        // ->groupBy('donors.donor_id')
+        // ->havingRaw('MAX(donation.donation_date) < DATE_SUB(NOW(), INTERVAL 30 DAY)')
+        // ->get();
+        return view('nurse.notify', ['donors' => $donor]);
     }
 
     function DaystoNotify(Request $req)
     {
         $date = $req->date;
         $lengthof_date = \Carbon\Carbon::today()->subDays($date);
-        $var = enrollementModel::where('created_at', '<=', $lengthof_date)->get();
-        return view('nurse.notify', ['donors' => $var]);
+        //  $var = donationModel::where('created_at', '<=', $lengthof_date)->get();
+
+        $donor = donationModel::join('donors', 'donation.donor_id', '=', 'donors.donor_id')
+            ->where('donation.created_at', '<=', $lengthof_date)
+            ->select('donors.*', 'donation.created_at', 'donation.packno')
+            ->get();
+        return view('nurse.notify', ['donors' => $donor]);
     }
 
-    public function sendnotification($id)
+    public function emailSend($donor_id)
     {
         $details = [
             'greeting' => 'hi',
@@ -266,9 +275,10 @@ class nurseController extends Controller
         ];
         try {
 
-            $msg = enrollementModel::find($id);
+            $msg = User::find($donor_id);
 
             \Notification::send($msg, new sendNotification($details));
+
             return redirect()->back()->with('success', 'Message send Successfully!', $msg);
         } catch (\Exception $e) {
             return response()->json([
@@ -277,11 +287,25 @@ class nurseController extends Controller
             ], 400);
         }
     }
-    public function generateReport()
+
+    public function smsSend($donor_id)
     {
-        $pdf = PDF::loadView('nurse.viewDonor');
-        return $pdf->download('demo.pdf');
+        $basic  = new \Vonage\Client\Credentials\Basic("6a348ecf", "QmbAIOePQzRM0kzl");
+        $client = new \Vonage\Client($basic);
+
+        $response = $client->sms()->send(
+            new \Vonage\SMS\Message\SMS("251943253137", 'BRAND_NAME', 'A text message sent using the Nexmo SMS API')
+        );
+
+        $message = $response->current();
+
+        if ($message->getStatus() == 0) {
+            echo "The message was sent successfully\n";
+        } else {
+            echo "The message failed with status: " . $message->getStatus() . "\n";
+        }
     }
+
 
     public function search_donors(Request $req)
     {
@@ -290,14 +314,39 @@ class nurseController extends Controller
 
 
         //$data = enrollementModel::where('bloodtype', $bloodtype)->distinct()->get(['fullname']);
-        $data = enrollementModel::where('bloodtype', $bloodtype)->paginate(5);
+        $data = donationModel::where('bloodtype', $bloodtype)->paginate(5);
         return view('nurse.searchDonor', compact('data', 'bloodtype'));
     }
     public function Donordetail($id)
     {
-        $donors = enrollementModel::find($id);
+        $donors = donationModel::find($id);
         return view('nurse.DetailofDonated', ['donors' => $donors]);
 
         //return view('nurse.searchDonor', compact('data', 'bloodtype'));
+    }
+
+    public function sms($donor_id)
+    {
+
+        // create a new Vonage API client instance
+
+        $client = new Client(new Basic('6a348ecf', 'QmbAIOePQzRM0kzl'));
+        try {
+            $donor = Donor::find($donor_id);
+            // format the phone number for Vonage API
+            $phone = preg_replace('/[^0-9]/', '', $donor->phone);
+            $donor = $donor->firstname;
+            $phone = '251' . substr($phone, -9);
+            // create a new SMS message
+            $sms = new SMS($phone, '0949496106', 'Hello thank you for donating blood!');
+            // send the SMS message
+            $response = $client->sms()->send($sms);
+            return redirect()->back()->with('success', 'sms send Successfully!');
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Something went wrong in nurseController.smsSend',
+                'error' => $e->getMessage()
+            ], 400);
+        }
     }
 }

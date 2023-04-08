@@ -30,7 +30,6 @@
                 <table class="table table-bordered table-responsive table-striped">
                     <thead>
                         <th>Pack No</th>
-                        <th>Blood Type</th>
                         <th>Volume</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -40,7 +39,6 @@
                         @foreach ($data as $dis)
                         <tr>
                             <td>{{$dis->packno}}</td>
-                            <td>{{$dis->bloodtype}}</td>
                             <td>{{$dis->volume}}</td>
                             <td>{{$dis->status}}</td>
                             <td>
@@ -59,7 +57,7 @@
                         @endforeach
                         @else
                         <tr>
-                            <td>There is No Donor Who send Reservation</td>
+                            <td>There is No Donation Still Now</td>
                         </tr>
                         @endif
                     </tbody>

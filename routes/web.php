@@ -116,7 +116,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::view('/nurse/enroll', 'nurse.enrollDonor');
         Route::post('/nurse/enrolldonor', [nurseController::class, 'enrollDonor']);
         Route::get('/nurse/notify', [nurseController::class, 'notifys']);
-        Route::get('/nurse/send/{id}', [nurseController::class, 'sendnotification']);
+        Route::get('/nurse/email/{id}', [nurseController::class, 'emailSend']);
+        Route::get('/nurse/sms/{donor_id}', [nurseController::class, 'smsSend']);
 
         Route::view('/nurse/advertise', 'nurse.advertise');
         Route::post('/nurse/advertise', [nurseController::class, 'advertise']);
@@ -124,7 +125,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::view('/nurse/reservation', 'nurse.reserationManagement');
         Route::get('/nurse/reservation', [nurseController::class, 'manageReservation']);
         Route::get('/nurse/reservationdetail/{id}', [nurseController::class, 'reservationDetail']);
-
+        Route::get('/nurse/findreservation', [nurseController::class, 'findReservation']);
+        
         Route::post('/nurse.reservationstatus/{id}', [nurseController::class, 'reservationstatus']);
 
         Route::delete('/nurse/deletereservation/{id}', [nurseController::class, 'deleteRes']);
@@ -151,7 +153,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::post('/technitian/updatephoto/{id}', [techController::class, 'updatephoto']);
         Route::post('/technitian/changepassword', [techController::class, 'changepassword']);
 
-        Route::get('/technitian/expired', [techController::class, 'ExpiredBlood']);
+        Route::get('/technitian/expiredblood', [techController::class, 'ExpiredBlood']);
         Route::view('/technitian/addbloods', 'technitian.addBlood');
         Route::post('/technitian/addbloods', [techController::class, 'addblood']);
 
@@ -162,6 +164,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('/technitian/testblood/{id}', [techController::class, 'testBloodDetail']);
         Route::get('/technitian/blooddetail', [techController::class, 'bloodDetail']);
         Route::post('/technitian/stock', [techController::class, 'storeStock'])->name('technitian.stock');
+        Route::get('/technitian/expire/{id}', [techController::class, 'expired']);
 
         Route::get('/technitian/handling', [techController::class, 'handling']);
     });
