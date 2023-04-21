@@ -17,7 +17,7 @@
             --header-height: 3rem;
             --nav-width: 70px;
             --first-color: #4723D9;
-            --red-color: #FF8B13;
+            --red-color: #2F4F4F;
             --first-color-black: #000000;
             --white-color: #F7F6FB;
             --body-font: 'Nunito', sans-serif;
@@ -100,7 +100,6 @@
             z-index: var(--z-fixed);
             overflow-y: auto;
             height: 100%;
-
         }
 
         .nav {
@@ -118,7 +117,9 @@
             grid-template-columns: max-content max-content;
             align-items: center;
             column-gap: 1rem;
-            padding: .5rem 0 .5rem 1.5rem
+            padding: .5rem 0 .5rem 1.5rem;
+            text-decoration: none;
+
         }
 
         .nav_logo {

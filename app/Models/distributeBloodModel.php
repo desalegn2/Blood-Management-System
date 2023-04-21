@@ -10,20 +10,17 @@ class distributeBloodModel extends Model
     use HasFactory;
     public $table = "distribute";
     protected $fillable = [
-        'user_id',
-        'bloodgroup',
-        'volume',
-        'issueddate',
-        'expirydate',
-        'recievedby',
-
-        'donateby',
-        'rh',
-        'hct',
-        'bloodpressure',
-        'packno',
-        'donoremail',
-        'donorphone'
-
+        'hospital_id',
+        'stock_id',
     ];
+
+    public function stock()
+    {
+        return $this->belongsTo(bloodStock::class, 'stock_id');
+    }
+
+    public function hospital()
+    {
+        return $this->belongsTo(hospitalModel::class, 'hospital_id');
+    }
 }

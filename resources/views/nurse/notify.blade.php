@@ -24,13 +24,13 @@
             <div class="col-md-12 col-md-offset-1">
                 <h1>Donors Who Donate Before</h1>
 
-                <form action="{{url('/nurse/datetonotify')}}" method="get">
+                <!-- <form action="{{url('/nurse/datetonotify')}}" method="get">
                     @csrf
                     <div style="float: right;">
                         <b>How Many Days Ago You Notify ?</b><input type="text" name="date" style="width: 200px;" placeholder="enter length of days" required>
                         <input type="submit" value="Enter" style="width: 50px;">
                     </div>
-                </form>
+                </form> -->
                 @if(session('success'))
                 <div class="alert alert-success">
                     Email Send Sucessfully

@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
+    <title>Health Institute Home</title>
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
@@ -17,11 +17,17 @@
     <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css" integrity="sha512-rO7BTsTmR9YNS+2kszOsZTKBszvgvFK34MnKj+n3x8yDkBOyv4vj4g4n/x6N8WUrGLz4skGrlrs+Fw5w6UxL6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-0r1NlKDCGIn2N+axvA8ygN1zbd0U5if6PfKj77FSCZwEa00P4D89j4f4Ux4HbFZB1Y9Y22VZp3qZ3OwUXvvLAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
         /* =========== Google Fonts ============ */
         @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 
-        /* =============== Globals ============== */
+        .grey-bg {
+            background-color: #F5F7FA;
+        }
+
         * {
             font-family: "Ubuntu", sans-serif;
             margin: 0;
@@ -42,29 +48,125 @@
             overflow-x: hidden;
         }
 
-        .top {
+        /* ================== Order Details List ============== */
+        .details {
+            position: relative;
             width: 100%;
-            height: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 10px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-gap: 30px;
+            background-color: #f5f5f5;
+            /* margin-top: 10px; */
         }
 
-        /* ======================= Cards ====================== */
-
-
-        /* ================== Order Details List ============== */
-
-        .recentCustomers {
+        .details .recentOrders {
             position: relative;
-            display: grid;
-            min-height: 500px;
-            padding: 20px;
+            /* display: grid;
+            min-height: 500px; */
             background: var(--white);
+            padding: 20px;
             box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
             border-radius: 20px;
         }
+
+        .details .cardHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .cardHeader h2 {
+            font-weight: 600;
+            color: var(--blue);
+        }
+
+        .cardHeader .btn {
+            position: relative;
+            padding: 5px 10px;
+            background: var(--blue);
+            text-decoration: none;
+            color: var(--white);
+            border-radius: 6px;
+        }
+
+        .details table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .details table thead td {
+            font-weight: 600;
+        }
+
+        .details .recentOrders table tr {
+            color: var(--black1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .details .recentOrders table tr:last-child {
+            border-bottom: none;
+        }
+
+        .details .recentOrders table tbody tr:hover {
+            background: var(--blue);
+            color: var(--white);
+        }
+
+        .details .recentOrders table tr td {
+            padding: 10px;
+        }
+
+        .details .recentOrders table tr td:last-child {
+            text-align: end;
+        }
+
+        .details .recentOrders table tr td:nth-child(2) {
+            text-align: end;
+        }
+
+        .details .recentOrders table tr td:nth-child(3) {
+            text-align: center;
+        }
+
+        .status.delivered {
+            padding: 2px 4px;
+            background: #8de02c;
+            color: var(--white);
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status.pending {
+            padding: 2px 4px;
+            background: #e9b10a;
+            color: var(--white);
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status.return {
+            padding: 2px 4px;
+            background: #f00;
+            color: var(--white);
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status.inProgress {
+            padding: 2px 4px;
+            background: #1795ce;
+            color: var(--white);
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+
 
         .recentCustomers .imgBx {
             position: relative;
@@ -99,7 +201,7 @@
         }
 
         .recentCustomers table tr:hover {
-            background: var(--blue);
+            background: red;
             color: var(--white);
         }
 
@@ -186,37 +288,29 @@
 
 <body>
 
-
-    <!-- ======================= Total blood Availability ================== -->
-
-    <div class="grey-bg container-fluid">
-
-
+    <div class="grey-bg container-fluid mt-1">
         <section id="minimal-statistics">
-
             <div class="row">
                 <div class="col-12 mt-3 mb-1">
-                    <h4 class="text-uppercase">Total Blood Stored</h4>
-                    <p></p>
+
+                    <h4 class="text-uppercase">Total Blood In Blood Bank Stock</h4>
                 </div>
             </div>
             <div class="row">
-
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body" style="background-color: #FF6E31;">
+                            <div class="card-body" style="background-color: #8EA7E9;">
                                 <div class="media d-flex">
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
                                     </div>
                                     <div class="media-body text-right">
-                                        <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
-
-                                        <h1>A-</h1>
-                                        <h3>{{$aminus}}</h3>
-
-
+                                        <a href="{{url('nurse/aminusdonor')}}">
+                                            <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
+                                        </a>
+                                        <h3><strong>{{$aminus}}</strong></h3>
+                                        <span><strong>A-</strong></span>
                                     </div>
                                 </div>
                             </div>
@@ -226,15 +320,15 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body" style="background-color: #FF6E31;">
+                            <div class="card-body" style="background-color: #8EA7E9;">
                                 <div class="media d-flex">
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
                                     </div>
                                     <div class="media-body text-right">
-                                        <img style="width: 130px; height:100px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
-                                        <h1>A+</h1>
-                                        <h3>{{$aplus}}</h3>
+                                        <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
+                                        <h3><strong>{{$aplus}}</strong></h3>
+                                        <span><strong>A+</strong></span>
                                     </div>
                                 </div>
                             </div>
@@ -244,16 +338,15 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body" style="background-color: #FF6E31;">
+                            <div class="card-body" style="background-color: #8EA7E9;">
                                 <div class="media d-flex">
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
                                     </div>
                                     <div class="media-body text-right">
-                                        <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
-                                        <h1>B-</h1>
-                                        <h3>{{$bminus}}</h3>
-
+                                        <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
+                                        <h3><strong>{{$bminus}}</strong></h3>
+                                        <span><strong>B-</strong></span>
                                     </div>
                                 </div>
                             </div>
@@ -263,16 +356,15 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body" style="background-color: #FF6E31;">
+                            <div class="card-body" style="background-color: #8EA7E9;">
                                 <div class="media d-flex">
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
                                     </div>
                                     <div class="media-body text-right">
-                                        <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
-                                        <h1>B+</h1>
-                                        <h3>{{$bplus}}</h3>
-
+                                        <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
+                                        <h3><strong>{{$bplus}}</strong></h3>
+                                        <span><strong>B+</strong></span>
                                     </div>
                                 </div>
                             </div>
@@ -286,13 +378,12 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body" style="background-color: #FF6E31;">
+                            <div class="card-body" style="background-color: #8EA7E9;">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
-                                        <img style="width: 100px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
-                                        <h1>AB-</h1>
-                                        <h3>{{$abminus}}</h3>
-
+                                        <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
+                                        <h3><strong>{{$abminus}}</strong></h3>
+                                        <span><strong>AB-</strong></span>
                                     </div>
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
@@ -305,13 +396,12 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body" style="background-color: #FF6E31;">
+                            <div class="card-body" style="background-color: #8EA7E9;">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
-                                        <img style="width: 100px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
-                                        <h1>AB+</h1>
-                                        <h3>{{$abplus}}</h3>
-
+                                        <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
+                                        <h3><strong>{{$abplus}}</strong></h3>
+                                        <span><strong>AB+</strong></span>
                                     </div>
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
@@ -325,13 +415,12 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body" style="background-color: #FF6E31;">
+                            <div class="card-body" style="background-color: #8EA7E9;">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
-                                        <img style="width: 130px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
-                                        <h1>O-</h1>
-                                        <h3>{{$ominus}}</h3>
-
+                                        <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F55050;"></ion-icon>
+                                        <h3><strong>{{$ominus}}</strong></h3>
+                                        <span><strong>O-</strong></span>
                                     </div>
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
@@ -344,13 +433,12 @@
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body" style="background-color: #FF6E31;">
+                            <div class="card-body" style="background-color: #8EA7E9;">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
-                                        <img style="width: 120px; height:70px; float: left;" src="{{asset('assets/imgs/11.jpg')}}" alt="">
-                                        <h1>O+</h1>
-                                        <h3>{{$oplus}}</h3>
-
+                                        <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
+                                        <h3><strong>{{$oplus}}</strong></h3>
+                                        <span><strong>O+</strong></span>
                                     </div>
                                     <div class="align-self-center">
                                         <i class="bi bi-balloon-heart-fill"></i>
@@ -364,13 +452,174 @@
         </section>
 
     </div>
+            <!-- =========== ============ -->
+            
+            <div class="grey-bg container-fluid mt-1">
+        <section id="minimal-statistics">
+            <div class="row">
+                <div class="col-12 mt-3 mb-1">
 
-    @include('sweetalert::alert')
+                    <h4 class="text-uppercase">Total Blood In Our Stock</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #8EA7E9;">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <a href="{{url('nurse/aminusdonor')}}">
+                                            <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
+                                        </a>
+                                        <h3><strong>{{$aminus}}</strong></h3>
+                                        <span><strong>A-</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #8EA7E9;">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
+                                        <h3><strong>{{$aplus}}</strong></h3>
+                                        <span><strong>A+</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #8EA7E9;">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
+                                        <h3><strong>{{$bminus}}</strong></h3>
+                                        <span><strong>B-</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #8EA7E9;">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
+                                        <h3><strong>{{$bplus}}</strong></h3>
+                                        <span><strong>B+</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <!-- ====== ionicons ======= -->
+            <div class="row">
+
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #8EA7E9;">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
+                                        <h3><strong>{{$abminus}}</strong></h3>
+                                        <span><strong>AB-</strong></span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #8EA7E9;">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
+                                        <h3><strong>{{$abplus}}</strong></h3>
+                                        <span><strong>AB+</strong></span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #8EA7E9;">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F55050;"></ion-icon>
+                                        <h3><strong>{{$ominus}}</strong></h3>
+                                        <span><strong>O-</strong></span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body" style="background-color: #8EA7E9;">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
+                                        <h3><strong>{{$oplus}}</strong></h3>
+                                        <span><strong>O+</strong></span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="bi bi-balloon-heart-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
 </body>
 
 </html>

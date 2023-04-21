@@ -509,7 +509,7 @@
     <div class="details">
         <div class="recentOrders">
             <div class="cardHeader">
-                <h2>Manage Reservation</h2>
+                <h2>Blood In Blood Stock</h2>
                 <a href="{{url('/nurse/reservation')}}" class="btn">View All</a>
             </div>
             <table>
@@ -517,6 +517,7 @@
                     <tr>
                         <td>Blood Group</td>
                         <td>Volume</td>
+                        <td>Pack No</td>
                         <td>Duration</td>
                         <td>Status</td>
                     </tr>
@@ -527,12 +528,13 @@
                     <tr>
                         <td>{{$blood->bloodgroup}}</td>
                         <td>{{$blood->volume}}</td>
-                        <td scope="row">{{ $blood->created_at->diffInMinutes(\Carbon\Carbon::now()) }} M ago</td>
+                        <td>{{$blood->packno}}
+                        <td scope="row">{{ $blood->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
                         <td>
-                            @if($blood->created_at->diffInMinutes(\Carbon\Carbon::now()) >100)
+                            @if($blood->created_at->diffInDays(\Carbon\Carbon::now()) >15)
                             Expired
                             @else
-                            {{$blood->created_at->diffInMinutes(\Carbon\Carbon::now()) - 100}} Minute left
+                            {{$blood->created_at->diffInDays(\Carbon\Carbon::now()) - 15}} Days left
                             @endif
                         </td>
                     </tr>

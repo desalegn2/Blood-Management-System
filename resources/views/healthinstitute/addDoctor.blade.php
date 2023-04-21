@@ -1,4 +1,4 @@
-@extends('bloodBankManager.sidebar')
+@extends('healthinstitute.sidebar')
 @section('content')
 
 <!DOCTYPE html>
@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        /* Style for the form container */
         .form-container {
 
             padding: 20px;
@@ -19,21 +18,18 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Style for the form grid */
         .form-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             grid-gap: 20px;
         }
 
-        /* Style for the form label */
         label {
             display: block;
             font-weight: 600;
             margin-bottom: 5px;
         }
 
-        /* Style for the form input */
         input {
             width: 100%;
             padding: 8px;
@@ -51,7 +47,6 @@
             padding: 10px;
         }
 
-        /* Style for the submit button */
         .submit-button {
             background-color: #19376D;
             color: white;
@@ -76,21 +71,22 @@
     <div class="container mt-5">
 
         <div class="form-container">
-            <h1>Add Hospitals</h1>
+            <h1>Add Doctors</h1>
             @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
             @endif
-            <form action="add_hospital" method="post" enctype="multipart/form-data">
+            <form action="add_doctor" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="role" value="5">
+                <input type="hidden" name="role" value="6">
+                <input type="hidden" name="hospital_id" value="{{Auth::user()->id}}">
                 <div class="form-grid">
                     <div>
-                        <label for="hospitalname">Hospital Name:</label>
-                        <input type="text" id="" name="hospitalname">
+                        <label for="firstname">Doctor First Name:</label>
+                        <input type="text" id="" name="firstname">
                         <p style="color: red;">
-                            @error('hospitalname')
+                            @error('firstname')
                             <strong>{{ $message }}</strong>
                             @enderror
                         </p>
@@ -106,10 +102,10 @@
                     </div>
 
                     <div>
-                        <label for="">Manager First Name:</label>
-                        <input type="text" id="" name="managerfname">
+                        <label for="">Doctor Last Name:</label>
+                        <input type="text" id="" name="lastname">
                         <div style="color: red;">
-                            @error('managerfname')
+                            @error('lastname')
                             <strong>{{ $message }}</strong>
                             @enderror
                         </div>
@@ -124,10 +120,10 @@
                         </div>
                     </div>
                     <div>
-                        <label for="lastname">Manager Last Name:</label>
-                        <input type="text" id="" name="managerlname">
+                        <label for="phone">Phone:</label>
+                        <input type="number" id="" name="phone" pattern="(09|07)[0-9]{8}">
                         <div style="color: red;">
-                            @error('managerlname')
+                            @error('phone')
                             <strong>{{ $message }}</strong>
                             @enderror
                         </div>
@@ -153,10 +149,10 @@
                     </div>
 
                     <div>
-                        <label for="role">Phone:</label>
-                        <input type="number" id="" name="phone">
+                        <label for="photo">Photo:</label>
+                        <input type="file" id="" name="photo">
                         <div style="color: red;">
-                            @error('phone')
+                            @error('photo')
                             <strong>{{ $message }}</strong>
                             @enderror
                         </div>

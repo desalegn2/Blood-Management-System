@@ -64,9 +64,18 @@
 </head>
 
 <body>
-    <div style="float: right;">
-        <a href="{{url('/nurse/listofdonor')}}" style="text-decoration:none;">Are you Donate Before?</a>
+    <div style="margin-top:60px; margin-left:150px;">
+        <!-- <a href="{{url('/nurse/listofdonor')}}" style="text-decoration:none;">Are you Donate Before?</a> -->
+
+        <form action="{{url('/nurse/search_donor')}}" method="post">
+            @csrf
+            <div style="float:right; margin-right:60px;">
+                <input type="text" name="fullname" style="width: 200px;" placeholder="enter name.email,phone" required>
+                <input type="submit" value="Search" class="btn btn-primary" style="width: 70px;">
+            </div>
+        </form>
     </div>
+    <br> <br>
     <div class="container mt-5">
 
         <div class="form-container">

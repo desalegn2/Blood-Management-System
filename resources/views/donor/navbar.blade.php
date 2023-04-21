@@ -120,11 +120,17 @@
         }
 
         a.profile {
-            background: #000000;
+            background: #227C70;
             color: #fff;
             font-weight: 500;
-            letter-spacing: 2px;
-
+            letter-spacing: 1px;
+            border-radius: 50%;
+            width: 62px;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         a.profile:hover {
@@ -162,10 +168,9 @@
                 padding: 20px 40px;
                 box-sizing: border-box;
                 z-index: 99;
-           
 
             }
-            
+
             .navigation-menu::before {
                 content: "";
                 border-left: 10px solid transparent;

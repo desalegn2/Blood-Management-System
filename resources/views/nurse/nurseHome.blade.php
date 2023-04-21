@@ -574,14 +574,11 @@
 
     </div>
 
-
-
-
     <!-- ======================= Cards ================== -->
 
+    <!-- <div class="details">
 
-    <!-- ================ Order Details List ================= -->
-    <div class="details">
+
 
         <div class="recentOrders">
             <div class="cardHeader">
@@ -622,7 +619,7 @@
             </table>
         </div>
 
-        <!-- ================= New Customers ================ -->
+      ================= New  ================ 
         <div class="recentCustomers">
             <div class="cardHeader">
                 <h2>Recent Donor Joined</h2>
@@ -640,7 +637,7 @@
             </table>
             @endforeach
         </div>
-    </div>
+    </div> -->
 
 
 

@@ -26,6 +26,8 @@ use App\Http\Controllers\techController;
 use App\Http\Controllers\bbManagerController;
 use App\Http\Controllers\botController;
 use App\Http\Controllers\encoderController;
+use App\Http\Controllers\hospitalController;
+use App\Http\Controllers\doctorController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -171,32 +173,34 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
     Route::middleware(['auth', 'user-role:healthinstitute'])->group(function () {
         Route::get('/healthinstitute/home', [HomeController::class, 'healthinstituteHome'])->name('healthinstitute.home');
-        Route::get('/healthinstitute/home', [hospitalRequestController::class, 'viewblood'])->name('healthinstitute.home');
+        Route::get('/healthinstitute/home', [hospitalController::class, 'viewblood'])->name('healthinstitute.home');
         //profile
-        Route::get('/healthinstitute/profile/{id}', [hospitalRequestController::class, 'Profile']);
-        Route::post('/healthinstitute/updateprofile/{id}', [hospitalRequestController::class, 'updateProfile']);
-        Route::post('/healthinstitute/updatephoto/{id}', [hospitalRequestController::class, 'updatephoto']);
-        Route::post('/healthinstitute/changepassword', [hospitalRequestController::class, 'changepassword']);
+        Route::get('/healthinstitute/profile/{id}', [hospitalController::class, 'Profile']);
+        Route::post('/healthinstitute/updateprofile/{id}', [hospitalController::class, 'updateProfile']);
+        Route::post('/healthinstitute/updatephoto/{id}', [hospitalController::class, 'updatephoto']);
+        Route::post('/healthinstitute/changepassword', [hospitalController::class, 'changepassword']);
 
         Route::view('/healthinstitute/seekerRegister', 'healthinstitute.postSeeker');
         Route::view('/healthinstitute/profile', 'healthinstitute.profile');
-        Route::post('/healthinstitute/profile', [healthinstituteController::class, 'profile']);
-        Route::post('/healthinstitute/seekerRegister', [bloodRequestController::class, 'bloodrequest']);
+        //Route::post('/healthinstitute/profile', [healthinstituteController::class, 'profile']);
+       // Route::post('/healthinstitute/seekerRegister', [bloodRequestController::class, 'bloodrequest']);
         Route::view('/healthinstitute/posts', 'healthinstitute.hospitalPost');
-        Route::post('/healthinstitute/post_seeker', [hospitalRequestController::class, 'postSeeker']);
-        Route::post('/healthinstitute/hospitalrequest', [hospitalRequestController::class, 'hospitalreq']);
+        Route::post('/healthinstitute/post_seeker', [hospitalController::class, 'postSeeker']);
+        Route::post('/healthinstitute/hospitalrequest', [hospitalController::class, 'hospitalreq']);
 
         Route::view('/healthinstitute/hospitalrequest', 'healthinstitute.bloodRequestform');
+        Route::get('/healthinstitute/request/{id}', [hospitalController::class, 'viewrequest']);
 
-        Route::get('/healthinstitute/request/{id}', [hospitalRequestController::class, 'viewrequest']);
+        Route::post('/healthinstitute/search', [hospitalController::class, 'search']);
+        Route::get('/healthinstitute/finddonor', [hospitalController::class, 'findDonor']);
 
-        //  Route::view('/healthinstitute/finddonor', 'healthinstitute.findDonor');
-        Route::post('/healthinstitute/search', [hospitalRequestController::class, 'search']);
-        Route::get('/healthinstitute/finddonor', [hospitalRequestController::class, 'findDonor']);
+        Route::get('/healthinstitute/aa/{id}', [hospitalController::class, 'mypost']);
+        Route::delete('/healthinstitute/deletepost/{id}', [hospitalController::class, 'deletepost']);
 
-        // Route::view('/healthinstitute/mypost', 'healthinstitute.mypost');
-        Route::get('/healthinstitute/aa/{id}', [hospitalRequestController::class, 'mypost']);
-        Route::delete('/healthinstitute/deletepost/{id}', [hospitalRequestController::class, 'deletepost']);
+        Route::view('/healthinstitute/adddoctor', 'healthinstitute.addDoctor');
+        Route::post('/healthinstitute/add_doctor', [hospitalController::class, 'addDoctors']);
+
+        
     });
 
     Route::middleware(['auth', 'user-role:bbmanager'])->group(function () {
@@ -223,8 +227,10 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('/bbmanager/generatereport', [bbManagerController::class, 'view']);
         Route::get('/bbmanager/donorhistory', [bbManagerController::class, 'DonorHistory']);
         Route::post('/bbmanager/searchdonor', [bbManagerController::class, 'searchDonor']);
-
         Route::post('/bbmanager/sendresult/{id}', [bbManagerController::class, 'sendResult']);
+        Route::get('/bbmanager/bloodjorny', [bbManagerController::class, 'bloodJorny']);
+        Route::post('/bbmanager/sendbloodjorny/{id}', [bbManagerController::class, 'sendBloodJorny']);
+        
 
         Route::view('/bbmanager/bbinfo', 'bloodBankManager.addInformation');
 
@@ -262,5 +268,13 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         // Route::view('/encoder/addbloods', 'encoder.add');
         Route::view('/encoder/handling', 'encoder.handling');
+    });
+
+    Route::middleware(['auth', 'user-role:doctor'])->group(function () {
+
+        Route::get('/doctor/home', [HomeController::class, 'doctorHome'])->name('doctor.home');
+        Route::get('/doctor/home', [doctorController::class, 'viewblood'])->name('doctor.home');
+
+        Route::get('/doctor/transfer', [doctorController::class, 'BloodTransfer']);
     });
 });//prevent back middllewire

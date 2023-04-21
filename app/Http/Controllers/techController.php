@@ -111,16 +111,17 @@ class techController extends Controller
     function ExpiredBlood()
     {
         $date = \Carbon\Carbon::today()->subDays(1);
-        $blood = bloodStock::where('created_at', '<=', $date)->get();
+        $blood = bloodStock::where('created_at', '<=', $date)->where('status','accept')->get();
         return view('technitian.expired', compact('blood'));
     }
 
 
     function viewblood()
     {
-        $bloods = bloodStock::paginate(10);
+        //$bloods = bloodStock::paginate(10);
+        $bloods = bloodStock::where('status', '=', 'accept')->paginate(10);
 
-        $date = \Carbon\Carbon::today()->subDays(1);
+        $date = \Carbon\Carbon::today()->subDays(5);
         $notification = bloodStock::where('created_at', '<=', $date)->where('status', '=', 'accept')->count();
      //   $notification = bloodStock::where('created_at', '<=', $date && 'status' ,'=','accept')->count();
     

@@ -1,55 +1,48 @@
 <!-- Edit Modal -->
-<div class="modal fade" id="distribute{{$dis->id}}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="distribute{{$stock->id}}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">distribute Blood</h5>
+                <h5 class="modal-title" id="myModalLabel">Distribute Blood</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {!! Form::model($data, [ 'method' => 'post','url' => ['bbmanager/distribute',$dis->id] ]) !!}
-                <div class="mb-3">
-                    {!! Form::hidden('user_id', Auth::user()->id, ['class' => 'form-control']) !!}
-                    {!! Form::hidden('fullname', $dis->fullname, ['class' => 'form-control']) !!}
-                    {!! Form::hidden('email', $dis->email, ['class' => 'form-control']) !!}
-                    {!! Form::hidden('phone', $dis->phone, ['class' => 'form-control']) !!}
-                </div>
+                {!! Form::model($data, [ 'method' => 'post','url' => ['bbmanager/distribute',$stock->id] ]) !!}
+
+                {!! Form::hidden('stockid', $stock->id) !!}
                 <div class="mb-3">
                     {!! Form::label('packno', 'Pack NO') !!}
-                    {!! Form::text('packno', $dis->packno, ['class' => 'form-control']) !!}
+                    {!! Form::text('packno', $stock->packno, ['class' => 'form-control']) !!}
                 </div>
                 <div class="mb-3">
                     {!! Form::label('bloodgroup', 'Blood group') !!}
-                    {!! Form::text('bloodtype', $dis->bloodgroup, ['class' => 'form-control']) !!}
+                    {!! Form::text('bloodtype', $stock->bloodgroup, ['class' => 'form-control']) !!}
                 </div>
                 <div class="mb-3">
                     {!! Form::label('volume', 'Volume') !!}
-                    {!! Form::text('volume', $dis->volume, ['class' => 'form-control']) !!}
+                    {!! Form::text('volume', $stock->volume, ['class' => 'form-control']) !!}
                 </div>
-                <div class="mb-3">
-                    {!! Form::label('bloodpressure', 'Blood Pressure') !!}
-                    {!! Form::text('bloodpressure', $dis->bloodpressure, ['class' => 'form-control']) !!}
-                </div>
+
                 <div class="mb-3">
                     {!! Form::label('rh', 'Rh') !!}
-                    {!! Form::text('rh', $dis->rh, ['class' => 'form-control']) !!}
+                    {!! Form::text('rh', $stock->rh, ['class' => 'form-control']) !!}
+                </div>
+
+                <div class="mb-3">
+                    {!! Form::label('expirydate', 'Expiry Date') !!}
+                    {!! Form::text('expitariondate', $stock->expitariondate, ['class' => 'form-control','readonly']) !!}
                 </div>
                 <div class="mb-3">
-                    {!! Form::label('hct', 'Hct') !!}
-                    {!! Form::text('hct', $dis->hct, ['class' => 'form-control']) !!}
+                    {!! Form::label('recievedby', 'Received By') !!}
+                    <select name="hospitalid" class="form-control">
+                        <option value="">-- Select Hospital --</option>
+                        @foreach ($hospital as $h)
+                        <option value="{{$h->hospital_id}}">{{$h->hospitalname}}</option>
+                        @endforeach
+                        <!-- add more options as needed -->
+                    </select>
                 </div>
-                <div class="mb-3">
-                    {!! Form::label('issueddate', 'Issued date') !!}
-                    {!! Form::date('issuedate', $dis->date, ['class' => 'form-control']) !!}
-                </div>
-                <div class="mb-3">
-                    {!! Form::label('expirydate', 'Expiry date') !!}
-                    {!! Form::date('expirydate', $dis->expirydate, ['class' => 'form-control']) !!}
-                </div>
-                <div class="mb-3">
-                    {!! Form::label('recievedby', 'Recieved By') !!}
-                    {!! Form::text('centerid', '', ['class' => 'form-control']) !!}
-                </div>
+
             </div>
 
             <div class="modal-footer">
@@ -62,7 +55,7 @@
 </div>
 
 <!-- Delete Modal -->
-<div class="modal fade" id="delete{{$dis->id}}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="delete{{$stock->id}}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -70,9 +63,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {!! Form::model($data, [ 'method' => 'delete','url' => ['admin/deletedonor', $dis->id] ]) !!}
+                {!! Form::model($data, [ 'method' => 'delete','url' => ['admin/deletedonor', $stock->id] ]) !!}
                 <h4 class="text-center">Are you sure you want to delete This Data?</h4>
-                <h5 class="text-center">Name: {{$dis->name}} {{$dis->email}}</h5>
+                <h5 class="text-center">Name: {{$stock->name}} {{$stock->email}}</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>

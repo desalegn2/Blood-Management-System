@@ -120,7 +120,7 @@
         }
 
         a.profile {
-            background: #000000;
+            background: #227C70;
             color: #fff;
             font-weight: 500;
             letter-spacing: 2px;

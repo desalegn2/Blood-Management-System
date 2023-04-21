@@ -84,7 +84,7 @@
             left: -30%;
             width: var(--nav-width);
             height: 100vh;
-            background-color: var(--red-color);
+            background-color: #2F4F4F;
             padding: .5rem 1rem 0 0;
             transition: .5s;
             z-index: var(--z-fixed);
@@ -98,6 +98,7 @@
             justify-content: space-between;
             /* overflow-y: scroll; */
             overflow: hidden;
+
         }
 
         .nav_logo,
@@ -106,7 +107,8 @@
             grid-template-columns: max-content max-content;
             align-items: center;
             column-gap: 1rem;
-            padding: .5rem 0 .5rem 1.5rem
+            padding: .5rem 0 .5rem 1.5rem;
+            text-decoration: none;
         }
 
         .nav_logo {
@@ -151,7 +153,7 @@
         }
 
         .active::before {
-            content: '';
+           content: '';
             position: absolute;
             left: 0;
             width: 2px;
@@ -184,13 +186,6 @@
             }
 
             .l-navbar {
-
-                /* width: 100%;
-                max-width: 400px;
-                background: #172b4d;
-                top: 90px;
-                right: 0;
-                display: none; */
                 left: 0;
                 padding: 1rem 1rem 0 0;
             }
@@ -245,11 +240,9 @@
                 </form>
             </nav>
         </div>
-        <!--Container Main start-->
         <div class="height-100 bg-light">
             @yield('content')
         </div>
-        <!--Container Main end-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
         <script>

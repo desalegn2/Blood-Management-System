@@ -24,13 +24,10 @@
         /* =========== Google Fonts ============ */
         @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 
-
         .grey-bg {
             background-color: #F5F7FA;
         }
 
-
-        /* =============== Globals ============== */
         * {
             font-family: "Ubuntu", sans-serif;
             margin: 0;
@@ -49,55 +46,6 @@
         body {
             min-height: 100vh;
             overflow-x: hidden;
-        }
-
-        /* ======================= Cards ====================== */
-        .cardBox {
-            position: relative;
-            width: 100%;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 30px;
-        }
-
-        .cardBox .card {
-            position: relative;
-            background: var(--white);
-            padding: 30px;
-            border-radius: 20px;
-            display: flex;
-            justify-content: space-between;
-            cursor: pointer;
-            box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-        }
-
-        .cardBox .card .numbers {
-            position: relative;
-            font-weight: 500;
-            font-size: 2.5rem;
-            color: var(--blue);
-        }
-
-        .cardBox .card .cardName {
-            color: var(--black2);
-            font-size: 1.1rem;
-            margin-top: 5px;
-        }
-
-        .cardBox .card .iconBx {
-            font-size: 3.5rem;
-            color: var(--black2);
-        }
-
-        .cardBox .card:hover {
-            background: var(--blue);
-        }
-
-        .cardBox .card:hover .numbers,
-        .cardBox .card:hover .cardName,
-        .cardBox .card:hover .iconBx {
-            color: var(--white);
         }
 
         /* ================== Order Details List ============== */
@@ -348,7 +296,7 @@
         <section id="minimal-statistics">
             <div class="row">
                 <div class="col-12 mt-3 mb-1">
-                   
+
                     <h4 class="text-uppercase">Total Blood In Our Stock</h4>
                 </div>
             </div>
@@ -506,54 +454,68 @@
                 </div>
             </div>
         </section>
-    </div>
-    <div class="details">
-        <div class="recentOrders">
-            <div class="cardHeader">
-                <h2>Manage Reservation</h2>
-                <a href="{{url('/nurse/reservation')}}" class="btn">View All</a>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <td>Blood Group</td>
-                        <td>Volume</td>
-                        <td>Duration</td>
-                        <td>Status</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if(count($donors))
-                    @foreach ($donors as $blood)
-                    <tr>
-                        <td>{{$blood->bloodgroup}}</td>
-                        <td>{{$blood->volume}}</td>
-                        <td scope="row">{{ $blood->created_at->diffInMinutes(\Carbon\Carbon::now()) }} M ago</td>
-                        <td>
-                            @if($blood->created_at->diffInMinutes(\Carbon\Carbon::now()) >100)
-                            Expired
-                            @else
-                            {{$blood->created_at->diffInMinutes(\Carbon\Carbon::now()) - 100}} Minute left
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach
-                    @else
-                    <tr>
-                        <td>There is No Donor Who send Reservation</td>
-                    </tr>
-                    @endif
+        <section id="stats-subtitle">
 
-                </tbody>
-            </table>
-            {{$donors->links()}}
-        </div>
-        <div class="recentCustomers">
-            <div class="cardHeader">
-                <h2>Recent</h2>
+            <div class="row">
+                <div class="col-12 mt-3 mb-1">
+                    <h4 class="text-uppercase">Statistics of Donors </h4>
+                </div>
             </div>
-        </div>
+
+            <div class="row">
+                <div class="col-xl-6 col-md-12">
+                    <div class="card overflow-hidden">
+                        <div class="card-content">
+                            <div class="card-body cleartfix">
+                                <div class="media align-items-stretch">
+                                    <div class="align-self-center">
+                                        <a href="#">
+                                            <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <a href="{{url('/bbmanager/donorhistory')}}">
+                                            <h4>Send Test Result To Blood Donor</h4>
+                                        </a>
+                                        <span></span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h1></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-md-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body cleartfix">
+                                <div class="media align-items-stretch">
+                                    <div class="align-self-center">
+                                        <a href="#">
+                                            <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <a href="{{url('/bbmanager/bloodjorny')}}">
+                                            <h4>send Blood Jorny To Donor</h4>
+                                        </a>
+                                        <span></span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h1></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>

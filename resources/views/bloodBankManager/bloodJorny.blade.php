@@ -22,32 +22,26 @@
     <div id="page-wrap">
 
         <h1>Distribute</h1>
-
         <table class="table table-bordered table-responsive table-striped">
             <thead>
                 <tr>
-                    <th>Pack No</th>
-                    <th>Blood Type</th>
-                    <th>Volume</th>
-                    <th>Rh</th>
-                    <th>Hct</th>
-                    <th>Date</th>
-                    <th>Action</th>
+                    <th>Hospital</th>
+                    <th>Pack Number</th>
+                    <th>Quantity</th>
+                    <th>Expiration Date</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($data as $stock)
+                @foreach ($data as $distribution)
                 <tr>
-                    <td>{{$stock->packno}}</td>
-                    <td>{{$stock->bloodgroup}}</td>
-                    <td>{{$stock->volume}}</td>
-                    <td>{{$stock->rh}}</td>
-                    <td>{{$stock->hct}}</td>
-                    <td>{{ $stock->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
+                    <td>{{ $distribution->hospital->hospitalname }}</td>
+                    <td>{{ $distribution->stock->packno }}</td>
+                    <td>{{ $distribution->stock->volume }}</td>
+                    <td>{{ $distribution->stock->expitariondate }}</td>
                     <td>
-                        <a href="#distribute{{$stock->id,}}" data-bs-toggle="modal" class="btn btn-info"><i class='fa fa-edit'></i> Distribute</a>
-
-                        @include('bloodBankManager.distModal')
+                        <a href="#bloodjornymessage{{$distribution->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-envelope'></i> email</a>
+                        <a href="bloodjornymessage{{$distribution->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-sms'></i> sms</a>
+                        @include('bloodBankManager.bloodJornyModal')
                     </td>
                 </tr>
                 @endforeach

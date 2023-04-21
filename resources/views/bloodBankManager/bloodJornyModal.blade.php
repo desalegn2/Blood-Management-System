@@ -1,4 +1,4 @@
-<div class="modal fade" id="sendmessage{{$donor->id}}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="bloodjornymessage{{$distribution->id}}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,8 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {!! Form::model($data, [ 'method' => 'post','url' => ['bbmanager/sendresult',$donor->donor_id] ]) !!}
-
+                {!! Form::model($data, [ 'method' => 'post','url' => ['bbmanager/sendbloodjorny',$distribution->stock->donor_id] ]) !!}
 
                 <div class="mb-3">
                     {!! Form::label('greeting', 'Greating') !!}
@@ -21,7 +20,7 @@
                 </div>
                 <div class="mb-3">
                     {!! Form::label('acttext', 'acttext') !!}
-                    {!! Form::text('acttext',$donor->created_at, ['class' => 'form-control']) !!}
+                    {!! Form::text('acttext',$distribution->created_at, ['class' => 'form-control']) !!}
                 </div>
                 <div class="mb-3">
                     {!! Form::label('actionurl', 'url') !!}

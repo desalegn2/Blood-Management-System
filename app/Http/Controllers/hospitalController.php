@@ -7,16 +7,61 @@ use App\Models\hospitalRequestModel;
 use App\Models\technicianOrderModel;
 use Illuminate\Support\Facades\Notification;
 use App\Models\hospitalPosts;
-use App\Notifications\orderTechnician;
-use App\Models\donorRequestModel;
-use App\Models\addBloodModel;
-use App\Models\discardBloodModel;
-use App\Models\distributeBloodModel;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\bloodStock;
+use App\Models\Doctor;
 
-class hospitalRequestController extends Controller
+class hospitalController extends Controller
 {
+
+    function addDoctors(Request $req)
+    {
+
+        $req->validate([
+            'email' => 'required|unique:users|max:255|string|email',
+            'role' => ['required', 'int', 'max:6'],
+            'password' => 'required|string|min:8|confirmed',
+            'photo' => 'required|mimes:jpeg,jpg,png,gif,bmp,svg|max:10240',
+            'firstname' => ['required', 'regex:/^[\p{L}\s]+$/u', 'max:255'],
+            'lastname' => ['required', 'regex:/^[\p{L}\s]+$/u', 'max:255'],
+            'gender' => 'required|string|max:25',
+            'phone' => ['required', 'regex:/^(09|07)\d{8}$/'],
+        ]);
+
+        try {
+
+            $user = User::create([
+                'email' => $req->email,
+                'password' => Hash::make($req->password),
+                'role' => $req->role,
+            ]);
+            if ($user) {
+
+                if ($req->hasfile('photo')) {
+                    $file = $req->file('photo');
+                    $extention = $file->getClientOriginalExtension();
+                    $filename = time() . '.' . $extention;
+                    $file->move('uploads/registers', $filename);
+                }
+                Doctor::create([
+                    'photo' => '0.png',
+                    'doctor_id' => $user->id,
+                    'hospital_id' => $req->hospital_id,
+                    'firstname' => $req->firstname,
+                    'lastname' => $req->lastname,
+                    'gender' => $req->gender,
+                    'phone' => $req->phone,
+                ]);
+                return redirect()->back()->with('success', 'Doctor Add is Done!');
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Something went wrong in bbManagerController.addHospital',
+                'error' => $e->getMessage()
+            ], 400);
+        }
+    }
 
     function findDonor(Request $req)
     {
@@ -83,7 +128,7 @@ class hospitalRequestController extends Controller
             'photo' => 'required|mimes:jpeg,png,jpg,gif',
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
-            
+
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
             'fname' => 'required|string|max:255',
@@ -156,18 +201,16 @@ class hospitalRequestController extends Controller
     }
     function viewblood()
     {
-
-        $aplus = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
-        $aminus = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
-        $oplus = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
-        $ominus = addBloodModel::where('bloodgroup', 'O-')->sum('volume');
-        $bplus = addBloodModel::where('bloodgroup', 'B+')->sum('volume');
-        $bminus = addBloodModel::where('bloodgroup', 'B-')->sum('volume');
-        $abplus = addBloodModel::where('bloodgroup', 'AB+')->sum('volume');
-        $abminus = addBloodModel::where('bloodgroup', 'AB-')->sum('volume');
+        $aplus = bloodStock::where('bloodgroup', 'A+')->where('status', '=', 'accept')->sum('volume');
+        $aminus = bloodStock::where('bloodgroup', 'A-')->where('status', '=', 'accept')->sum('volume');
+        $oplus = bloodStock::where('bloodgroup', 'O+')->where('status', '=', 'accept')->sum('volume');
+        $ominus = bloodStock::where('bloodgroup', 'O-')->where('status', '=', 'accept')->sum('volume');
+        $bplus = bloodStock::where('bloodgroup', 'B+')->where('status', '=', 'accept')->sum('volume');
+        $bminus = bloodStock::where('bloodgroup', 'B-')->where('status', '=', 'accept')->sum('volume');
+        $abplus = bloodStock::where('bloodgroup', 'AB+')->where('status', '=', 'accept')->sum('volume');
+        $abminus = bloodStock::where('bloodgroup', 'AB-')->where('status', '=', 'accept')->sum('volume');
         return view('healthinstitute.healthinstituteHome', compact('aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
-
 
     function deletepost($id)
     {

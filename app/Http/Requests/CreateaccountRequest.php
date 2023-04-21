@@ -21,11 +21,14 @@ class CreateaccountRequest extends FormRequest
     public function rules()
     {
         return [
-            'photo' => 'required|mimes:jpeg,png,jpg,gif',
-            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'role' => ['required', 'int', 'max:5'],
+            'role' => ['required', 'int', 'max:6'],
             'password' => 'required|string|min:8|confirmed',
+            'hospitalname' => 'required|string|max:255',
+            'managerfname' => 'required|string|max:255',
+            'managerlname' => 'required|string|max:255',
+            'phone' => 'required|numeric|digits:10',
+            'gender' => 'required|string|max:25',
         ];
     }
 }

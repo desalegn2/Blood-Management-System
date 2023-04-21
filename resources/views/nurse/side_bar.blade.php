@@ -11,7 +11,6 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Nurse Page</title>
     <style>
-
         @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 
         :root {
@@ -85,7 +84,7 @@
             left: -30%;
             width: var(--nav-width);
             height: 100vh;
-            background-color: var(--red-color);
+            background-color: #2F4F4F;
             padding: .5rem 1rem 0 0;
             transition: .5s;
             z-index: var(--z-fixed);

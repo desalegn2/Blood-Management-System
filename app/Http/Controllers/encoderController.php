@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\addBloodModel;
+use App\Models\bloodStock;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\enrollementModel;
@@ -117,17 +117,14 @@ class encoderController extends Controller
     }
     function viewblood()
     {
-        $aplus = addBloodModel::where('bloodgroup', 'A+')->sum('volume');
-        $aminus = addBloodModel::where('bloodgroup', 'A-')->sum('volume');
-        $oplus = addBloodModel::where('bloodgroup', 'O+')->sum('volume');
-        $ominus = addBloodModel::where('bloodgroup', 'O-')->sum('volume');
-        $bplus = addBloodModel::where('bloodgroup', 'B+')->sum('volume');
-        $bminus = addBloodModel::where('bloodgroup', 'B-')->sum('volume');
-        $abplus = addBloodModel::where('bloodgroup', 'AB+')->sum('volume');
-        $abminus = addBloodModel::where('bloodgroup', 'AB-')->sum('volume');
-
-
-
+        $aplus = bloodStock::where('bloodgroup', 'A+')->where('status', '=', 'accept')->sum('volume');
+        $aminus = bloodStock::where('bloodgroup', 'A-')->where('status', '=', 'accept')->sum('volume');
+        $oplus = bloodStock::where('bloodgroup', 'O+')->where('status', '=', 'accept')->sum('volume');
+        $ominus = bloodStock::where('bloodgroup', 'O-')->where('status', '=', 'accept')->sum('volume');
+        $bplus = bloodStock::where('bloodgroup', 'B+')->where('status', '=', 'accept')->sum('volume');
+        $bminus = bloodStock::where('bloodgroup', 'B-')->where('status', '=', 'accept')->sum('volume');
+        $abplus = bloodStock::where('bloodgroup', 'AB+')->where('status', '=', 'accept')->sum('volume');
+        $abminus = bloodStock::where('bloodgroup', 'AB-')->where('status', '=', 'accept')->sum('volume');
         return view('encoder.encoderHome', compact('aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
 }

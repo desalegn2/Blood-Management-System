@@ -229,18 +229,18 @@ class nurseController extends Controller
     function notifys()
     {
         $date = \Carbon\Carbon::today()->subDays(5);
-        // $var = donationModel::where('created_at', '<=', $date)->get();
-        // $donor = donationModel::join('donors', 'donation.donor_id', '=', 'donors.donor_id')
-        //     ->where('donation.created_at', '<=', $date)
-        //     ->where('donation.status', 'accept')
-        //     ->select('donors.*', 'donation.created_at', 'donation.packno')
-        //     ->latest()->first();
+        //$var = donationModel::where('donation.created_at', '<=', $date)->get();
+        $donor = donationModel::join('donors', 'donation.donor_id', '=', 'donors.donor_id')
+            ->where('donation.created_at', '<=', $date)
+            ->where('donation.status', 'accept')
+            ->select('donors.*', 'donation.created_at', 'donation.packno')
+            ->latest()->first();
 
-        $donor = Donor::join('donation', 'donors.donor_id', '=', 'donation.donor_id')
-                ->select('donors.*', 'donation.created_at','donation.packno')
-                ->whereRaw('DATEDIFF(NOW(), (SELECT MAX(donation.created_at) FROM donation WHERE donation.donor_id = donors.donor_id)) >= 6')
-                ->orderBy('donation.created_at', 'desc')
-                ->get();
+        // $donor = Donor::join('donation', 'donors.donor_id', '=', 'donation.donor_id')
+        //         ->select('donors.*', 'donation.created_at','donation.packno')
+        //         ->whereRaw('DATEDIFF(NOW(), (SELECT MAX(donation.created_at) FROM donation WHERE donation.donor_id = donors.donor_id)) >= 3')
+        //         ->orderBy('donation.created_at', 'asc')
+        //         ->get();
 
         // $donor = DB::table('donors')
         // ->select('donors.donor_id', 'donors.firstname', 'donors.lastname', DB::raw('MAX(donation.created_at) as last_donation_date'), DB::raw('MAX(donors.phone) as phone'))

@@ -62,4 +62,9 @@ class HomeController extends Controller
     {
         return view('encoder.encoderHome');
     }
+    
+    public function doctorHome()
+    {
+        return view('doctor.home');
+    }
 }

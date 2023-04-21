@@ -100,14 +100,14 @@ class LoginController extends Controller
                 }
                 return redirect()->route('healthinstitute.home');
             }
-            if (auth()->user()->role == 'encoder') {
+            if (auth()->user()->role == 'doctor') {
                 if (auth()->user()->isBlocked == 1) {
                     Auth::logout();
                     return
                         redirect()->route('login')
                         ->with('warning', 'User has been blocked please contanct administrator.');
                 }
-                return redirect()->route('encoder.home');
+                return redirect()->route('doctor.home');
             }
         } else {
             return redirect()->route('login')

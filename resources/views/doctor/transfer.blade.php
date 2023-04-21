@@ -1,4 +1,4 @@
-@extends('bloodBankManager.sidebar')
+@extends('doctor.sidebar')
 @section('content')
 
 <!DOCTYPE html>
@@ -21,34 +21,23 @@
 
     <div id="page-wrap">
 
-        <h1>Distribute</h1>
-
+        <h1>Transfer</h1>
         <table class="table table-bordered table-responsive table-striped">
             <thead>
                 <tr>
-                    <th>Pack No</th>
-                    <th>Blood Type</th>
-                    <th>Volume</th>
-                    <th>Rh</th>
-                    <th>Hct</th>
-                    <th>Date</th>
+                    <th>blood broup</th>
+                    <th>RH- Factor</th>
+                    <th>volume</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($data as $stock)
+                @foreach ($distributes as $dist)
                 <tr>
-                    <td>{{$stock->packno}}</td>
-                    <td>{{$stock->bloodgroup}}</td>
-                    <td>{{$stock->volume}}</td>
-                    <td>{{$stock->rh}}</td>
-                    <td>{{$stock->hct}}</td>
-                    <td>{{ $stock->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
-                    <td>
-                        <a href="#distribute{{$stock->id,}}" data-bs-toggle="modal" class="btn btn-info"><i class='fa fa-edit'></i> Distribute</a>
-
-                        @include('bloodBankManager.distModal')
-                    </td>
+                    <td>{{$dist->bloodgroup}}</td>
+                    <td>{{$dist->rh}}</td>
+                    <td>{{$dist->volume}}</td>
+                    <td>a</td>
                 </tr>
                 @endforeach
             </tbody>

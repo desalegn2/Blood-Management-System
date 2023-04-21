@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\enrollementModel;
 use App\Models\hospitalRequestModel;
 use PDF;
-use App\Models\addBloodModel;
-
-use App\Models\discardBloodModel;
 use App\Models\distributeBloodModel;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -18,12 +15,12 @@ use Illuminate\Notifications\Messages\MailMessage;
 use App\Notifications\sendNotification;
 use App\Models\feedbackModel;
 use App\Models\bbinformatiomModel;
-use App\Models\donorRequestModel;
 use App\Http\Requests\CreateaccountRequest;
 use App\Models\referralModel;
 use App\Models\donationModel;
 use App\Models\bloodStock;
 use App\Models\Donor;
+use App\Models\hospitalModel;
 
 class bbManagerController extends Controller
 {
@@ -50,22 +47,22 @@ class bbManagerController extends Controller
     {
         try {
 
-            // $password = $req->password;
-            // $pass = bcrypt($password);
-            if ($req->hasfile('photo')) {
-                $file = $req->file('photo');
-                $extention = $file->getClientOriginalExtension();
-                $filename = time() . '.' . $extention;
-                $file->move('uploads/registers', $filename);
-            }
-            User::create([
-                'photo' => $req->hasfile('photo') ? $filename : '0.png',
-                'name' => $req->name,
+            $user = User::create([
                 'email' => $req->email,
                 'password' => Hash::make($req->password),
                 'role' => $req->role,
             ]);
-            return redirect('bbmanager/addhospital')->with('success', 'Task Added Successfully!');
+            if ($user) {
+                hospitalModel::create([
+                    'hospital_id' => $user->id,
+                    'hospitalname' => $req->hospitalname,
+                    'manager_fname' => $req->managerfname,
+                    'manager_lname' => $req->managerlname,
+                    'gender' => $req->gender,
+                    'phone' => $req->phone,
+                ]);
+                return redirect()->back()->with('success', 'Hospital Add is Done!');
+            }
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Something went wrong in bbManagerController.addHospital',
@@ -191,18 +188,12 @@ class bbManagerController extends Controller
     }
     function Bloods()
     {
-        $data = addBloodModel::all()->where('status', '=', 'notexpired');
+        $hospital = hospitalModel::all();
+        $data = bloodStock::where('status', '=', 'accept')->paginate(10);
 
-        return view('bloodBankManager.availableBlood', ['data' => $data]);
+        return view('bloodBankManager.availableBlood', compact('hospital', 'data'));
     }
-    function Read($id)
-    {
-
-        $res = hospitalRequestModel::find($id);
-        $res->readat = "read";
-        $res->save();
-        return redirect()->back();
-    }
+  
     function Approve($id)
     {
         $data = hospitalRequestModel::find($id);
@@ -220,17 +211,10 @@ class bbManagerController extends Controller
 
     function DonorHistory()
     {
-        $data = addBloodModel::paginate(5);
+        $data = bloodStock::paginate(5);
 
         return view('bloodBankManager.donorHistory', ['data' => $data]);
     }
-    function searchDonor(Request $req)
-    {
-        $a = $req->fullname;
-        $data = addBloodModel::where('fullname', $a)->orWhere('phone', $a)->orWhere('email', $a)->paginate(5);
-        return view('bloodBankManager.donorHistory', ['data' => $data]);
-    }
-
     function sendResult(Request $req, $id)
     {
         //$id = $req->id;
@@ -248,8 +232,7 @@ class bbManagerController extends Controller
         ];
         try {
 
-            $message = addBloodModel::find($id);
-
+            $message = User::find($id);
             \Notification::send($message, new sendNotification($details));
 
             return redirect()->back()->with('success', 'Message send Successfully! to', $message);
@@ -260,6 +243,48 @@ class bbManagerController extends Controller
             ], 400);
         }
     }
+    function bloodJorny()
+    {
+        $data = distributeBloodModel::with(['hospital', 'stock'])->paginate(5);
+        //$data = distributeBloodModel::paginate(5);
+        return view('bloodBankManager.bloodJorny', ['data' => $data]);
+    }
+    function sendBloodJorny(Request $req, $id)
+    {
+        $greeting = $req->greeting;
+        $body = $req->body;
+        $acttext = $req->acttext;
+        $actionurl = $req->actionurl;
+        $lastline = $req->lastline;
+        $details = [
+            'greeting' => $greeting,
+            'body' => $body,
+            'acttext' => $acttext,
+            'actionurl' => $actionurl,
+            'lastline' => $lastline,
+        ];
+        try {
+
+            $message = User::find($id);
+            \Notification::send($message, new sendNotification($details));
+
+            return redirect()->back()->with('success', 'Message send Successfully! to', $message);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Something went wrong in bbManagerController.sendnotification',
+                'error' => $e->getMessage()
+            ], 400);
+        }
+    }
+    
+    function searchDonor(Request $req)
+    {
+        $a = $req->fullname;
+        $data = addBloodModel::where('fullname', $a)->orWhere('phone', $a)->orWhere('email', $a)->paginate(5);
+        return view('bloodBankManager.donorHistory', ['data' => $data]);
+    }
+
+   
     function feedbacks()
 
     {
@@ -277,24 +302,15 @@ class bbManagerController extends Controller
     function Distribute(Request $req, $id)
     {
         $var = new distributeBloodModel;
-        $var->packno = $req->packno;
-        $var->user_id = $req->user_id;
-        $var->bloodgroup = $req->bloodtype;
-        $var->volume = $req->volume;
-        $var->bloodpressure = $req->bloodpressure;
-        $var->rh = $req->rh;
-        $var->hct = $req->hct;
-        $var->issueddate = $req->issuedate;
-        $var->expirydate = $req->expirydate;
-        $var->recievedby = $req->centerid;
-        $var->donateby = $req->fullname;
-        $var->donoremail = $req->email;
-        $var->donorphone = $req->phone;
+        $var->stock_id = $id;
+        $var->hospital_id = $req->hospitalid;
+
         $var->save();
 
         if ($var) {
-            $data = addBloodModel::find($id);
-            $data->delete();
+          
+            bloodStock::where("id", $id)
+                ->update(["status" => "distribute"]);
             return redirect()->back()->with('success', 'Task Added Successfully!');
         }
     }
@@ -355,28 +371,30 @@ class bbManagerController extends Controller
 
     function HomePage()
     {
-        $donors = donationModel::paginate(10);
-       // $numberof_message = hospitalRequestModel::where('readat', 'unread')->count();
+        //$donors = donationModel::paginate(10);
+        // $donors = bloodStock::where('status', '=', 'accept')->paginate(10);
+
+        // $numberof_message = hospitalRequestModel::where('readat', 'unread')->count();
 
         //$date = \Carbon\Carbon::today()->subDays(1);
         //$recentdoner = donorRequestModel::where('created_at', '>=', $date)->get();
 
-        $aplus = bloodStock::where('bloodgroup', 'A+')->sum('volume');
-        $aminus = bloodStock::where('bloodgroup', 'A-')->sum('volume');
-        $oplus = bloodStock::where('bloodgroup', 'O+')->sum('volume');
-        $ominus = bloodStock::where('bloodgroup', 'O-')->sum('volume');
-        $bplus = bloodStock::where('bloodgroup', 'B+')->sum('volume');
-        $bminus = bloodStock::where('bloodgroup', 'B-')->sum('volume');
-        $abplus = bloodStock::where('bloodgroup', 'AB+')->sum('volume');
-        $abminus = bloodStock::where('bloodgroup', 'AB-')->sum('volume');
+        $aplus = bloodStock::where('bloodgroup', 'A+')->where('status', '=', 'accept')->sum('volume');
+        $aminus = bloodStock::where('bloodgroup', 'A-')->where('status', '=', 'accept')->sum('volume');
+        $oplus = bloodStock::where('bloodgroup', 'O+')->where('status', '=', 'accept')->sum('volume');
+        $ominus = bloodStock::where('bloodgroup', 'O-')->where('status', '=', 'accept')->sum('volume');
+        $bplus = bloodStock::where('bloodgroup', 'B+')->where('status', '=', 'accept')->sum('volume');
+        $bminus = bloodStock::where('bloodgroup', 'B-')->where('status', '=', 'accept')->sum('volume');
+        $abplus = bloodStock::where('bloodgroup', 'AB+')->where('status', '=', 'accept')->sum('volume');
+        $abminus = bloodStock::where('bloodgroup', 'AB-')->where('status', '=', 'accept')->sum('volume');
 
-        return view('bloodBankManager.home', compact('donors','aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
+        return view('bloodBankManager.home', compact('aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
 
     function Referral()
     {
 
-       // $referrals = User::whereHas('referrals')->with('referredUsers.user')->get();
+        // $referrals = User::whereHas('referrals')->with('referredUsers.user')->get();
 
         // $list_referred = referralModel::select('u1.name as referring_name', 'u1.email as referring_email', 'u2.name as referred_name', 'u2.email as referred_email')
         //     ->join('users as u1', 'referrals.referring_id', '=', 'u1.id')
