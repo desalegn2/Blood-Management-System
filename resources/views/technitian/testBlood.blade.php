@@ -43,15 +43,6 @@
                             <td>{{$dis->status}}</td>
                             <td>
                                 <a href="{{url('technitian/testblood', $dis->id)}}"><i class='fa fa-edit'></i> Test</a>
-                                <!-- <a href="{{url('technitian/discard', $dis->id)}}"><i class='fa fa-delete'></i>
-                            <form action="{{url('technitian/discard', $dis->id)}}">
-                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"></input>
-                                <input type="hidden" name="bloodtype" value="{{$dis->bloodtype}}"></input>
-                                <input type="hidden" name="volume" value="{{$dis->volume}}"></input>
-                                <input type="hidden" name="reason" value="not used for patient"></input>
-                                <input type="submit" value="Discard">
-                            </form>
-                        </a> -->
                             </td>
                         </tr>
                         @endforeach

@@ -11,6 +11,9 @@ use App\Models\donationModel;
 use App\Models\bloodTest;
 use App\Models\bloodStock;
 use App\Models\Donor;
+use \Notification;
+use Illuminate\Notifications\Messages\MailMessage;
+use App\Notifications\sendNotification;
 
 class techController extends Controller
 {
@@ -31,7 +34,6 @@ class techController extends Controller
         $validator = Validator::make($request->all(), [
             'status' => ['required', Rule::in(['accept', 'discard'])],
             'diseases' => ['required'],
-
             'bloodgroup' => 'required|string|max:5',
             'volume' => 'required|string|max:255',
             'rh' => 'required|string|max:25',
@@ -59,6 +61,7 @@ class techController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+
         $health = new bloodTest;
         $health->tech_id = $request->user_id;
         $health->donor_id = $request->donor_id;
@@ -87,12 +90,36 @@ class techController extends Controller
 
             $var->save();
         }
+
         if ($health) {
             donationModel::where("donor_id", $request->donor_id)
                 ->update(["status" => $request->status]);
             Donor::where("donor_id", $request->donor_id)
                 ->update(["bloodtype" => $request->bloodgroup]);
-            return redirect()->back()->with('success', 'Task Added Successfully!');
+        }
+        if ($var) {
+            $donor = Donor::where('donor_id', $request->donor_id)->first();
+            $fname = $donor->firstname;
+            $lname = $donor->lastname;
+            $frequency = donationModel::all()->where('donor_id', '=', $request->donor_id)->count('donor_id');
+           $date=$request->donationdate;
+            $details = [
+                'greeting' => "ውድ ደም ለጋሻችን $fname $lname ደም ለወገንወ ስለለገሱ እናመሰግናለን",
+                'body' => "በ $date ቀን ለ $frequency ኛ ጊዜ የለገሱት የደን አይነት ዉጤት $request->bloodgroup ነው",
+                'lastline' => "Bahirdar Blood Bank",
+            ];
+            try {
+
+                $message = User::find($request->donor_id);
+                \Notification::send($message, new sendNotification($details));
+
+                return redirect()->back()->with('success', 'Task Added Successfully! and Result are sent to donor');
+            } catch (\Exception $e) {
+                return response()->json([
+                    'message' => 'Something went wrong in bbManagerController.sendnotification',
+                    'error' => $e->getMessage()
+                ], 400);
+            }
         }
     }
 
@@ -106,12 +133,12 @@ class techController extends Controller
     {
         bloodStock::where("id", $id)
             ->update(["status" => "expired"]);
-            return redirect()->back()->with('success', 'Blood is set as Expired!');
+        return redirect()->back()->with('success', 'Blood is set as Expired!');
     }
     function ExpiredBlood()
     {
         $date = \Carbon\Carbon::today()->subDays(1);
-        $blood = bloodStock::where('created_at', '<=', $date)->where('status','accept')->get();
+        $blood = bloodStock::where('created_at', '<=', $date)->where('status', 'accept')->get();
         return view('technitian.expired', compact('blood'));
     }
 
@@ -123,8 +150,8 @@ class techController extends Controller
 
         $date = \Carbon\Carbon::today()->subDays(5);
         $notification = bloodStock::where('created_at', '<=', $date)->where('status', '=', 'accept')->count();
-     //   $notification = bloodStock::where('created_at', '<=', $date && 'status' ,'=','accept')->count();
-    
+        //   $notification = bloodStock::where('created_at', '<=', $date && 'status' ,'=','accept')->count();
+
         $aplus = bloodStock::where('bloodgroup', 'A+')->sum('volume');
         $aminus = bloodStock::where('bloodgroup', 'A-')->sum('volume');
         $oplus = bloodStock::where('bloodgroup', 'O+')->sum('volume');

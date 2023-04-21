@@ -12,15 +12,8 @@
 
     <style>
         .gradient-custom {
-            /* fallback for old browsers */
-
+            
             overflow-y: scroll;
-            /* Chrome 10-25, Safari 5.1-6 
-            background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
-
-            W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+
-            background: linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1))
-            */
         }
 
         .card-registration .select-input.form-control[readonly]:not([disabled]) {
@@ -44,7 +37,6 @@
             background-color: green;
             color: white;
             margin-right: 20px;
-            /* add a 10-pixel gap to the right */
         }
     </style>
 </head>
@@ -56,12 +48,13 @@
                 <div class="col-12 col-lg-9 col-xl-7">
                     <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                         <div class="card-body p-4 p-md-5">
-                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Blood</h3>
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Blood Registration</h3>
 
                             <form action="{{ route('technitian.stock') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}" required>
                                 <input type="hidden" name="donor_id" value="{{$data->donor_id}}" required>
+                                <input type="hidden" name="donationdate" value="{{$data->created_at}}" required>
                                 <div class="row">
 
                                     <div class="row">

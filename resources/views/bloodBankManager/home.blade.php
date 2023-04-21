@@ -454,66 +454,7 @@
                 </div>
             </div>
         </section>
-        <section id="stats-subtitle">
-
-            <div class="row">
-                <div class="col-12 mt-3 mb-1">
-                    <h4 class="text-uppercase">Statistics of Donors </h4>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-xl-6 col-md-12">
-                    <div class="card overflow-hidden">
-                        <div class="card-content">
-                            <div class="card-body cleartfix">
-                                <div class="media align-items-stretch">
-                                    <div class="align-self-center">
-                                        <a href="#">
-                                            <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <a href="{{url('/bbmanager/donorhistory')}}">
-                                            <h4>Send Test Result To Blood Donor</h4>
-                                        </a>
-                                        <span></span>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <h1></h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-6 col-md-12">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body cleartfix">
-                                <div class="media align-items-stretch">
-                                    <div class="align-self-center">
-                                        <a href="#">
-                                            <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <a href="{{url('/bbmanager/bloodjorny')}}">
-                                            <h4>send Blood Jorny To Donor</h4>
-                                        </a>
-                                        <span></span>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <h1></h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+      
     </div>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

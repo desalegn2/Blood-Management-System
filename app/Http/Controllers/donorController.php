@@ -188,13 +188,25 @@ class donorController extends Controller
 
         return view('donor.referring', compact('num_referred', 'list_referred', 'referral_code'));
     }
+    
+    function Home()
+    {
+        $data = bbinformatiomModel::where('type','service')->get();
+        return view('donor.home', ['data' => $data]);
+    }
 
+    function viewNews()
+    {
+        $data = bbinformatiomModel::where('type','news')->get();
+        return view('donor.bbinformation', ['data' => $data]);
+    }
 
     function viewInfo()
     {
-        $data = bbinformatiomModel::all();
+        $data = bbinformatiomModel::where('type','information')->get();
         return view('donor.bbinformation', ['data' => $data]);
     }
+    
     function ReservationForm()
     {
         $data = centorModel::all();

@@ -56,6 +56,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
     Route::middleware(['auth', 'user-role:donor'])->group(function () {
         Route::get('/donor/home', [HomeController::class, 'donorHome'])->name('donor.home');
+        Route::get('/donor/home', [donorController::class, 'Home'])->name('donor.home');
         Route::view('/donor/asks', 'donor.chatbot');
         Route::view('/donor/refer', 'donor.referring');
         Route::get('/donor/refer/{user_id}', [donorController::class, 'ReferrdedDonor']);

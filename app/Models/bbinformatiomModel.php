@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class bbinformatiomModel extends Model
 {
     use HasFactory;
-    public $table = "bbinformation";
+    public $table = "bloodbankinfo";
 
     protected $fillable = [
+        'user_id',
         'title',
         'description',
         'image',
+        'type',
     ];
 }

@@ -27,10 +27,11 @@ class bbManagerController extends Controller
 
     function addInfo(Request $req)
     {
-
         $var = new bbinformatiomModel;
+        $var->user_id = $req->user_id;
         $var->title = $req->title;
-        $var->description = $req->discription;
+        $var->description = $req->description;
+        $var->type = $req->type;
 
         if ($req->hasfile('image')) {
             $file = $req->file('image');
@@ -193,7 +194,7 @@ class bbManagerController extends Controller
 
         return view('bloodBankManager.availableBlood', compact('hospital', 'data'));
     }
-  
+
     function Approve($id)
     {
         $data = hospitalRequestModel::find($id);
@@ -276,7 +277,7 @@ class bbManagerController extends Controller
             ], 400);
         }
     }
-    
+
     function searchDonor(Request $req)
     {
         $a = $req->fullname;
@@ -284,7 +285,7 @@ class bbManagerController extends Controller
         return view('bloodBankManager.donorHistory', ['data' => $data]);
     }
 
-   
+
     function feedbacks()
 
     {
@@ -308,7 +309,7 @@ class bbManagerController extends Controller
         $var->save();
 
         if ($var) {
-          
+
             bloodStock::where("id", $id)
                 ->update(["status" => "distribute"]);
             return redirect()->back()->with('success', 'Task Added Successfully!');

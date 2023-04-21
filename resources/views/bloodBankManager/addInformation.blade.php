@@ -65,8 +65,8 @@
 			border-radius: 0;
 			border-color: #ddd;
 			box-shadow: none;
-			font-size: 16px;
-			padding: 15px;
+			font-size: 15px;
+			padding: 10px;
 			background-color: #fff;
 			color: #555;
 			margin-bottom: 20px;
@@ -100,27 +100,29 @@
 <body>
     <div class="container">
         <h1>Add Blood Bank Information </h1>
-        <form>
+        <form action="{{url('/bbmanager/addinfo')}}" method="post" enctype="multipart/form-data" >
+			@csrf
+			<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
             <div class="form-group">
-                <label for="input1">Title:</label>
-                <input type="text" class="form-control" id="input1" placeholder="Enter Title ">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="Enter Title ">
             </div>
 
             <div class="form-group">
-                <label for="textarea">Description:</label>
-                <textarea class="form-control" id="textarea" rows="5" placeholder="Enter description"></textarea>
+                <label for="description">Description:</label>
+                <textarea class="form-control" name="description" id="description" rows="5" placeholder="Enter description"></textarea>
             </div>
             <div class="form-group">
                 <label for="select">Select:</label>
-                <select class="form-control-select" id="select">
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                <select class="form-control-select" id="select" name="type">
+                    <option value="opinformationtion1">information</option>
+                    <option value="news">news</option>
+					<option value="service">service</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="image">Image File:</label>
-                <input type="file" class="form-control-file" id="image">
+                <input type="file" class="form-control-file" id="image" name="image">
             </div>
             <button type="submit" class="btn btn-primary">Add</button>
         </form>

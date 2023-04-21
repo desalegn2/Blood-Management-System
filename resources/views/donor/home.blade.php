@@ -154,23 +154,16 @@
             <div class="carousel-item active">
                 <img class="d-block w-100" src="{{asset('assets/imgs/photo1.jpg')}}" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <!-- <h5 style="color: black;">Blood Donation Illustration</h5>
-                    <p style="color: green;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p> -->
                 </div>
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="{{asset('assets/imgs/photo2.jpg')}}" alt="Second slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <!-- <h5 style="color: black;">Blood Donation Illustration</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p> -->
                 </div>
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="{{asset('assets/imgs/photo6.jpg')}}" alt="Third slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <!-- <h5 style="color: black;">Blood Donation Illustration</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p> -->
-                </div>
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -190,106 +183,18 @@
         </div>
 
         <div class="row people">
-
+            @foreach($data as $service)
             <div class="col-md-6 col-lg-4 item">
-                <div class="box"><img class="" style="width:236px; height:279px" src="{{asset('assets/imgs/provisioredbloodcell.jpg')}}">
-                    <h3 class="name">Provision of Red Blood Cell</h3>
-                    <!-- <p class="title">email</p> -->
+                <div class="box"><img class="" style="width:236px; height:279px" src="{{asset('uploads/registers/'.$service->image)}}"">
+                    <h3 class="name">{{$service->title}}</h3>
                     <p class="description">
-                        Blood typing and cross-matching: Before a blood transfusion, the patient's blood type and Rh factor are determined. The donor blood is also tested to ensure compatibility. The donor blood must be the same type and Rh factor as the patient's blood to avoid a transfusion reaction.
-                        he red blood cells are collected from a donor and processed to remove any white blood cells, platelets, or plasma.
+                   {{ $service->description}}
                     </p>
-
-                    <!-- <div class="social"><a href="">View Detail</a></div> -->
-
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 item">
-                <div class="box"><img style="width:236px; height:279px" src="{{asset('assets/imgs/blood2.jpg')}}">
-                    <h3 class="name">በደምዎ ህይዎትን ያስቀጥሉ</h3>
-                    <!-- <p class="title">email</p> -->
-                    <p class="description">
-                        ከ1% በታች የሚሆነው የኢትዮጵያ ደም ለጋሾች ንቁ ናቸው።
-                        አንድ የደም ክፍል የሚቆየው ከለገሱ በኋላ ለ 90 ቀናት ብቻ ነው, በዚህ ምክንያት ደም ለጋሾች
-                        በየጊዜው መለገስ አስፈላጊ ነው. ለጋሾች በ12 ሳምንቱ ብዙ ጊዜ ደም መስጠት ይችላሉ።
-
-                        ደም ወደ ቀይ የደም ሴሎች፣ ፕላዝማ እና ፕሌትሌትስ ስለሚለያይ እያንዳንዱ የደም ክፍል ቢያንስ
-                        የሶስት ህይወትን ማዳን ይችላል።
-
-                        በጤና አጠባበቅ ስርዓት ውስጥ ደህንነቱ የተጠበቀ እና በቂ የደም አቅርቦትን ለማረጋገጥ በቀን
-                        3000 ዩኒት ደም ለመሰብሰብ ያለመ ነው።
-
-                        ለህዝብ ክፍት የሆኑ ብዙ የደም ልገሳ ማዕከላት አሉ። ወይም ለሁሉም የሰራተኛ አባላት ምቾት
-                        ሲባል ቀጣሪዎ በቢሮዎ ውስጥ የደም ግፊትን እንዲያስተናግድ ለማነሳሳት ሊያስቡበት ይችላሉ።
-                    </p>
-
-                    <!-- <div class="social"><a href="">View Detail</a></div> -->
-
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 item">
-                <div class="box"><img style="width:236px; height:279px" src="{{asset('assets/imgs/c.jpg')}}">
-                    <h3 class="name">ለመለገስ ብቁ ነዎት?</h3>
-                    <!-- <p class="title">email</p> -->
-                    <p class="description">
-                        በአጠቃላይ ጤነኛ ከሆንክ እና ለአደጋ ተጋላጭ ያልሆነ የአኗኗር ዘይቤ የምትመራ ከሆነ መለገስ ትችላለህ<br>
-                        "ጤናማ" ማለት ጥሩ ስሜት ይሰማዎታል እና የተለመዱ ተግባራትን ማከናወን ይችላሉ. እንደ የስኳር
-                        በሽታ ያለ ሥር የሰደደ በሽታ ካለብዎት, "ጤናማ" ማለት እርስዎ እየታከሙ እና ሁኔታው ​​​​በቁጥጥር ስር
-                        ነው ማለት ነው.
-
-                        እንደ ከማያውቁት ሰው ጋር የግብረ ሥጋ ግንኙነት መፈጸም ወይም ራስን በመድኃኒት መርፌ እንደ “አደጋ
-                        የሚያጋልጥ ባሕርይ” ማለት እንደ ኤች አይ ቪ እና ሄፓታይተስ ቢ እና ሲ ያሉ በደም ምትክ የሚተላለፉ
-                        ኢንፌክሽኖች ሊያዙ ይችላሉ ማለት ነው። አደገኛ ባህሪ ላይ ከተሰማራ አትለግስ።
-                    </p>
-
-                    <!-- <div class="social"><a href="">View Detail</a></div> -->
-
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 item">
-                <div class="box"><img style="width:236px; height:279px" class="" src="{{asset('assets/imgs/blood-samples-are-stored-in-a-hospital.jpg')}}">
-                    <h3 class="name">Blood Camp Management</h3>
-                    <!-- <p class="title">email</p> -->
-                    <p class="description">
-                        We collect, process, and store blood and blood components for use in medical emergencies. we are doing the following activities
-                        Donor screening,Blood collection,Blood processing,Storage,Distribution,Quality control Recruit donors
-
-                        We recruit new donors to maintain a sufficient supply of blood.
-
-                    </p>
-
-                    <!-- <div class="social"><a href="">View Detail</a></div> -->
-
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 item">
-                <div class="box"><img class="" style="width:236px; height:279px" src="{{asset('assets/imgs/provisionplatlets.jpg')}}">
-                    <h3 class="name">provision of platlets</h3>
-                    <!-- <p class="title">email</p> -->
-                    <p class="description">Platelet transfusion is a lifesaving procedure that is carried out to prevent bleeding or stop ongoing bleeding in patients with low platelet count or functional platelet disorders.s
-                        platelets are usually stored separately from whole blood and are transfused in a smaller volume.
-                        Platelet transfusions are often used to treat conditions such as (low platelet count), leukemia, and other types of cancer that can affect the production or function of platelets in the body.
-                    </p>
-
-                    <!-- <div class="social"><a href="">View Detail</a></div> -->
-
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 item">
-                <div class="box"><img class="" style="width:236px; height:279px" src="{{asset('assets/imgs/bloodstorage.jpg')}}">
-                    <h3 class="name">Donor Management</h3>
-                    <!-- <p class="title">email</p> -->
-                    <p class="description">
-                        Donor management is an essential aspect of nonprofit management that involves building and maintaining relationships with all your donors and tracking various donor details and interactions. Although it sounds simple, donor management requires paying close attention to your donors’ activity, habits, and experiences. As a nonprofit, you must be prepared to manage a large donor base that consists of all types of donors — recurring donors, one-time donors, major donors, or in-kind donors.
-                    </p>
-
-                    <!-- <div class="social"><a href="">View Detail</a></div> -->
-
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
-
 
     <div class="container mt-5">
 
@@ -311,8 +216,6 @@
                         ተከላ፣ መቅኒ ንቅለ ተከላ፣ ውስብስብ የቀዶ ሕክምና ሂደቶች እና የካንሰር ሕክምናዎች አይቻሉም ነበር።
 
                     </p>
-
-
                     <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fparse.com" target="_blank" rel="noopener">
                         <img class="YOUR_FB_CSS_STYLING_CLASS" src="{{asset('assets/imgs/fb2.png')}}" width="30px" height="30px" alt="Share on Facebook">
                     </a>
@@ -329,7 +232,6 @@
         <div class=" mt-5">
             <div class="row mt-5 mb-5">
                 <div class="card col-md-8 ml-5">
-                    <!-- <img class="img-fluid" src="{{asset('assets/imgs/c.jpg')}}" alt="..."> -->
                     <h3 class="card-title mt-2">ለምን ደም ይለግሳሉ ??</h3>
                     <h6><b>ደም መለገስ ህይወትን ለማዳን የሚረዳ ከራስ ወዳድነት ነፃ የሆነ ተግባር ነው። ደም የምትለግሱበት ምክንያቶች እነኚሁና።</b></h6>
 
@@ -359,13 +261,6 @@
                 </div>
                 <div class="col-md-4">
                     <img class="img-fluid" src="{{asset('assets/imgs/bblogo.jpg')}}" alt="...">
-                    <!-- <h3 class="card-title mt-2">Title</h3>
-                    <p class="card-text mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates corrupti possimus quae quidem itaque voluptatum, delectus quo soluta voluptate sequi dignissimos eos sint neque! Possimus cumque magnam excepturi necessitatibus obcaecati?</p>
-                    <button class="mb-4" href="" style="float: right;">share </button>
-
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fparse.com" target="_blank" rel="noopener">
-                        <img class="YOUR_FB_CSS_STYLING_CLASS" src="{{asset('assets/imgs/fb2.png')}}" width="30px" height="30px" alt="Share on Facebook">
-                    </a> -->
                 </div>
                 <div class="card-footer">
                     <small class="text-muted"></small>

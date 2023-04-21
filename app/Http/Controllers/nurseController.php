@@ -3,13 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\HIprofile;
-use App\Models\nurseprofile;
-use App\Models\approvedViewModel;
 use App\Models\User;
-use App\Models\advertises;
 use App\Models\reservationModel;
-use App\Models\donorRequestModel;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Donor;
 
@@ -25,11 +20,30 @@ use Vonage\Client;
 use Vonage\Client\Credentials\Basic;
 use Vonage\SMS\Message\SMS;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\bbinformatiomModel;
 
 class nurseController extends Controller
 {
 
+    
+    function advertise(Request $req)
+    {
+        $var = new bbinformatiomModel;
+        $var->user_id = $req->user_id;
+        $var->title = $req->title;
+        $var->description = $req->description;
+        $var->type = $req->type;
+
+        if ($req->hasfile('image')) {
+            $file = $req->file('image');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('uploads/registers', $filename);
+            $var->image = $filename;
+        }
+        $var->save();
+        return redirect()->back();
+    }
     function ReturntoHome()
     {
         //$stats = donorRequestModel::all()->orderBy('created_at', 'desc')->take(4);
