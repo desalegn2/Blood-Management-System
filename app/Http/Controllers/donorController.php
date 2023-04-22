@@ -198,7 +198,7 @@ class donorController extends Controller
     function viewNews()
     {
         $data = bbinformatiomModel::where('type','news')->get();
-        return view('donor.bbinformation', ['data' => $data]);
+        return view('donor.news', ['data' => $data]);
     }
 
     function viewInfo()

@@ -311,7 +311,7 @@
 
             @csrf
             <h1>Blood Donor Enrollment Form</h1>
-
+            @foreach($donor as $data)
             <fieldset>
                 @if(session('success'))
                 <div class="alert alert-success">
@@ -392,6 +392,7 @@
 
                         <div><input type="hidden" name="nurse_id" value="{{ Auth::user()->id }}" required></div>
                         <div><input type="hidden" name="donor_id" value="{{$data->donor_id}}" required></div>
+                        <div><input type="hidden" name="reservation_id" value="{{$data->id}}" required></div>
                         <div><label>Weight</label><input type="text" name="weight" required></div>
                         <div style="color: white; background-color:#0EA293;">
                             @error('weight')
@@ -419,7 +420,7 @@
                     </div>
                 </div>
             </fieldset>
-
+            @endforeach
 
         </form>
 

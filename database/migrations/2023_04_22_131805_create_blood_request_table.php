@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bloodrequest', function (Blueprint $table) {
+        Schema::create('blood_request', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('hospital_id');
             $table->foreign('hospital_id')->references('hospital_id')->on('hospitals')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('bloodgroup');
-            $table->string('volume');
-            $table->string('reason');
-            $table->string('status')->default("in progress");
+            $table->string('status')->default("pending");
+            $table->string('approved_by');
+            $table->boolean('accepted')->default(false);
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bloodrequest');
+        Schema::dropIfExists('blood_request');
     }
 };

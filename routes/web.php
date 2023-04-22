@@ -1,31 +1,14 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\skregisterController;
-use App\Http\Controllers\dnrRegisterController;
-use App\Http\Controllers\addAdminController;
-use App\Http\Controllers\bloodRequestController;
-use App\Http\Controllers\donorReq;
-use App\Http\Controllers\donorRequestController;
-use App\Http\Controllers\donorViewseeker;
-use App\Http\Controllers\listofApproved;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\addBloodController;
-use App\Http\Controllers\viewBloodStore;
-use App\Http\Controllers\discardBloodControlle;
 use App\Http\Controllers\hospitalRequestController;
-use App\Http\Controllers\viewStatusDonor;
-use App\Http\Controllers\deleteC;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\adminnotificationController;
-use App\Http\Controllers\donorController;
-use App\Http\Controllers\healthinstituteController;
 use App\Http\Controllers\nurseController;
 use App\Http\Controllers\techController;
 use App\Http\Controllers\bbManagerController;
 use App\Http\Controllers\botController;
-use App\Http\Controllers\encoderController;
 use App\Http\Controllers\hospitalController;
 use App\Http\Controllers\doctorController;
 use Illuminate\Support\Facades\Auth;
@@ -182,15 +165,12 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::post('/healthinstitute/changepassword', [hospitalController::class, 'changepassword']);
 
         Route::view('/healthinstitute/seekerRegister', 'healthinstitute.postSeeker');
-        Route::view('/healthinstitute/profile', 'healthinstitute.profile');
-        //Route::post('/healthinstitute/profile', [healthinstituteController::class, 'profile']);
-       // Route::post('/healthinstitute/seekerRegister', [bloodRequestController::class, 'bloodrequest']);
         Route::view('/healthinstitute/posts', 'healthinstitute.hospitalPost');
         Route::post('/healthinstitute/post_seeker', [hospitalController::class, 'postSeeker']);
-        Route::post('/healthinstitute/hospitalrequest', [hospitalController::class, 'hospitalreq']);
-
+        
         Route::view('/healthinstitute/hospitalrequest', 'healthinstitute.bloodRequestform');
-        Route::get('/healthinstitute/request/{id}', [hospitalController::class, 'viewrequest']);
+        Route::post('/healthinstitute/bloodrequest', [hospitalController::class, 'bloodRequest']);
+        Route::get('/healthinstitute/history/{id}', [hospitalController::class, 'viewHistory']);
 
         Route::post('/healthinstitute/search', [hospitalController::class, 'search']);
         Route::get('/healthinstitute/finddonor', [hospitalController::class, 'findDonor']);
@@ -251,26 +231,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         Route::get('/bbmanager/referral', [bbManagerController::class, 'Referral']);
     });
-    Route::middleware(['auth', 'user-role:encoder'])->group(function () {
-
-        Route::get('/encoder/home', [HomeController::class, 'encoderHome'])->name('encoder.home');
-        Route::get('/encoder/home', [encoderController::class, 'viewblood'])->name('encoder.home');
-
-        Route::get('/encoder/profile/{id}', [encoderController::class, 'Profile']);
-        Route::post('/encoder/updateprofile/{id}', [encoderController::class, 'updateProfile']);
-        Route::post('/encoder/updatephoto/{id}', [encoderController::class, 'updatephoto']);
-        Route::post('/encoder/changepassword', [encoderController::class, 'changepassword']);
-
-        // Route::view('/encoder/addbloods', 'encoder.addBlood');recordBloodDetail
-        Route::get('/encoder/record', [encoderController::class, 'Record']);
-
-        Route::get('/encoder/recordblood/{id}', [encoderController::class, 'recordBloods']);
-        Route::post('/encoder/addbloods/{id}', [encoderController::class, 'addblood']);
-
-        // Route::view('/encoder/addbloods', 'encoder.add');
-        Route::view('/encoder/handling', 'encoder.handling');
-    });
-
+ 
     Route::middleware(['auth', 'user-role:doctor'])->group(function () {
 
         Route::get('/doctor/home', [HomeController::class, 'doctorHome'])->name('doctor.home');

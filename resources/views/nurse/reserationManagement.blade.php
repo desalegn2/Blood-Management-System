@@ -54,6 +54,7 @@
                         <input type="submit" value="Search" class="btn btn-primary btn-sm float-end">
                     </div>
                 </form>
+                
                 <br><br>
                 <table class="table table-bordered table-responsive table-striped">
                     <thead>
@@ -73,9 +74,8 @@
                             <td>{{$donors->status}}</td>
                             <td>
                                 <a class="btn btn-success" href="{{url('nurse/reservationdetail', $donors->id)}}">View</a>
-                                <a href="{{url('nurse/reservationregister',$donors->donor_id)}}" class="btn btn-primary btn-sm float-end"><i class='fa fa-edit'></i> Registor</a>
-                            </td>
-
+                                <a href="{{url('nurse/reservationregister',$donors->id)}}" class="btn btn-primary btn-sm float-end"><i classdonor_id='fa fa-edit'></i> Registor</a>
+                            </td>donor_id
                         </tr>
                         @endforeach
 

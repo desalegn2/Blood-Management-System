@@ -23,7 +23,7 @@
 
 
     <div class="container mt-5">
-        @foreach($advert as $adv)
+        @foreach($data as $adv)
         <div class=" mt-5">
             <div class="row mt-5">
                 <div class="col-md-4 ml-5">
@@ -32,8 +32,6 @@
                 <div class="col-md-8">
                     <h3 class="card-title mt-2">{{$adv->title}}</h3>
                     <p class="card-text mb-4">{{$adv->description}}</p>
-
-
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">{{ $adv->created_at}}</small>

@@ -25,7 +25,7 @@ use App\Models\bbinformatiomModel;
 class nurseController extends Controller
 {
 
-    
+
     function advertise(Request $req)
     {
         $var = new bbinformatiomModel;
@@ -125,23 +125,20 @@ class nurseController extends Controller
     function manageReservation()
     {
 
-        $reservations = reservationModel::join('donors', 'reservation.donor_id', '=', 'donors.donor_id')->where('reservation.status', 'in progress')
-            ->select('reservation.*', 'donors.*')
+        $reservations = reservationModel::join('donors', 'reservation.donor_id', '=', 'donors.donor_id')
+            ->where('reservation.status','<>','Donated')
+            ->select('reservation.center','reservation.status', 'donors.phone','donors.firstname')
             ->get();
+            //->paginate(4);
         return view('nurse.reserationManagement', ['reservations' => $reservations]);
     }
 
     function reservationDetail($id)
     {
-        // $donors = Donor::find($donor_id);
-        // $reservation = reservationModel::where('donor_id',$donor_id);
-
         $donor = reservationModel::join('donors', 'reservation.donor_id', '=', 'donors.donor_id')
             ->where('reservation.id', $id)
             ->select('reservation.*', 'donors.*')
             ->get();
-
-
         return view('nurse.reservationDetail', compact('donor'));
     }
     function findReservation(Request $req)
@@ -163,8 +160,12 @@ class nurseController extends Controller
 
     function getReservation($id)
     {
-        $donors = Donor::find($id);
-        return view('nurse.registorAlreadyDonated', ['data' => $donors]);
+        $donor = reservationModel::join('donors', 'reservation.donor_id', '=', 'donors.donor_id')
+            ->where('reservation.id', $id)
+            ->select('reservation.*', 'donors.*')
+            ->get();
+        //$donors = Donor::find($id);
+        return view('nurse.registorAlreadyDonated', ['donor' => $donor]);
     }
 
     function accept($id)
@@ -202,10 +203,10 @@ class nurseController extends Controller
 
             if ($var) {
                 $isExist = reservationModel::select("*")
-                    ->where("donor_id", $req->donor_id)
+                    ->where("id", $req->reservation_id)
                     ->exists();
                 if ($isExist) {
-                    $res = reservationModel::where("donor_id", $req->donor_id)->first();
+                    $res = reservationModel::where("id", $req->reservation_id)->first();
                     $res->status = "Donated";
                     $res->save();
                     return redirect()->back()->with('success', 'Thank you for your donation!');

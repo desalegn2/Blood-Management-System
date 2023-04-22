@@ -8,313 +8,142 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- ======= Styles ====== -->
 
     <style>
-        /* =========== Google Fonts ============ */
-        @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
-
-        /* =============== Globals ============== */
-        * {
-            font-family: "Ubuntu", sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --blue: #2a2185;
-            --white: #fff;
-            --gray: #f5f5f5;
-            --black1: #222;
-            --black2: #999;
-        }
-
-        /* ====================== Responsive Design ========================== */
-        @media (max-width: 480px) {
-            .cardBox {
-                grid-template-columns: repeat(1, 1fr);
-            }
-
-            .cardHeader h2 {
-                font-size: 20px;
-            }
-
-            .user {
-                min-width: 40px;
-            }
-
-            .navigation {
-                width: 100%;
-                left: -100%;
-                z-index: 1000;
-            }
-
-            .navigation.active {
-                width: 100%;
-                left: 0;
-            }
-
-            .toggle {
-                z-index: 10001;
-            }
-
-            .main.active .toggle {
-                color: #fff;
-                position: fixed;
-                right: 0;
-                left: initial;
-            }
-        }
-
-
-        html,
         body {
-            min-height: 100%;
-        }
-
-        body,
-        div,
-        form,
-        input,
-        select,
-        p {
-            padding: 0;
-            margin: 0;
-            outline: none;
-            font-family: Roboto, Arial, sans-serif;
-            font-size: 14px;
-            color: #666;
-        }
-
-        h1 {
-            margin: 0;
-            font-weight: 400;
-        }
-
-        h3 {
-            margin: 12px 0;
-            color: #8ebf42;
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f0f0;
         }
 
         .main-block {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #fff;
-        }
-
-        form {
-            width: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            margin: 50px auto;
             padding: 20px;
+            width: 80%;
+            max-width: 700px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
-        fieldset {
-            border: none;
-            border-top: 1px solid #8ebf42;
-        }
-
-        .account-details,
-        .personal-details {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        .account-details>div,
-        .personal-details>div>div {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .account-details>div,
-        .personal-details>div,
-        input,
-        label {
-            width: 100%;
-        }
-
-        label {
-            padding: 0 5px;
-            text-align: right;
-            vertical-align: middle;
-        }
-
-        input {
-            padding: 5px;
-            vertical-align: middle;
-        }
-
-        .checkbox {
-            margin-bottom: 10px;
-        }
-
-        select,
-        .children,
-        .gender,
-        .bdate-block {
-            width: calc(100% + 26px);
-            padding: 5px 0;
-        }
-
-        select {
-            background: transparent;
-        }
-
-        .gender input {
-            width: auto;
-        }
-
-        .gender label {
-            padding: 0 5px 0 0;
-        }
-
-        .bdate-block {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .birthdate select.day {
-            width: 35px;
-        }
-
-        .birthdate select.mounth {
-            width: calc(100% - 94px);
-        }
-
-        .birthdate input {
-            width: 38px;
-            vertical-align: unset;
-        }
-
-        .checkbox input,
-        .children input {
-            width: auto;
-            margin: -2px 10px 0 0;
-        }
-
-        .checkbox a {
-            color: #8ebf42;
-        }
-
-        .checkbox a:hover {
-            color: #82b534;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px 0;
-            margin: 10px auto;
-            border-radius: 5px;
-            border: none;
-            background: #8ebf42;
-            font-size: 14px;
+        h1 {
+            font-size: 32px;
             font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 30px;
+        }
+
+        label {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        input[type=number] {
+            font-size: 18px;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+            max-width: 100px;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+
+        button[type=submit] {
+            margin-top: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #007bff;
             color: #fff;
+            border: none;
+            cursor: pointer;
         }
 
-        button:hover {
-            background: #82b534;
-        }
-
-        @media (min-width: 568px) {
-
-            .account-details>div,
-            .personal-details>div {
-                width: 50%;
-            }
-
-            label {
-                width: 40%;
-            }
-
-            input {
-                width: 60%;
-            }
-
-            select,
-            .children,
-            .gender,
-            .bdate-block {
-                width: calc(60% + 16px);
-            }
+        button[type=submit]:hover {
+            background-color: #0069d9;
         }
     </style>
-
 </head>
 
 <body>
-
-
-
     <!-- ======================= Cards ================== -->
     <div class="main-block">
+        <h1>Blood Request Form</h1>
 
-        <form action="hospitalrequest" method="post" enctype="multipart/form-data">
-            @csrf
-            <h1>Blood Request Form</h1>
+        <div class="row">
+        <h3>Enter the quantity of each blood types you need:</h3>
+           
+                <div class="col-md-6">
+                <form action="{{url('/healthinstitute/bloodrequest')}}" method="POST">
+                @csrf
+                    <input type="hidden" name="hospital_id" value="{{Auth::user()->id}}" id="hospital_name" class="form-control" required>
+                    <input type="hidden" name="approved_by" value="none" id="hospital_address" class="form-control" required>
 
-            <fieldset>
-                <legend>
-                    <h3>Fill This Form</h3>
-                </legend>
-                <div class="personal-details">
-                    <div>
-                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required>
-                        <div>
-                            <label>Hospital Name</label>
-                            <input type="text" name="hospital" value="{{ Auth::user()->name }}" readonly required>
-                        </div>
-                        <div><label>Date you want</label><input type="date" name="date" placeholder="date" required></div>
-                        <div><label>Email</label><input type="email" name="email" value="{{ Auth::user()->email }}" readonly required></div>
-                        <div><label>Phone</label><input type="tel" name="phone" placeholder="+251948758542" required></div>
-                        <div>
-                            <label>Blood Group</label>
-                            <select name="bloodtype">
-                                <option value="A+">A+</option>
-                                <option value="A-">A-</option>
-                                <option value="B+">B+</option>
-                                <option value="B-">B-</option>
-                                <option value="AB+">AB+</option>
-                                <option value="AB-">AB-</option>
-                                <option value="O+">O+</option>
-                                <option value="O-">O+</option>
-                            </select>
-                        </div>
-                        <div><label>How Many Unit You Need in ml</label><input type="text" name="volume" placeholder="volume in ml"></div>
+                   
 
+                    <div class="form-group">
+                        <label for="A_pos">A+</label>
+                        <input type="number" name="blood_types[A+]" id="A_pos" class="form-control" min="0">
                     </div>
-                    <div>
 
-                        <div>
-                            <label>For What Purpose Do You Want</label>
-                            <textarea id="w3review" name="reason" rows="5" cols="30" placeholder="for what purpose"></textarea>
-                        </div>
+                    <div class="form-group">
+                        <label for="A_neg">A-</label>
+                        <input type="number" name="blood_types[A-]" id="A_neg" class="form-control" min="0">
+                    </div>
 
+                    <div class="form-group">
+                        <label for="B_pos">B+</label>
+                        <input type="number" name="blood_types[B+]" id="B_pos" class="form-control" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="B_neg">B-</label>
+                        <input type="number" name="blood_types[B-]" id="B_neg" class="form-control" min="0">
                     </div>
                 </div>
-            </fieldset>
-            <fieldset>
-                <legend>
-                    <h3>Term</h3>
-                </legend>
-                <div class="terms-mailing">
-
-                    <div class="checkbox">
-                        <input type="checkbox" name=""><span>I am agree with above information</span>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="O_pos">O+</label>
+                        <input type="number" name="blood_types[O+]" id="O_pos" class="form-control" min="0">
                     </div>
-            </fieldset>
-            <button type="submit">Submit</button>
-        </form>
+
+                    <div class="form-group">
+                        <label for="O_neg">O-</label>
+                        <input type="number" name="blood_types[O-]" id="O_neg" class="form-control" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="AB_pos">AB+</label>
+                        <input type="number" name="blood_types[AB+]" id="AB_pos" class="form-control" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="AB_neg">AB-</label>
+                        <input type="number" name="blood_types[AB-]" id="AB_neg" class="form-control" min="0">
+                    </div>
+                    <button type="submit" class="btn btn-primary">submit</button>
+                </div>
+                
+            </form>
+        </div>
     </div>
+
 
     @include('sweetalert::alert')
 </body>
 
 </html>
+
+
 @endsection
