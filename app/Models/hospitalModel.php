@@ -19,4 +19,10 @@ class hospitalModel extends Model
         'gender',
         'phone',
     ];
+
+    public function bloodRequests()
+{
+    return $this->hasMany(BloodRequest::class);
+}
+
 }

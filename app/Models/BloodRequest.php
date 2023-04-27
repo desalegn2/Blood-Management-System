@@ -15,4 +15,15 @@ class BloodRequest extends Model
         'approved_by',
         'accepted',
     ];
+
+    public function hospital()
+{
+    return $this->belongsTo(hospitalModel::class,'hospital_id');
+}
+
+public function bloodRequestItems()
+{
+    return $this->hasMany(BloodRequestItem::class,'request_id');
+}
+
 }

@@ -43,8 +43,6 @@ class doctorController extends Controller
             ->groupBy('hospitals.hospitalname')
             ->get();
         
-        //return view('distributes', compact('distributes'));
-        
         return view('doctor.home', compact('stockInfo','distributes'));
     }
     function BloodTransfer()

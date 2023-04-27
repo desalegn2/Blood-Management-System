@@ -21,6 +21,7 @@ use App\Models\donationModel;
 use App\Models\bloodStock;
 use App\Models\Donor;
 use App\Models\hospitalModel;
+use App\Models\BloodRequest;
 
 class bbManagerController extends Controller
 {
@@ -70,6 +71,22 @@ class bbManagerController extends Controller
                 'error' => $e->getMessage()
             ], 400);
         }
+    }
+
+    function requests()
+    {
+       
+        $bloodRequests = BloodRequest::with('hospital', 'bloodRequestItems')->get();
+
+        return view('bloodBankManager.request', ['bloodRequests' => $bloodRequests]);
+    }
+
+    function deleteRequest($id)
+    {
+        $res = hospitalRequestModel::find($id);
+        $res->delete();
+
+        return redirect()->back()->with('success', 'Message Delete Successfully!');
     }
     function view()
     {
@@ -174,19 +191,6 @@ class bbManagerController extends Controller
         return $pdf->download('oneDayReport.pdf');
     }
 
-    function requests()
-    {
-        $request = hospitalRequestModel::all()->where('readat', '=', 'unread');
-        return view('bloodBankManager.request', ['req' => $request]);
-    }
-
-    function deleteRequest($id)
-    {
-        $res = hospitalRequestModel::find($id);
-        $res->delete();
-
-        return redirect()->back()->with('success', 'Message Delete Successfully!');
-    }
     function Bloods()
     {
         $hospital = hospitalModel::all();
