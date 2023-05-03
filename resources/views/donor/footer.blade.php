@@ -213,7 +213,7 @@
                         <ul class="social" style="display:flex; justify-content: center; align-items: center; gap: 1rem;">
                             <li> <a href="https://www.facebook.com/bdrbloodbank" value=""> <i class=" fa fa-facebook"> </i> </a> </li>
                             <li> <a href="#"> <i class="fa fa-twitter"> </i> </a> </li>
-                            <li> <a href="#"> <i class="fa fa-google"> </i> </a> </li>
+                            <!-- <li> <a href="#"> <i class="fa fa-google"> </i> </a> </li> -->
                             <li> <a href="mailto:mikshif2001@gmail.com"> <i class="fa fa-envelope"> </i> </a> </li>
                             <li> <a href="#"> <i class="fa fa-telegram"> </i> </a> </li>
                         </ul>

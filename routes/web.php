@@ -11,6 +11,7 @@ use App\Http\Controllers\bbManagerController;
 use App\Http\Controllers\botController;
 use App\Http\Controllers\hospitalController;
 use App\Http\Controllers\doctorController;
+use App\Http\Controllers\donorController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {

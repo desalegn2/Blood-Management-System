@@ -59,8 +59,8 @@
                             <td>{{$donor->firstname}}</td>
                             <td>{{$donor->lastname}}</td>
                             <td>{{$donor->phone}}</td>
-                            <td>{{$donor->packno}}</td>
-                            <td>{{$donor->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
+                            <td>{{$donor->bloodtype}}</td>
+                            <td>{{ \Carbon\Carbon::parse($donor->created_at)->diffForHumans() }}</td>
                             <td>
                                 <a class="btn btn-success" href="{{url('nurse/email', $donor->donor_id)}}"> Email</a>
                                 <a class="btn btn-success" href="{{url('nurse/sms', $donor->donor_id)}}">SMS</a>
@@ -75,6 +75,8 @@
                         @endif
                     </tbody>
                 </table>
+
+                
             </div>
         </div>
     </div>

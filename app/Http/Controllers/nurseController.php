@@ -126,10 +126,10 @@ class nurseController extends Controller
     {
 
         $reservations = reservationModel::join('donors', 'reservation.donor_id', '=', 'donors.donor_id')
-            ->where('reservation.status','<>','Donated')
-            ->select('reservation.center','reservation.status', 'donors.phone','donors.firstname')
+            ->where('reservation.status', '<>', 'Donated')
+            ->select('reservation.center', 'reservation.status', 'donors.phone', 'donors.firstname')
             ->get();
-            //->paginate(4);
+        //->paginate(4);
         return view('nurse.reserationManagement', ['reservations' => $reservations]);
     }
 
@@ -244,26 +244,17 @@ class nurseController extends Controller
     function notifys()
     {
         $date = \Carbon\Carbon::today()->subDays(5);
-        //$var = donationModel::where('donation.created_at', '<=', $date)->get();
-        $donor = donationModel::join('donors', 'donation.donor_id', '=', 'donors.donor_id')
-            ->where('donation.created_at', '<=', $date)
-            ->where('donation.status', 'accept')
-            ->select('donors.*', 'donation.created_at', 'donation.packno')
-            ->latest()->first();
+        $donors = DB::table('donors')
+            ->select('donors.firstname','donors.photo','donors.lastname', 'donors.phone','donation.donor_id','donors.bloodtype','donation.created_at')
+            ->join(DB::raw('(SELECT MAX(id) AS id, donor_id FROM donation WHERE created_at <= ? AND status = "accept" GROUP BY donor_id) AS latest_donation'), function ($join) {
+                $join->on('donors.donor_id', '=', 'latest_donation.donor_id');
+            })
+            ->join('donation', 'latest_donation.id', '=', 'donation.id')
+            ->orderBy('donation.created_at', 'desc')
+            ->setBindings([$date])
+            ->get();
 
-        // $donor = Donor::join('donation', 'donors.donor_id', '=', 'donation.donor_id')
-        //         ->select('donors.*', 'donation.created_at','donation.packno')
-        //         ->whereRaw('DATEDIFF(NOW(), (SELECT MAX(donation.created_at) FROM donation WHERE donation.donor_id = donors.donor_id)) >= 3')
-        //         ->orderBy('donation.created_at', 'asc')
-        //         ->get();
-
-        // $donor = DB::table('donors')
-        // ->select('donors.donor_id', 'donors.firstname', 'donors.lastname', DB::raw('MAX(donation.created_at) as last_donation_date'), DB::raw('MAX(donors.phone) as phone'))
-        // ->leftJoin('donation', 'donors.donor_id', '=', 'donation.donor_id')
-        // ->groupBy('donors.donor_id')
-        // ->havingRaw('MAX(donation.donation_date) < DATE_SUB(NOW(), INTERVAL 30 DAY)')
-        // ->get();
-        return view('nurse.notify', ['donors' => $donor]);
+        return view('nurse.notify', ['donors' => $donors]);
     }
 
     function DaystoNotify(Request $req)

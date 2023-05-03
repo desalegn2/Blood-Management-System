@@ -71,7 +71,7 @@
                         {{ $item->quantity }}<br>
                         @endforeach
                     </td>
-                    <td>button</td>
+                    <td> <a data-bs-toggle="modal" class="btn btn-info">view</a></td>
                 </tr>
                 @endforeach
             </tbody>
