@@ -147,19 +147,10 @@
         .body-pd {
             padding-left: calc(var(--nav-width) + 1rem)
         }
-
-        .active {
-            color: var(--white-color)
-        }
-
-        .active::before {
-           content: '';
-            position: absolute;
-            left: 0;
-            width: 2px;
-            height: 32px;
-            background-color: var(--white-color)
-        }
+        .nav_link.active {
+        background-color: black;
+        color: #fff;
+    }
 
         .height-100 {
             height: 100vh
@@ -207,39 +198,45 @@
     <body id="body-pd">
         <header class="header" id="header">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-         
+
             <img class="header_img" src="{{asset('uploads/registers/'. Auth::user()->photo )}}" alt="">
         </header>
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
-                <div> <a href="{{url('/technitian/profile',Auth::user()->id)}}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Profile</span> </a>
+                <div>
+                    <a href="{{ url('/technitian/profile', Auth::user()->id) }}" class="nav_logo">
+                        <i class='bx bx-layer nav_logo-icon'></i>
+                        <span class="nav_logo-name">Profile</span>
+                    </a>
                     <div class="nav_list">
-                        <a href="{{url('/technitian/home')}}" class="nav_link active"><span class="bx nav_icon"><i class='bx bx-home'></i></span><span class="bx nav_name">Dashboard</span> </a>
-                        <a href="{{url('/technitian/test')}}" class="nav_link">
-                            <span class="bx nav_icon"><box-icon type='solid' name='flask'></box-icon></span>
+                        <a href="{{ url('/technitian/home') }}" class="nav_link{{ Request::is('technitian/home') ? ' active' : '' }}">
+                            <span class="bx nav_icon"><i class='bx bx-home'></i></span>
+                            <span class="bx nav_name">Dashboard</span>
+                        </a>
+                        <a href="{{ url('/technitian/test') }}" class="nav_link{{ Request::is('technitian/test') ? ' active' : '' }}">
+                            <span class="bx bxs-flask nav_icon"></span>
                             <span class="bx nav_name">Test Blood</span>
                         </a>
-                        <a href="{{url('/technitian/viewstoredblood')}}" class="nav_link">
+                        <a href="{{ url('/technitian/viewstoredblood') }}" class="nav_link{{ Request::is('technitian/viewstoredblood') ? ' active' : '' }}">
                             <span class="bx nav_icon"><i class='bx bx-droplet'></i></span>
                             <span class="bx nav_name">Manage Stored Blood</span>
                         </a>
-                        <a href="{{url('/technitian/handling')}}" class="nav_link">
+                        <a href="{{ url('/technitian/handling') }}" class="nav_link{{ Request::is('technitian/handling') ? ' active' : '' }}">
                             <span class="bx nav_icon"><i class='bx bx-info-circle'></i></span>
                             <span class="bx nav_name">Rules</span>
                         </a>
-
                     </div>
-                </div> <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();" class="nav_link">
+                </div>
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav_link">
                     <i class='bx bx-log-out nav_icon'></i>
-                    <span class="bx nav_name">
-                        SignOut
-                    </span> </a>
+                    <span class="bx nav_name">SignOut</span>
+                </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
             </nav>
         </div>
+
         <div class="height-100 bg-light">
             @yield('content')
         </div>

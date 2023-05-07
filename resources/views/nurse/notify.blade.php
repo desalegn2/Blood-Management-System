@@ -22,7 +22,7 @@
         </div>
         <div class="row mt-5">
             <div class="col-md-12 col-md-offset-1">
-                <h1>Donors Who Donate Before</h1>
+                <h1>Donors Who Donate Before And Next Donation Date is Coming</h1>
 
                 <!-- <form action="{{url('/nurse/datetonotify')}}" method="get">
                     @csrf
@@ -60,7 +60,8 @@
                             <td>{{$donor->lastname}}</td>
                             <td>{{$donor->phone}}</td>
                             <td>{{$donor->bloodtype}}</td>
-                            <td>{{ \Carbon\Carbon::parse($donor->created_at)->diffForHumans() }}</td>
+                            <td>{{$donor->created_at}}</td>
+                            <!-- <td>{{ \Carbon\Carbon::parse($donor->created_at)->diffForHumans() }}</td> -->
                             <td>
                                 <a class="btn btn-success" href="{{url('nurse/email', $donor->donor_id)}}"> Email</a>
                                 <a class="btn btn-success" href="{{url('nurse/sms', $donor->donor_id)}}">SMS</a>

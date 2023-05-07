@@ -127,7 +127,7 @@ class nurseController extends Controller
 
         $reservations = reservationModel::join('donors', 'reservation.donor_id', '=', 'donors.donor_id')
             ->where('reservation.status', '<>', 'Donated')
-            ->select('reservation.center', 'reservation.status', 'donors.phone', 'donors.firstname')
+            ->select('reservation.id','reservation.center', 'reservation.status','reservation.donor_id', 'donors.phone', 'donors.firstname')
             ->get();
         //->paginate(4);
         return view('nurse.reserationManagement', ['reservations' => $reservations]);
@@ -154,7 +154,6 @@ class nurseController extends Controller
             ->where('status', 'Accepted')
             ->select('reservation.*', 'donors.*')
             ->get();
-
         return view('nurse.reserationManagement', ['reservations' => $reservations]);
     }
 
@@ -243,7 +242,7 @@ class nurseController extends Controller
     }
     function notifys()
     {
-        $date = \Carbon\Carbon::today()->subDays(5);
+        $date = \Carbon\Carbon::today()->subDays(30);
         $donors = DB::table('donors')
             ->select('donors.firstname','donors.photo','donors.lastname', 'donors.phone','donation.donor_id','donors.bloodtype','donation.created_at')
             ->join(DB::raw('(SELECT MAX(id) AS id, donor_id FROM donation WHERE created_at <= ? AND status = "accept" GROUP BY donor_id) AS latest_donation'), function ($join) {
@@ -253,7 +252,6 @@ class nurseController extends Controller
             ->orderBy('donation.created_at', 'desc')
             ->setBindings([$date])
             ->get();
-
         return view('nurse.notify', ['donors' => $donors]);
     }
 

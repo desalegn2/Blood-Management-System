@@ -19,13 +19,17 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        /* drop down css */
         .dropbtn {
 
             color: white;
             padding: 16px;
             font-size: 16px;
             border: none;
+        }
+
+        .active {
+            background-color: #19A7CE;
+            color: #fff;
         }
 
         .dropdown {
@@ -48,12 +52,15 @@
             text-decoration: none;
             display: block;
         }
+
         .dropdown-content a:hover {
             background-color: #FF7B54;
         }
+
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
         header {
             position: fixed;
             height: 100px;
@@ -63,8 +70,6 @@
             top: 0;
             left: 0;
             z-index: 9999;
-            /* overflow-y: scroll; */
-
         }
 
         .inner-width {
@@ -88,7 +93,6 @@
             display: flex;
             align-items: center;
             min-height: 90px;
-
         }
 
         .navigation-menu a {
@@ -100,11 +104,9 @@
             border-radius: 4px;
             text-decoration: none;
             transition: .3s linear;
-
         }
 
         .navigation-menu a:hover {
-            /* background: #273b91; */
             text-decoration: none;
             color: #fff;
             transform: scale(1.1);
@@ -123,11 +125,10 @@
             background: #227C70;
             color: #fff;
             font-weight: 500;
-            letter-spacing: 2px;
-
+            letter-spacing: 1px;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 62px;
+            height: 62px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -151,6 +152,10 @@
             cursor: pointer;
         }
 
+        .nav_link.active {
+            background-color: black;
+            color: #fff;
+        }
 
         @media screen and (max-width:900px) {
             .menu-toggle-btn {
@@ -169,7 +174,6 @@
                 padding: 20px 40px;
                 box-sizing: border-box;
                 z-index: 99;
-
             }
 
             .navigation-menu::before {
@@ -185,8 +189,6 @@
             .navigation-menu a {
                 display: block;
                 margin: 1px 0;
-
-
             }
 
             .navigation-menu.active {
@@ -197,44 +199,34 @@
 </head>
 
 <body>
-
     <div>
-
         <header>
-
-            <!-- <div class="inner-width" style="width: 90vw; height: 8px;">  -->
-
             <i class="menu-toggle-btn fas fa-bars" style="margin-right: 2rem;"></i>
             <nav class="navigation-menu" style="margin: auto;">
-
-                <a href="{{url('/donor/profile',Auth::user()->id)}}" class="profile">
+                <a href="{{url('/donor/profile',Auth::user()->id)}}" class="profile @if(Request::is('donor/profile*')) active @endif">
                     Profile
                 </a>
-                <a href="{{url('/donor/home')}}">Home</a>
-                <a href="{{url('/donor/news')}}"></i> News</a>
-                <a href="{{url('/donor/information')}}"></i> Blood Bank Information</a>
-                <a href="{{url('/donor/seeker')}}"></i> View Seeker</a>
-                <!-- <a href="{{url('/donor/donorregister')}}"></i> Registor</a>
-                <a href="{{url('/donor/history',Auth::user()->id)}}"></i> Rigstration Status</a> -->
-                <div class="dropdown">
-                    <a href="" class="dropbtn"></i> Reservation</a>
+                <a href="{{url('/donor/home')}}" class="@if(Request::is('donor/home*')) active @endif">Home</a>
+                <a href="{{url('/donor/news')}}" class="@if(Request::is('donor/news*')) active @endif">News</a>
+                <a href="{{url('/donor/information')}}" class="@if(Request::is('donor/information*')) active @endif">Blood Bank Information</a>
+                <div class="dropdown @if(Request::is('donor/reservation*')) active @endif">
+                    <a href="" class="dropbtn">Reservation</a>
                     <div class="dropdown-content">
-                        <a href="{{url('/donor/reservationform')}}">Send Reservation</a>
-                        <a href="{{url('/donor/reservationhistory',Auth::user()->id)}}">View Reservation Status</a>
+                        <a href="{{ url('/donor/reservationform') }}">Send Reservation</a>
+                        <a href="{{ url('/donor/reservationhistory', Auth::user()->id) }}">View Reservation Status</a>
                     </div>
                 </div>
-                <a href="{{url('/donor/asks')}}"></i>Chatbot</a>
-                <a href="{{url('/donor/refer',Auth::user()->id)}}"></i> Refere Others</a>
-                <!-- <a href=""></i> Reservation Status</a> -->
+
+                <a href="{{url('/donor/asks')}}" class="@if(Request::is('donor/asks*')) active @endif">Chatbot</a>
+                <a href="{{url('/donor/refer',Auth::user()->id)}}" class="@if(Request::is('donor/refer*')) active @endif">Refere Others</a>
                 <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                             document.getElementById('logout-form').submit();" class="@if(Request::is('logout')) active @endif">
 
                     Logout</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
             </nav>
-            <!-- </div>  -->
         </header>
 
     </div>
@@ -242,6 +234,7 @@
     <div>
         @yield('content')
     </div>
+
     <script>
         $(".menu-toggle-btn").click(function() {
             $(this).toggleClass("fa-times");

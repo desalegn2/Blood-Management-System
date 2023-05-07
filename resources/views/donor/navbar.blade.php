@@ -28,6 +28,13 @@
             border: none;
         }
 
+        /* Active link styles */
+        .active {
+            background-color: #19A7CE;
+            color: #fff;
+        }
+
+
         .dropdown {
             position: relative;
             display: inline-block;
@@ -48,12 +55,15 @@
             text-decoration: none;
             display: block;
         }
+
         .dropdown-content a:hover {
             background-color: #FF7B54;
         }
+
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
         header {
             position: fixed;
             height: 100px;
@@ -150,7 +160,6 @@
             cursor: pointer;
         }
 
-
         @media screen and (max-width:900px) {
             .menu-toggle-btn {
                 display: block !important;
@@ -205,27 +214,28 @@
 
             <i class="menu-toggle-btn fas fa-bars" style="margin-right: 2rem;"></i>
             <nav class="navigation-menu" style="margin: auto;">
-                <a href="{{url('/donor/profile',Auth::user()->id)}}" class="profile">
+                <a href="{{url('/donor/profile',Auth::user()->id)}}" class="profile @if(Request::is('donor/profile*')) active @endif">
                     Profile
                 </a>
-                <a href="{{url('/donor/home')}}">Home</a>
-                <a href="{{url('/donor/news')}}"></i> News</a>
-                <a href="{{url('/donor/information')}}"></i> Blood Bank Information</a>
+                <a href="{{url('/donor/home')}}" class="@if(Request::is('donor/home*')) active @endif">Home</a>
+                <a href="{{url('/donor/news')}}" class="@if(Request::is('donor/news*')) active @endif">News</a>
+                <a href="{{url('/donor/information')}}" class="@if(Request::is('donor/information*')) active @endif">Blood Bank Information</a>
                 <!-- <a href="{{url('/donor/seeker')}}"></i> View Seeker</a> -->
                 <!-- <a href="{{url('/donor/donorregister')}}"></i> Registor</a>
-                <a href="{{url('/donor/history',Auth::user()->id)}}"></i> Rigstration Status</a> -->
-                <div class="dropdown">
-                    <a href="" class="dropbtn"></i> Reservation</a>
+    <a href="{{url('/donor/history',Auth::user()->id)}}"></i> Rigstration Status</a> -->
+                <div class="dropdown @if(Request::is('donor/reservation*')) active @endif">
+                    <a href="" class="dropbtn">Reservation</a>
                     <div class="dropdown-content">
-                        <a href="{{url('/donor/reservationform')}}">Send Reservation</a>
-                        <a href="{{url('/donor/reservationhistory',Auth::user()->id)}}">View Reservation Status</a>
+                        <a href="{{ url('/donor/reservationform') }}">Send Reservation</a>
+                        <a href="{{ url('/donor/reservationhistory', Auth::user()->id) }}">View Reservation Status</a>
                     </div>
                 </div>
-                <a href="{{url('/donor/asks')}}"></i>Chatbot</a>
-                <a href="{{url('/donor/refer',Auth::user()->id)}}"></i> Refere Others</a>
+
+                <a href="{{url('/donor/asks')}}" class="@if(Request::is('donor/asks*')) active @endif">Chatbot</a>
+                <a href="{{url('/donor/refer',Auth::user()->id)}}" class="@if(Request::is('donor/refer*')) active @endif">Refere Others</a>
                 <!-- <a href=""></i> Reservation Status</a> -->
                 <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                             document.getElementById('logout-form').submit();" class="@if(Request::is('logout')) active @endif">
 
                     Logout</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

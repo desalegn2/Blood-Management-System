@@ -34,7 +34,7 @@
         <div class="row mt-5">
             <div class="col-md-12 col-md-offset-1">
                 <h1>Donors Who send reservation</h1>
-              
+
                 <div style="color: white; background-color:#0EA293;">
                     @error('date')
                     <strong>{{ $message }}</strong>
@@ -54,7 +54,7 @@
                         <input type="submit" value="Search" class="btn btn-primary btn-sm float-end">
                     </div>
                 </form>
-                
+
                 <br><br>
                 <table class="table table-bordered table-responsive table-striped">
                     <thead>
@@ -65,7 +65,6 @@
                         <th>Action</th>
                     </thead>
                     <tbody>
-
                         @foreach ($reservations as $donors)
                         <tr>
                             <td>{{$donors->firstname}}</td>
@@ -75,10 +74,9 @@
                             <td>
                                 <a class="btn btn-success" href="{{url('nurse/reservationdetail', $donors->id)}}">View</a>
                                 <a href="{{url('nurse/reservationregister',$donors->id)}}" class="btn btn-primary btn-sm float-end"><i classdonor_id='fa fa-edit'></i> Registor</a>
-                            </td>donor_id
+                            </td>
                         </tr>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>
