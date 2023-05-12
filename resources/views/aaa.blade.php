@@ -1,248 +1,270 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en" dir="ltr">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <title>Donor Home Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Responsive Sidebar with Navigation Links and Icons</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500&display=swap');
 
+
+        .hidden {
+            display: none;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .sidebar {
+        header {
             position: fixed;
+            height: 100px;
+            background-color: rgb(30, 144, 255);
+            position: fixed;
+            width: 100%;
             top: 0;
-            left: -300px;
-            width: 300px;
-            height: 100%;
-            background-color: #333;
-            padding: 20px;
-            transition: all 0.3s ease-in-out;
-            z-index: 999;
-            color: #fff;
+            left: 0;
+            z-index: 9999;
+            /* overflow-y: scroll; */
+
         }
 
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .sidebar-header h3 {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .sidebar .nav-link {
-            color: #fff;
-            padding: 10px 20px;
-            display: block;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .sidebar .nav-link:hover {
-            background-color: #555;
-        }
-
-        .toggle-btn {
-            position: relative;
-
-
-            font-size: 24px;
-            color: #fff;
-            background-color: #333;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            z-index: 999;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .toggle-btn:hover {
-            background-color: #555;
-        }
-
-        .close-btn {
-            font-size: 24px;
-            color: #333;
-            cursor: pointer;
-            border: none;
-            background-color: transparent;
-            outline: none;
-        }
-
-        .nav-links {
-            margin-top: 50px;
-            list-style: none;
-        }
-
-        .nav-links li {
-            padding: 10px 20px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .nav-links li a {
+        .language-switcher {
+            margin-left: auto;
             display: flex;
             align-items: center;
+        }
+
+        .language-switcher label {
+            margin-right: 0.5rem;
+        }
+
+        .language-switcher select {
+            font-size: 1rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            border: none;
+            background-color: #f1f1f1;
             color: #333;
+            cursor: pointer;
+        }
+
+        .menu-toggle-btn {
+            display: none;
+            cursor: pointer;
+        }
+
+        .menu-item {
+            display: inline-block;
+            margin-right: 1rem;
+        }
+
+        .menu-item a {
+
+            padding: 12px 20px;
+            color: white;
+            border-radius: 4px;
+            font-size: 1.2rem;
             text-decoration: none;
-            font-size: 18px;
+            display: inline-block;
+            position: relative;
+            margin-top: 1.5rem;
+            padding: 0.5rem;
+            transition: .3s linear;
         }
 
-        .nav-links li a i {
-            margin-right: 10px;
-        }
-
-        .content {
-            background-color: #f8f9fa;
-            padding: 20px;
-            margin-left: 0;
-            /* initial margin */
-            transition: margin-left 0.3s ease-in-out;
-            /* added transition */
-        }
-
-        .content h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        .open-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            font-size: 24px;
+        .menu-item a:hover {
             color: #fff;
-            background-color: #333;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            z-index: 999;
         }
 
-        @media (min-width: 992px) {
-            .sidebar {
-                left: 0;
+        .menu-item a.active {
+            background-color: #19A7CE;
+            color: #fff;
+        }
+
+        .dropbtn {
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            display: inline-block;
+            position: relative;
+        }
+
+        .dropdown a {
+            text-decoration: none;
+            font-size: 1.2rem;
+
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            z-index: 1;
+            background-color: #f1f1f1;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            border-radius: 0.25rem;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 0.5rem;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu-toggle-btn {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                font-size: 1.5rem;
             }
 
-            .content {
-                margin-left: 300px;
+            .navigation-menu {
+                /* display: none;
+                position: absolute;
+                top: 4rem;
+                left: 0;
+                width: 100%;
+                background: #172b4d;
+                padding: 1rem; */
+
+                position: fixed;
+                width: 100%;
+                max-width: 400px;
+                background: #172b4d;
+                top: 90px;
+                right: 0;
+                display: none;
+                padding: 20px 40px;
+                box-sizing: border-box;
+                z-index: 99;
+            }
+
+            .navigation-menu.active {
+                display: block;
+            }
+
+            .menu-item {
+                display: block;
+                margin: 1rem 0;
+            }
+
+            .menu-item a {
+                display: block;
+                padding: 0.5rem 0;
+                margin: 0;
+            }
+
+            .dropdown-content {
+                position: static;
+                display: block;
+                box-shadow: none;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Navigation Sidebar -->
-    <div class="sidebar">
 
-        <div class="sidebar-header">
-            <button class="toggle-btn open-btn">
-                <i class="fas fa-bars"></i>
-            </button>
+    <div>
+        <div>
+            <header>
+                <i class="menu-toggle-btn fas fa-bars" style="margin-right: 2rem;"></i>
+                <nav class="navigation-menu" style="margin: auto;">
 
+                    <div class="menu-item">
+                        <a href="">
+                            <span class="en">Home</span>
+                            <span class="am hidden">መነሻ</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="about">
+                            <span class="en">About</span>
+                            <span class="am hidden">ስለኛ</span>
+                        </a>
+                    </div>
+                
+                    <div class="menu-item">
+                        <a href="{{ route('login') }}">
+                            <span class="en">Login</span>
+                            <span class="am hidden">ይግቡ</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="create_account">
+                            <span class="en">Create Account</span>
+                            <span class="am hidden">አዲስ አካዉንት ይክፈቱ</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <div class="language-switcher">
+                            <label for="lang-toggle">Language:</label>
+                            <select id="lang-toggle">
+                                <option value="en">English</option>
+                                <option value="am">አማርኛ</option>
+                            </select>
+                        </div>
+                    </div>
+                </nav>
+
+            </header>
         </div>
-
-        <ul class="nav-links">
-            <li>
-                <a href="#">
-                    <i class="fas fa-home"></i>
-                    Home
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-user"></i>
-                    Profile
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-envelope"></i>
-                    Messages
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-bell"></i>
-                    Notifications
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-cog"></i>
-                    Settings
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-question"></i>
-                    Help
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Logout
-                </a>
-            </li>
-        </ul>
     </div>
-    <!-- Main Content -->
-    <div class="content">
-        <h1>Responsive Sidebar with Navigation Links and Icons</h1>
-        <p>Click on the button to open the navigation sidebar.</p>
-        <!-- <button class="open-btn">Open Sidebar</button> -->
+    <br><br>
+    <img style="width: 100%; height:400px; margin-top:50px;" src="{{asset('assets/imgs/background.jpeg')}}">
+    <div style="background-color: #F1F6F9;">
+        @yield('content')
     </div>
-    <!-- Bootstrap JS and Fontawesome JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/js/all.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Custom JS -->
     <script>
-        // const openBtn = document.querySelector('.open-btn');
-        // const closeBtn = document.querySelector('.close-btn');
-        // const sidebar = document.querySelector('.sidebar');
+        const langToggle = document.getElementById('lang-toggle');
+        const enText = document.querySelectorAll('.en');
+        const amText = document.querySelectorAll('.am');
 
-        // openBtn.addEventListener('click', () => {
-        //     sidebar.style.left = '0';
-        // });
-
-        // closeBtn.addEventListener('click', () => {
-        //     sidebar.style.left = '-300px';
-        // });
-        const toggleBtn = document.querySelector('.toggle-btn');
-        const sidebar = document.querySelector('.sidebar');
-        const mainContent = document.querySelector('.main-content');
-
-        toggleBtn.addEventListener('click', () => {
-            if (sidebar.style.left === '-300px') {
-                sidebar.style.left = '0';
-                toggleBtn.classList.replace('open-btn', 'close-btn');
-                toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
-                mainContent.style.marginLeft = '300px'; /* added line */
-            } else {
-                sidebar.style.left = '-300px';
-                toggleBtn.classList.replace('close-btn', 'open-btn');
-                toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                mainContent.style.marginLeft = '0'; /* added line */
+        langToggle.addEventListener('change', function() {
+            const selectedLang = langToggle.value;
+            if (selectedLang === 'en') {
+                enText.forEach(function(text) {
+                    text.classList.remove('hidden');
+                });
+                amText.forEach(function(text) {
+                    text.classList.add('hidden');
+                });
+            } else if (selectedLang === 'am') {
+                enText.forEach(function(text) {
+                    text.classList.add('hidden');
+                });
+                amText.forEach(function(text) {
+                    text.classList.remove('hidden');
+                });
             }
         });
     </script>
+
+    <script>
+        $(".menu-toggle-btn").click(function() {
+            $(this).toggleClass("fa-times");
+            $(".navigation-menu").toggleClass("active");
+        });
+    </script>
+
+
 </body>
 
 </html>

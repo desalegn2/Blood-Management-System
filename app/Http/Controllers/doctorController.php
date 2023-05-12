@@ -2,9 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Doctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\tansferModel;
+use App\Models\Donor;
+use App\Models\User;
+use App\Models\donationModel;
+use App\Models\hospitalModel;
+use App\Models\bloodStock;
+use \Notification;
+use App\Notifications\sendNotification;
 
 class doctorController extends Controller
 {
@@ -12,11 +21,11 @@ class doctorController extends Controller
     {
         $user = Auth::user();
         $id = $user->id;
-
         $stockInfo = DB::table('distribute')
             ->join('bloodstock', 'distribute.stock_id', '=', 'bloodstock.id')
             ->join('doctors', 'distribute.hospital_id', '=', 'doctors.hospital_id')
             ->where('doctors.doctor_id', $id)
+            ->where('distribute.status', 'available')
             ->selectRaw('
                  SUM(CASE WHEN bloodgroup = "A+" THEN volume ELSE 0 END) AS aplus,
                  SUM(CASE WHEN bloodgroup = "A-" THEN volume ELSE 0 END) AS aminus,
@@ -28,7 +37,7 @@ class doctorController extends Controller
                  SUM(CASE WHEN bloodgroup = "O-" THEN volume ELSE 0 END) AS ominus')
             ->first();
 
-            $distributes = DB::table('distribute')
+        $distributes = DB::table('distribute')
             ->join('bloodstock', 'distribute.stock_id', '=', 'bloodstock.id')
             ->join('hospitals', 'distribute.hospital_id', '=', 'hospitals.hospital_id')
             ->selectRaw('hospitals.hospitalname,
@@ -40,10 +49,11 @@ class doctorController extends Controller
                  SUM(CASE WHEN bloodgroup = "AB-" THEN volume ELSE 0 END) AS abminus,
                  SUM(CASE WHEN bloodgroup = "O+" THEN volume ELSE 0 END) AS oplus,
                  SUM(CASE WHEN bloodgroup = "O-" THEN volume ELSE 0 END) AS ominus')
+            ->where('distribute.status', 'available')
             ->groupBy('hospitals.hospitalname')
             ->get();
-        
-        return view('doctor.home', compact('stockInfo','distributes'));
+
+        return view('doctor.home', compact('stockInfo', 'distributes'));
     }
     function BloodTransfer()
     {
@@ -57,5 +67,58 @@ class doctorController extends Controller
             ->where('doctors.doctor_id', '=', $id)
             ->get();
         return view('doctor.transfer', compact('distributes'));
+    }
+    function Transfusion(Request $req, $id)
+    {
+        $res = bloodStock::find($id);
+        $donorid = $res->donor_id;
+        if ($req->hasfile('photo')) {
+            $file = $req->file('photo');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('uploads/registers', $filename);
+        }
+        $var = new tansferModel;
+        $var->doctor_id = $req->doctor_id;
+        $var->donor_id = $donorid;
+        $var->patientid_number = $req->pid;
+        $var->patient_fname = $req->firstname;
+        $var->patient_lname = $req->lastname;
+        $var->phone = $req->phone;
+        $var->gender = $req->gender;
+        // $var->photo = $req->filename;
+        $var->photo = $req->hasfile('photo') ? $var->filename : '0.png';
+        $var->save();
+        if ($var) {
+            $res = bloodStock::find($id);
+            $donorid = $res->donor_id;
+            $doc = Doctor::where('doctor_id', $req->doctor_id)->get()->first();
+            $hospitalid = $doc->hospital_id;
+            $hospital = hospitalModel::find($hospitalid);
+            $hospitalname = $hospital->hospitalname;
+
+            $donor = Donor::where('donor_id', $donorid)->first();
+            $fname = $donor->firstname;
+            $lname = $donor->lastname;
+            $frequency = donationModel::all()->where('donor_id', '=', $donorid)->count('donor_id');
+
+            $details = [
+                'greeting' => "ውድ ደም ለጋሻችን $fname $lname ደም ለወገንወ ስለለገሱ እናመሰግናለን የለገሱት ደም የሰው ህይወት ታስጏል ",
+                'body' => "ለ $frequency ኛ ጊዜ የለገሱት ደም ለ $req->firstname $req->lastname ተሰጥቷል",
+                'lastline' => "$hospitalname",
+            ];
+            try {
+
+                $message = User::find($donorid);
+                \Notification::send($message, new sendNotification($details));
+
+                return redirect()->back()->with('success', 'Task Added Successfully! and Result are sent to donor');
+            } catch (\Exception $e) {
+                return response()->json([
+                    'message' => 'Something went wrong in bbManagerController.sendnotification',
+                    'error' => $e->getMessage()
+                ], 400);
+            }
+        }
     }
 }

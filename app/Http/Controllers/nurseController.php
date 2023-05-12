@@ -178,7 +178,7 @@ class nurseController extends Controller
     {
         $res = reservationModel::find($id);
         $var = $req->changedate;
-        $res->appointmentdate = $var;
+        $res->reservationdate = $var;
         $res->save();
         return redirect()->back()->with('success', 'Task Added Successfully!');
     }

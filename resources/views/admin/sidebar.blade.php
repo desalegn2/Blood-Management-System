@@ -17,7 +17,7 @@
             --header-height: 3rem;
             --nav-width: 70px;
             --first-color: #4723D9;
-            --red-color: #FF8B13;
+            --red-color: #2F4F4F;
             --first-color-black: #000000;
             --white-color: #F7F6FB;
             --body-font: 'Nunito', sans-serif;
@@ -28,8 +28,14 @@
         *,
         ::before,
         ::after {
-            box-sizing: border-box;
-            text-decoration: none;
+            box-sizing: border-box
+        }
+
+        .nav_list {
+            overflow-y: auto;
+            /* adds vertical scrollbar when needed */
+            max-height: calc(100vh - 220px);
+            /* set the max-height to the viewport height minus some margin */
         }
 
         body {
@@ -57,7 +63,10 @@
             padding: 0 1rem;
             background-color: var(--white-color);
             z-index: var(--z-fixed);
-            transition: .5s
+            transition: .5s;
+            overflow-y: scroll;
+
+
         }
 
         .header_toggle {
@@ -89,7 +98,8 @@
             padding: .5rem 1rem 0 0;
             transition: .5s;
             z-index: var(--z-fixed);
-
+            overflow-y: auto;
+            height: 100%;
         }
 
         .nav {
@@ -107,7 +117,9 @@
             grid-template-columns: max-content max-content;
             align-items: center;
             column-gap: 1rem;
-            padding: .5rem 0 .5rem 1.5rem
+            padding: .5rem 0 .5rem 1.5rem;
+            text-decoration: none;
+
         }
 
         .nav_logo {
@@ -121,19 +133,23 @@
 
         .nav_logo-name {
             color: var(--white-color);
-            font-weight: 700; 
+            font-weight: 700
         }
 
         .nav_link {
             position: relative;
             color: var(--white-color);
             margin-bottom: 1.5rem;
-            transition: .3s
+            transition: .3s;
         }
 
         .nav_link:hover {
-            color: var(--first-color-black);
-            text-decoration: none;
+            color: var(--first-color-black)
+        }
+
+        .nav_link.active {
+            background-color: #fff;
+            color: black;
         }
 
         .nav_icon {
@@ -146,19 +162,6 @@
 
         .body-pd {
             padding-left: calc(var(--nav-width) + 1rem)
-        }
-
-        .active {
-            color: var(--white-color)
-        }
-
-        .active::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            width: 2px;
-            height: 32px;
-            background-color: var(--white-color)
         }
 
         .height-100 {
@@ -199,7 +202,6 @@
             }
         }
     </style>
-
 </head>
 
 <body>
@@ -213,10 +215,10 @@
             <nav class="nav">
                 <div> <a href="{{url('/admin/profile',Auth::user()->id)}}" class="nav_logo"> <box-icon type='solid' name='layer'></box-icon><span class="nav_logo-name">Profile</span> </a>
                     <div class="nav_list">
-                        <a href="{{url('/admin/home')}}" class="nav_link active"><span class="bx nav_icon"><box-icon type='solid' name='home'></box-icon></span><span class="bx nav_name">Dashboard</span> </a>
-                    
-                        <a href="{{url('/admin/add')}}" class="nav_link"> <span class="bx nav_icon"><box-icon type='solid' name='user-plus'></box-icon></span><span class="bx nav_name">Add User</span> </a>
-                        <a href="{{url('/admin/alluser')}}" class="nav_link"> <span class="bx nav_icon"><box-icon type='solid' name='user-account'></box-icon></span><span class="bx nav_name">Manage user</span> </a>
+                        <a href="{{url('/admin/home')}}" class="nav_link{{ Request::is('admin/home') ? ' active' : '' }}"><span class="bx nav_icon"><box-icon type='solid' name='home'></box-icon></span><span class="bx nav_name">Dashboard</span> </a>
+
+                        <a href="{{url('/admin/add')}}" class="nav_link{{ Request::is('admin/add') ? ' active' : '' }}"> <span class="bx nav_icon"><box-icon type='solid' name='user-plus'></box-icon></span><span class="bx nav_name">Add User</span> </a>
+                        <a href="{{url('/admin/alluser')}}" class="nav_link{{ Request::is('admin/alluser') ? ' active' : '' }}"> <span class="bx nav_icon"><box-icon type='solid' name='user-account'></box-icon></span><span class="bx nav_name">Manage user</span> </a>
 
                     </div>
                 </div> <a href="{{ route('logout') }}" onclick="event.preventDefault();

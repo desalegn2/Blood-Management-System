@@ -19,9 +19,14 @@
 
 <body>
 
-    <div id="page-wrap">
+    <div id="page-wrap" style="margin-top: 50px;">
 
         <h1>Transfer</h1>
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
         <table class="table table-bordered table-responsive table-striped">
             <thead>
                 <tr>
@@ -37,7 +42,10 @@
                     <td>{{$dist->bloodgroup}}</td>
                     <td>{{$dist->rh}}</td>
                     <td>{{$dist->volume}}</td>
-                    <td>a</td>
+                    <td>
+                        <a href="#transfer{{$dist->id}}" data-bs-toggle="modal" class="btn btn-info">Transfer</a>
+                        @include('doctor.transferModal')
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

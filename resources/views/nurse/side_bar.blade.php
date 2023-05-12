@@ -133,6 +133,10 @@
         .nav_link:hover {
             color: var(--first-color-black)
         }
+        .nav_link.active {
+            background-color: #fff;
+            color: black;
+        }
 
         .nav_icon {
             font-size: 1.25rem
@@ -146,18 +150,7 @@
             padding-left: calc(var(--nav-width) + 1rem)
         }
 
-        .active {
-            color: var(--white-color)
-        }
-
-        .active::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            width: 2px;
-            height: 32px;
-            background-color: var(--white-color)
-        }
+     
 
         .height-100 {
             height: 100vh
@@ -211,13 +204,12 @@
             <nav class="nav">
                 <div> <a href="{{url('/nurse/profile',Auth::user()->id)}}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Profile</span> </a>
                     <div class="nav_list">
-                        <a href="{{url('/nurse/home')}}" class="nav_link active"><span class="bx nav_icon"><i class='bx bx-home'></i></span><span class="bx nav_name">Dashboard</span> </a>
-                        <a href="{{url('/nurse/reservation')}}" class="nav_link"> <span class="bx nav_icon"><i class='bx bx-calendar'></i></span><span class="bx nav_name">Reservation</span> </a>
-                        <a href="{{url('/nurse/advertise')}}" class="nav_link"> <span class="bx nav_icon"><i class='bx bx-microphone'></i></span><span class="bx nav_name">Add Advertise</span> </a>
-                        <a href="{{url('/nurse/notify')}}" class="nav_link"> <span class="bx nav_icon"><i class='bx bx-bell'></i></span><span class="bx nav_name">Notify</span> </a>
-                        <a href="{{url('/nurse/enroll')}}" class="nav_link"> <span class="bx nav_icon"><i class='bx bx-user-plus'></i></span><span class="bx nav_name">Enroll Donor</span> </a>
-                        <a href="{{url('/nurse/display')}}" class="nav_link"> <span class="bx nav_icon"><i class='bx bx-show'></i></span><span class="bx nav_name">Manage Donor</span> </a>
-
+                        <a href="{{url('/nurse/home')}}" class="nav_link{{ Request::is('nurse/home') ? ' active' : '' }}"><span class="bx nav_icon"><i class='bx bx-home'></i></span><span class="bx nav_name">Dashboard</span> </a>
+                        <a href="{{url('/nurse/reservation')}}" class="nav_link{{ Request::is('nurse/reservation') ? ' active' : '' }}"> <span class="bx nav_icon"><i class='bx bx-calendar'></i></span><span class="bx nav_name">Reservation</span> </a>
+                        <a href="{{url('/nurse/advertise')}}" class="nav_link{{ Request::is('nurse/advertise') ? ' active' : '' }}"> <span class="bx nav_icon"><i class='bx bx-microphone'></i></span><span class="bx nav_name">Add Advertise</span> </a>
+                        <a href="{{url('/nurse/notify')}}" class="nav_link{{ Request::is('nurse/notify') ? ' active' : '' }}"> <span class="bx nav_icon"><i class='bx bx-bell'></i></span><span class="bx nav_name">Notify</span> </a>
+                        <a href="{{url('/nurse/enroll')}}" class="nav_link{{ Request::is('nurse/enroll') ? ' active' : '' }}"> <span class="bx nav_icon"><i class='bx bx-user-plus'></i></span><span class="bx nav_name">Enroll Donor</span> </a>
+                        <a href="{{url('/nurse/display')}}" class="nav_link{{ Request::is('nurse/display') ? ' active' : '' }}"> <span class="bx nav_icon"><i class='bx bx-show'></i></span><span class="bx nav_name">Manage Donor</span> </a>
                     </div>
                 </div> <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" class="nav_link">

@@ -346,4 +346,10 @@ class donorController extends Controller
         $var->save();
         return view('donor.feedback');
     }
+
+    public function landingPage()
+    {
+        $data = bbinformatiomModel::where('type', 'service')->get();
+        return view('HomePage', ['data' => $data]);
+    }
 }

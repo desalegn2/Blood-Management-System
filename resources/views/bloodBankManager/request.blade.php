@@ -15,6 +15,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
+        
         .blood-request-table {
             border-collapse: collapse;
             width: 100%;
@@ -43,7 +44,7 @@
         <table class="blood-request-table">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th> Request ID</th>
                     <th>Hospital Name</th>
                     <th>Status</th>
                     <th>Approved By</th>
@@ -71,7 +72,13 @@
                         {{ $item->quantity }}<br>
                         @endforeach
                     </td>
-                    <td> <a data-bs-toggle="modal" class="btn btn-info">view</a></td>
+                    <td>
+                        <!-- <a data-bs-toggle="modal" class="btn btn-info">view</a> -->
+                        <a href="#approve{{$request->id}}" data-bs-toggle="modal" class="btn btn-info"> Approve</a>
+                        @include('bloodBankManager.requestModal')
+                    </td>
+
+
                 </tr>
                 @endforeach
             </tbody>

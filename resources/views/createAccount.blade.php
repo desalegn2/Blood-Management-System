@@ -11,7 +11,7 @@
     <style>
         header {
             height: 90px;
-            background: #FF7B54;
+            background: #245953;
             position: fixed;
             width: 100%;
             top: 0;
@@ -294,6 +294,51 @@
                 width: calc(60% + 16px);
             }
         }
+
+        /* card style */
+        .card-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            margin-top: 10px;
+        }
+
+        .card-title {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card-column {
+            flex: 1;
+            max-width: 300px;
+            margin: 10px;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .card-heading {
+            margin-top: 0;
+        }
+
+        .card-content {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 767px) {
+            .card-row {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
     </style>
 </head>
 
@@ -316,11 +361,38 @@
     </div>
     <br><br>
 
+    <div class="card-container" style="margin-top: 70px;">
+        <h2 class="card-title">Bahir Dar Blood Bank</h2>
+        <div class="card-row">
+            <div class="card-column">
+                <div class="card">
+                    <h3 class="card-headheadinging"> <!--Join Our Blood Bank Community and Help Save Lives --> የእኛን የደም ባንክ ይቀላቀሉ ህይወትን ለማዳን ያግዙ</h3>
+                    <p class="card-content" style="font-size: large;">
+                    የደም ባንክ ማህበረሰባችን አባል በመሆን፣ ህይወትን ለማዳን የሚተጉ ለጋሾች ቡድን አባል ይሆናሉ። የእርስዎ ልገሳ ለተቸገሩ ታካሚዎች ወሳኝ ለውጥ ያመጣል፣ ዛሬ ይቀላቀሉን እና ለተቸገረ ሰው ይድረሱ ።<br>
+                    አባሎቻችንን እናከብራለን እናም ህይወትን ለማዳን ላደረጉት ቁርጠኝነት ያለንን አድናቆት ማሳየት እንፈልጋለን
+                    </p>
+                </div>
+            </div>
+            <div class="card-column">
+                <div class="card">
+                    <h3 class="card-heading">አባል ይሁኑ  ልዩ ልዩ ጥቅማጥቅሞችን ያግኛሉ</h3>
+                    <p class="card-content" style="font-size: large;">
+                        <!-- "Join our blood bank community today and help save lives! By creating an account, you'll have access to our life-saving blood donation program, where you can easily schedule appointments, track your donations, and receive alerts when your blood type is needed. Plus, as a member, you'll receive exclusive perks like priority donation appointments, special promotions, and more. Sign up now and start making a difference in your community!" -->
+                        "አካውንት በመፍጠር ህይወት አድን የደም ልገሳ ፕሮግራማችንን በቀላሉ ቀጠሮ መያዝ፣ መዋጮዎትን መከታተል እና የደም አይነትዎ ሲከሰት ማንቂያዎችን ማግኘት ይችላሉ። ያስፈልጋል። በተጨማሪም፣ አባል እንደመሆኖ፣ እንደ የቅድሚያ የልገሳ ቀጠሮዎች፣ ልዩ ማስተዋወቂያዎች እና ሌሎች የመሳሰሉ ልዩ ጥቅማጥቅሞችን ያገኛሉ። አሁኑኑ ይመዝገቡ እና በማህበረሰብዎ ላይ ለውጥ ማምጣት ይጀምሩ!"
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
     <div class="main-block mt-6 ml-5" style="margin-top: 50px;">
+
 
         <form action="create_acc" method="post" enctype=" multipart/form-data">
             @csrf
-            <h1>Blood Donor Enrollment Form</h1>
+            <h1>Create Account</h1>
 
             <fieldset>
                 @if(session('success'))

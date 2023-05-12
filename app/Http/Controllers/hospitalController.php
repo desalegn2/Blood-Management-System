@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Notification;
 use App\Models\hospitalPosts;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Models\bloodStock;
 use App\Models\Doctor;
 use App\Models\BloodRequestItem;
@@ -89,11 +91,12 @@ class hospitalController extends Controller
     public function viewHistory($id)
     {
         $isExist = BloodRequest::select("*")
-            ->where("user_id", $id)
+            ->where("hospital_id", $id)
             ->exists();
 
         if ($isExist) {
-            $data = BloodRequest::where('user_id', "=", $id)->orderBy('created_at', 'desc')->get();
+            $data = BloodRequest::with('hospital', 'bloodRequestItems')->where('hospital_id', "=", $id)->get();
+            //$data = BloodRequest::where('hospital_id', "=", $id)->orderBy('created_at', 'desc')->get();
             //$data = hospitalRequestModel::where('user_id', 'LIKE', '%' . $id . '%')->get();
             return view('healthinstitute.viewRequest', compact('data'));
         } else {
@@ -101,26 +104,21 @@ class hospitalController extends Controller
             return redirect('healthinstitute/home')->with('warning', 'No Request');
         }
     }
+    public function Accept($id)
+    {
+        $res = BloodRequest::find($id);
+        $res->accepted = true;
+        $res->save();
+        return redirect()->back();
+    }
+
+
 
     function findDonor(Request $req)
     {
         $data = addBloodModel::all();
         return view('healthinstitute.findDonor', ['data' => $data]);
     }
-
-    function viewHospitalRequest(Request $req)
-    {
-        $views = hospitalRequestModel::all()->where('readat', '=', 'unread');
-        return view('admin.hospitalRequest', ['views' => $views]);
-    }
-
-
-    public function show($id)
-    {
-        $user = hospitalRequestModel::find($id);
-        return response()->json($user);
-    }
-
 
     function postSeeker(Request $req)
     {
@@ -179,7 +177,7 @@ class hospitalController extends Controller
         }
     }
 
-  
+
     public function search(Request $request)
     {
         $blood = $request->bloodtype;
@@ -197,7 +195,25 @@ class hospitalController extends Controller
         $bminus = bloodStock::where('bloodgroup', 'B-')->where('status', '=', 'accept')->sum('volume');
         $abplus = bloodStock::where('bloodgroup', 'AB+')->where('status', '=', 'accept')->sum('volume');
         $abminus = bloodStock::where('bloodgroup', 'AB-')->where('status', '=', 'accept')->sum('volume');
-        return view('healthinstitute.healthinstituteHome', compact('aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
+
+        $user = Auth::user();
+        $id = $user->id;
+
+        $stockInfo = DB::table('distribute')
+            ->join('bloodstock', 'distribute.stock_id', '=', 'bloodstock.id')
+            ->join('hospitals', 'distribute.hospital_id', '=', 'hospitals.hospital_id')
+            ->where('hospitals.hospital_id', $id)
+            ->selectRaw('
+                 SUM(CASE WHEN bloodgroup = "A+" THEN volume ELSE 0 END) AS aplus,
+                 SUM(CASE WHEN bloodgroup = "A-" THEN volume ELSE 0 END) AS aminus,
+                 SUM(CASE WHEN bloodgroup = "B+" THEN volume ELSE 0 END) AS bplus,
+                 SUM(CASE WHEN bloodgroup = "B-" THEN volume ELSE 0 END) AS bminus,
+                 SUM(CASE WHEN bloodgroup = "AB+" THEN volume ELSE 0 END) AS abplus,
+                 SUM(CASE WHEN bloodgroup = "AB-" THEN volume ELSE 0 END) AS abminus,
+                 SUM(CASE WHEN bloodgroup = "O+" THEN volume ELSE 0 END) AS oplus,
+                 SUM(CASE WHEN bloodgroup = "O-" THEN volume ELSE 0 END) AS ominus')
+            ->first();
+        return view('healthinstitute.healthinstituteHome', compact('stockInfo', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
 
     function deletepost($id)

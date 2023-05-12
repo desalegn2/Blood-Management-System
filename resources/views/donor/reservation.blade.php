@@ -1,4 +1,4 @@
-@extends('donor.navbar')
+@extends('donor.nav2')
 @section('content')
 
 <!DOCTYPE html>
@@ -55,8 +55,8 @@
         }
 
         #alert-danger {
-            color: white;
-            background-color: #245953;
+            color: red;
+            background-color: #F6F1F1;
             border-color: #000000;
             padding: .75rem 1.25rem;
             margin-bottom: 1rem;

@@ -148,8 +148,8 @@
             padding-left: calc(var(--nav-width) + 1rem)
         }
         .nav_link.active {
-        background-color: black;
-        color: #fff;
+        background-color: #fff;
+        color: black;
     }
 
         .height-100 {

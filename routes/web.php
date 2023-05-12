@@ -14,9 +14,10 @@ use App\Http\Controllers\doctorController;
 use App\Http\Controllers\donorController;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return view('HomePage');
-});
+// Route::get('/', function () {
+//     return view('HomePage');
+// });
+
 Route::match(['get', 'post'], 'botman', [botController::class, 'handle']);
 
 Route::view('create_account', 'createAccount');
@@ -26,7 +27,8 @@ Route::get('create_account_r/{referral_code}', [donorController::class, 'createA
 Route::post('create_account_referred', [donorController::class, 'Account_Reffered']);
 
 Route::view('about', 'aboutus');
-Route::view('aa', 'aaa');
+//Route::view('aa', 'aaa');
+Route::get('/', [donorController::class, 'landingPage']);
 
 Route::get('bb', function () {
     return view('index');
@@ -113,7 +115,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('/nurse/reservation', [nurseController::class, 'manageReservation']);
         Route::get('/nurse/reservationdetail/{id}', [nurseController::class, 'reservationDetail']);
         Route::get('/nurse/findreservation', [nurseController::class, 'findReservation']);
-        
+
         Route::post('/nurse.reservationstatus/{id}', [nurseController::class, 'reservationstatus']);
 
         Route::delete('/nurse/deletereservation/{id}', [nurseController::class, 'deleteRes']);
@@ -168,10 +170,11 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::view('/healthinstitute/seekerRegister', 'healthinstitute.postSeeker');
         Route::view('/healthinstitute/posts', 'healthinstitute.hospitalPost');
         Route::post('/healthinstitute/post_seeker', [hospitalController::class, 'postSeeker']);
-        
+
         Route::view('/healthinstitute/hospitalrequest', 'healthinstitute.bloodRequestform');
         Route::post('/healthinstitute/bloodrequest', [hospitalController::class, 'bloodRequest']);
         Route::get('/healthinstitute/history/{id}', [hospitalController::class, 'viewHistory']);
+        Route::post('/healthinstitute/accept/{id}', [hospitalController::class, 'Accept']);
 
         Route::post('/healthinstitute/search', [hospitalController::class, 'search']);
         Route::get('/healthinstitute/finddonor', [hospitalController::class, 'findDonor']);
@@ -181,8 +184,6 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         Route::view('/healthinstitute/adddoctor', 'healthinstitute.addDoctor');
         Route::post('/healthinstitute/add_doctor', [hospitalController::class, 'addDoctors']);
-
-        
     });
 
     Route::middleware(['auth', 'user-role:bbmanager'])->group(function () {
@@ -212,7 +213,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::post('/bbmanager/sendresult/{id}', [bbManagerController::class, 'sendResult']);
         Route::get('/bbmanager/bloodjorny', [bbManagerController::class, 'bloodJorny']);
         Route::post('/bbmanager/sendbloodjorny/{id}', [bbManagerController::class, 'sendBloodJorny']);
-        
+
 
         Route::view('/bbmanager/bbinfo', 'bloodBankManager.addInformation');
 
@@ -222,22 +223,24 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         Route::get('/bbmanager/request', [bbManagerController::class, 'requests']);
         Route::delete('/bbmanager/deleterequest/{id}', [bbManagerController::class, 'deleteRequest']);
+        Route::post('/bbmanager/approverequest/{id}', [bbManagerController::class, 'Approve']);
 
         Route::get('/bbmanager/bloods', [bbManagerController::class, 'Bloods']);
         Route::post('/bbmanager/distribute/{id}', [bbManagerController::class, 'Distribute']);
 
-        Route::get('/bbmanager/read/{id}', [bbManagerController::class, 'Read']);
-        Route::get('/bbmanager/approve/{id}', [bbManagerController::class, 'Approve']);
-        Route::get('/bbmanager/disapprove/{id}', [bbManagerController::class, 'DisApprove']);
+        // Route::get('/bbmanager/read/{id}', [bbManagerController::class, 'Read']);
+        //  Route::get('/bbmanager/approve/{id}', [bbManagerController::class, 'Approve']);
+        //  Route::get('/bbmanager/disapprove/{id}', [bbManagerController::class, 'DisApprove']);
 
         Route::get('/bbmanager/referral', [bbManagerController::class, 'Referral']);
     });
- 
+
     Route::middleware(['auth', 'user-role:doctor'])->group(function () {
 
         Route::get('/doctor/home', [HomeController::class, 'doctorHome'])->name('doctor.home');
         Route::get('/doctor/home', [doctorController::class, 'viewblood'])->name('doctor.home');
 
         Route::get('/doctor/transfer', [doctorController::class, 'BloodTransfer']);
+        Route::post('/doctor/transfusion/{id}', [doctorController::class, 'Transfusion']);
     });
 });//prevent back middllewire

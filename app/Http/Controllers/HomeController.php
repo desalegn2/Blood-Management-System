@@ -7,7 +7,7 @@ use App\Models\User;
 use Notification;
 use App\Notifications\sendNotification;
 
-
+use App\Models\bbinformatiomModel;
 class HomeController extends Controller
 {
     /**
@@ -62,7 +62,7 @@ class HomeController extends Controller
     {
         return view('encoder.encoderHome');
     }
-    
+
     public function doctorHome()
     {
         return view('doctor.home');

@@ -10,7 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <style>
-
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500&display=swap');
 
 
@@ -191,7 +190,7 @@
                     <div class="menu-item">
                         <a href="{{url('/donor/profile',Auth::user()->id)}}" class="profile @if(Request::is('donor/profile*')) active @endif">
                             <span class="en">Profile</span>
-                            <span class="am hidden">መገለጫ</span>
+                            <span class="am hidden">የግል ማህደር</span>
                         </a>
                     </div>
                     <div class="menu-item">
@@ -245,7 +244,7 @@
                         <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();" class="@if(Request::is('logout')) active @endif">
                             <span class="en">Logout</span>
-                            <span class="am hidden">ውጣ</span>
+                            <span class="am hidden">መዉጣት</span>
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
@@ -269,13 +268,45 @@
     <div style="background-color: #F1F6F9;">
         @yield('content')
     </div>
+
+    @include('donor.footer')
+
+    </style>
+
     <script>
         const langToggle = document.getElementById('lang-toggle');
         const enText = document.querySelectorAll('.en');
         const amText = document.querySelectorAll('.am');
 
+        // Retrieve the language from cookies or local storage
+        let selectedLang = localStorage.getItem('selectedLang') || 'en';
+        langToggle.value = selectedLang;
+
+        // Update the display properties of the English and Amharic text
+        if (selectedLang === 'en') {
+            enText.forEach(function(text) {
+                text.classList.remove('hidden');
+            });
+            amText.forEach(function(text) {
+                text.classList.add('hidden');
+            });
+        } else if (selectedLang === 'am') {
+            enText.forEach(function(text) {
+                text.classList.add('hidden');
+            });
+            amText.forEach(function(text) {
+                text.classList.remove('hidden');
+            });
+        }
+
+        // Add an event listener to the language toggle select element
         langToggle.addEventListener('change', function() {
-            const selectedLang = langToggle.value;
+            selectedLang = langToggle.value;
+
+            // Store the selected language in cookies or local storage
+            localStorage.setItem('selectedLang', selectedLang);
+
+            // Update the display properties of the English and Amharic text based on the selected language
             if (selectedLang === 'en') {
                 enText.forEach(function(text) {
                     text.classList.remove('hidden');
@@ -293,7 +324,6 @@
             }
         });
     </script>
-
     <script>
         $(".menu-toggle-btn").click(function() {
             $(this).toggleClass("fa-times");

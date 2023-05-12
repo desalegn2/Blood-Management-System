@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class staffModel extends Model
+class tansferModel extends Model
 {
     use HasFactory;
-    public $table = "staffs";
-    protected $primaryKey = 'staff_id';
-    public $incrementing = false;
+    public $table = "transfusion";
     protected $fillable = [
-        'staff_id',
-        'firstname',
-        'lastname',
+        'doctor_id',
+        'donor_id',
+        'patientid_number',
+        'patient_fname',
+        'patient_lname',
         'gender',
         'phone',
-        'photo',
+        'photo'
     ];
 }

@@ -1,4 +1,4 @@
-@extends('donor.navbar')
+@extends('donor.nav2')
 @section('content')
 
 <!doctype html>

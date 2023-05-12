@@ -12,8 +12,9 @@ use App\Models\bloodTest;
 use App\Models\bloodStock;
 use App\Models\Donor;
 use \Notification;
-use Illuminate\Notifications\Messages\MailMessage;
 use App\Notifications\sendNotification;
+use Illuminate\Notifications\Messages\MailMessage;
+
 
 class techController extends Controller
 {
@@ -97,6 +98,7 @@ class techController extends Controller
             Donor::where("donor_id", $request->donor_id)
                 ->update(["bloodtype" => $request->bloodgroup]);
         }
+
         if ($var) {
             $donor = Donor::where('donor_id', $request->donor_id)->first();
             $fname = $donor->firstname;
@@ -152,14 +154,15 @@ class techController extends Controller
         $notification = bloodStock::where('created_at', '<=', $date)->where('status', '=', 'accept')->count();
         //   $notification = bloodStock::where('created_at', '<=', $date && 'status' ,'=','accept')->count();
 
-        $aplus = bloodStock::where('bloodgroup', 'A+')->sum('volume');
-        $aminus = bloodStock::where('bloodgroup', 'A-')->sum('volume');
-        $oplus = bloodStock::where('bloodgroup', 'O+')->sum('volume');
-        $ominus = bloodStock::where('bloodgroup', 'O-')->sum('volume');
-        $bplus = bloodStock::where('bloodgroup', 'B+')->sum('volume');
-        $bminus = bloodStock::where('bloodgroup', 'B-')->sum('volume');
-        $abplus = bloodStock::where('bloodgroup', 'AB+')->sum('volume');
-        $abminus = bloodStock::where('bloodgroup', 'AB-')->sum('volume');
+        $aplus = bloodStock::where('bloodgroup', 'A+')->where('status', '=', 'accept')->sum('volume');
+        $aminus = bloodStock::where('bloodgroup', 'A-')->where('status', '=', 'accept')->sum('volume');
+        $oplus = bloodStock::where('bloodgroup', 'O+')->where('status', '=', 'accept')->sum('volume');
+        $ominus = bloodStock::where('bloodgroup', 'O-')->where('status', '=', 'accept')->sum('volume');
+        $bplus = bloodStock::where('bloodgroup', 'B+')->where('status', '=', 'accept')->sum('volume');
+        $bminus = bloodStock::where('bloodgroup', 'B-')->where('status', '=', 'accept')->sum('volume');
+        $abplus = bloodStock::where('bloodgroup', 'AB+')->where('status', '=', 'accept')->sum('volume');
+        $abminus = bloodStock::where('bloodgroup', 'AB-')->where('status', '=', 'accept')->sum('volume');
+
         return view('technitian.technitanHome', compact('bloods', 'notification', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
     function handling()

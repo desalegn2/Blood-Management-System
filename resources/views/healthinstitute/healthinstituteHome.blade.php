@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-0r1NlKDCGIn2N+axvA8ygN1zbd0U5if6PfKj77FSCZwEa00P4D89j4f4Ux4HbFZB1Y9Y22VZp3qZ3OwUXvvLAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
+        
         /* =========== Google Fonts ============ */
         @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 
@@ -475,7 +476,7 @@
                                         <a href="{{url('nurse/aminusdonor')}}">
                                             <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
                                         </a>
-                                        <h3><strong>{{$aminus}}</strong></h3>
+                                        <h3><strong>{{$stockInfo->aminus}}</strong></h3>
                                         <span><strong>A-</strong></span>
                                     </div>
                                 </div>
@@ -493,7 +494,7 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
-                                        <h3><strong>{{$aplus}}</strong></h3>
+                                        <h3><strong>{{$stockInfo->aplus}}</strong></h3>
                                         <span><strong>A+</strong></span>
                                     </div>
                                 </div>
@@ -511,7 +512,7 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
-                                        <h3><strong>{{$bminus}}</strong></h3>
+                                        <h3><strong>{{$stockInfo->bminus}}</strong></h3>
                                         <span><strong>B-</strong></span>
                                     </div>
                                 </div>
@@ -529,7 +530,7 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
-                                        <h3><strong>{{$bplus}}</strong></h3>
+                                        <h3><strong>{{$stockInfo->bplus}}</strong></h3>
                                         <span><strong>B+</strong></span>
                                     </div>
                                 </div>
@@ -548,7 +549,7 @@
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
                                         <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
-                                        <h3><strong>{{$abminus}}</strong></h3>
+                                        <h3><strong>{{$stockInfo->abminus}}</strong></h3>
                                         <span><strong>AB-</strong></span>
                                     </div>
                                     <div class="align-self-center">
@@ -566,7 +567,7 @@
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
                                         <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
-                                        <h3><strong>{{$abplus}}</strong></h3>
+                                        <h3><strong>{{$stockInfo->abplus}}</strong></h3>
                                         <span><strong>AB+</strong></span>
                                     </div>
                                     <div class="align-self-center">
@@ -585,7 +586,7 @@
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
                                         <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F55050;"></ion-icon>
-                                        <h3><strong>{{$ominus}}</strong></h3>
+                                        <h3><strong>{{$stockInfo->ominus}}</strong></h3>
                                         <span><strong>O-</strong></span>
                                     </div>
                                     <div class="align-self-center">
@@ -603,7 +604,7 @@
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
                                         <ion-icon name="water-outline" style="float: left; font-size: 80px; color: #F94A29;"></ion-icon>
-                                        <h3><strong>{{$oplus}}</strong></h3>
+                                        <h3><strong>{{$stockInfo->oplus}}</strong></h3>
                                         <span><strong>O+</strong></span>
                                     </div>
                                     <div class="align-self-center">

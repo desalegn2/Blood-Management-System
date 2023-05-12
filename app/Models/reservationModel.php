@@ -10,7 +10,6 @@ class reservationModel extends Model
     use HasFactory;
     
     public $table = "reservation";
-
     protected $fillable = [
         'user_id',
         'firstname',

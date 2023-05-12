@@ -10,6 +10,7 @@ use PDF;
 use App\Models\distributeBloodModel;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use \Notification;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Notifications\sendNotification;
@@ -22,6 +23,7 @@ use App\Models\bloodStock;
 use App\Models\Donor;
 use App\Models\hospitalModel;
 use App\Models\BloodRequest;
+use App\Models\staffModel;
 
 class bbManagerController extends Controller
 {
@@ -75,10 +77,29 @@ class bbManagerController extends Controller
 
     function requests()
     {
-       
+
         $bloodRequests = BloodRequest::with('hospital', 'bloodRequestItems')->get();
 
         return view('bloodBankManager.request', ['bloodRequests' => $bloodRequests]);
+    }
+
+
+    function Approve(Request $req, $id)
+    {
+        $data = BloodRequest::find($id);
+
+        $user = Auth::user();
+        $staff_id = $user->id;
+        $approvedby = staffModel::find($staff_id);
+
+        $name = $approvedby->firstname;
+        $status = $req->status;
+
+        $data->status = $status;
+        $data->approved_by=$name;
+
+        $data->save();
+        return redirect()->back();
     }
 
     function deleteRequest($id)
@@ -199,20 +220,6 @@ class bbManagerController extends Controller
         return view('bloodBankManager.availableBlood', compact('hospital', 'data'));
     }
 
-    function Approve($id)
-    {
-        $data = hospitalRequestModel::find($id);
-        $data->status = "Available";
-        $data->save();
-        return redirect()->back();
-    }
-    function DisApprove($id)
-    {
-        $data = hospitalRequestModel::find($id);
-        $data->status = "Not Availabe";
-        $data->save();
-        return redirect()->back();
-    }
 
     function DonorHistory()
     {
@@ -293,8 +300,8 @@ class bbManagerController extends Controller
     function feedbacks()
 
     {
-        $feedback = User::join('feedbacks', 'feedbacks.user_id', '=', 'users.id')
-            ->get(['feedbacks.id', 'feedbacks.created_at', 'feedbacks.feedback', 'users.name', 'users.email', 'users.photo']);
+        $feedback = User::join('feedback', 'feedback.user_id', '=', 'users.id')
+            ->get(['feedback.id', 'feedback.created_at', 'feedback.feedback', 'users.email']);
         $fdbk = feedbackModel::all();
         return view('bloodBankManager.feedback', compact('feedback', 'fdbk'));
     }

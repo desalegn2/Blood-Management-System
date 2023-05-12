@@ -1,4 +1,4 @@
-@extends('donor.navbar')
+@extends('donor.nav2')
 @section('content')
 
 <!DOCTYPE html>
@@ -8,256 +8,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <style>
-        .input-group {
-            margin-right: 5px;
-            background-color: black;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0069d9;
-            border-color: #0062cc;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        input[type=text],
-        select,
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid rgb(70, 68, 68);
-            border-radius: 4px;
-            resize: vertical;
-        }
-
-        input[type=email],
-        select,
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid rgb(70, 68, 68);
-            border-radius: 4px;
-            resize: vertical;
-        }
-
-        label {
-            padding: 12px 12px 12px 0;
-            display: inline-block;
-        }
-
-        input[type=submit] {
-            background-color: rgb(37, 116, 161);
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            float: right;
-        }
-
-        input[type=submit]:hover {
-            background-color: #45a049;
+        .list {
+            font-size: large;
         }
 
         .container {
-            border-radius: 5px;
-            background-color: #f2f2f2;
-            padding: 20px;
-        }
-
-        .col-25 {
-            float: left;
-            width: 25%;
-            margin-top: 6px;
-        }
-
-        .col-75 {
-            float: left;
-            width: 75%;
-            margin-top: 6px;
-        }
-
-        /* Clear floats after the columns */
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-        .copy-cont {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            /* padding: 20px; */
-            background-color: #6D67E4;
-            max-width: 800px;
-            /* margin: 0 auto; */
-        }
-
-        .header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            background-color: #009EFF;
-            padding: 10px;
+            justify-content: space-between;
+            border-top: 1px solid black;
+            /* Add a 2px black border to the top of the container */
+            padding-top: 20px;
+            /* Add some padding to the top of the container to separate the border from the content */
+
         }
 
-        #copy-link {
-            color: white;
-            text-decoration: none;
-            margin-right: 10px;
-        }
-
-        .t {
-            color: #F7F7F7;
-            margin: 0;
+        h1 {
+            flex-basis: 30%;
+            font-size: 24px;
+            margin-right: 20px;
         }
 
         p {
-            margin: 0;
+            flex-basis: 60%;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 0;
         }
 
-        .table-wrapper {
-            overflow-x: auto;
-        }
-
-        table {
-            border: 1px solid #ddd;
-            border-collapse: collapse;
-            width: 100%;
-
-            margin-bottom: 20px;
-        }
-
-        th,
-        td {
-
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        @media only screen and (max-width: 600px) {
-
-            table,
-            thead,
-            tbody,
-            th,
-            td,
-            tr {
-                display: block;
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: flex-start;
             }
 
-            thead tr {
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            }
-
-            tr {
-                border: 1px solid #ddd;
-            }
-
-            td {
-                border: none;
-                border-bottom: 1px solid #ddd;
-                position: relative;
-                padding-left: 50%;
-            }
-
-            td:before {
-                position: absolute;
-                top: 6px;
-                left: 6px;
-                width: 45%;
-                padding-right: 10px;
-                white-space: nowrap;
-                content: attr(data-label);
-                font-weight: bold;
+            h1 {
+                margin-bottom: 10px;
             }
         }
     </style>
+
 </head>
 
 <body>
 
-    <div class="container mt-5">
-        <h2>Referral Program</h2>
-        <div class="copy-cont">
-            <div class="header">
-                <p class="t">Referral Link</p>
-                <a href="{{ url('create_account_r',$referral_code) }}" id="copy-link"><i class="far fa-copy"></i>Copy</a>
+    <div class="containers mt-5">
 
-            </div>
-            <p style="color: white;">This is Your Referrel Link copy it and share to you friend,families and relatives to donate blood </p>
-        </div>
-        <div class="row">
-            <div class="col-25">
-                <label for="fname">Number of Referral You Made</label>
-            </div>
-            <div class="col-75">
-                <label>{{$num_referred}}</label>
-            </div>
+        <div class="container">
+            <h4>Referral Link</h4>
+            <a href="{{ url('create_account_r',$referral_code) }}" id="copy-link"><i class="far fa-copy"></i>Copy</a>
+            <p>This is Your Referrel Link copy it and share to you friend,families and relatives to donate blood </p>
         </div>
 
-        <div class="row">
-            <div class="col-25">
-                <label for="fname">Your Incentives</label>
-            </div>
-            <div class="col-75">
-                <label for="fname">Pending...</label>
-            </div>
+        <div class="container">
+            <h6>Number of Referral You Made</h6>
+            <label>{{$num_referred}}</label>
         </div>
-        <div class="row">
-            <div class="col-25">
-                <label for="fname">list of Referred Donor</label>
-            </div>
-            <div class="col-75">
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>First Name </th>
 
-                                <th>Last Name </th>
-                                <th> phone </th>
+        <div class="container">
+            <h6>list of Referred Donor</h6>
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name </th>
 
-                                <th>Status </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($list_referred as $referral)
-                            <tr>
-                                <td>{{$referral->referredDonor->firstname}}</td>
-                                <td>{{$referral->referredDonor->lastname}}</td>
-                                <td>{{$referral->referredDonor->phone}}</td>
-                                <td>{{$referral->status}}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                        <th>Last Name </th>
+                        <th> phone </th>
 
-            </div>
+                        <th>Status </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($list_referred as $referral)
+                    <tr>
+                        <td>{{$referral->referredDonor->firstname}}</td>
+                        <td>{{$referral->referredDonor->lastname}}</td>
+                        <td>{{$referral->referredDonor->phone}}</td>
+                        <td>{{$referral->status}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 
