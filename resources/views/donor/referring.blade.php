@@ -16,12 +16,15 @@
 
         .container {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            
+             justify-content: space-between;
+            
             border-top: 1px solid black;
             /* Add a 2px black border to the top of the container */
             padding-top: 20px;
             /* Add some padding to the top of the container to separate the border from the content */
+            margin-top: 100px;
+            left: 0;
 
         }
 
@@ -37,6 +40,12 @@
             line-height: 1.5;
             margin-bottom: 0;
         }
+        table tr th{
+
+            width: 100%;
+            left: 0;
+        }
+     
 
         @media (max-width: 768px) {
             .container {
@@ -59,6 +68,7 @@
         <div class="container">
             <h4>Referral Link</h4>
             <a href="{{ url('create_account_r',$referral_code) }}" id="copy-link"><i class="far fa-copy"></i>Copy</a>
+            <br>
             <p>This is Your Referrel Link copy it and share to you friend,families and relatives to donate blood </p>
         </div>
 

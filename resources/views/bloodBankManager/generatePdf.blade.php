@@ -17,6 +17,12 @@
             background-color: black;
             color: white;
         }
+        .container{
+            margin-top: 100px;
+        }
+        #selection{
+            padding: 7px;
+        }
     </style>
 </head>
 
@@ -27,13 +33,13 @@
         <form action="{{url('/bbmanager/report')}}" method="get">
             @csrf
             <div style="float: right;">
-                <select name="reporttype" required>
+                <select name="reporttype" id="selection" required>
                     <option value="">Choose Report Type</option>
                     <option value="collection">Blood Collection Report</option>
                     <option value="distribution">Blood Distribute Report</option>
                     <option value="request">Blood Request Report</option>
                 </select>
-                <input type="submit" value="Search">
+                <input type="submit" value="OK"  class="btn btn-primary btn-block">
             </div>
         </form>
         <div class="row">

@@ -51,6 +51,17 @@
             margin-bottom: 0;
         }
 
+        .footer-bottom {
+            background: #E3E3E3;
+            border-top: 1px solid #DDDDDD;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .footer-bottom p.pull-left {
+            padding-top: 6px;
+        }
+
         @media (max-width: 767px) {
             .card-row {
                 flex-direction: column;
@@ -61,7 +72,7 @@
 </head>
 
 <body>
-    @include('aaa')
+    @include('navbar')
 
     <div class="container">
         <div class="intro">
@@ -72,16 +83,24 @@
             @foreach($data as $service)
             <div class="col-md-6 col-lg-4 item">
                 <div class="box"><img class="" style="width:236px; height:279px" src="{{asset('uploads/registers/'.$service->image)}}"">
-                    <h3 class="name">{{$service->title}}</h3>
+                    <h3 class=" name">{{$service->title}}</h3>
                     <p class="description">
-                   {{ $service->description}}
+                        {{ $service->description}}
                     </p>
                 </div>
             </div>
             @endforeach
         </div>
     </div>
-   
+    <footer>
+        <div class="footer-bottom">
+            <div class="container">
+                <p class="pull-left" style="text-align:center;"> Copyright © Bahir Dar Blood Bank 2023. All right reserved. </p>
+
+            </div>
+        </div>
+
+    </footer>
 </body>
 
 </html>

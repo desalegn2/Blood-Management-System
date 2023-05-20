@@ -5,7 +5,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="myModalLabel">Manage Donor</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+            </div>welcome
             <div class="modal-body">
                 {!! Form::model($members, [ 'method' => 'patch','url' => ['admin/updatedonor', $member->id] ]) !!}
                 <div class="mb-3">

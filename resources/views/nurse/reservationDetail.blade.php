@@ -94,6 +94,11 @@
                         @include('nurse.resendReservation')
                     </div>
                 </div>
+                <div style="color: red;">
+                    @error('changedate')
+                    <strong>{{ $message }}</strong>
+                    @enderror
+                </div>
             </div>
             @endforeach
         </div>

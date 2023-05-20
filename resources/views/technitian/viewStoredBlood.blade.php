@@ -52,7 +52,7 @@
                                 @if($bloods->created_at->diffInDays(\Carbon\Carbon::now()) >15)
                                 Expired
                                 @else
-                                {{$bloods->created_at->diffInDays(\Carbon\Carbon::now()) - 5}} Days left
+                                {{$bloods->created_at->diffInDays(\Carbon\Carbon::now()) - 15}} Days left
                                 @endif
                             </td>
                             <td>

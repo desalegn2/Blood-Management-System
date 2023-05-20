@@ -27,7 +27,7 @@ Route::get('create_account_r/{referral_code}', [donorController::class, 'createA
 Route::post('create_account_referred', [donorController::class, 'Account_Reffered']);
 
 Route::view('about', 'aboutus');
-//Route::view('aa', 'aaa');
+Route::view('aa', 'aaa');
 Route::get('/', [donorController::class, 'landingPage']);
 
 Route::get('bb', function () {
@@ -200,6 +200,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::post('/bbmanager/changepassword', [bbManagerController::class, 'changepassword']);
         //report
         Route::get('/bbmanager/report', [bbManagerController::class, 'ReturnReportpage']);
+        Route::get('/bbmanager/generatereport', [bbManagerController::class, 'view']);
         Route::post('/bbmanager/morethanOneDayCollection', [bbManagerController::class, 'ReportCollection']);
         Route::post('/bbmanager/onedayCollection', [bbManagerController::class, 'oneDayCollection']);
         Route::post('/bbmanager/manydayDistributeReport', [bbManagerController::class, 'manyDayReportDistribute']);
@@ -207,7 +208,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::post('/bbmanager/reportrequest', [bbManagerController::class, 'ReportRequest']);
         Route::post('/bbmanager/onedayRequest', [bbManagerController::class, 'oneDayRequest']);
 
-        Route::get('/bbmanager/generatereport', [bbManagerController::class, 'view']);
+
         Route::get('/bbmanager/donorhistory', [bbManagerController::class, 'DonorHistory']);
         Route::post('/bbmanager/searchdonor', [bbManagerController::class, 'searchDonor']);
         Route::post('/bbmanager/sendresult/{id}', [bbManagerController::class, 'sendResult']);

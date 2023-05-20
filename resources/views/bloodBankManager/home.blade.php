@@ -19,6 +19,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css" integrity="sha512-rO7BTsTmR9YNS+2kszOsZTKBszvgvFK34MnKj+n3x8yDkBOyv4vj4g4n/x6N8WUrGLz4skGrlrs+Fw5w6UxL6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-0r1NlKDCGIn2N+axvA8ygN1zbd0U5if6PfKj77FSCZwEa00P4D89j4f4Ux4HbFZB1Y9Y22VZp3qZ3OwUXvvLAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- chart js library 
+    <script src="{{ asset('js/app.js') }}"></script>
+     <script src="{{ asset('node_modules/chart.js/dist/chart.min.js') }}"></script> -->
 
     <style>
         /* =========== Google Fonts ============ */
@@ -454,8 +457,77 @@
                 </div>
             </div>
         </section>
-      
+
     </div>
+
+
+    <div style="width: 500px">
+        <p>Percentage of blood type</p>
+        <canvas id="myChart"></canvas>
+    </div><script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1"></script>
+
+    <!-- chart js cdn -->
+    <script src="https://unpkg.com/chart.js"></script>
+    <!-- latest version chart  -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var bloodTypes = @json($bloodTypes);
+            var volumes = @json($volumes);
+
+            var data = volumes;
+            var labels = bloodTypes;
+
+            var chart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'red',
+                            'green',
+                            'purple',
+                            'black',
+                            'blue',
+                            'yellow',
+                            'pink',
+                            'brown'
+                        ],
+                        borderColor: [
+                            'brown',
+                            'red',
+                            'green',
+                            'purple',
+                            'black',
+                            'blue',
+                            'yellow',
+                            'pink',
+                        ],
+                        borderWidth: 2
+                    }],
+                    labels: labels
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            align: 'start',
+                            labels: {
+                                font: {
+                                    size: 12,
+                                },
+                                padding: 30 
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

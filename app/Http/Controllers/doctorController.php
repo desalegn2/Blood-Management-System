@@ -14,6 +14,7 @@ use App\Models\hospitalModel;
 use App\Models\bloodStock;
 use \Notification;
 use App\Notifications\sendNotification;
+use App\Models\distributeBloodModel;
 
 class doctorController extends Controller
 {
@@ -65,6 +66,7 @@ class doctorController extends Controller
             ->join('doctors', 'distribute.hospital_id', '=', 'doctors.hospital_id')
             ->select('distribute.hospital_id', 'bloodstock.id', 'bloodstock.bloodgroup', 'bloodstock.volume', 'bloodstock.rh', 'bloodstock.expitariondate')
             ->where('doctors.doctor_id', '=', $id)
+            ->where('distribute.status', 'available')
             ->get();
         return view('doctor.transfer', compact('distributes'));
     }
@@ -89,6 +91,10 @@ class doctorController extends Controller
         // $var->photo = $req->filename;
         $var->photo = $req->hasfile('photo') ? $var->filename : '0.png';
         $var->save();
+        if ($var) {
+            distributeBloodModel::where("stock_id", $id)
+                ->update(["status" => "transfer"]);
+        }
         if ($var) {
             $res = bloodStock::find($id);
             $donorid = $res->donor_id;
@@ -115,7 +121,7 @@ class doctorController extends Controller
                 return redirect()->back()->with('success', 'Task Added Successfully! and Result are sent to donor');
             } catch (\Exception $e) {
                 return response()->json([
-                    'message' => 'Something went wrong in bbManagerController.sendnotification',
+                    'message' => 'Something went wrong in donorController.Transfusion',
                     'error' => $e->getMessage()
                 ], 400);
             }

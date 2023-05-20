@@ -221,7 +221,7 @@
                         <a href="{{url('/bbmanager/bbinfo')}}" class="nav_link{{ Request::is('bbmanager/bbinfo') ? ' active' : '' }}"> <span class="bx bx-info-circle nav_icon"></span><span class="bx nav_name">Add Information</span> </a>
                         <a href="{{url('/bbmanager/bloods')}}" class="nav_link{{ Request::is('bbmanager/bloods') ? ' active' : '' }}"> <span class="bx bx-droplet nav_icon"></span><span class="bx nav_name">Blood Store</span> </a>
                         <a href="{{url('/bbmanager/request')}}" class="nav_link{{ Request::is('bbmanager/request') ? ' active' : '' }}"> <span class="bx bx-message-square-detail nav_icon"></span><span class="bx nav_name">Blood Request</span> </a>
-                        <a href="{{url('/bbmanager/generatereport')}}" class="nav_link{{ Request::is('nurse/generatereport') ? ' active' : '' }}"> <span class="bx bx-bar-chart nav_icon"></span><span class="bx nav_name">Report</span> </a>
+                        <a href="{{url('/bbmanager/generatereport')}}" class="nav_link{{ Request::is('nurse/generatereport') ? ' active' : '' }}"> <span class="bx bx-bar-chart nav_icon"></span><span class="bx nav_name">Analysis</span> </a>
                         <!-- <a href="{{url('/bbmanager/donorhistory')}}" class="nav_link"> <span class="bx bx-user nav_icon"></span><span class="bx nav_name">Donor History</span> </a> -->
                         <a href="{{url('/bbmanager/feedback')}}" class="nav_link{{ Request::is('bbmanager/feedback') ? ' active' : '' }}"> <span class="bx bx-message-square-edit nav_icon"></span><span class="bx nav_name">Feedback</span> </a>
                         <a href="{{url('/bbmanager/addhospital')}}" class="nav_link{{ Request::is('bbmanager/addhospital') ? ' active' : '' }}"> <box-icon name='plus-medical'></box-icon><span class="bx nav_name">Add Hospital</span> </a>
@@ -239,41 +239,13 @@
                 </form>
             </nav>
         </div>
-        <div class="height-100 bg-light">
+        <div class="bg-grey">
             @yield('content')
         </div>
+        <div>
+            @include('bloodBankManager.footer')
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function(event) {
-
-                const showNavbar = (toggleId, navId, bodyId, headerId) => {
-                    const toggle = document.getElementById(toggleId),
-                        nav = document.getElementById(navId),
-                        bodypd = document.getElementById(bodyId),
-                        headerpd = document.getElementById(headerId)
-                    if (toggle && nav && bodypd && headerpd) {
-                        toggle.addEventListener('click', () => {
-                            nav.classList.toggle('show')
-                            toggle.classList.toggle('bx-x')
-                            bodypd.classList.toggle('body-pd')
-                            headerpd.classList.toggle('body-pd')
-                        })
-                    }
-                }
-
-                showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header')
-                const linkColor = document.querySelectorAll('.nav_link')
-
-                function colorLink() {
-                    if (linkColor) {
-                        linkColor.forEach(l => l.classList.remove('active'))
-                        this.classList.add('active')
-                    }
-                }
-                linkColor.forEach(l => l.addEventListener('click', colorLink))
-            });
-        </script>
     </body>
 
 </html>

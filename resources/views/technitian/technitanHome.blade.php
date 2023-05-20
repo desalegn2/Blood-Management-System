@@ -510,7 +510,7 @@
         <div class="recentOrders">
             <div class="cardHeader">
                 <h2>Blood In Blood Stock</h2>
-                <a href="{{url('/nurse/reservation')}}" class="btn">View All</a>
+                <a href="{{url('/technitian/viewstoredblood')}}" class="btn">View All</a>
             </div>
             <table>
                 <thead>

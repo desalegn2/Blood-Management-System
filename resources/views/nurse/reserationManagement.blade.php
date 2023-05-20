@@ -62,6 +62,7 @@
                         <th>Phone</th>
                         <th>Center</th>
                         <th>Status</th>
+                        <th>Reservation Date</th>
                         <th>Action</th>
                     </thead>
                     <tbody>
@@ -71,6 +72,7 @@
                             <td>{{$donors->phone}}</td>
                             <td>{{$donors->center}}</td>
                             <td>{{$donors->status}}</td>
+                            <td>{{$donors->reservationdate}}</td>
                             <td>
                                 <a class="btn btn-success" href="{{url('nurse/reservationdetail', $donors->id)}}">View</a>
                                 <a href="{{url('nurse/reservationregister',$donors->id)}}" class="btn btn-primary btn-sm float-end"><i classdonor_id='fa fa-edit'></i> Registor</a>

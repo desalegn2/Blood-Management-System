@@ -145,11 +145,18 @@ class donorController extends Controller
         $var->role = $req->role;
         $var->save();
         if ($var) {
+            if ($req->hasfile('photo')) {
+                $file = $req->file('photo');
+                $extention = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extention;
+                $file->move('uploads/registers', $filename);
+            }
 
             $donor = new Donor;
             $donor->donor_id = $var->id;
             $donor->firstname = $req->firstname;
             $donor->lastname = $req->lastname;
+            $donor->photo = $req->hasfile('photo') ? $var->filename : '0.png';
             $donor->occupation = $req->occupation;
             $donor->phone = $req->phone;
             $donor->gender = $req->gender;

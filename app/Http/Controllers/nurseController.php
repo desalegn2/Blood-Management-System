@@ -176,8 +176,12 @@ class nurseController extends Controller
     }
     function changeReservation(Request $req, $id)
     {
+        $req->validate([
+            'changedate' => 'required|date_format:Y-m-d|after_or_equal:today'
+        ]);
         $res = reservationModel::find($id);
         $var = $req->changedate;
+
         $res->reservationdate = $var;
         $res->save();
         return redirect()->back()->with('success', 'Task Added Successfully!');

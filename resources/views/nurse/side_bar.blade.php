@@ -209,7 +209,7 @@
                         <a href="{{url('/nurse/advertise')}}" class="nav_link{{ Request::is('nurse/advertise') ? ' active' : '' }}"> <span class="bx nav_icon"><i class='bx bx-microphone'></i></span><span class="bx nav_name">Add Advertise</span> </a>
                         <a href="{{url('/nurse/notify')}}" class="nav_link{{ Request::is('nurse/notify') ? ' active' : '' }}"> <span class="bx nav_icon"><i class='bx bx-bell'></i></span><span class="bx nav_name">Notify</span> </a>
                         <a href="{{url('/nurse/enroll')}}" class="nav_link{{ Request::is('nurse/enroll') ? ' active' : '' }}"> <span class="bx nav_icon"><i class='bx bx-user-plus'></i></span><span class="bx nav_name">Enroll Donor</span> </a>
-                        <a href="{{url('/nurse/display')}}" class="nav_link{{ Request::is('nurse/display') ? ' active' : '' }}"> <span class="bx nav_icon"><i class='bx bx-show'></i></span><span class="bx nav_name">Manage Donor</span> </a>
+                        <!-- <a href="{{url('/nurse/display')}}" class="nav_link{{ Request::is('nurse/display') ? ' active' : '' }}"> <span class="bx nav_icon"><i class='bx bx-show'></i></span><span class="bx nav_name">Manage Donor</span> </a> -->
                     </div>
                 </div> <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" class="nav_link">

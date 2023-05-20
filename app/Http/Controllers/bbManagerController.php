@@ -96,7 +96,7 @@ class bbManagerController extends Controller
         $status = $req->status;
 
         $data->status = $status;
-        $data->approved_by=$name;
+        $data->approved_by = $name;
 
         $data->save();
         return redirect()->back();
@@ -111,8 +111,8 @@ class bbManagerController extends Controller
     }
     function view()
     {
-        $don = enrollementModel::all();
-        return view('bloodBankManager.generatePdf', ['don' => $don]);
+        //$don = enrollementModel::all();
+        return view('bloodBankManager.generatePdf');
     }
     //Report
     function ReturnReportpage(Request $req)
@@ -391,6 +391,7 @@ class bbManagerController extends Controller
         //$date = \Carbon\Carbon::today()->subDays(1);
         //$recentdoner = donorRequestModel::where('created_at', '>=', $date)->get();
 
+
         $aplus = bloodStock::where('bloodgroup', 'A+')->where('status', '=', 'accept')->sum('volume');
         $aminus = bloodStock::where('bloodgroup', 'A-')->where('status', '=', 'accept')->sum('volume');
         $oplus = bloodStock::where('bloodgroup', 'O+')->where('status', '=', 'accept')->sum('volume');
@@ -399,8 +400,11 @@ class bbManagerController extends Controller
         $bminus = bloodStock::where('bloodgroup', 'B-')->where('status', '=', 'accept')->sum('volume');
         $abplus = bloodStock::where('bloodgroup', 'AB+')->where('status', '=', 'accept')->sum('volume');
         $abminus = bloodStock::where('bloodgroup', 'AB-')->where('status', '=', 'accept')->sum('volume');
+        //for pie chart
+        $bloodTypes = ['A+', 'A-', 'O+', 'O-', 'B+', 'B-', 'AB+', 'AB-'];
+        $volumes = [$aplus, $aminus, $oplus, $ominus, $bplus, $bminus, $abplus, $abminus];
 
-        return view('bloodBankManager.home', compact('aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
+        return view('bloodBankManager.home', compact('bloodTypes', 'volumes', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
 
     function Referral()
