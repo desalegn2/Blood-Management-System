@@ -111,8 +111,34 @@ class bbManagerController extends Controller
     }
     function view()
     {
-        //$don = enrollementModel::all();
-        return view('bloodBankManager.generatePdf');
+        $bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB-', 'AB+', 'O-', 'O+'];
+
+        $donorCounts = [
+            Donor::where('bloodtype', 'A+')->count(),
+            Donor::where('bloodtype', 'A-')->count(),
+            Donor::where('bloodtype', 'B+')->count(),
+            Donor::where('bloodtype', 'B-')->count(),
+            Donor::where('bloodtype', 'AB-')->count(),
+            Donor::where('bloodtype', 'AB+')->count(),
+            Donor::where('bloodtype', 'O-')->count(),
+            Donor::where('bloodtype', 'O+')->count()
+        ];
+
+          // Retrieve data from the database
+          $donations = donationModel::all();
+
+          // Format the data for the chart
+        //   $data = [];
+        //   foreach ($donations as $donation) {
+        //       $data[$donation->created_at->format('Y-m-d')] = $donation->amount;
+        //   }
+  
+        //   // Sort the data by date
+        //   ksort($data);
+  
+          // Pass the chart data to the view
+
+        return view('bloodBankManager.generatePdf', compact('bloodTypes', 'donorCounts','donations'));
     }
     //Report
     function ReturnReportpage(Request $req)
@@ -295,7 +321,6 @@ class bbManagerController extends Controller
         $data = addBloodModel::where('fullname', $a)->orWhere('phone', $a)->orWhere('email', $a)->paginate(5);
         return view('bloodBankManager.donorHistory', ['data' => $data]);
     }
-
 
     function feedbacks()
 

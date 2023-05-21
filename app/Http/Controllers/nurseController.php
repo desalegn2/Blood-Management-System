@@ -48,25 +48,27 @@ class nurseController extends Controller
     {
         //$stats = donorRequestModel::all()->orderBy('created_at', 'desc')->take(4);
         $donors_enrolled = Donor::count();
-        $donor = donationModel::count();
+        $male = Donor::where('gender', 'male')->count();
+        $female = Donor::where('gender', 'female')->count();
+        //$donor = donationModel::count();
         //  $donors_enrolled = enrollementModel::distinct()->count('fullname');
 
         //  $a = enrollementModel::where('bloodtype', 'A-')->distinct()->count('fullname');
 
-        $aplus = bloodStock::where('bloodgroup', 'A+')->count();
-        $aminus = bloodStock::where('bloodgroup', 'A-')->count();
-        $bplus = bloodStock::where('bloodgroup', 'B+')->count();
-        $bminus = bloodStock::where('bloodgroup', 'B-')->count();
-        $abminus = bloodStock::where('bloodgroup', 'AB-')->count();
-        $abplus = bloodStock::where('bloodgroup', 'AB+')->count();
-        $ominus = bloodStock::where('bloodgroup', 'O-')->count();
-        $oplus = bloodStock::where('bloodgroup', 'O+')->count();
+        $aplus = Donor::where('bloodtype', 'A+')->count();
+        $aminus = Donor::where('bloodtype', 'A-')->count();
+        $bplus = Donor::where('bloodtype', 'B+')->count();
+        $bminus = Donor::where('bloodtype', 'B-')->count();
+        $abminus = Donor::where('bloodtype', 'AB-')->count();
+        $abplus = Donor::where('bloodtype', 'AB+')->count();
+        $ominus = Donor::where('bloodtype', 'O-')->count();
+        $oplus = Donor::where('bloodtype', 'O+')->count();
 
         $date = \Carbon\Carbon::today()->subDays(1);
         $stats = reservationModel::where('created_at', '>=', $date)->get();
         $display1 = reservationModel::all();
 
-        return view('nurse.nurseHome', compact('display1', 'stats', 'donor', 'donors_enrolled', 'aminus', 'aplus', 'bminus', 'bplus', 'abminus', 'abplus', 'ominus', 'oplus'));
+        return view('nurse.nurseHome', compact('display1','male','female', 'stats', 'donors_enrolled', 'aminus', 'aplus', 'bminus', 'bplus', 'abminus', 'abplus', 'ominus', 'oplus'));
     }
 
     function Profile($id)

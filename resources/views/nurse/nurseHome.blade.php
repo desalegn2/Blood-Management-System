@@ -537,7 +537,7 @@
                                     </div>
                                     <div class="media-body">
 
-                                        <h4>Total Donor Registered At Home</h4>
+                                        <h4>Total Donor Registered</h4>
                                         <span></span>
                                     </div>
                                     <div class="align-self-center">
@@ -558,11 +558,32 @@
                                         <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
                                     </div>
                                     <div class="media-body">
-                                        <h4>Total Enrolled</h4>
-                                        <span>Person who Give Blood</span>
+                                        <h4>Total Male</h4>
+                                        <span>Total Male Donor In Our Blood Bank</span>
                                     </div>
                                     <div class="align-self-center">
-                                        <h1>{{$donor}}</h1>
+                                        <h1>{{$male}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-md-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body cleartfix">
+                                <div class="media align-items-stretch">
+                                    <div class="align-self-center">
+                                        <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4>Total Female</h4>
+                                        <span>Total Female Donor In Our Blood Bank</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h1>{{$female}}</h1>
                                     </div>
                                 </div>
                             </div>

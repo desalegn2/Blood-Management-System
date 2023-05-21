@@ -31,6 +31,36 @@
             background-color: #F5F7FA;
         }
 
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            grid-gap: 20px;
+        }
+
+        .grid1,
+        .grid2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10px;
+        }
+
+        .item {
+            background-color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .grid1,
+            .grid2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         * {
             font-family: "Ubuntu", sans-serif;
             margin: 0;
@@ -459,17 +489,29 @@
         </section>
 
     </div>
+    <div class="container">
+        <div class="grid1">
+            <div class="item" style="width: 500px;">
+                <p>Percentage Of Blood Type</p>
+                <canvas id="myChart"></canvas>
+            </div>
 
+        </div>
+        
+    </div>
 
-    <div style="width: 500px">
+    <!-- <div style="width: 500px; border:#222 solid; float:right; margin-top:30px;">
         <p>Percentage of blood type</p>
         <canvas id="myChart"></canvas>
-    </div><script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1"></script>
+    </div> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1"></script>
 
     <!-- chart js cdn -->
     <script src="https://unpkg.com/chart.js"></script>
     <!-- latest version chart  -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1"></script>
+    <!-- chartjs-plugin-datalabels -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -479,6 +521,8 @@
 
             var data = volumes;
             var labels = bloodTypes;
+
+            var total = data.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
             var chart = new Chart(ctx, {
                 type: 'pie',
@@ -492,18 +536,18 @@
                             'black',
                             'blue',
                             'yellow',
-                            'pink',
+                            '#00FFCA',
                             'brown'
                         ],
                         borderColor: [
-                            'brown',
                             'red',
                             'green',
                             'purple',
                             'black',
                             'blue',
                             'yellow',
-                            'pink',
+                            '#00FFCA',
+                            'brown'
                         ],
                         borderWidth: 2
                     }],
@@ -515,11 +559,23 @@
                         legend: {
                             position: 'right',
                             align: 'start',
+
                             labels: {
                                 font: {
                                     size: 12,
                                 },
-                                padding: 30 
+                                padding: 30
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    var label = context.label || '';
+                                    var value = context.raw || '';
+                                    var percent = (value / total) * 100;
+
+                                    return label + ': ' + value + ' (' + percent.toFixed(2) + '%)';
+                                }
                             }
                         }
                     }
@@ -527,7 +583,6 @@
             });
         });
     </script>
-
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
