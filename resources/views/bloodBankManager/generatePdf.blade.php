@@ -13,18 +13,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        .dark {
-            background-color: black;
-            color: white;
-        }
 
-        .container {
-            margin-top: 100px;
-        }
-
-        #selection {
-            padding: 7px;
-        }
     </style>
 </head>
 
@@ -34,7 +23,7 @@
         <form action="{{url('/bbmanager/report')}}" method="get">
             @csrf
             <div style="float: right;">
-                <h6>Report</h6>
+                <h6>Generate Report</h6>
                 <select name="reporttype" id="selection" required>
                     <option value="">Choose Report Type</option>
                     <option value="collection">Blood Collection Report</option>
@@ -53,7 +42,7 @@
     </div>
     <div>
         <h5>Analysis Of Donor Data</h5>
-        <canvas id="barChart"></canvas>
+        <canvas id="barChart" width="400" height="200"></canvas>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -100,7 +89,7 @@
 
     <div>
         <h5>Analysis Of Donation Rate</h5>
-        <canvas id="donationsChart"></canvas>
+        <canvas id="donationsChart" width="400" height="200"></canvas>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
@@ -109,24 +98,33 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var ctx = document.getElementById('donationsChart').getContext('2d');
-            // var donations = {!! $donations !!};
             var donations = @json($donations);
 
+            // Group donations by month and count the number of donations in each month
+            var monthlyDonations = {};
+            donations.forEach(function(donation) {
+                var month = moment(donation.created_at).format('YYYY-MM');
+                if (monthlyDonations[month]) {
+                    monthlyDonations[month]++;
+                } else {
+                    monthlyDonations[month] = 1;
+                }
+            });
+
+            console.log(monthlyDonations); // Check the monthly donations object
+
             var data = {
-                labels: donations.map(function(donation) {
-                    return moment(donation.created_at).format('YYYY-MM');
-                }),
+                labels: Object.keys(monthlyDonations),
                 datasets: [{
                     label: 'Number of Donations',
-                    data: donations.map(function(donation) {
-                        return donation.amount;
-                    }),
-                    borderColor: 'red',
-                    fill: false
+                    data: Object.values(monthlyDonations),
+                    borderColor: 'blue',
+                    fill: true
                 }]
             };
 
             var options = {
+
                 scales: {
                     x: {
                         type: 'time',
@@ -157,13 +155,13 @@
             });
         });
     </script>
-    <script>
+    <!-- <script>
         function myfunction() {
             // var element = document.body;
             // element.classList.toggle("dark");
             document.getElementById("div1").style.backgroundColor = "black";
         }
-    </script>
+    </script> -->
 </body>
 
 </html>
