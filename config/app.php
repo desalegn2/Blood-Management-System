@@ -217,4 +217,6 @@ return [
     ])->toArray(),
     'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
 
+    'default_phone_prefix' => '+251',
+
 ];

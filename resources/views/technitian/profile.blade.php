@@ -73,6 +73,14 @@
         .shadow-none {
             box-shadow: none !important;
         }
+
+        .error-message {
+            color: #212A3E;
+            font-weight: bold;
+            background-color: #E76161;
+            height: 50px;
+            width: 1180px;
+        }
     </Style>
 </head>
 
@@ -85,7 +93,21 @@
             @foreach ($data as $dataprofil)
 
             <div class="row gutters-sm">
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
 
+                @if(session('warning'))
+                <div class="alert alert-warning">
+                    {{ session('warning') }}
+                </div>
+                @endif
+
+                @error('password')
+                <span class="error-message">{{ $message }}</span>
+                @enderror
                 <div class="col-md-4 mb-3">
                     <form action=" {{url('/technitian/updatephoto',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -147,15 +169,21 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Full name</h6>
+                                        <h6 class="mb-0">First name</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="name" value="{{$dataprofil->name}}">
+                                        <input type="text" name="firstname" value="{{$dataprofil->firstname}}">
                                     </div>
                                 </div>
-
                                 <hr>
-
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Last name</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" name="lastname" value="{{$dataprofil->lastname}}">
+                                    </div>
+                                </div>
                                 <hr>
 
                                 <div class="row">
@@ -163,7 +191,7 @@
                                         <h6 class="mb-0">Email</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="email" value="{{$dataprofil->email}}" readonly>
+                                        <input type="text" name="email" value="{{$dataprofil->user->email}}" readonly>
                                     </div>
                                 </div>
 
@@ -223,7 +251,7 @@
             </div>
         </div>
     </div>
-    @include('sweetalert::alert')
+    <!-- @include('sweetalert::alert') -->
 </body>
 
 </html>

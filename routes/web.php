@@ -21,7 +21,9 @@ use Illuminate\Support\Facades\Auth;
 Route::match(['get', 'post'], 'botman', [botController::class, 'handle']);
 
 Route::view('create_account', 'createAccount');
-Route::post('create_acc', [donorController::class, 'createAccount']);
+//Route::post('create_acc', [donorController::class, 'createAccount']);
+Route::post('/create_acc', [donorController::class, 'createAccount'])->name('create_acc');
+
 
 Route::get('create_account_r/{referral_code}', [donorController::class, 'createAccount_Reffered']);
 Route::post('create_account_referred', [donorController::class, 'Account_Reffered']);
@@ -97,7 +99,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('/nurse/home', [HomeController::class, 'nurseHome'])->name('nurse.home');
         Route::get('/nurse/home', [nurseController::class, 'ReturntoHome'])->name('nurse.home');
         //profile
-        Route::get('/nurse/profile/{id}', [nurseController::class, 'Profile']);
+        Route::get('/nurse/profile', [nurseController::class, 'Profile']);
         Route::post('/nurse/updateprofile/{id}', [nurseController::class, 'updateProfile']);
         Route::post('/nurse/updatephoto/{id}', [nurseController::class, 'updatephoto']);
         Route::post('/nurse/changepassword', [nurseController::class, 'changepassword']);
@@ -137,7 +139,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('/technitian/home', [HomeController::class, 'technitanHome'])->name('technitian.home');
         Route::get('/technitian/home', [techController::class, 'viewblood'])->name('technitian.home');
         //profile
-        Route::get('/technitian/profile/{id}', [techController::class, 'Profile']);
+        Route::get('/technitian/profile', [techController::class, 'Profile']);
         Route::post('/technitian/updateprofile/{id}', [techController::class, 'updateProfile']);
         Route::post('/technitian/updatephoto/{id}', [techController::class, 'updatephoto']);
         Route::post('/technitian/changepassword', [techController::class, 'changepassword']);
@@ -162,7 +164,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('/healthinstitute/home', [HomeController::class, 'healthinstituteHome'])->name('healthinstitute.home');
         Route::get('/healthinstitute/home', [hospitalController::class, 'viewblood'])->name('healthinstitute.home');
         //profile
-        Route::get('/healthinstitute/profile/{id}', [hospitalController::class, 'Profile']);
+        Route::get('/healthinstitute/profile', [hospitalController::class, 'Profile']);
         Route::post('/healthinstitute/updateprofile/{id}', [hospitalController::class, 'updateProfile']);
         Route::post('/healthinstitute/updatephoto/{id}', [hospitalController::class, 'updatephoto']);
         Route::post('/healthinstitute/changepassword', [hospitalController::class, 'changepassword']);
@@ -240,6 +242,12 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         Route::get('/doctor/home', [HomeController::class, 'doctorHome'])->name('doctor.home');
         Route::get('/doctor/home', [doctorController::class, 'viewblood'])->name('doctor.home');
+
+        //profile
+        Route::get('/doctor/profile', [doctorController::class, 'Profile']);
+        Route::post('/doctor/updateprofile/{id}', [doctorController::class, 'updateProfile']);
+        Route::post('/doctor/updatephoto/{id}', [doctorController::class, 'updatephoto']);
+        Route::post('/doctor/changepassword', [doctorController::class, 'changepassword']);
 
         Route::get('/doctor/transfer', [doctorController::class, 'BloodTransfer']);
         Route::post('/doctor/transfusion/{id}', [doctorController::class, 'Transfusion']);

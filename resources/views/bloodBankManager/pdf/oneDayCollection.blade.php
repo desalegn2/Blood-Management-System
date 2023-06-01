@@ -73,7 +73,10 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Donor Name</th>
+                    <th>first Name</th>
+                    <th>Last Name</th>
+                    <th>Gender</th>
+                    <th>Age</th>
                     <th>Date of Donation</th>
                     <th>Blood Type</th>
                     <th>Amount Collected (mL)</th>
@@ -83,8 +86,10 @@
                 @if(count($data))
                 @foreach($data as $member)
                 <tr>
-
-                    <td>{{$member->fullname}}</td>
+                    <td>{{$member->firstname}}</td>
+                    <td>{{$member->lastname}}</td>
+                    <td>{{$member->gender}}</td>
+                    <td>{{$member->age}}</td>
                     <td>{{$member->created_at}}</td>
                     <td>{{$member->bloodtype}}</td>
                     <td>{{$member->volume}}</td>
@@ -99,11 +104,9 @@
         </table>
         <p>Notes: [insert any important notes or issues related to the blood collection for the period]</p>
         <br><br><br>
-        <p>Bahir Dar Blood Bank Representative<br>
-            {{ Auth::user()->name }}
+        <p>Bahir Dar Blood Bank Representative<br><br>
+            {{$fname}} {{$lname}}
         </p>
-
-
 </body>
 
 </html>

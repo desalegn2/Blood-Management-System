@@ -1,37 +1,75 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {
-            'packages': ['corechart']
-        });
-        google.charts.setOnLoadCallback(drawChart);
+    <title>Form Validation</title>
+    <script>
+        function validateName(name) {
+            var letterRegex = /^[a-zA-Z]+$/;
+            return letterRegex.test(name);
+        }
 
-        function drawChart() {
+        function validateInput() {
+            // Check first name validation
+            var firstName = document.getElementById("firstNameField").value;
+            if (!validateName(firstName)) {
+                document.getElementById("errorFirstName").style.display = "block";
+            } else {
+                document.getElementById("errorFirstName").style.display = "none";
+            }
 
-            var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Work', 11],
-                ['Eat', 2],
-                ['Commute', 2],
-                ['Watch TV', 2],
-                ['Sleep', 7]
-            ]);
+            // Check last name validation
+            var lastName = document.getElementById("lastNameField").value;
+            if (!validateName(lastName)) {
+                document.getElementById("errorLastName").style.display = "block";
+            } else {
+                document.getElementById("errorLastName").style.display = "none";
+            }
 
-            var options = {
-                title: 'My Daily Activities'
-            };
+            // ... rest of the code ...
+        }
 
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        function validateForm(event) {
+            event.preventDefault();
 
-            chart.draw(data, options);
+            // Check first name validation
+            var firstName = document.getElementById("firstNameField").value;
+            if (!validateName(firstName)) {
+                alert("First name must contain only letters.");
+                return false;
+            }
+
+            // Check last name validation
+            var lastName = document.getElementById("lastNameField").value;
+            if (!validateName(lastName)) {
+                alert("Last name must contain only letters.");
+                return false;
+            }
+
+            // ... rest of the code ...
         }
     </script>
+    <style>
+        .error-message {
+            display: none;
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
+    <form onsubmit="return validateForm(event)">
+        <label for="firstNameField">First name:</label>
+        <input type="text" id="firstNameField" name="firstNameField" onkeyup="validateInput()">
+        <div id="errorFirstName" class="error-message">First name must contain only letters.</div>
+        <br>
+        <label for="lastNameField">Last name:</label>
+        <input type="text" id="lastNameField" name="lastNameField" onkeyup="validateInput()">
+        <div id="errorLastName" class="error-message">Last name must contain only letters.</div>
+        <br>
+        <!-- Rest of the form elements -->
+        <input type="submit" value="submit">
+    </form>
 </body>
 
 </html>

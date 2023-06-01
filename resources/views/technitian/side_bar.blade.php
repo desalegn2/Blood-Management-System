@@ -204,7 +204,7 @@
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
                 <div>
-                    <a href="{{ url('/technitian/profile', Auth::user()->id) }}" class="nav_logo">
+                    <a href="{{ url('/technitian/profile') }}" class="nav_logo">
                         <i class='bx bx-layer nav_logo-icon'></i>
                         <span class="nav_logo-name">Profile</span>
                     </a>

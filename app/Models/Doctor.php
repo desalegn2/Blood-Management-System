@@ -21,4 +21,8 @@ class Doctor extends Model
         'gender',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'doctor_id');
+    }
 }

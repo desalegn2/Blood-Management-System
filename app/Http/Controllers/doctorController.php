@@ -6,6 +6,7 @@ use App\Models\Doctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\tansferModel;
 use App\Models\Donor;
 use App\Models\User;
@@ -120,11 +121,72 @@ class doctorController extends Controller
 
                 return redirect()->back()->with('success', 'Task Added Successfully! and Result are sent to donor');
             } catch (\Exception $e) {
-                return response()->json([
-                    'message' => 'Something went wrong in donorController.Transfusion',
-                    'error' => $e->getMessage()
-                ], 400);
+                $errorMessage = 'Something went wrong in donorController.Transfusion';
+
+                // Check if the error is related to the internet connection
+                if (strpos($e->getMessage(), 'Temporary failure in name resolution') !== false) {
+                    $errorMessage = 'There is no internet connection, so message not sent to donor.';
+                }
+
+                return redirect()->back()->with('error', $errorMessage);
             }
+        }
+    }
+
+
+    function Profile()
+    {
+        $user = Auth::user();
+        $id = $user->id;
+        $isExist = User::select("*")
+            ->where("id", $id)
+            ->exists();
+        if ($isExist) {
+            // $data = User::all()->where('id', '=', $id);
+            $data = Doctor::where('doctor_id', $id)->with('user')->get();
+            return view('doctor.profile', ['data' => $data]);
+        }
+    }
+    function updateProfile(Request $req, int $id)
+    {
+
+        Doctor::where("doctor_id", $id)
+            ->update(["firstname" => $req->firstname, "lastname" => $req->lastname, "phone" => $req->phone]);
+        return redirect()->back()->with('success', 'your Profile,are Updated');
+    }
+
+    function updatephoto(Request $req, int $id)
+    {
+
+        $var = Doctor::all()->where('doctor_id', '=', $id);
+        if ($req->hasfile('photo')) {
+            $file = $req->file('photo');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('uploads/registers', $filename);
+            $var->photo = $filename;
+        }
+        Doctor::where("doctor_id", $id)
+            ->update(["photo" => $filename]);
+        //return redirect('nurse/home');
+        return redirect()->back()->with('success', 'your Image,Changed');
+    }
+    function changepassword(Request $req)
+    {
+        # Validation
+        $req->validate([
+            'oldpassword' => ['required', 'string', 'min:8'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        $currentPasswordStatus = Hash::check($req->oldpassword, auth()->user()->password);
+        if ($currentPasswordStatus) {
+
+            User::findOrFail(auth()->user()->id)->update([
+                'password' => Hash::make($req->password)
+            ]);
+            return redirect()->back()->with('success', 'password changed Successfully!');
+        } else {
+            return redirect()->back()->with('warning', 'password not match with old password!');
         }
     }
 }

@@ -50,7 +50,7 @@ class donorController extends Controller
                 'firstname' => ['required', 'regex:/^[\p{L}\s]+$/u', 'max:255'],
                 'lastname' => ['required', 'regex:/^[a-zA-Z\s]+$/', 'max:255'],
                 'occupation' => 'required|string|max:255',
-                'phone' => ['required', 'regex:/^(09|07)\d{8}$/'],
+                'phone' => ['required', 'regex:/^(9|7)\d{8}$/'],
                 'gender' => 'required|string|max:25',
                 'bloodtype' => 'required|string|max:25',
                 'age' => 'required|numeric|min:17|max:65',
@@ -79,12 +79,14 @@ class donorController extends Controller
                 $file->move('uploads/registers', $filename);
             }
             $donor = new Donor;
-            $donor->photo = $req->hasfile('photo') ? $var->filename : '0.png';
+            $donor->photo = '0.png';
             $donor->donor_id = $var->id;
             $donor->firstname = ucfirst($req->input('firstname'));
             $donor->lastname = ucfirst($req->input('lastname'));
             $donor->occupation = $req->occupation;
-            $donor->phone = $req->phone;
+            // $donor->phone = $req->phone;
+            $donor->phone = '+251' . $req->phone;
+
             $donor->gender = $req->gender;
             $donor->bloodtype = $req->bloodtype;
             $donor->typeofdonation = $req->typeofdonation;
@@ -195,25 +197,25 @@ class donorController extends Controller
 
         return view('donor.referring', compact('num_referred', 'list_referred', 'referral_code'));
     }
-    
+
     function Home()
     {
-        $data = bbinformatiomModel::where('type','service')->get();
+        $data = bbinformatiomModel::where('type', 'service')->get();
         return view('donor.home', ['data' => $data]);
     }
 
     function viewNews()
     {
-        $data = bbinformatiomModel::where('type','news')->get();
+        $data = bbinformatiomModel::where('type', 'news')->get();
         return view('donor.news', ['data' => $data]);
     }
 
     function viewInfo()
     {
-        $data = bbinformatiomModel::where('type','information')->get();
+        $data = bbinformatiomModel::where('type', 'information')->get();
         return view('donor.bbinformation', ['data' => $data]);
     }
-    
+
     function ReservationForm()
     {
         $data = centorModel::all();
@@ -228,7 +230,7 @@ class donorController extends Controller
         ]);
         if ($req->health == "hiv" || $req->health == 'hepatite') {
             $message = 'ህይወትን ለማዳን ደም ለመለገስ ላሳዩት ፍላጎት እና ቁርጠኝነት እናመሰግናለን። ነገር ግን ተላላፊ በሽታ ካለባቸዉ ግለሰቦች የደም ልገሳን መቀበል አንችልም ምክንያቱም ለለጋሹም ሆነ ለተቀባዩ አደጋ ያስከትላል.የደም ልገ ሳን አስፈላጊነት ግንዛቤ በማስጨበጥ እና ሌሎችም እንዲለግሱ በማበረታታት የዓላማችንን ድጋፍ እንድትቀጥሉ እናሳስባለን።';
-            return redirect()->back()->with('error',$message);
+            return redirect()->back()->with('error', $message);
         } else {
 
             $var = new reservationModel;
@@ -345,13 +347,11 @@ class donorController extends Controller
 
     {
         $var = new feedbackModel;
-        $var->name = $req->name;
+
         $var->user_id = $req->user_id;
-        $var->email = $req->email;
-        $var->address = $req->address;
         $var->feedback = $req->feedback;
         $var->save();
-        return view('donor.feedback');
+        return redirect()->back()->with('success', 'your feed has sent Successfully!');
     }
 
     public function landingPage()

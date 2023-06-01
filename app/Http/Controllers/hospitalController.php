@@ -15,15 +15,24 @@ use App\Models\bloodStock;
 use App\Models\Doctor;
 use App\Models\BloodRequestItem;
 use App\Models\BloodRequest;
+use App\Models\hospitalModel;
 
 class hospitalController extends Controller
 {
     function addDoctors(Request $req)
     {
         $req->validate([
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+                'regex:/^(?=.*[a-z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]+$/'
+            ],
+
             'email' => 'required|unique:users|max:255|string|email',
             'role' => ['required', 'int', 'max:6'],
-            'password' => 'required|string|min:8|confirmed',
+            // 'password' => 'required|string|min:8|confirmed',
             'photo' => 'required|mimes:jpeg,jpg,png,gif,bmp,svg|max:10240',
             'firstname' => ['required', 'regex:/^[\p{L}\s]+$/u', 'max:255'],
             'lastname' => ['required', 'regex:/^[\p{L}\s]+$/u', 'max:255'],
@@ -124,7 +133,10 @@ class hospitalController extends Controller
     {
 
         $req->validate([
+
+
             'email' => ['required', 'string', 'email', 'max:255', 'unique:hospitalpost'],
+
             'photo' => 'required|mimes:jpeg,png,jpg,gif',
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
@@ -224,29 +236,31 @@ class hospitalController extends Controller
         return redirect()->back();
     }
 
-    function Profile($id)
+    function Profile()
     {
+        $user = Auth::user();
+        $id = $user->id;
         $isExist = User::select("*")
             ->where("id", $id)
             ->exists();
         if ($isExist) {
-            $data = User::all()->where('id', '=', $id);
-            //return view('nurse.profile', ['data' => $data]);
+            // $data = User::all()->where('id', '=', $id);
+            $data = hospitalModel::where('hospital_id', $id)->with('user')->get();
             return view('healthinstitute.profile', ['data' => $data]);
         }
     }
     function updateProfile(Request $req, int $id)
     {
 
-        User::where("id", $id)
-            ->update(["name" => $req->name, "email" => $req->email, "phone" => $req->phone]);
-        return redirect()->back()->with('success', 'your Profile,Changed');
+        hospitalModel::where("hospital_id", $id)
+            ->update(["hospitalname" => $req->hospitalname, "manager_fname" => $req->fname, "manager_lname" => $req->lname, "phone" => $req->phone]);
+        return redirect()->back()->with('success', 'your Profile,are Updated');
     }
 
     function updatephoto(Request $req, int $id)
     {
 
-        $var = User::all()->where('id', '=', $id);
+        $var = hospitalModel::all()->where('hospital_id', '=', $id);
         if ($req->hasfile('photo')) {
             $file = $req->file('photo');
             $extention = $file->getClientOriginalExtension();
@@ -254,11 +268,12 @@ class hospitalController extends Controller
             $file->move('uploads/registers', $filename);
             $var->photo = $filename;
         }
-        User::where("id", $id)
+        hospitalModel::where("hospital_id", $id)
             ->update(["photo" => $filename]);
         //return redirect('nurse/home');
         return redirect()->back()->with('success', 'your Image,Changed');
     }
+
     function changepassword(Request $req)
     {
         # Validation

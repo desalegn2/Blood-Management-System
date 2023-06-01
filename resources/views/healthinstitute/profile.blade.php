@@ -72,6 +72,14 @@
         .shadow-none {
             box-shadow: none !important;
         }
+
+        .error-message {
+            color: #212A3E;
+            font-weight: bold;
+            background-color: #E76161;
+            height: 50px;
+            width: 1090px;
+        }
     </Style>
 </head>
 
@@ -84,6 +92,21 @@
             @foreach ($data as $dataprofil)
 
             <div class="row gutters-sm">
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+
+                @if(session('warning'))
+                <div class="alert alert-warning">
+                    {{ session('warning') }}
+                </div>
+                @endif
+
+                @error('password')
+                <span class="error-message">{{ $message }}</span>
+                @enderror
 
                 <div class="col-md-4 mb-3">
                     <form action=" {{url('/healthinstitute/updatephoto',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
@@ -97,8 +120,6 @@
                                         <h4> {{$dataprofil->name}}</h4>
                                         <p class="text-secondary mb-1">Health Institute</p>
 
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class='fa fa-edit'></i>Change Password</button>
-
                                     </div>
                                 </div>
                                 <hr>
@@ -106,9 +127,7 @@
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Change Photo</h6>
-
                                     </div>
-
                                     <div class="col-sm-9 text-secondary">
                                         <input type="file" name="photo" required>
                                         <input type="submit" value="save">
@@ -118,6 +137,8 @@
                             </div>
                         </div>
                     </form>
+                    <br><br>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-right"><i class='fa fa-edit'></i>Change Password</button>
                 </div>
 
                 <div class="col-md-8">
@@ -148,15 +169,31 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Full name</h6>
+                                        <h6 class="mb-0">Hospital Name</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="name" value="{{$dataprofil->name}}">
+                                        <input type="text" name="hospitalname" value="{{$dataprofil->hospitalname}}">
                                     </div>
                                 </div>
 
                                 <hr>
-
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">First Name</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" name="fname" value="{{$dataprofil->manager_fname}}">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">last Name</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" name="lname" value="{{$dataprofil->manager_lname}}">
+                                    </div>
+                                </div>
                                 <hr>
 
                                 <div class="row">
@@ -164,7 +201,7 @@
                                         <h6 class="mb-0">Email</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="email" value="{{$dataprofil->email}}" readonly>
+                                        <input type="text" name="email" value="{{$dataprofil->user->email}}" readonly>
                                     </div>
                                 </div>
 
@@ -224,7 +261,7 @@
             </div>
         </div>
     </div>
-    @include('sweetalert::alert')
+    <!-- @include('sweetalert::alert') -->
 </body>
 
 </html>

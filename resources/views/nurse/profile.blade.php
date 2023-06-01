@@ -13,6 +13,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <Style>
+
         body {
             margin-top: 20px;
             color: #1a202c;
@@ -73,6 +74,10 @@
         .shadow-none {
             box-shadow: none !important;
         }
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
     </Style>
 </head>
 
@@ -86,6 +91,21 @@
 
             <div class="row gutters-sm">
 
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+
+                @if(session('warning'))
+                <div class="alert alert-warning">
+                    {{ session('warning') }}
+                </div>
+                @endif
+
+                @error('password')
+                <span class="error-message">{{ $message }}</span>
+                @enderror
                 <div class="col-md-4 mb-3">
                     <form action=" {{url('/nurse/updatephoto',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -117,6 +137,8 @@
                             </div>
                         </div>
                     </form>
+                    <br><br>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-left"><i class='fa fa-edit'></i>Change Password</button>
                 </div>
 
                 <div class="col-md-8">
@@ -132,10 +154,7 @@
                             </div>
                             <form action="  {{url('/nurse/updateprofile',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
                                 @csrf
-
                                 <hr>
-
-
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0"> User ID</h6>
@@ -147,23 +166,29 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Full name</h6>
+                                        <h6 class="mb-0">First name</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="name" value="{{$dataprofil->name}}">
+                                        <input type="text" name="firstname" value="{{$dataprofil->firstname}}">
                                     </div>
                                 </div>
-
                                 <hr>
-
-
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Last name</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" name="lastname" value="{{$dataprofil->lastname}}">
+                                    </div>
+                                </div>
+                                <hr>
 
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Email</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="email" value="{{$dataprofil->email}}">
+                                        <input type="text" name="email" value="{{$dataprofil->user->email}}" readonly>
                                     </div>
                                 </div>
 
@@ -186,7 +211,7 @@
 
                     </div>
                     <br> <br> <br>
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-primary pull-left"><i class='fa fa-edit'></i>Change Password</button>
+
                 </div>
                 </form>
                 @endforeach
@@ -227,7 +252,7 @@
             </div>
         </div>
     </div>
-    @include('sweetalert::alert')
+    <!-- @include('sweetalert::alert') -->
 </body>
 
 </html>

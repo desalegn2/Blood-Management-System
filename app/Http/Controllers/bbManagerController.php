@@ -11,6 +11,7 @@ use App\Models\distributeBloodModel;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use \Notification;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Notifications\sendNotification;
@@ -124,21 +125,21 @@ class bbManagerController extends Controller
             Donor::where('bloodtype', 'O+')->count()
         ];
 
-          // Retrieve data from the database
-          $donations = donationModel::all();
+        // Retrieve data from the database
+        $donations = donationModel::all();
 
-          // Format the data for the chart
+        // Format the data for the chart
         //   $data = [];
         //   foreach ($donations as $donation) {
         //       $data[$donation->created_at->format('Y-m-d')] = $donation->amount;
         //   }
-  
+
         //   // Sort the data by date
         //   ksort($data);
-  
-          // Pass the chart data to the view
 
-        return view('bloodBankManager.generatePdf', compact('bloodTypes', 'donorCounts','donations'));
+        // Pass the chart data to the view
+
+        return view('bloodBankManager.generatePdf', compact('bloodTypes', 'donorCounts', 'donations'));
     }
     //Report
     function ReturnReportpage(Request $req)
@@ -153,58 +154,121 @@ class bbManagerController extends Controller
     }
     function ReportCollection(Request $request)
     {
+        $user = Auth::user();
+        $id = $user->id;
+        $name = staffModel::where('staff_id', $id)->first();
+        $fname = $name->firstname;
+        $lname = $name->lastname;
         $startDate = $request->startdate;
         $endDate = $request->enddate;
 
-        $data = enrollementModel::whereBetween('created_at', [$startDate, $endDate])->get();
-        $total = enrollementModel::whereBetween('created_at', [$startDate, $endDate])->sum('volume');
+        //$data = donationModel::whereBetween('created_at', [$startDate, $endDate])->get();
+        $total = donationModel::whereBetween('created_at', [$startDate, $endDate])->sum('volume');
 
         $mytime = \Carbon\Carbon::now();
+        $data = DB::table('donation')
+            ->join('donors', 'donation.donor_id', '=', 'donors.donor_id')
+            ->select('donors.firstname', 'donors.lastname', 'donors.bloodtype', 'donors.gender', 'age', 'donation.created_at', 'donation.volume')
+            ->whereBetween('donation.created_at', [$startDate, $endDate])
+            ->get();
         $pdf = PDF::setOptions([
             'defaultFont' => 'sans-serif',
             'isHtml5ParserEnabled' => true,
             'isRemoteEnabled' => true,
             // 'chroot' => public_path('uploads/registers'),
-        ])->loadView('bloodBankManager.pdf.generateCollection', compact('data', 'startDate', 'endDate', 'total', 'mytime'));
+        ])->loadView('bloodBankManager.pdf.generateCollection', compact('data', 'fname', 'lname', 'startDate', 'endDate', 'total', 'mytime'));
         return $pdf->download('blood collection.pdf');
     }
 
     function oneDayCollection(Request $request)
+
     {
+
+        $user = Auth::user();
+        $id = $user->id;
+        $name = staffModel::where('staff_id', $id)->first();
+        $fname = $name->firstname;
+        $lname = $name->lastname;
+
         $date = $request->startdate;
-        $data = enrollementModel::whereDate('created_at', $date)->get();
-        $total = enrollementModel::whereDate('created_at', $date)->sum('volume');
+
+
+        //  $data = donationModel::whereDate('created_at', $date)->get();
+        $total = donationModel::whereDate('created_at', $date)->sum('volume');
+        $data = DB::table('donation')
+            ->join('donors', 'donation.donor_id', '=', 'donors.donor_id')
+            ->select('donors.firstname', 'donors.lastname', 'donors.bloodtype', 'donors.gender', 'age', 'donation.created_at', 'donation.volume')
+            ->whereDate('donation.created_at', $date)
+            ->get();
         $pdf = PDF::setOptions([
             'defaultFont' => 'sans-serif',
             'isHtml5ParserEnabled' => true,
             'isRemoteEnabled' => true,
-        ])->loadView('bloodBankManager.pdf.oneDayCollection', compact('data', 'total', 'date'));
+        ])->loadView('bloodBankManager.pdf.oneDayCollection', compact('data', 'fname', 'lname', 'total', 'date'));
         return $pdf->download('oneDayCollection.pdf');
     }
 
     function manyDayReportDistribute(Request $request)
     {
+
+        $user = Auth::user();
+        $id = $user->id;
+        $name = staffModel::where('staff_id', $id)->first();
+        $fname = $name->firstname;
+        $lname = $name->lastname;
+
+        $mytime = \Carbon\Carbon::now();
+
         $startDate = $request->startdate;
         $endDate = $request->enddate;
-        $data = distributeBloodModel::whereBetween('created_at', [$startDate, $endDate])->get();
+        //  $data = distributeBloodModel::whereBetween('created_at', [$startDate, $endDate])->get();
+
+        $total = DB::table('distribute')
+            ->join('bloodstock', 'distribute.stock_id', '=', 'bloodstock.id')
+            ->whereBetween('distribute.created_at', [$startDate, $endDate])
+            ->sum('bloodstock.volume');
+
+        $data = DB::table('distribute')
+            ->join('bloodstock', 'distribute.stock_id', '=', 'bloodstock.id')
+            ->join('hospitals', 'distribute.hospital_id', '=', 'hospitals.hospital_id')
+            ->select('hospitals.hospitalname', 'bloodstock.bloodgroup', 'bloodstock.volume', 'bloodstock.expitariondate')
+            ->whereBetween('distribute.created_at', [$startDate, $endDate])
+            ->get();
 
         $pdf = PDF::setOptions([
             'defaultFont' => 'sans-serif',
             'isHtml5ParserEnabled' => true,
             'isRemoteEnabled' => true,
-        ])->loadView('bloodBankManager.pdf.generateDistribute', compact('data'));
+        ])->loadView('bloodBankManager.pdf.generateDistribute', compact('data', 'fname', 'lname', 'total', 'mytime', 'startDate', 'endDate'));
         return $pdf->download('Distribute_Blood.pdf');
     }
     function ReportDis_one(Request $request)
     {
+        $user = Auth::user();
+        $id = $user->id;
+        $name = staffModel::where('staff_id', $id)->first();
+        $fname = $name->firstname;
+        $lname = $name->lastname;
+
         $startDate = $request->startdate;
-        $data = distributeBloodModel::whereDate('created_at', $startDate)->get();
-        $total = enrollementModel::whereDate('created_at', $startDate)->sum('volume');
+        $dateofReport = \Carbon\Carbon::now();
+
+        $total = DB::table('distribute')
+            ->join('bloodstock', 'distribute.stock_id', '=', 'bloodstock.id')
+            ->whereDate('distribute.created_at', $startDate)
+            ->sum('bloodstock.volume');
+
+        $data = DB::table('distribute')
+            ->join('bloodstock', 'distribute.stock_id', '=', 'bloodstock.id')
+            ->join('hospitals', 'distribute.hospital_id', '=', 'hospitals.hospital_id')
+            ->select('hospitals.hospitalname', 'bloodstock.bloodgroup', 'bloodstock.volume', 'bloodstock.expitariondate')
+            ->whereDate('distribute.created_at', $startDate)
+            ->get();
         $pdf = PDF::setOptions([
             'defaultFont' => 'sans-serif',
             'isHtml5ParserEnabled' => true,
             'isRemoteEnabled' => true,
-        ])->loadView('bloodBankManager.pdf.oneDayDistribution', compact('data', 'startDate', 'total'));
+        ])->loadView('bloodBankManager.pdf.oneDayDistribution', compact('data', 'startDate', 'dateofReport', 'total', 'fname', 'lname'));
 
         return $pdf->download('oneDayDistribution.pdf');
     }
@@ -213,8 +277,8 @@ class bbManagerController extends Controller
     {
         $startDate = $request->startdate;
         $endDate = $request->enddate;
-        $data = hospitalRequestModel::whereBetween('created_at', [$startDate, $endDate])->get();
-        $total = hospitalRequestModel::whereBetween('created_at', [$startDate, $endDate])->sum('volume');
+        $data = BloodRequest::whereBetween('created_at', [$startDate, $endDate])->get();
+        $total = BloodRequest::whereBetween('created_at', [$startDate, $endDate])->sum('volume');
 
         $mytime = \Carbon\Carbon::now();
         $pdf = PDF::setOptions([
@@ -228,8 +292,8 @@ class bbManagerController extends Controller
     function oneDayRequest(Request $request)
     {
         $startDate = $request->startdate;
-        $data = hospitalRequestModel::whereDate('created_at', $startDate)->get();
-        $total = enrollementModel::whereDate('created_at', $startDate)->sum('volume');
+        $data = BloodRequest::whereDate('created_at', $startDate)->get();
+        $total = BloodRequest::whereDate('created_at', $startDate)->sum('volume');
         $pdf = PDF::setOptions([
             'defaultFont' => 'sans-serif',
             'isHtml5ParserEnabled' => true,
@@ -354,26 +418,27 @@ class bbManagerController extends Controller
 
     function Profile($id)
     {
-        $isExist = User::select("*")
-            ->where("id", $id)
+        $isExist = staffModel::select("*")
+            ->where("staff_id", $id)
             ->exists();
         if ($isExist) {
-            $data = User::all()->where('id', '=', $id);
+            $data = staffModel::where('staff_id', $id)->with('user')->get();
+
             return view('bloodBankManager.profile', ['data' => $data]);
         }
     }
     function updateProfile(Request $req, int $id)
     {
 
-        User::where("id", $id)
-            ->update(["name" => $req->name, "email" => $req->email, "phone" => $req->phone]);
+        staffModel::where("staff_id", $id)
+            ->update(["firstname" => $req->firstname, "lastname" => $req->lastname, "phone" => $req->phone]);
         return redirect()->back()->with('success', 'your Profile,Changed');
     }
 
     function updatephoto(Request $req, int $id)
     {
 
-        $var = User::all()->where('id', '=', $id);
+        $var = staffModel::all()->where('staff_id', '=', $id);
         if ($req->hasfile('photo')) {
             $file = $req->file('photo');
             $extention = $file->getClientOriginalExtension();
@@ -381,7 +446,7 @@ class bbManagerController extends Controller
             $file->move('uploads/registers', $filename);
             $var->photo = $filename;
         }
-        User::where("id", $id)
+        staffModel::where("staff_id", $id)
             ->update(["photo" => $filename]);
         //return redirect('nurse/home');
         return redirect()->back()->with('success', 'your Image,Changed');
@@ -401,7 +466,7 @@ class bbManagerController extends Controller
             ]);
             return redirect()->back()->with('success', 'password changed Successfully!');
         } else {
-            return redirect()->back()->with('warnig', 'password not match with old!');
+            return redirect()->back()->with('warning', 'password not match with old!');
         }
     }
 

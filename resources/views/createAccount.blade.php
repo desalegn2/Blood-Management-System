@@ -9,6 +9,35 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <style>
+        .phone-input {
+            display: flex;
+            align-items: center;
+            width: 400px;
+            height: 40px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .phone-input .country-code {
+            padding: 5px;
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .phone-input .separator {
+            margin: 0 10px;
+        }
+
+        .phone-input input {
+            flex: 1;
+            border: none;
+            padding: 5px;
+            outline: none;
+        }
+
+
+
         header {
             height: 90px;
             background: #245953;
@@ -221,7 +250,7 @@
         }
 
         .gender label {
-            padding: 0 5px 0 0;
+            padding: 0 20px 0 0;
         }
 
         .bdate-block {
@@ -339,7 +368,173 @@
                 align-items: center;
             }
         }
+
+        .error-message {
+            display: none;
+            color: red;
+        }
     </style>
+
+    <script>
+        function validateName(name) {
+            var letterRegex = /^[a-zA-Z]+$/;
+            return letterRegex.test(name);
+        }
+
+        function validateInput() {
+            var password = document.getElementById("passwordField").value;
+            var confirmPass = document.getElementById("confirmPasswordField").value;
+            var fileInput = document.getElementById("fileInput");
+            var firstName = document.getElementById("firstNameField").value;
+            var lastName = document.getElementById("lastNameField").value;
+
+            // Check first name validation
+            if (!validateName(firstName)) {
+                document.getElementById("errorFirstName").style.display = "block";
+            } else {
+                document.getElementById("errorFirstName").style.display = "none";
+            }
+
+            // Check last name validation
+            if (!validateName(lastName)) {
+                document.getElementById("errorLastName").style.display = "block";
+            } else {
+                document.getElementById("errorLastName").style.display = "none";
+            }
+
+            // Check password validations
+            if (password.length < 8) {
+                document.getElementById("errorLength").style.display = "block";
+            } else {
+                document.getElementById("errorLength").style.display = "none";
+            }
+
+            var lowercaseRegex = /[a-z]/;
+            if (!lowercaseRegex.test(password)) {
+                document.getElementById("errorLowercase").style.display = "block";
+            } else {
+                document.getElementById("errorLowercase").style.display = "none";
+            }
+
+            var specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+            if (!specialCharRegex.test(password)) {
+                document.getElementById("errorSpecialChar").style.display = "block";
+            } else {
+                document.getElementById("errorSpecialChar").style.display = "none";
+            }
+
+            var numberRegex = /\d/;
+            if (!numberRegex.test(password)) {
+                document.getElementById("errorNumber").style.display = "block";
+            } else {
+                document.getElementById("errorNumber").style.display = "none";
+            }
+            // Check password confirmation
+            if (password !== confirmPass) {
+                document.getElementById("errorConfirm").style.display = "block";
+            } else {
+                document.getElementById("errorConfirm").style.display = "none";
+            }
+
+
+            // Check file size
+            if (fileInput.files.length > 0) {
+                var fileSize = fileInput.files[0].size / 1024 / 1024; // in MB
+                if (fileSize > 10) {
+                    document.getElementById("errorFileSize").style.display = "block";
+                } else {
+                    document.getElementById("errorFileSize").style.display = "none";
+                }
+            }
+
+            // Check file format
+            var allowedFormats = ["jpeg", "jpg", "png", "gif", "bmp", "svg"];
+            var fileFormat = fileInput.value.split('.').pop().toLowerCase();
+            if (!allowedFormats.includes(fileFormat)) {
+                document.getElementById("errorFileFormat").style.display = "block";
+            } else {
+                document.getElementById("errorFileFormat").style.display = "none";
+            }
+
+
+        }
+
+        function validateForm(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Perform final validation and show error messages
+            var password = document.getElementById("passwordField").value;
+            var confirmPass = document.getElementById("confirmPasswordField").value;
+            var fileInput = document.getElementById("fileInput");
+
+            // Check first name validation
+            var firstName = document.getElementById("firstNameField").value;
+            if (!validateName(firstName)) {
+                document.getElementById("errorFirstName").style.display = "block";
+            } else {
+                document.getElementById("errorFirstName").style.display = "none";
+            }
+
+            // Check last name validation
+            var lastName = document.getElementById("lastNameField").value;
+            if (!validateName(lastName)) {
+                document.getElementById("errorLastName").style.display = "block";
+            } else {
+                document.getElementById("errorLastName").style.display = "none";
+            }
+
+            // Check password validations
+            if (password.length < 8) {
+                alert("Password must be 8 characters or longer.");
+                return false;
+            }
+
+            var lowercaseRegex = /[a-z]/;
+            if (!lowercaseRegex.test(password)) {
+                alert("Password must contain at least one lowercase letter.");
+                return false;
+            }
+
+            var specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+            if (!specialCharRegex.test(password)) {
+                alert("Password must contain at least one special character.");
+                return false;
+            }
+
+            var numberRegex = /\d/;
+            if (!numberRegex.test(password)) {
+                alert("Password must contain at least one number.");
+                return false;
+            }
+
+            // Check password confirmation
+            if (password !== confirmPass) {
+                alert("Password confirmation does not match.");
+                return false;
+            }
+
+            // Check file size
+            if (fileInput.files.length > 0) {
+                var fileSize = fileInput.files[0].size / 1024 / 1024; // in MB
+                if (fileSize > 10) {
+                    alert("File size must be 10 MB or smaller.");
+                    return false;
+                }
+            }
+
+            // Check file format
+            var allowedFormats = ["jpeg", "jpg", "png", "gif", "bmp", "svg"];
+            var fileFormat = fileInput.value.split('.').pop().toLowerCase();
+            if (!allowedFormats.includes(fileFormat)) {
+                alert("Only JPEG, JPG, PNG, GIF, BMP, and SVG file formats are allowed.");
+                return false;
+            }
+
+            // If all validations pass, you can proceed with further actions if needed
+            event.target.submit();
+            //  return true; // Prevent form submission and page refresh
+        }
+    </script>
 </head>
 
 <body>
@@ -368,14 +563,14 @@
                 <div class="card">
                     <h3 class="card-headheadinging"> <!--Join Our Blood Bank Community and Help Save Lives --> የእኛን የደም ባንክ ይቀላቀሉ ህይወትን ለማዳን ያግዙ</h3>
                     <p class="card-content" style="font-size: large;">
-                    የደም ባንክ ማህበረሰባችን አባል በመሆን፣ ህይወትን ለማዳን የሚተጉ ለጋሾች ቡድን አባል ይሆናሉ። የእርስዎ ልገሳ ለተቸገሩ ታካሚዎች ወሳኝ ለውጥ ያመጣል፣ ዛሬ ይቀላቀሉን እና ለተቸገረ ሰው ይድረሱ ።<br>
-                    አባሎቻችንን እናከብራለን እናም ህይወትን ለማዳን ላደረጉት ቁርጠኝነት ያለንን አድናቆት ማሳየት እንፈልጋለን
+                        የደም ባንክ ማህበረሰባችን አባል በመሆን፣ ህይወትን ለማዳን የሚተጉ ለጋሾች ቡድን አባል ይሆናሉ። የእርስዎ ልገሳ ለተቸገሩ ታካሚዎች ወሳኝ ለውጥ ያመጣል፣ ዛሬ ይቀላቀሉን እና ለተቸገረ ሰው ይድረሱ ።<br>
+                        አባሎቻችንን እናከብራለን እናም ህይወትን ለማዳን ላደረጉት ቁርጠኝነት ያለንን አድናቆት ማሳየት እንፈልጋለን
                     </p>
                 </div>
             </div>
             <div class="card-column">
                 <div class="card">
-                    <h3 class="card-heading">አባል ይሁኑ  ልዩ ልዩ ጥቅማጥቅሞችን ያግኛሉ</h3>
+                    <h3 class="card-heading">አባል ይሁኑ ልዩ ልዩ ጥቅማጥቅሞችን ያግኛሉ</h3>
                     <p class="card-content" style="font-size: large;">
                         <!-- "Join our blood bank community today and help save lives! By creating an account, you'll have access to our life-saving blood donation program, where you can easily schedule appointments, track your donations, and receive alerts when your blood type is needed. Plus, as a member, you'll receive exclusive perks like priority donation appointments, special promotions, and more. Sign up now and start making a difference in your community!" -->
                         "አካውንት በመፍጠር ህይወት አድን የደም ልገሳ ፕሮግራማችንን በቀላሉ ቀጠሮ መያዝ፣ መዋጮዎትን መከታተል እና የደም አይነትዎ ሲከሰት ማንቂያዎችን ማግኘት ይችላሉ። ያስፈልጋል። በተጨማሪም፣ አባል እንደመሆኖ፣ እንደ የቅድሚያ የልገሳ ቀጠሮዎች፣ ልዩ ማስተዋወቂያዎች እና ሌሎች የመሳሰሉ ልዩ ጥቅማጥቅሞችን ያገኛሉ። አሁኑኑ ይመዝገቡ እና በማህበረሰብዎ ላይ ለውጥ ማምጣት ይጀምሩ!"
@@ -390,10 +585,10 @@
     <div class="main-block mt-6 ml-5" style="margin-top: 50px;">
 
 
-        <form action="create_acc" method="post" enctype=" multipart/form-data">
+        <form action="{{ route('create_acc') }}" method="post" enctype="multipart/form-data" onsubmit="return validateForm(event)">
+
             @csrf
             <h1>Create Account</h1>
-
             <fieldset>
                 @if(session('success'))
                 <div class="alert alert-success">
@@ -405,7 +600,13 @@
                 </legend>
                 <input type="hidden" name="role" value="2" required>
                 <div class="account-details">
-                    <div><label>First Name</label><input type="text" name="firstname" value="">
+                    <div>
+                        <!-- <label>First Name</label>
+                        <input type="text" name="firstname" value=""> -->
+                        <label for="firstNameField">First name:</label>
+                        <input type="text" id="firstNameField" name="firstname" onkeyup="validateInput()">
+
+                        <div id="errorFirstName" class="error-message">First name must contain only letters.</div>
                         <div style="color: red;">
                             @error('firstname')
                             <strong>{{ $message }}</strong>
@@ -419,28 +620,55 @@
                             @enderror
                         </div>
                     </div>
-                    <div><label>Last Name</label><input type="text" name="lastname" value="">
+                    <div>
+                        <!-- <label>Last Name</label>
+                        <input type="text" name="lastname" value=""> -->
+
+                        <label for="lastNameField">Last name:</label>
+                        <input type="text" id="lastNameField" name="lastname" onkeyup="validateInput()">
+                        <div id="errorLastName" class="error-message">Last name must contain only letters.</div>
+
                         <div style="color: red;">
                             @error('lastname')
                             <strong>{{ $message }}</strong>
                             @enderror
                         </div>
                     </div>
-                    <div><label>Password</label><input type="password" name="password" value="">
+                    <div>
+                        <!-- <label>Password</label> -->
+                        <label for="passwordField">Enter password:</label>
+                        <!-- <input type="password" name="password" value=""> -->
+                        <input type="password" id="passwordField" name="password" onkeyup="validateInput()">
+                        <br>
+                        <div id="errorLength" class="error-message">Password must be 8 characters or longer.</div>
+                        <div id="errorLowercase" class="error-message">Password must contain at least one lowercase letter.</div>
+                        <div id="errorSpecialChar" class="error-message">Password must contain at least one special character.</div>
+                        <div id="errorNumber" class="error-message">Password must contain at least one number.</div>
+
                         <div style="color: red;">
                             @error('password')
                             <strong>{{ $message }}</strong>
                             @enderror
                         </div>
                     </div>
+
                     <div><label>Age</label><input type="number" name="age" value="">
+                        <!-- <input type="date" name="date" min="{{ date('Y-m-d') }}"> -->
                         <div style="color: red;">
                             @error('age')
                             <strong>{{ $message }}</strong>
                             @enderror
                         </div>
                     </div>
-                    <div><label>Confirm Password</label> <input type="password" name="password_confirmation" /></div>
+                    <div>
+                        <!--  <label>Confirm Password</label>
+                     <input type="password" name="password_confirmation" /> -->
+                        <label for="confirmPasswordField">Confirm password:</label>
+                        <input type="password" id="confirmPasswordField" name="password_confirmation" onkeyup="validateInput()">
+                        <br>
+                        <div id="errorConfirm" class="error-message">Password confirmation does not match.</div>
+                    </div>
+
                     <div><label>Occupation</label><input type="text" name="occupation" value="">
                         <div style="color: red;">
                             @error('occupation')
@@ -448,21 +676,41 @@
                             @enderror
                         </div>
                     </div>
-                    <div><label>phone</label><input type="text" name="phone" value="">
+                    <div><label>phone</label>
+                        <div class="phone-input">
+                            <span class="country-code">+251</span>
+                            <span class="separator">|</span>
+                            <input type="text" name="phone" placeholder="Phone Number">
+                        </div>
+
                         <div style="color: red;">
                             @error('phone')
                             <strong>{{ $message }}</strong>
                             @enderror
                         </div>
+
                     </div>
-                    <div><label>Image</label><input type="file" accept="image/png/jpeg/svg/jpg" name="photo">
+                    <div>
+                        <!-- <label>Image</label>
+                        <input type="file" accept="image/png/jpeg/svg/jpg" name="photo"> -->
+
+                        <label for="fileInput">Upload Image:</label>
+                        <input type="file" id="fileInput" name="photo" onchange="validateInput()">
+
+                        <div id="errorFileSize" class="error-message">File size must be 10 MB or smaller.</div>
+                        <div id="errorFileFormat" class="error-message">Only JPEG, JPG, PNG, GIF, BMP, and SVG file formats are allowed.</div>
                         <div style="color: red;">
                             @error('photo')
                             <strong>{{ $message }}</strong>
                             @enderror
                         </div>
                     </div>
-                    <div><label>Gender</label><input type="text" name="gender" value="">
+                    <div class="gender"><label>Gender</label>
+                        <label for="male">male</label>
+                        <input type="radio" id="male" name="gender" value="male">
+
+                        <label for="female">female</label>
+                        <input type="radio" id="female" name="gender" value="female">
                         <div style="color: red;">
                             @error('gender')
                             <strong>{{ $message }}</strong>
@@ -519,7 +767,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div><label>House Number</label><input type="text" name="housenumber" value="">
+                        <div><label>House Number</label><input type="text" name="housenumber" pattern="\d{5}">
+
                             <div style="color: red;">
                                 @error('housenumber')
                                 <strong>{{ $message }}</strong>
@@ -549,7 +798,8 @@
                             </div>
                         </div>
                         <div><label>Type of Donation</label><input type="text" name="typeofdonation" value="vountary" readonly></div>
-                        <div><label>Height</label><input type="text" name="height" value="">
+                        <div><label>Height</label><input type="number" name="height" min="1.50" max="2.10" step="0.01">
+
                             <div style="color: red;">
                                 @error('height')
                                 <strong>{{ $message }}</strong>

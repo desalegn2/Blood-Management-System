@@ -216,7 +216,7 @@
         <div class="l-navbar" id="nav-bar">
 
             <nav class="nav">
-                <div> <a href="{{url('/doctor/profile',Auth::user()->id)}}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Profile</span> </a>
+                <div> <a href="{{url('/doctor/profile')}}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Profile</span> </a>
                     <div class="nav_list">
                         <a href="{{url('/doctor/home')}}" class="nav_link{{ Request::is('doctor/home') ? ' active' : '' }}"><span class="bx bx-home nav_icon"></span><span class="bx nav_name">Dashboard</span></a>
                         <a href="{{url('/doctor/finddonor')}}" class="nav_link{{ Request::is('doctor/finddonor') ? ' active' : '' }}"><span class="bx bx-search nav_icon"></span><span class="bx nav_name">Find Donor</span></a>

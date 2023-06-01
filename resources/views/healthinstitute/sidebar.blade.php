@@ -215,7 +215,7 @@
         <div class="l-navbar" id="nav-bar">
 
             <nav class="nav">
-                <div> <a href="{{url('/healthinstitute/profile',Auth::user()->id)}}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Profile</span> </a>
+                <div> <a href="{{url('/healthinstitute/profile')}}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Profile</span> </a>
                     <div class="nav_list">
                         <a href="{{url('/healthinstitute/home')}}" class="nav_link{{ Request::is('healthinstitute/home') ? ' active' : '' }}"><span class="bx bx-home nav_icon"></span><span class="bx nav_name">Dashboard</span></a>
                         <a href="{{url('/healthinstitute/hospitalrequest')}}" class="nav_link{{ Request::is('healthinstitute/hospitalrequest') ? ' active' : '' }}"><span class="bx bx-list-plus nav_icon"></span><span class="bx nav_name">Blood Request</span></a>

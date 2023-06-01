@@ -59,7 +59,9 @@
             <div class="col-md-12">
 
                 <h3> Blood Distribution Report To Hospitals</h3>
-                <p>Date Of Report {{$startDate}}</p>
+                <p>Date Of Report {{$dateofReport}}</p>
+                <p>Date of distributed: {{$startDate}}</p>
+                <p>Total amount distributed:{{$total}} ml </p>
 
                 <p>We successfully distributed blood from our blood bank to these health institute. We take pride in ensuring the safety and efficacy of our blood products and strive to provide the highest level of service to our customers.</p>
                 <br><br>
@@ -76,10 +78,10 @@
                         @if(count($data))
                         @foreach($data as $member)
                         <tr>
-                            <td>{{$member->recievedby}}</td>
+                            <td>{{$member->hospitalname}}</td>
                             <td>{{$member->bloodgroup}}</td>
                             <td>{{$member->volume}}</td>
-                            <td>{{$member->expirydate}}</td>
+                            <td>{{$member->expitariondate}}</td>
                         </tr>
                         @endforeach
                         @else
@@ -92,7 +94,7 @@
                 <p>The proper distribution of blood products is critical to ensuring that patients receive safe and effective transfusions. Blood banks, transportation companies, and healthcare facilities must work together to ensure that the blood products are handled and transported properly at all times.</p>
                 <br> <br> <br> <br>
                 <p>Bahir Dar Blood Bank Representative<br>
-                    {{ Auth::user()->name }}
+                    {{$fname}} {{$lname}}
                 </p>
             </div>
         </div>

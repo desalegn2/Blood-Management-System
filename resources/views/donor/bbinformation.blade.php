@@ -12,6 +12,38 @@
     <title>blood bank</title>
     <style>
 
+        textarea {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid rgb(70, 68, 68);
+            border-radius: 4px;
+            resize: vertical;
+        }
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        input[type=submit] {
+            background-color: rgb(37, 116, 161);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
     </style>
 </head>
 
@@ -59,6 +91,25 @@
             </div>
         </div>
     </div>
+
+    <div class="container">
+        <form action="givefeedbak" method="post">
+            @csrf
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required>
+            <div class="row">
+                <div class="col-25">
+                    <label for="feed_back">Feed Back</label>
+                </div>
+                <div class="col-75">
+                    <textarea id="subject" name="feedback" placeholder="Write something.." style="height:100px"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 </body>

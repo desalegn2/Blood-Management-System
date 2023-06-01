@@ -58,7 +58,7 @@
 <body>
     @include('donor.chatbotnav')
 
-    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/chatbot_style.css') }}">
 
     <div class="card-container">
@@ -132,10 +132,7 @@
                     <h3 class="card-heading">Highlight questions and answers</h3>
                     <p class="card-content">
 
-                    <p style="float: right;">ደም ለማን ይሰጣል ?</p><br><br>
-                    <p> በመኪና አደጋ ወይም በተፈጥሮ አደጋዎች ከባድ ጉዳት ለደረሰባቸው ታካሚዎች,የኩላሊት በሽታ ያሉ
-                        የደም ማነስን የሚያመጣ በሽታ ያለባቸው ግለሰቦች,ለወላዶች ።
-                    </p><br>
+                  
 
                     <p style="float: right;">ለጋሾች ውጤታቸው መቼ ነው የሚነገረው ?</p><br><br>
                     <p>የባህር ዳር ደም ለጋሽ ደንበኞች ዉጤታቸውን ለማየት፣ የባህር ዳር ደም ባንክ ኢንፎርሜሽን ማኔጅመንት ዌብ ሲስተም ተጠቃሚ ከሆኑ መቸ ወጤቱ

@@ -21,8 +21,12 @@ class hospitalModel extends Model
     ];
 
     public function bloodRequests()
-{
-    return $this->hasMany(BloodRequest::class);
-}
+    {
+        return $this->hasMany(BloodRequest::class);
+    }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'hospital_id');
+    }
 }

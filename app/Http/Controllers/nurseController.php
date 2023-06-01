@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\reservationModel;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Donor;
 
 use \Notification;
@@ -21,6 +22,7 @@ use Vonage\Client\Credentials\Basic;
 use Vonage\SMS\Message\SMS;
 use Illuminate\Support\Facades\DB;
 use App\Models\bbinformatiomModel;
+use App\Models\staffModel;
 
 class nurseController extends Controller
 {
@@ -68,31 +70,34 @@ class nurseController extends Controller
         $stats = reservationModel::where('created_at', '>=', $date)->get();
         $display1 = reservationModel::all();
 
-        return view('nurse.nurseHome', compact('display1','male','female', 'stats', 'donors_enrolled', 'aminus', 'aplus', 'bminus', 'bplus', 'abminus', 'abplus', 'ominus', 'oplus'));
+        return view('nurse.nurseHome', compact('display1', 'male', 'female', 'stats', 'donors_enrolled', 'aminus', 'aplus', 'bminus', 'bplus', 'abminus', 'abplus', 'ominus', 'oplus'));
     }
 
-    function Profile($id)
+    function Profile()
     {
+        $user = Auth::user();
+        $id = $user->id;
         $isExist = User::select("*")
             ->where("id", $id)
             ->exists();
         if ($isExist) {
-            $data = User::all()->where('id', '=', $id);
+            // $data = User::all()->where('id', '=', $id);
+            $data = staffModel::where('staff_id', $id)->with('user')->get();
             return view('nurse.profile', ['data' => $data]);
         }
     }
     function updateProfile(Request $req, int $id)
     {
 
-        User::where("id", $id)
-            ->update(["name" => $req->name, "email" => $req->email, "phone" => $req->phone]);
+        staffModel::where("staff_id", $id)
+            ->update(["firstname" => $req->firstname, "lastname" => $req->lastname, "phone" => $req->phone]);
         return redirect()->back()->with('success', 'your Profile,Changed');
     }
 
     function updatephoto(Request $req, int $id)
     {
 
-        $var = User::all()->where('id', '=', $id);
+        $var = staffModel::all()->where('staff_id', '=', $id);
         if ($req->hasfile('photo')) {
             $file = $req->file('photo');
             $extention = $file->getClientOriginalExtension();
@@ -100,7 +105,7 @@ class nurseController extends Controller
             $file->move('uploads/registers', $filename);
             $var->photo = $filename;
         }
-        User::where("id", $id)
+        staffModel::where("staff_id", $id)
             ->update(["photo" => $filename]);
         //return redirect('nurse/home');
         return redirect()->back()->with('success', 'your Image,Changed');
@@ -120,7 +125,7 @@ class nurseController extends Controller
             ]);
             return redirect()->back()->with('success', 'password changed Successfully!');
         } else {
-            return redirect()->back()->with('warnig', 'password not match with old!');
+            return redirect()->back()->with('warning', 'password not match with old password!');
         }
     }
 
@@ -129,7 +134,7 @@ class nurseController extends Controller
 
         $reservations = reservationModel::join('donors', 'reservation.donor_id', '=', 'donors.donor_id')
             ->where('reservation.status', '<>', 'Donated')
-            ->select('reservation.id','reservation.center', 'reservation.status','reservation.donor_id', 'donors.phone', 'donors.firstname')
+            ->select('reservation.id', 'reservation.center', 'reservation.status', 'reservation.donor_id', 'donors.phone', 'donors.firstname')
             ->get();
         //->paginate(4);
         return view('nurse.reserationManagement', ['reservations' => $reservations]);
@@ -250,7 +255,7 @@ class nurseController extends Controller
     {
         $date = \Carbon\Carbon::today()->subDays(30);
         $donors = DB::table('donors')
-            ->select('donors.firstname','donors.photo','donors.lastname', 'donors.phone','donation.donor_id','donors.bloodtype','donation.created_at')
+            ->select('donors.firstname', 'donors.photo', 'donors.lastname', 'donors.phone', 'donation.donor_id', 'donors.bloodtype', 'donation.created_at')
             ->join(DB::raw('(SELECT MAX(id) AS id, donor_id FROM donation WHERE created_at <= ? AND status = "accept" GROUP BY donor_id) AS latest_donation'), function ($join) {
                 $join->on('donors.donor_id', '=', 'latest_donation.donor_id');
             })

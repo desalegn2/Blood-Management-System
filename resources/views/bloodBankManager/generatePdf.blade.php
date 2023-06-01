@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <div class="container" id="div1">
+    <div class="container" id="div1" style="margin-top: 50px;">
         <h1 class="page-header text-center">Analysis</h1>
         <form action="{{url('/bbmanager/report')}}" method="get">
             @csrf

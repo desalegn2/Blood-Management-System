@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use App\Models\donationModel;
 use App\Models\bloodTest;
 use App\Models\bloodStock;
 use App\Models\Donor;
+use App\Models\staffModel;
 use \Notification;
 use App\Notifications\sendNotification;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -172,28 +174,31 @@ class techController extends Controller
     }
 
 
-    function Profile($id)
+    function Profile()
     {
+        $user = Auth::user();
+        $id = $user->id;
         $isExist = User::select("*")
             ->where("id", $id)
             ->exists();
         if ($isExist) {
-            $data = User::all()->where('id', '=', $id);
+            // $data = User::all()->where('id', '=', $id);
+            $data = staffModel::where('staff_id', $id)->with('user')->get();
             return view('technitian.profile', ['data' => $data]);
         }
     }
     function updateProfile(Request $req, int $id)
     {
 
-        User::where("id", $id)
-            ->update(["name" => $req->name, "email" => $req->email, "phone" => $req->phone]);
-        return redirect()->back()->with('success', 'your Profile,Changed');
+        staffModel::where("staff_id", $id)
+            ->update(["firstname" => $req->firstname, "lastname" => $req->lastname, "phone" => $req->phone]);
+        return redirect()->back()->with('success', 'your Profile,are Updated');
     }
 
     function updatephoto(Request $req, int $id)
     {
 
-        $var = User::all()->where('id', '=', $id);
+        $var = staffModel::all()->where('staff_id', '=', $id);
         if ($req->hasfile('photo')) {
             $file = $req->file('photo');
             $extention = $file->getClientOriginalExtension();
@@ -201,7 +206,7 @@ class techController extends Controller
             $file->move('uploads/registers', $filename);
             $var->photo = $filename;
         }
-        User::where("id", $id)
+        staffModel::where("staff_id", $id)
             ->update(["photo" => $filename]);
         //return redirect('nurse/home');
         return redirect()->back()->with('success', 'your Image,Changed');
@@ -221,7 +226,7 @@ class techController extends Controller
             ]);
             return redirect()->back()->with('success', 'password changed Successfully!');
         } else {
-            return redirect()->back()->with('warnig', 'password not match with old!');
+            return redirect()->back()->with('warning', 'password not match with old password!');
         }
     }
 }

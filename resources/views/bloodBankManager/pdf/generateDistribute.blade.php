@@ -61,7 +61,7 @@
 
                 <p>Date: {{$mytime}}</p>
                 <p>Time period: From{{$startDate}} To {{$endDate}} </p>
-                <p>Total amount collected:{{$total}} ml </p>
+                <p>Total amount distributed:{{$total}} ml </p>
 
                 <p>We successfully distributed blood from our blood bank to these health institute. We take pride in ensuring the safety and efficacy of our blood products and strive to provide the highest level of service to our customers.</p>
                 <table>
@@ -77,10 +77,10 @@
                         @if(count($data))
                         @foreach($data as $member)
                         <tr>
-                            <td>{{$member->recievedby}}</td>
+                            <td>{{$member->hospitalname}}</td>
                             <td>{{$member->bloodgroup}}</td>
                             <td>{{$member->volume}}</td>
-                            <td>{{$member->expirydate}}</td>
+                            <td>{{$member->expitariondate}}</td>
                         </tr>
                         @endforeach
                         @else
@@ -95,7 +95,7 @@
                 </p>
                 <br><br><br>
                 <p>Bahir Dar Blood Bank Representative<br>
-                    {{ Auth::user()->name }}
+                    {{$fname}} {{$lname}}
                 </p>
             </div>
         </div>

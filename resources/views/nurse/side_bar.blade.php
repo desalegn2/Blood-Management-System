@@ -202,7 +202,7 @@
         </header>
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
-                <div> <a href="{{url('/nurse/profile',Auth::user()->id)}}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Profile</span> </a>
+                <div> <a href="{{url('/nurse/profile')}}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Profile</span> </a>
                     <div class="nav_list">
                         <a href="{{url('/nurse/home')}}" class="nav_link{{ Request::is('nurse/home') ? ' active' : '' }}"><span class="bx nav_icon"><i class='bx bx-home'></i></span><span class="bx nav_name">Dashboard</span> </a>
                         <a href="{{url('/nurse/reservation')}}" class="nav_link{{ Request::is('nurse/reservation') ? ' active' : '' }}"> <span class="bx nav_icon"><i class='bx bx-calendar'></i></span><span class="bx nav_name">Reservation</span> </a>
