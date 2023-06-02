@@ -374,165 +374,145 @@
             color: red;
         }
     </style>
-
     <script>
         function validateName(name) {
             var letterRegex = /^[a-zA-Z]+$/;
             return letterRegex.test(name);
         }
 
-        function validateInput() {
-            var password = document.getElementById("passwordField").value;
-            var confirmPass = document.getElementById("confirmPasswordField").value;
-            var fileInput = document.getElementById("fileInput");
-            var firstName = document.getElementById("firstNameField").value;
-            var lastName = document.getElementById("lastNameField").value;
+        function validatePassword(password) {
+            var passwordRegex = /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[a-z\d@$!%*?&]{6,}$/;
+            return passwordRegex.test(password);
+        }
 
-            // Check first name validation
-            if (!validateName(firstName)) {
-                document.getElementById("errorFirstName").style.display = "block";
+        function validateInput(inputField, errorMessageId) {
+            var inputValue = inputField.value;
+            var errorMessage = document.getElementById(errorMessageId);
+
+            if (inputValue.trim() === "") {
+                errorMessage.textContent = "This field is required.";
+                errorMessage.style.display = "block";
             } else {
-                document.getElementById("errorFirstName").style.display = "none";
+                errorMessage.style.display = "none";
             }
 
-            // Check last name validation
-            if (!validateName(lastName)) {
-                document.getElementById("errorLastName").style.display = "block";
-            } else {
-                document.getElementById("errorLastName").style.display = "none";
-            }
-
-            // Check password validations
-            if (password.length < 8) {
-                document.getElementById("errorLength").style.display = "block";
-            } else {
-                document.getElementById("errorLength").style.display = "none";
-            }
-
-            var lowercaseRegex = /[a-z]/;
-            if (!lowercaseRegex.test(password)) {
-                document.getElementById("errorLowercase").style.display = "block";
-            } else {
-                document.getElementById("errorLowercase").style.display = "none";
-            }
-
-            var specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
-            if (!specialCharRegex.test(password)) {
-                document.getElementById("errorSpecialChar").style.display = "block";
-            } else {
-                document.getElementById("errorSpecialChar").style.display = "none";
-            }
-
-            var numberRegex = /\d/;
-            if (!numberRegex.test(password)) {
-                document.getElementById("errorNumber").style.display = "block";
-            } else {
-                document.getElementById("errorNumber").style.display = "none";
-            }
-            // Check password confirmation
-            if (password !== confirmPass) {
-                document.getElementById("errorConfirm").style.display = "block";
-            } else {
-                document.getElementById("errorConfirm").style.display = "none";
-            }
-
-
-            // Check file size
-            if (fileInput.files.length > 0) {
-                var fileSize = fileInput.files[0].size / 1024 / 1024; // in MB
-                if (fileSize > 10) {
-                    document.getElementById("errorFileSize").style.display = "block";
+            if (inputField.id === "firstNameField" || inputField.id === "lastNameField") {
+                if (!validateName(inputValue)) {
+                    errorMessage.textContent = "This field must contain only letters.";
+                    errorMessage.style.display = "block";
                 } else {
-                    document.getElementById("errorFileSize").style.display = "none";
+                    errorMessage.style.display = "none";
                 }
             }
 
-            // Check file format
-            var allowedFormats = ["jpeg", "jpg", "png", "gif", "bmp", "svg"];
-            var fileFormat = fileInput.value.split('.').pop().toLowerCase();
-            if (!allowedFormats.includes(fileFormat)) {
-                document.getElementById("errorFileFormat").style.display = "block";
-            } else {
-                document.getElementById("errorFileFormat").style.display = "none";
+            if (inputField.id === "ageField") {
+                if (isNaN(inputValue) || inputValue < 17 || inputValue > 65) {
+                    errorMessage.textContent = "Age must be between 17 and 65.";
+                    errorMessage.style.display = "block";
+                } else {
+                    errorMessage.style.display = "none";
+                }
+            }
+
+            if (inputField.id === "heightField") {
+                if (isNaN(inputValue) || inputValue < 1.50 || inputValue > 2.50) {
+                    errorMessage.textContent = "Height must be between 1.50 and 2.50.";
+                    errorMessage.style.display = "block";
+                } else {
+                    errorMessage.style.display = "none";
+                }
+            }
+
+            if (inputField.id === "phoneField") {
+                if (!/^([79]\d{8})$/.test(inputValue)) {
+                    errorMessage.textContent = "Phone number must start with 7 or 9 and have 8 digits.";
+                    errorMessage.style.display = "block";
+                } else {
+                    errorMessage.style.display = "none";
+                }
+            }
+
+            if (inputField.id === "weightField") {
+                if (isNaN(inputValue) || inputValue < 48) {
+                    errorMessage.textContent = "Weight must be at least 48.";
+                    errorMessage.style.display = "block";
+                } else {
+                    errorMessage.style.display = "none";
+                }
+            }
+
+            if (inputField.id === "passwordField") {
+                if (inputValue !== "" && !validatePassword(inputValue)) {
+                    errorMessage.textContent = "Password must be at least 6 characters long and contain at least one lowercase letter, one number, and one special character.";
+                    errorMessage.style.display = "block";
+                } else {
+                    errorMessage.style.display = "none";
+                }
             }
 
 
+            if (inputField.id === "confirmPasswordField") {
+                var password = document.getElementById("passwordField").value;
+                if (inputValue !== password) {
+                    errorMessage.textContent = "Passwords do not match.";
+                    errorMessage.style.display = "block";
+                } else {
+                    errorMessage.style.display = "none";
+                }
+            }
+
+            if (inputField.id === "fileField") {
+                var fileSize = inputField.files[0].size / (1024 * 1024); // File size in MB
+                var fileExtension = inputField.value.split(".").pop().toLowerCase();
+                var allowedExtensions = ["jpeg", "jpg", "png", "gif", "bmp", "svg"];
+
+                if (fileSize > 10) {
+                    errorMessage.textContent = "File size must be less than 10 MB.";
+                    errorMessage.style.display = "block";
+                } else if (!allowedExtensions.includes(fileExtension)) {
+                    errorMessage.textContent = "File format not supported. Allowed formats are JPEG, JPG, PNG, GIF, BMP, or SVG.";
+                    errorMessage.style.display = "block";
+                } else {
+                    errorMessage.style.display = "none";
+                }
+            }
         }
 
         function validateForm(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            // Perform final validation and show error messages
-            var password = document.getElementById("passwordField").value;
-            var confirmPass = document.getElementById("confirmPasswordField").value;
-            var fileInput = document.getElementById("fileInput");
+            event.preventDefault();
 
             // Check first name validation
-            var firstName = document.getElementById("firstNameField").value;
-            if (!validateName(firstName)) {
-                document.getElementById("errorFirstName").style.display = "block";
-            } else {
-                document.getElementById("errorFirstName").style.display = "none";
+            var firstName = document.getElementById("firstNameField");
+            if (!validateName(firstName.value)) {
+                alert("First name must contain only letters.");
+                return false;
             }
 
             // Check last name validation
-            var lastName = document.getElementById("lastNameField").value;
-            if (!validateName(lastName)) {
-                document.getElementById("errorLastName").style.display = "block";
-            } else {
-                document.getElementById("errorLastName").style.display = "none";
-            }
-
-            // Check password validations
-            if (password.length < 8) {
-                alert("Password must be 8 characters or longer.");
+            var lastName = document.getElementById("lastNameField");
+            if (!validateName(lastName.value)) {
+                alert("Last name must contain only letters.");
                 return false;
             }
 
-            var lowercaseRegex = /[a-z]/;
-            if (!lowercaseRegex.test(password)) {
-                alert("Password must contain at least one lowercase letter.");
-                return false;
-            }
+            // Check input validations
+            var inputs = document.getElementsByClassName("input-field");
+            var errorMessages = document.getElementsByClassName("error-message");
 
-            var specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
-            if (!specialCharRegex.test(password)) {
-                alert("Password must contain at least one special character.");
-                return false;
-            }
+            for (var i = 0; i < inputs.length; i++) {
+                var inputField = inputs[i];
+                var errorMessage = errorMessages[i];
 
-            var numberRegex = /\d/;
-            if (!numberRegex.test(password)) {
-                alert("Password must contain at least one number.");
-                return false;
-            }
-
-            // Check password confirmation
-            if (password !== confirmPass) {
-                alert("Password confirmation does not match.");
-                return false;
-            }
-
-            // Check file size
-            if (fileInput.files.length > 0) {
-                var fileSize = fileInput.files[0].size / 1024 / 1024; // in MB
-                if (fileSize > 10) {
-                    alert("File size must be 10 MB or smaller.");
-                    return false;
+                if (inputField.value.trim() === "") {
+                    errorMessage.textContent = "This field is required.";
+                    errorMessage.style.display = "block";
+                } else {
+                    errorMessage.style.display = "none";
                 }
             }
 
-            // Check file format
-            var allowedFormats = ["jpeg", "jpg", "png", "gif", "bmp", "svg"];
-            var fileFormat = fileInput.value.split('.').pop().toLowerCase();
-            if (!allowedFormats.includes(fileFormat)) {
-                alert("Only JPEG, JPG, PNG, GIF, BMP, and SVG file formats are allowed.");
-                return false;
-            }
-
-            // If all validations pass, you can proceed with further actions if needed
+            //return true;
             event.target.submit();
-            //  return true; // Prevent form submission and page refresh
         }
     </script>
 </head>
@@ -601,12 +581,9 @@
                 <input type="hidden" name="role" value="2" required>
                 <div class="account-details">
                     <div>
-                        <!-- <label>First Name</label>
-                        <input type="text" name="firstname" value=""> -->
                         <label for="firstNameField">First name:</label>
-                        <input type="text" id="firstNameField" name="firstname" onkeyup="validateInput()">
-
-                        <div id="errorFirstName" class="error-message">First name must contain only letters.</div>
+                        <input type="text" id="firstNameField" name="firstname" class="input-field" onkeyup="validateInput(this, 'errorFirstName')">
+                        <div id="errorFirstName" class="error-message"></div>
                         <div style="color: red;">
                             @error('firstname')
                             <strong>{{ $message }}</strong>
@@ -621,12 +598,9 @@
                         </div>
                     </div>
                     <div>
-                        <!-- <label>Last Name</label>
-                        <input type="text" name="lastname" value=""> -->
-
                         <label for="lastNameField">Last name:</label>
-                        <input type="text" id="lastNameField" name="lastname" onkeyup="validateInput()">
-                        <div id="errorLastName" class="error-message">Last name must contain only letters.</div>
+                        <input type="text" id="lastNameField" name="lastname" class="input-field" onkeyup="validateInput(this, 'errorLastName')">
+                        <div id="errorLastName" class="error-message"></div>
 
                         <div style="color: red;">
                             @error('lastname')
@@ -635,16 +609,9 @@
                         </div>
                     </div>
                     <div>
-                        <!-- <label>Password</label> -->
-                        <label for="passwordField">Enter password:</label>
-                        <!-- <input type="password" name="password" value=""> -->
-                        <input type="password" id="passwordField" name="password" onkeyup="validateInput()">
-                        <br>
-                        <div id="errorLength" class="error-message">Password must be 8 characters or longer.</div>
-                        <div id="errorLowercase" class="error-message">Password must contain at least one lowercase letter.</div>
-                        <div id="errorSpecialChar" class="error-message">Password must contain at least one special character.</div>
-                        <div id="errorNumber" class="error-message">Password must contain at least one number.</div>
-
+                        <label for="passwordField">Enter Password:</label>
+                        <input type="password" id="passwordField" name="password" class="input-field" onkeyup="validateInput(this, 'errorPassword')">
+                        <div id="errorPassword" class="error-message"></div>
                         <div style="color: red;">
                             @error('password')
                             <strong>{{ $message }}</strong>
@@ -652,7 +619,10 @@
                         </div>
                     </div>
 
-                    <div><label>Age</label><input type="number" name="age" value="">
+                    <div>
+                        <label for="ageField">Age:</label>
+                        <input type="number" id="ageField" name="age" min="17" max="65" class="input-field" onkeyup="validateInput(this, 'errorAge')">
+                        <div id="errorAge" class="error-message"></div>
                         <!-- <input type="date" name="date" min="{{ date('Y-m-d') }}"> -->
                         <div style="color: red;">
                             @error('age')
@@ -661,12 +631,9 @@
                         </div>
                     </div>
                     <div>
-                        <!--  <label>Confirm Password</label>
-                     <input type="password" name="password_confirmation" /> -->
-                        <label for="confirmPasswordField">Confirm password:</label>
-                        <input type="password" id="confirmPasswordField" name="password_confirmation" onkeyup="validateInput()">
-                        <br>
-                        <div id="errorConfirm" class="error-message">Password confirmation does not match.</div>
+                        <label for="confirmPasswordField">Confirm Password:</label>
+                        <input type="password" id="confirmPasswordField" name="password_confirmation" class="input-field" onkeyup="validateInput(this, 'errorConfirmPassword')">
+                        <div id="errorConfirmPassword" class="error-message"></div>
                     </div>
 
                     <div><label>Occupation</label><input type="text" name="occupation" value="">
@@ -676,12 +643,14 @@
                             @enderror
                         </div>
                     </div>
-                    <div><label>phone</label>
+                    <div>
+                        <label for="phoneField">Phone:</label>
                         <div class="phone-input">
                             <span class="country-code">+251</span>
                             <span class="separator">|</span>
-                            <input type="text" name="phone" placeholder="Phone Number">
+                            <input type="tel" id="phoneField" name="phone" pattern="[79]\d{8}" class="input-field" onkeyup="validateInput(this, 'errorPhone')">
                         </div>
+                        <div id="errorPhone" class="error-message"></div>
 
                         <div style="color: red;">
                             @error('phone')
@@ -691,14 +660,9 @@
 
                     </div>
                     <div>
-                        <!-- <label>Image</label>
-                        <input type="file" accept="image/png/jpeg/svg/jpg" name="photo"> -->
-
-                        <label for="fileInput">Upload Image:</label>
-                        <input type="file" id="fileInput" name="photo" onchange="validateInput()">
-
-                        <div id="errorFileSize" class="error-message">File size must be 10 MB or smaller.</div>
-                        <div id="errorFileFormat" class="error-message">Only JPEG, JPG, PNG, GIF, BMP, and SVG file formats are allowed.</div>
+                        <label for="fileField">Image:</label>
+                        <input type="file" id="fileField" name="photo" class="input-field" onchange="validateInput(this, 'errorFile')">
+                        <div id="errorFile" class="error-message"></div>
                         <div style="color: red;">
                             @error('photo')
                             <strong>{{ $message }}</strong>
@@ -798,7 +762,10 @@
                             </div>
                         </div>
                         <div><label>Type of Donation</label><input type="text" name="typeofdonation" value="vountary" readonly></div>
-                        <div><label>Height</label><input type="number" name="height" min="1.50" max="2.10" step="0.01">
+                        <div>
+                            <label for="heightField">Height:</label>
+                            <input type="number" id="heightField" name="height" min="1.50" max="2.50" step="0.01" class="input-field" onkeyup="validateInput(this, 'errorHeight')">
+                            <div id="errorHeight" class="error-message"></div>
 
                             <div style="color: red;">
                                 @error('height')
@@ -806,7 +773,10 @@
                                 @enderror
                             </div>
                         </div>
-                        <div><label>Weight</label><input type="number" name="weight" value="">
+                        <div>
+                            <label for="weightField">Weight:</label>
+                            <input type="number" id="weightField" name="weight" min="48" class="input-field" onkeyup="validateInput(this, 'errorWeight')">
+                            <div id="errorWeight" class="error-message"></div>
                             <div style="color: red;">
                                 @error('weight')
                                 <strong>{{ $message }}</strong>
