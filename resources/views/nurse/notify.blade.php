@@ -36,6 +36,7 @@
                     Email Send Sucessfully
                 </div>
                 @endif
+
                 <table class="table table-bordered table-responsive table-striped">
                     <thead>
                         <tr>
@@ -46,12 +47,12 @@
                             <th>blood Type</th>
                             <th>Duration</th>
                             <th>Notify</th>
-
                         </tr>
                     </thead>
                     <tbody>
-                        @if(count($donors))
-                        @foreach ($donors as $donor)
+
+                        @foreach ($data as $donor)
+                        @if ($donor->donation->count() > 0)
                         <tr>
                             <td>
                                 <img src="{{asset('uploads/registers/'.$donor->photo)}}" width="80" height="80">
@@ -60,24 +61,17 @@
                             <td>{{$donor->lastname}}</td>
                             <td>{{$donor->phone}}</td>
                             <td>{{$donor->bloodtype}}</td>
-                            <td>{{$donor->created_at}}</td>
-                            <!-- <td>{{ \Carbon\Carbon::parse($donor->created_at)->diffForHumans() }}</td> -->
+                            <td>{{ $donor->donation[0]->created_at }}</td>
+                            <!-- <td>{{ \Carbon\Carbon::parse($donor->created_at)->diffForHumans(null, false, true) }}</td> -->
                             <td>
                                 <a class="btn btn-success" href="{{url('nurse/email', $donor->donor_id)}}"> Email</a>
                                 <a class="btn btn-success" href="{{url('nurse/sms', $donor->donor_id)}}">SMS</a>
                             </td>
-
-                        </tr>
-                        @endforeach
-                        @else
-                        <tr>
-                            <td>No Donor with This Length of Date</td>
                         </tr>
                         @endif
+                        @endforeach
                     </tbody>
                 </table>
-
-                
             </div>
         </div>
     </div>

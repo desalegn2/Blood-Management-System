@@ -28,7 +28,7 @@
                     <option value="">Choose Report Type</option>
                     <option value="collection">Blood Collection Report</option>
                     <option value="distribution">Blood Distribute Report</option>
-                    <option value="request">Blood Request Report</option>
+                    <!-- <option value="request">Blood Request Report</option> -->
                 </select>
                 <input type="submit" value="OK" class="btn btn-primary btn-block">
             </div>

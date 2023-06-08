@@ -211,6 +211,12 @@
                             <span class="am hidden">የደም ባንክ መረጃ</span>
                         </a>
                     </div>
+                    <div class="menu-item">
+                        <a href="{{url('/donor/seeker')}}" class="@if(Request::is('donor/information*')) active @endif">
+                            <span class="en">Seeker</span>
+                            <span class="am hidden">ደም ፈላጊወች</span>
+                        </a>
+                    </div>
                     <div class="dropdown @if(Request::is('donor/reservation*')) active @endif">
                         <a href="" class="dropbtn">
                             <span class="en">Reservation</span>

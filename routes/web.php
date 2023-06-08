@@ -58,8 +58,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::post('/donor/updatephoto/{id}', [donorController::class, 'updatephoto']);
         Route::post('/donor/changepassword', [donorController::class, 'changepassword']);
 
-        Route::view('donor/view', 'donor.viewP');
-        Route::get('donor/seeker', [donorController::class, 'view']);
+        //Route::view('/donor/view', 'donor.viewP');
+        Route::get('/donor/seeker', [donorController::class, 'viewSeeer']);
 
         Route::get('donor/news', [donorController::class, 'viewNews']);
         Route::get('donor/information', [donorController::class, 'viewInfo']);
@@ -169,7 +169,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::post('/healthinstitute/updatephoto/{id}', [hospitalController::class, 'updatephoto']);
         Route::post('/healthinstitute/changepassword', [hospitalController::class, 'changepassword']);
 
-        Route::view('/healthinstitute/seekerRegister', 'healthinstitute.postSeeker');
+       // Route::view('/healthinstitute/seekerRegister', 'healthinstitute.postSeeker');
         Route::view('/healthinstitute/posts', 'healthinstitute.hospitalPost');
         Route::post('/healthinstitute/post_seeker', [hospitalController::class, 'postSeeker']);
 
@@ -251,5 +251,10 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         Route::get('/doctor/transfer', [doctorController::class, 'BloodTransfer']);
         Route::post('/doctor/transfusion/{id}', [doctorController::class, 'Transfusion']);
+        Route::view('/doctor/finddonor','doctor.searchDonor');
+
+       // Route::post('/healthinstitute/search', [hospitalController::class, 'search']);
+        Route::post('/doctor/search', [doctorController::class, 'search']);
+        
     });
 });//prevent back middllewire

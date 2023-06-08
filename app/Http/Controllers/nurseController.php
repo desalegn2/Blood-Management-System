@@ -23,6 +23,8 @@ use Vonage\SMS\Message\SMS;
 use Illuminate\Support\Facades\DB;
 use App\Models\bbinformatiomModel;
 use App\Models\staffModel;
+use Carbon\Carbon;
+
 
 class nurseController extends Controller
 {
@@ -253,17 +255,14 @@ class nurseController extends Controller
     }
     function notifys()
     {
-        $date = \Carbon\Carbon::today()->subDays(30);
-        $donors = DB::table('donors')
-            ->select('donors.firstname', 'donors.photo', 'donors.lastname', 'donors.phone', 'donation.donor_id', 'donors.bloodtype', 'donation.created_at')
-            ->join(DB::raw('(SELECT MAX(id) AS id, donor_id FROM donation WHERE created_at <= ? AND status = "accept" GROUP BY donor_id) AS latest_donation'), function ($join) {
-                $join->on('donors.donor_id', '=', 'latest_donation.donor_id');
-            })
-            ->join('donation', 'latest_donation.id', '=', 'donation.id')
-            ->orderBy('donation.created_at', 'desc')
-            ->setBindings([$date])
-            ->get();
-        return view('nurse.notify', ['donors' => $donors]);
+        
+        $data = Donor::with(['donation' => function ($query) {
+            $query->select('donor_id', 'created_at')
+                ->where('created_at', '<=', Carbon::now()->subDays(30))
+                ->orderBy('created_at', 'desc');
+        }])->get();
+
+        return view('nurse.notify', ['data' => $data]);
     }
 
     function DaystoNotify(Request $req)

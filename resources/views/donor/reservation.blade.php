@@ -23,6 +23,7 @@
             grid-template-columns: repeat(auto-fit);
             grid-gap: 20px;
         }
+
         label {
             display: block;
             font-weight: 600;
@@ -50,6 +51,7 @@
             width: 100%;
             transition: all 0.3s ease;
         }
+
         .submit-button:hover {
             background-color: #3e8e41;
         }
@@ -62,7 +64,7 @@
             margin-bottom: 1rem;
             border: 1px solid transparent;
             border-radius: .25rem;
-           font-weight: lighter;
+            font-weight: lighter;
         }
     </style>
 </head>
@@ -89,8 +91,8 @@
             <div id="alert-danger" class="alert alert-danger">
                 <strong>ህይወትን ለማዳን ደም ለመለገስ ላሳዩት ፍላጎት እና ቁርጠኝነት እናመሰግናለን። <br>
                     ነገር ግን ተላላፊ በሽታ ካለባቸዉ ግለሰቦች የደም ልገሳን መቀበል አንችልም <br>
-                     ምክንያቱም ለለጋሹም ሆነ ለተቀባዩ አደጋ ያስከትላል. <br>
-                     የደም ልገ ሳን አስፈላጊነት ግንዛቤ በማስጨበጥ እና ሌሎችም እንዲለግሱ በማበረታታት የዓላማችንን ድጋፍ እንድትቀጥሉ እናሳስባለን። </strong>
+                    ምክንያቱም ለለጋሹም ሆነ ለተቀባዩ አደጋ ያስከትላል. <br>
+                    የደም ልገ ሳን አስፈላጊነት ግንዛቤ በማስጨበጥ እና ሌሎችም እንዲለግሱ በማበረታታት የዓላማችንን ድጋፍ እንድትቀጥሉ እናሳስባለን። </strong>
             </div>
             @endif
 
@@ -134,8 +136,7 @@
 
                     <div>
                         <label for="reservationdate">Donation Date:</label>
-                        <input type="date" id="reservationdate" name="reservationdate">
-
+                        <input type="date" id="reservationdate" name="reservationdate" min="{{ date('Y-m-d') }}">
                         <div style="color: red;">
                             @error('reservationdate')
                             <strong>{{ $message }}</strong>
@@ -144,7 +145,7 @@
                     </div>
 
                 </div>
-                
+
                 <button type="submit" class="submit-button">Send</button>
             </form>
         </div>

@@ -220,8 +220,8 @@
                         <a href="{{url('/healthinstitute/home')}}" class="nav_link{{ Request::is('healthinstitute/home') ? ' active' : '' }}"><span class="bx bx-home nav_icon"></span><span class="bx nav_name">Dashboard</span></a>
                         <a href="{{url('/healthinstitute/hospitalrequest')}}" class="nav_link{{ Request::is('healthinstitute/hospitalrequest') ? ' active' : '' }}"><span class="bx bx-list-plus nav_icon"></span><span class="bx nav_name">Blood Request</span></a>
                         <a href="{{url('/healthinstitute/history',Auth::user()->id)}}" class="nav_link{{ Request::is('healthinstitute/history',Auth::user()->id) ? ' active' : '' }}"><span class="bx bx-list-ul nav_icon"></span><span class="bx nav_name">View Request</span></a>
-                        <!-- <a href="{{url('/healthinstitute/posts')}}" class="nav_link{{ Request::is('healthinstitute/posts') ? ' active' : '' }}"><span class="bx bx-user nav_icon"></span><span class="bx nav_name">Post Seekers</span></a>
-                        <a href="{{url('/healthinstitute/aa',Auth::user()->id)}}" class="nav_link{{ Request::is('healthinstitute/aa') ? ' active' : '' }}"><span class="bx bx-file nav_icon"></span><span class="bx nav_name">Our Post</span></a> -->
+                     <a href="{{url('/healthinstitute/posts')}}" class="nav_link{{ Request::is('healthinstitute/posts') ? ' active' : '' }}"><span class="bx bx-user nav_icon"></span><span class="bx nav_name">Post Seekers</span></a>
+                        <a href="{{url('/healthinstitute/aa',Auth::user()->id)}}" class="nav_link{{ Request::is('healthinstitute/aa') ? ' active' : '' }}"><span class="bx bx-file nav_icon"></span><span class="bx nav_name">Our Post</span></a>
                         <a href="{{url('/healthinstitute/adddoctor')}}" class="nav_link{{ Request::is('healthinstitute/adddoctor') ? ' active' : '' }}"><span class="bx bx-user-plus nav_icon"></span><span class="bx nav_name">Add Doctor</span></a>
                     </div>
                 </div> <a href="{{ route('logout') }}" onclick="event.preventDefault();

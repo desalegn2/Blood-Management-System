@@ -221,6 +221,7 @@
                 <a href="{{url('/donor/home')}}" class="@if(Request::is('donor/home*')) active @endif">Home</a>
                 <a href="{{url('/donor/news')}}" class="@if(Request::is('donor/news*')) active @endif">News</a>
                 <a href="{{url('/donor/information')}}" class="@if(Request::is('donor/information*')) active @endif">Blood Bank Information</a>
+                <a href="{{url('/donor/seeker')}}" class="@if(Request::is('donor/news*')) active @endif">Seeer</a>
                 <div class="dropdown @if(Request::is('donor/reservation*')) active @endif">
                     <a href="" class="dropbtn">Reservation</a>
                     <div class="dropdown-content">

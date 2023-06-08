@@ -31,7 +31,7 @@
                     <option value="">Choose Report Type</option>
                     <option value="collection">Blood Collection Report</option>
                     <option value="distribution">Blood Distribute Report</option>
-                    <option value="request">Blood Request Report</option>
+                    <!-- <option value="request">Blood Request Report</option> -->
                 </select>
                 <input type="submit" value="Search">
             </div>
@@ -57,15 +57,15 @@
                         <form action="{{url('/bbmanager/morethanOneDayCollection')}}" method="post">
                             @csrf
                             <p>Blood Collection Report of Many Days</p>
-                            <label>From</label>&nbsp;<input type="date" name="startdate"><br><br>
-                            <label>To</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="enddate">&nbsp;&nbsp;
+                            <label>From</label>&nbsp;<input type="date" name="startdate"  max="{{ date('Y-m-d') }}"><br><br>
+                            <label>To</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="enddate"  max="{{ date('Y-m-d') }}">&nbsp;&nbsp;
                             <input type="submit" value="Report">
                         </form>
                         <br><br>
                         <form action="{{url('/bbmanager/onedayCollection')}}" method="post">
                             @csrf
                             <p>Blood Collection Report of one day</p>
-                            <label>From</label>&nbsp;&nbsp;&nbsp;<input type="date" name="startdate" required>
+                            <label>From</label>&nbsp;&nbsp;&nbsp;<input type="date" name="startdate" max="{{ date('Y-m-d') }}" required>
                             <input type="submit" value="Report">
                         </form>
                     </div>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Donor Home Page</title>
+    <title>Createb Account Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
@@ -425,7 +425,7 @@
 
             if (inputField.id === "phoneField") {
                 if (!/^([79]\d{8})$/.test(inputValue)) {
-                    errorMessage.textContent = "Phone number must start with 7 or 9 and have 8 digits.";
+                    errorMessage.textContent = "Phone number must start with 7 or 9 and have 9 digits.";
                     errorMessage.style.display = "block";
                 } else {
                     errorMessage.style.display = "none";
@@ -518,13 +518,9 @@
 </head>
 
 <body>
-
     <div>
-
         <header>
-
             <div class="inner-width">
-
                 <i class="menu-toggle-btn fas fa-bars"></i>
                 <nav class="navigation-menu">
                     <a href="/">Home</a>
@@ -532,7 +528,6 @@
                 </nav>
             </div>
         </header>
-
     </div>
     <br><br>
 
@@ -696,14 +691,31 @@
                                 @enderror
                             </div>
                         </div>
-                        <div><label>State</label><input type="text" name="state">
+                        <div>
+                            <label>State</label>
+                            <!-- <input type="text" name="state"> -->
+                            <select name="state">
+                                <option value="">choose</option>
+                                <option value="tigray">Tigray</option>
+                                <option value="amhare">Amhara</option>
+                                <option value="afar">Afar</option>
+                                <option value="oromia">Oromia</option>
+                                <option value="somaalia">Somalia</option>
+                                <option value="sidama">Sidama</option>
+                                <option value="gambela">Gambella</option>
+                                <option value="harer">Harere</option>
+                                <option value="SNNS">SNNS</option>
+                                <option value="southwestethiopia">South West Ethiopia</option>
+                            </select>
                             <div style="color: red;">
                                 @error('state')
                                 <strong>{{ $message }}</strong>
                                 @enderror
                             </div>
                         </div>
-                        <div><label>City</label><input type="text" name="city" value="">
+                        <div>
+                            <label>City</label>
+                            <input type="text" name="city" value="">
                             <div style="color: red;">
                                 @error('city')
                                 <strong>{{ $message }}</strong>

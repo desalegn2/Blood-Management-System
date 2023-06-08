@@ -16,6 +16,7 @@ use App\Models\Doctor;
 use App\Models\BloodRequestItem;
 use App\Models\BloodRequest;
 use App\Models\hospitalModel;
+use App\Models\seekerModel;
 
 class hospitalController extends Controller
 {
@@ -123,48 +124,34 @@ class hospitalController extends Controller
 
 
 
-    function findDonor(Request $req)
-    {
-        $data = addBloodModel::all();
-        return view('healthinstitute.findDonor', ['data' => $data]);
-    }
+    // function findDonor(Request $req)
+    // {
+    //     $data = addBloodModel::all();
+    //     return view('healthinstitute.findDonor', ['data' => $data]);
+    // }
 
     function postSeeker(Request $req)
     {
 
-        $req->validate([
-
-
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:hospitalpost'],
-
-            'photo' => 'required|mimes:jpeg,png,jpg,gif',
-            'fname' => 'required|string|max:255',
-            'lname' => 'required|string|max:255',
-
-            'fname' => 'required|string|max:255',
-            'lname' => 'required|string|max:255',
-            'fname' => 'required|string|max:255',
-            'lname' => 'required|string|max:255',
-
-
-            'age' => 'min:1|max:3',
-            'whenneed' => 'required|date|after_or_equal:today',
-        ]);
-        $var = new hospitalPosts;
-        $var->user_id = $req->user_id;
-        $var->patientname = $req->fname;
-        $var->lastname = $req->lname;
+        // $req->validate([
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:seeker'],
+        //     'pbloodtypehoto' => 'required|mimes:jpeg,png,jpg,gif',
+        //     'firstname' => 'required|string|max:255',
+        //     'lastname' => 'required|string|max:255',
+        //     'age' => 'min:1|max:3',
+        //     'when_nedded' => 'required|date|after_or_equal:today',
+        // ]);
+        $var = new seekerModel;
+        $var->hospital_id = $req->hospital_id;
+        $var->firstname = $req->firstname;
+        $var->lastname = $req->lastname;
+        $var->age = $req->age;
         $var->email = $req->email;
         $var->phone = $req->phone;
         $var->gender = $req->gender;
-        $var->whenneed = $req->whenneed;
-        $var->amount = $req->amount;
+        $var->when_nedded = $req->when_nedded;
         $var->bloodtype = $req->bloodtype;
-        $var->age = $req->age;
-        $var->hospital = $req->hospital;
-        $var->state = $req->state;
-        $var->city = $req->city;
-        $var->purpose = $req->purpose;
+        $var->reason = $req->purpose;
         if ($req->hasfile('photo')) {
             $file = $req->file('photo');
             $extention = $file->getClientOriginalExtension();
@@ -173,7 +160,7 @@ class hospitalController extends Controller
             $var->photo =  $filename;
         }
         $var->save();
-        return redirect('healthinstitute/posts')->with('success', 'Task Added Successfully!');
+        return redirect()->back()->with('success', 'Task Added Successfully!');
     }
     public function mypost($id)
     {
@@ -189,14 +176,6 @@ class hospitalController extends Controller
         }
     }
 
-
-    public function search(Request $request)
-    {
-        $blood = $request->bloodtype;
-        $city = $request->city;
-        $data = addBloodModel::where('bloodgroup', $blood)->Where('city', $city)->get();
-        return view('healthinstitute.donor',  ['data' => $data]);
-    }
     function viewblood()
     {
         $aplus = bloodStock::where('bloodgroup', 'A+')->where('status', '=', 'accept')->sum('volume');

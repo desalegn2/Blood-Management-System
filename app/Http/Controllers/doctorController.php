@@ -127,29 +127,36 @@ class doctorController extends Controller
                 if (strpos($e->getMessage(), 'Temporary failure in name resolution') !== false) {
                     $errorMessage = 'There is no internet connection, so message not sent to donor.';
                 }
-
                 return redirect()->back()->with('error', $errorMessage);
             }
         }
     }
 
+    public function search(Request $request)
+    {
+        $blood = $request->bloodtype;
+        $city = $request->city;
+        $data = Donor::where('bloodtype', $blood)->Where('city', $city)->with('donation')->get();
+        return view('doctor.donor', ['data' => $data]);
+    }
 
     function Profile()
     {
         $user = Auth::user();
         $id = $user->id;
+        $hospital_id = Doctor::where("doctor_id", $id)->pluck("hospital_id");
+        $hospital = hospitalModel::where("hospital_id", $hospital_id)->pluck("hospitalname");
         $isExist = User::select("*")
             ->where("id", $id)
             ->exists();
         if ($isExist) {
             // $data = User::all()->where('id', '=', $id);
             $data = Doctor::where('doctor_id', $id)->with('user')->get();
-            return view('doctor.profile', ['data' => $data]);
+            return view('doctor.profile', ['data' => $data, 'hospital' => $hospital]);
         }
     }
     function updateProfile(Request $req, int $id)
     {
-
         Doctor::where("doctor_id", $id)
             ->update(["firstname" => $req->firstname, "lastname" => $req->lastname, "phone" => $req->phone]);
         return redirect()->back()->with('success', 'your Profile,are Updated');
@@ -157,7 +164,6 @@ class doctorController extends Controller
 
     function updatephoto(Request $req, int $id)
     {
-
         $var = Doctor::all()->where('doctor_id', '=', $id);
         if ($req->hasfile('photo')) {
             $file = $req->file('photo');
@@ -173,7 +179,6 @@ class doctorController extends Controller
     }
     function changepassword(Request $req)
     {
-        # Validation
         $req->validate([
             'oldpassword' => ['required', 'string', 'min:8'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],

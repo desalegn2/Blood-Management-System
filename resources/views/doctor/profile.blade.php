@@ -117,8 +117,10 @@
                                     <img src="{{asset('uploads/registers/'.$dataprofil->photo)}}" alt="Admin" class="rounded-circle" width="150">
 
                                     <div class="mt-3">
-                                        <h4> {{$dataprofil->firstname}}</h4>
-                                        <p class="text-secondary mb-1">Technician</p>
+                                    <h3>Hospital:&nbsp;&nbsp;{{$hospital}}</h3>
+                                        <h4> Full Name:&nbsp;&nbsp;{{$dataprofil->firstname}} {{$dataprofil->lastname}}</h4>
+                                        <h5>Profession :&nbsp;&nbsp;Doctor </h5>
+                                       
                                     </div>
                                 </div>
                                 <hr>

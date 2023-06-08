@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Exceptions\PostTooLargeException;
 use App\Models\referralModel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 use App\Models\Donor;
 use App\Models\centorModel;
 use App\Models\donationModel;
@@ -273,13 +275,17 @@ class donorController extends Controller
         }
     }
 
-    function view()
+    function viewSeeer()
 
     {
-        $date = \Carbon\Carbon::today()->subDays(3);
-        $views = User::join('hospitalpost', 'hospitalpost.user_id', '=', 'users.id')
-            ->where('hospitalpost.created_at', '>=', $date)->get(['hospitalpost.*', 'users.name', 'users.email']);
-
+        // $date = \Carbon\Carbon::today()->subDays(3);
+        // $views = User::join('seeker', 'seeker.hospital_id', '=', 'hospitals.hospital_id')
+        //     ->where('seeker.created_at', '>=', $date)
+        //     ->get(['seeker.*', 'hospitals.hospitalname']);
+        $views = DB::table('seeker')
+            ->join('hospitals', 'seeker.hospital_id', '=', 'hospitals.hospital_id')
+            ->select('seeker.*', 'hospitals.hospitalname')
+            ->get();
         return view('donor.viewseeker', compact('views'));
     }
 

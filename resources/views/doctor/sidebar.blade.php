@@ -220,7 +220,6 @@
                     <div class="nav_list">
                         <a href="{{url('/doctor/home')}}" class="nav_link{{ Request::is('doctor/home') ? ' active' : '' }}"><span class="bx bx-home nav_icon"></span><span class="bx nav_name">Dashboard</span></a>
                         <a href="{{url('/doctor/finddonor')}}" class="nav_link{{ Request::is('doctor/finddonor') ? ' active' : '' }}"><span class="bx bx-search nav_icon"></span><span class="bx nav_name">Find Donor</span></a>
-                        <a href="{{url('/doctor/posts')}}" class="nav_link{{ Request::is('doctor/posts') ? ' active' : '' }}"><span class="bx bx-user nav_icon"></span><span class="bx nav_name">Post Seekers</span></a>
                         <a href="{{url('/doctor/transfer')}}" class="nav_link{{ Request::is('doctor/transfer') ? ' active' : '' }}"><span class="bx bx-transfer nav_icon"></span><span class="bx nav_name">Blood Transfusion</span></a>
                     </div>
                 </div> <a href="{{ route('logout') }}" onclick="event.preventDefault();

@@ -4,14 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Donor Home Page</title>
+    <title> Home Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500&display=swap');
-
 
         .hidden {
             display: none;
@@ -187,7 +186,9 @@
             <header>
                 <i class="menu-toggle-btn fas fa-bars" style="margin-right: 2rem;"></i>
                 <nav class="navigation-menu" style="margin: auto;">
-
+                    <div class="menu-item" style="margin-left: 30px;">
+                        <img style="width: 50px; height:50px; border-radius:50%" src="{{asset('assets/imgs/bblogo2.jpg')}}">
+                    </div>
                     <div class="menu-item">
                         <a href="">
                             <span class="en">Home</span>

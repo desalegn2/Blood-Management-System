@@ -77,7 +77,7 @@
                 {{ session('success') }}
             </div>
             @endif
-            <form action="post_seeker" method="post" enctype="multipart/form-data">
+            <form action="" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="hospital_id" value="{{Auth::user()->id}}">
                 <div class="form-grid">
@@ -111,24 +111,24 @@
                     </div>
                     <div>
                         <label for="date">when is need:</label>
-                        <input type="date" id="" name="when_nedded" min="{{ date('Y-m-d') }}">
+                        <input type="date" id="" name="date" min="{{ date('Y-m-d') }}">
                         <div style="color: red;">
                             @error('date')
                             <strong>{{ $message }}</strong>
                             @enderror
                         </div>
                     </div>
-
+                
                     <div>
                         <label for="phone">Phone:</label>
-                        <input type="number" id="" name="phone">
+                        <input type="number" id="" name="phone" pattern="(09|07)[0-9]{8}">
                         <div style="color: red;">
                             @error('phone')
                             <strong>{{ $message }}</strong>
                             @enderror
                         </div>
                     </div>
-
+                 
                     <div>
                         <label for="">Age:</label>
                         <input type="text" id="" name="age">
@@ -160,7 +160,7 @@
                             <option value="O-">O-</option>
                         </select>
                     </div>
-
+                 
                     <div>
                         <label for="photo">Photo:</label>
                         <input type="file" id="" name="photo">
