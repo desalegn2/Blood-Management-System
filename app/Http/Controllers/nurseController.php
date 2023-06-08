@@ -255,7 +255,7 @@ class nurseController extends Controller
     }
     function notifys()
     {
-        
+
         $data = Donor::with(['donation' => function ($query) {
             $query->select('donor_id', 'created_at')
                 ->where('created_at', '<=', Carbon::now()->subDays(30))
@@ -276,6 +276,11 @@ class nurseController extends Controller
             ->select('donors.*', 'donation.created_at', 'donation.packno')
             ->get();
         return view('nurse.notify', ['donors' => $donor]);
+    }
+    function donorHistory()
+    {
+        $data = Donor::with('donation')->paginate(5);
+        return view('nurse.donorhistory', compact('data'));
     }
 
     public function emailSend($donor_id)

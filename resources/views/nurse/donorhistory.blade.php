@@ -5,7 +5,7 @@
 
 <head>
     <meta charset='UTF-8'>
-    <title>Reservation</title>
+    <title>History</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
@@ -22,21 +22,7 @@
         </div>
         <div class="row mt-5">
             <div class="col-md-12 col-md-offset-1">
-                <h5>Donors Who Donate Before And Next Donation Date is Coming</h5>
-
-                <!-- <form action="{{url('/nurse/datetonotify')}}" method="get">
-                    @csrf
-                    <div style="float: right;">
-                        <b>How Many Days Ago You Notify ?</b><input type="text" name="date" style="width: 200px;" placeholder="enter length of days" required>
-                        <input type="submit" value="Enter" style="width: 50px;">
-                    </div>
-                </form> -->
-                @if(session('success'))
-                <div class="alert alert-success">
-                    Email Send Sucessfully
-                </div>
-                @endif
-
+                <h5>Donors Who Donate Before</h5>
                 <table class="table table-bordered table-responsive table-striped">
                     <thead>
                         <tr>
@@ -45,8 +31,8 @@
                             <th>Last Name</th>
                             <th>Phone</th>
                             <th>blood Type</th>
-                            <th>Duration</th>
-                            <th>Notify</th>
+                            <th>Number of Donation</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,17 +47,20 @@
                             <td>{{$donor->lastname}}</td>
                             <td>{{$donor->phone}}</td>
                             <td>{{$donor->bloodtype}}</td>
-                            <td>{{ $donor->donation[0]->created_at }}</td>
-                            <!-- <td>{{ \Carbon\Carbon::parse($donor->created_at)->diffForHumans(null, false, true) }}</td> -->
+                            <td>{{$donor->donation->count()}}</td>
                             <td>
-                                <a class="btn btn-success" href="{{url('nurse/email', $donor->donor_id)}}"> Email</a>
-                                <!-- <a class="btn btn-success" href="{{url('nurse/sms', $donor->donor_id)}}">SMS</a> -->
+                                <a class="btn btn-success" href=""> ...</a>
                             </td>
                         </tr>
                         @endif
                         @endforeach
                     </tbody>
                 </table>
+
+                <!-- Pagination links -->
+                <div class="pagination">
+                    {{$data->links()}}
+                </div>
             </div>
         </div>
     </div>

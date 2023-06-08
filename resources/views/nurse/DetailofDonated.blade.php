@@ -18,7 +18,6 @@
             <div class="row">
                 <div class="col col-md-6"><b>Donor Details</b></div>
                 <div class="col col-md-6">
-
                     <a href="{{ URL::previous() }}" class="btn btn-primary btn-sm float-end">Back</a>
                 </div>
             </div>
@@ -92,15 +91,6 @@
                     {{ $donors->kebelie }}
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
         </div>
     </div>
 

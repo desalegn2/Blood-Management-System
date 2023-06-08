@@ -133,6 +133,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::post('/nurse/search_donor', [nurseController::class, 'searchDonor']);
         Route::get('/nurse/registordon/{id}', [nurseController::class, 'getDonor']);
         Route::get('/nurse/reservationregister/{id}', [nurseController::class, 'getReservation']);
+
+        Route::get('/nurse/display', [nurseController::class, 'donorHistory']);
     });
     Route::middleware(['auth', 'user-role:technitian'])->group(function () {
 
