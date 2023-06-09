@@ -212,7 +212,7 @@
                         </a>
                     </div>
                     <div class="menu-item">
-                        <a href="{{url('/donor/seeker')}}" class="@if(Request::is('donor/information*')) active @endif">
+                        <a href="{{url('/donor/seeker')}}" class="@if(Request::is('donor/seeker*')) active @endif">
                             <span class="en">Seeker</span>
                             <span class="am hidden">ደም ፈላጊወች</span>
                         </a>

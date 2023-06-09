@@ -22,4 +22,10 @@ class bloodTest extends Model
         'ast',
         'hct',
     ];
+
+    public function bloodStocks()
+    {
+        return $this->hasMany(bloodStock::class, 'test_id');
+    }
+    
 }

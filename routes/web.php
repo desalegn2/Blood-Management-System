@@ -133,8 +133,15 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::post('/nurse/search_donor', [nurseController::class, 'searchDonor']);
         Route::get('/nurse/registordon/{id}', [nurseController::class, 'getDonor']);
         Route::get('/nurse/reservationregister/{id}', [nurseController::class, 'getReservation']);
-
+        //donor history and discard bloods
         Route::get('/nurse/display', [nurseController::class, 'donorHistory']);
+        Route::get('/nurse/searchdonorhistory', [nurseController::class, 'searchDonorHistory']);
+        Route::get('/nurse/labresult', [nurseController::class, 'labResult']);
+
+        Route::get('/nurse/discard', [nurseController::class, 'discarededBlood']);
+        Route::get('/nurse/discardDonor/{donor_id}', [nurseController::class, 'discardDonor']);
+        Route::get('/nurse/discrdlabresult/{testId}', [nurseController::class, 'discardLabResult']);
+         
     });
     Route::middleware(['auth', 'user-role:technitian'])->group(function () {
 
@@ -171,7 +178,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::post('/healthinstitute/updatephoto/{id}', [hospitalController::class, 'updatephoto']);
         Route::post('/healthinstitute/changepassword', [hospitalController::class, 'changepassword']);
 
-       // Route::view('/healthinstitute/seekerRegister', 'healthinstitute.postSeeker');
+        // Route::view('/healthinstitute/seekerRegister', 'healthinstitute.postSeeker');
         Route::view('/healthinstitute/posts', 'healthinstitute.hospitalPost');
         Route::post('/healthinstitute/post_seeker', [hospitalController::class, 'postSeeker']);
 
@@ -253,10 +260,9 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         Route::get('/doctor/transfer', [doctorController::class, 'BloodTransfer']);
         Route::post('/doctor/transfusion/{id}', [doctorController::class, 'Transfusion']);
-        Route::view('/doctor/finddonor','doctor.searchDonor');
+        Route::view('/doctor/finddonor', 'doctor.searchDonor');
 
-       // Route::post('/healthinstitute/search', [hospitalController::class, 'search']);
+        // Route::post('/healthinstitute/search', [hospitalController::class, 'search']);
         Route::post('/doctor/search', [doctorController::class, 'search']);
-        
     });
 });//prevent back middllewire

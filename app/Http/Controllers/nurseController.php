@@ -23,6 +23,7 @@ use Vonage\SMS\Message\SMS;
 use Illuminate\Support\Facades\DB;
 use App\Models\bbinformatiomModel;
 use App\Models\staffModel;
+use App\Models\bloodTest;
 use Carbon\Carbon;
 
 
@@ -243,6 +244,7 @@ class nurseController extends Controller
         $data = donationModel::where('fullname', $a)->orWhere('phone', $a)->orWhere('email', $a)->paginate(5);
         return view('nurse.listOfRegistor', compact('data'));
     }
+
     function getDonor($donor_id)
     {
         $isExist = Donor::select("*")
@@ -260,7 +262,11 @@ class nurseController extends Controller
             $query->select('donor_id', 'created_at')
                 ->where('created_at', '<=', Carbon::now()->subDays(30))
                 ->orderBy('created_at', 'desc');
-        }])->get();
+        }])
+            ->whereDoesntHave('donation', function ($query) {
+                $query->where('created_at', '>', Carbon::now()->subDays(30));
+            })
+            ->paginate(5); // Specify the number of records per page
 
         return view('nurse.notify', ['data' => $data]);
     }
@@ -281,6 +287,36 @@ class nurseController extends Controller
     {
         $data = Donor::with('donation')->paginate(5);
         return view('nurse.donorhistory', compact('data'));
+    }
+    function searchDonorHistory(Request $req)
+    {
+        $dat = $req->data;
+        $data = Donor::where('firstname', $dat)->orWhere('lastname', $dat)->orWhere('phone', $dat)->with('donation')->paginate(5);
+        return view('nurse.donorhistory', ['data' => $data]);
+    }
+
+    function labResult(Request $request)
+    {
+        $donor_id = $request->donor_id;
+        $data = bloodTest::where('donor_id', $donor_id)->with('bloodStocks')->paginate(3);
+        return view('nurse.showResult')->with('data', $data);
+    }
+    function discarededBlood()
+    {
+        $data = bloodStock::where('status', 'discard')->with('staff')->paginate(5);
+        return view('nurse.discardedBloods', compact('data'));
+    }
+
+    function discardDonor(Request $request, $donor_id)
+    {
+        $data = Donor::where('donor_id', $donor_id)->get();
+        return view('nurse.discardDonorInformation')->with('data', $data);
+    }
+
+    function discardLabResult(Request $request, $testId)
+    {
+        $data = bloodTest::where('id', $testId)->get();
+        return view('nurse.discardLabResult')->with('data', $data);
     }
 
     public function emailSend($donor_id)

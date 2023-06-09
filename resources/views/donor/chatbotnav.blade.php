@@ -10,7 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <style>
-
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500&display=swap');
 
 
@@ -210,6 +209,12 @@
                         <a href="{{url('/donor/information')}}" class="@if(Request::is('donor/information*')) active @endif">
                             <span class="en">Blood Bank Information</span>
                             <span class="am hidden">የደም ባንክ መረጃ</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="{{url('/donor/seeker')}}" class="@if(Request::is('donor/seeker*')) active @endif">
+                            <span class="en">Seeker</span>
+                            <span class="am hidden">ደም ፈላጊወች</span>
                         </a>
                     </div>
                     <div class="dropdown @if(Request::is('donor/reservation*')) active @endif">

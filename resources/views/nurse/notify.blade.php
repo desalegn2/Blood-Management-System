@@ -11,6 +11,40 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination .page-link {
+            color: #000;
+            background-color: #f8f9fa;
+            border-color: #dee2e6;
+        }
+
+        .pagination .page-link:hover {
+            color: #000;
+            background-color: #e9ecef;
+            border-color: #dee2e6;
+        }
+
+        .pagination .page-item.active .page-link {
+            z-index: 3;
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            cursor: not-allowed;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+    </style>
 </head>
 
 <body>
@@ -72,6 +106,10 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="pagination">
+                {{ $data->appends(Request::all())->links() }}
+                </div>
+
             </div>
         </div>
     </div>

@@ -23,4 +23,8 @@ class staffModel extends Model
     {
         return $this->belongsTo(User::class, 'staff_id');
     }
+    public function bloodstock()
+    {
+        return $this->hasOne(bloodStock::class, 'tech_id', 'staff_id');
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+
 class bloodStock extends Model
 {
     use HasFactory;
@@ -29,5 +30,14 @@ class bloodStock extends Model
             $expiryDate = Carbon::parse($bloodstock->created_at)->addDays(20);
             $bloodstock->expitariondate = $expiryDate;
         });
+    }
+
+    public function bloodTests()
+    {
+        return $this->hasMany(bloodTest::class, 'id');
+    }
+    public function staff()
+    {
+        return $this->belongsTo(staffModel::class, 'tech_id', 'staff_id');
     }
 }

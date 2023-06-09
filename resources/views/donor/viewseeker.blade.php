@@ -1,6 +1,5 @@
 @extends('donor.nav2')
 @section('content')
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +26,7 @@
             overflow: hidden;
             margin-left: 50px;
             margin-right: 50px;
-            
+
         }
 
         .team .member {
@@ -119,12 +118,6 @@
             margin: -15px;
         }
 
-        .team .col-lg-4 {
-            flex: 0 0 33.33%;
-            max-width: 33.33%;
-            padding: 15px;
-        }
-
         .section-title .underline {
             width: 150px;
             height: 1px;
@@ -151,15 +144,15 @@
     <section class="team">
         <div class="section-title">
             <h2>These People Need Help from Donors</h2>
-            
+
         </div>
         <div class="row">
             <!-- one card -->
             @foreach ($views as $view)
-            <div class="col-lg-4 mt-4">
+            <div class="col-sm-12 col-md-6 col-lg-4 mt-4">
                 <div class="member d-flex align-items-start">
                     <div class="teampic">
-                        <img class="img-fluid" src="{{asset('uploads/registers/'.$view->photo)}}" alt="Image not displaying">
+                        <img class="img-fluid" src="{{asset('uploads/registers/'.$view->photo)}}" alt="Image notdisplaying">
                     </div>
                     <div class="member-info">
                         <h2>From: {{$view->hospitalname}}</h2>

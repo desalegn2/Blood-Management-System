@@ -82,7 +82,7 @@
                 <div class="col-md-8">
                     <h3 class="card-title mt-2">Blood Compatibility</h3>
                     <p class="card-text mb-4">Blood compatibility refers to the ability of one person's blood to be transfused into another person's body without causing an adverse reaction. Blood compatibility is determined by the presence or absence of certain antigens and antibodies on the surface of red blood cells.</p>
-                    <img class="d-block w-100" src="{{asset('assets/imgs/blood-donor-compatibilityv3.jpg')}}" alt="First slide">
+                    <img class="d-block w-100" style="width: 400px; height:400px;" src="{{asset('assets/imgs/blood-donor-compatibilityv3.jpg')}}" alt="First slide">
                 </div>
                 <div class="card-footer">
                     <small class="text-muted"></small>

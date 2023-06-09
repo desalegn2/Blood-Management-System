@@ -11,12 +11,12 @@
     <title>Document</title>
 </head>
 
-<body>
-    <div class=" mt-5">
+<body style="margin-left: 30px;">
+    <div style="margin-top: 60px;">
 
         <div class="row mt-5 mb-5">
             <div class="col-md-4 ml-5">
-                <img class="img-fluid" src="{{asset('assets/imgs/bblogo.jpg')}}" alt="...">
+                <img class="img-fluid" style="width: 300px; height:400px;" src="{{asset('assets/imgs/bblogo.jpg')}}" alt="...">
             </div>
             <div class="col-md-8">
                 <h3 class="card-title mt-2">ደም ህይወት ነው</h3>

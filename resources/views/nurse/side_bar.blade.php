@@ -106,7 +106,8 @@
             grid-template-columns: max-content max-content;
             align-items: center;
             column-gap: 1rem;
-            padding: .5rem 0 .5rem 1.5rem
+            padding: .5rem 0 .5rem 1.5rem;
+            text-decoration: none;
         }
 
         .nav_logo {
@@ -191,11 +192,9 @@
             }
         }
     </style>
-
 </head>
 
 <body>
-
     <body id="body-pd">
         <header class="header" id="header">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
@@ -209,17 +208,15 @@
                         <a href="{{url('/nurse/reservation')}}" class="nav_link{{ Request::is('nurse/reservation') ? ' active' : '' }}"> <span class="bx nav_icon"><i class='bx bx-calendar'></i></span><span class="bx nav_name">Reservation</span> </a>
                         <a href="{{url('/nurse/advertise')}}" class="nav_link{{ Request::is('nurse/advertise') ? ' active' : '' }}"> <span class="bx nav_icon"><i class='bx bx-microphone'></i></span><span class="bx nav_name">Add Advertise</span> </a>
                         <a href="{{url('/nurse/notify')}}" class="nav_link{{ Request::is('nurse/notify') ? ' active' : '' }}"> <span class="bx nav_icon"><i class='bx bx-bell'></i></span><span class="bx nav_name">Notify</span> </a>
-                        <a href="{{url('/nurse/enroll')}}" class="nav_link{{ Request::is('nurse/enroll') ? ' active' : '' }}"> <span class="bx nav_icon"><i class='bx bx-user-plus'></i></span><span class="bx nav_name">Enroll Donor</span> </a>
+                        <!-- <a href="{{url('/nurse/enroll')}}" class="nav_link{{ Request::is('nurse/enroll') ? ' active' : '' }}"> <span class="bx nav_icon"><i class='bx bx-user-plus'></i></span><span class="bx nav_name">Enroll Donor</span> </a> -->
                         <a href="{{url('/nurse/display')}}" class="nav_link{{ Request::is('nurse/display') ? ' active' : '' }}">
                             <span class="bx nav_icon"><i class='bx bx-show'></i></span>
-                            <span class="bx nav_name">Manage Donor</span>
+                            <span class="bx nav_name">Track Donor</span>
                         </a>
-
                         <a href="{{url('/nurse/discard')}}" class="nav_link{{ Request::is('nurse/discard') ? ' active' : '' }}">
                             <span class="bx nav_icon"><i class='bx bx-trash'></i></span>
-                            <span class="bx nav_name">Discarded</span>
+                            <span class="bx nav_name">Discarded Blood </span>
                         </a>
-s
                     </div>
                 </div> <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" class="nav_link">
@@ -238,7 +235,6 @@ s
         </div>
         <!--Container Main end-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
 
@@ -279,8 +275,6 @@ s
                 // Your code to run since DOM is loaded and ready
             });
         </script>
-
-
     </body>
 
 </html>
