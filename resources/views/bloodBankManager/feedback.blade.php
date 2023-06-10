@@ -14,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -130,6 +131,38 @@
         .section-title h2 {
             margin-top: 20px;
         }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination .page-link {
+            color: #000;
+            background-color: #f8f9fa;
+            border-color: #dee2e6;
+        }
+
+        .pagination .page-link:hover {
+            color: #000;
+            background-color: #e9ecef;
+            border-color: #dee2e6;
+        }
+
+        .pagination .page-item.active .page-link {
+            z-index: 3;
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            cursor: not-allowed;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
     </style>
 </head>
 
@@ -167,6 +200,10 @@
                 </div>
                 @endforeach
             </div>
+              <!-- Pagination links -->
+        <div class="pagination">
+        {{ $feedback->appends(Request::all())->links() }}
+        </div>
         </div>
     </section>
     @include('sweetalert::alert')

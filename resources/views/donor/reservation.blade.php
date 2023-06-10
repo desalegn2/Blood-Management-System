@@ -134,7 +134,7 @@
                             @enderror
                         </div>
                     </div>
-                    ld{{$lastDonationDate}}
+                    
                     <input type="hidden" name="lastDonationDate" value="{{$lastDonationDate}}">
                     <div>
                         <label for="reservationdate">Donation Date:</label>

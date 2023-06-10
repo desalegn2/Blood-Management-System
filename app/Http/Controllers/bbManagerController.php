@@ -48,7 +48,7 @@ class bbManagerController extends Controller
         $var->save();
         return redirect()->back()->with('success', 'Information is added !');;
     }
-    
+
     function addCenters(Request $req)
     {
         $var = new centorModel;
@@ -86,7 +86,7 @@ class bbManagerController extends Controller
     }
     function requests()
     {
-        $bloodRequests = BloodRequest::with('hospital', 'bloodRequestItems')->get();
+        $bloodRequests = BloodRequest::with('hospital', 'bloodRequestItems')->paginate(5);
         return view('bloodBankManager.request', ['bloodRequests' => $bloodRequests]);
     }
     function Approve(Request $req, $id)
@@ -104,7 +104,7 @@ class bbManagerController extends Controller
         return redirect()->back();
     }
 
-    
+
     function view()
     {
         $bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB-', 'AB+', 'O-', 'O+'];
@@ -120,19 +120,7 @@ class bbManagerController extends Controller
             Donor::where('bloodtype', 'O+')->count()
         ];
 
-        // Retrieve data from the database
         $donations = donationModel::all();
-
-        // Format the data for the chart
-        //   $data = [];
-        //   foreach ($donations as $donation) {
-        //       $data[$donation->created_at->format('Y-m-d')] = $donation->amount;
-        //   }
-
-        //   // Sort the data by date
-        //   ksort($data);
-
-        // Pass the chart data to the view
 
         return view('bloodBankManager.generatePdf', compact('bloodTypes', 'donorCounts', 'donations'));
     }
@@ -300,7 +288,7 @@ class bbManagerController extends Controller
     function Bloods()
     {
         $hospital = hospitalModel::all();
-        $data = bloodStock::where('status', '=', 'accept')->paginate(10);
+        $data = bloodStock::where('status', '=', 'accept')->paginate(5);
 
         return view('bloodBankManager.availableBlood', compact('hospital', 'data'));
     }
@@ -374,18 +362,12 @@ class bbManagerController extends Controller
         }
     }
 
-    function searchDonor(Request $req)
-    {
-        $a = $req->fullname;
-        $data = addBloodModel::where('fullname', $a)->orWhere('phone', $a)->orWhere('email', $a)->paginate(5);
-        return view('bloodBankManager.donorHistory', ['data' => $data]);
-    }
-
     function feedbacks()
 
     {
         $feedback = User::join('feedback', 'feedback.user_id', '=', 'users.id')
-            ->get(['feedback.id', 'feedback.created_at', 'feedback.feedback', 'users.email']);
+            ->select('feedback.id', 'feedback.created_at', 'feedback.feedback', 'users.email')
+            ->paginate(4);
         $fdbk = feedbackModel::all();
         return view('bloodBankManager.feedback', compact('feedback', 'fdbk'));
     }
@@ -468,14 +450,6 @@ class bbManagerController extends Controller
 
     function HomePage()
     {
-        //$donors = donationModel::paginate(10);
-        // $donors = bloodStock::where('status', '=', 'accept')->paginate(10);
-
-        // $numberof_message = hospitalRequestModel::where('readat', 'unread')->count();
-
-        //$date = \Carbon\Carbon::today()->subDays(1);
-        //$recentdoner = donorRequestModel::where('created_at', '>=', $date)->get();
-
 
         $aplus = bloodStock::where('bloodgroup', 'A+')->where('status', '=', 'accept')->sum('volume');
         $aminus = bloodStock::where('bloodgroup', 'A-')->where('status', '=', 'accept')->sum('volume');
@@ -494,13 +468,7 @@ class bbManagerController extends Controller
 
     function Referral()
     {
-
-        // $referrals = User::whereHas('referrals')->with('referredUsers.user')->get();
-
-        // $list_referred = referralModel::select('u1.name as referring_name', 'u1.email as referring_email', 'u2.name as referred_name', 'u2.email as referred_email')
-        //     ->join('users as u1', 'referrals.referring_id', '=', 'u1.id')
-        //     ->join('users as u2', 'referrals.referred_id', '=', 'u2.id')->get();
-        $referrals = Donor::whereHas('referrals')->with('referredUsers.donor')->paginate(2);
+        $referrals = Donor::whereHas('referrals')->with('referredUsers.donor')->paginate(5);
 
         return view('bloodBankManager.referralProgram', compact('referrals'));
     }

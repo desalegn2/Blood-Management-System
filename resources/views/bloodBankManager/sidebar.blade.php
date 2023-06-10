@@ -219,7 +219,7 @@
                         <a href="{{url('/bbmanager/bbinfo')}}" class="nav_link{{ Request::is('bbmanager/bbinfo') ? ' active' : '' }}"> <span class="bx bx-info-circle nav_icon"></span><span class="bx nav_name">Add Information</span> </a>
                         <a href="{{url('/bbmanager/bloods')}}" class="nav_link{{ Request::is('bbmanager/bloods') ? ' active' : '' }}"> <span class="bx bx-droplet nav_icon"></span><span class="bx nav_name">Blood Store</span> </a>
                         <a href="{{url('/bbmanager/request')}}" class="nav_link{{ Request::is('bbmanager/request') ? ' active' : '' }}"> <span class="bx bx-message-square-detail nav_icon"></span><span class="bx nav_name">Blood Request</span> </a>
-                        <a href="{{url('/bbmanager/generatereport')}}" class="nav_link{{ Request::is('nurse/generatereport') ? ' active' : '' }}"> <span class="bx bx-bar-chart nav_icon"></span><span class="bx nav_name">Analysis</span> </a>
+                        <a href="{{url('/bbmanager/generatereport')}}" class="nav_link{{ Request::is('bbmanager/generatereport') ? ' active' : '' }}"> <span class="bx bx-bar-chart nav_icon"></span><span class="bx nav_name">Analysis</span> </a>
                         <!-- <a href="{{url('/bbmanager/donorhistory')}}" class="nav_link"> <span class="bx bx-user nav_icon"></span><span class="bx nav_name">Donor History</span> </a> -->
                         <a href="{{url('/bbmanager/feedback')}}" class="nav_link{{ Request::is('bbmanager/feedback') ? ' active' : '' }}"> <span class="bx bx-message-square-edit nav_icon"></span><span class="bx nav_name">Feedback</span> </a>
                         <a href="{{url('/bbmanager/addhospital')}}" class="nav_link{{ Request::is('bbmanager/addhospital') ? ' active' : '' }}"> <box-icon name='plus-medical'></box-icon><span class="bx nav_name">Add Hospital</span> </a>
@@ -236,7 +236,7 @@
                 </form>
             </nav>
         </div>
-        <div class="bg-grey">
+        <div style="background-color: white;">
             @yield('content')
         </div>
         @include('bloodBankManager.footer')

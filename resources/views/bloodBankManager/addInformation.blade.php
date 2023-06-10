@@ -12,8 +12,8 @@
 	<style>
 		.container {
 			margin-top: 35px;
-			background-color: #f8f8f8;
-			padding: 20px;
+			
+			padding: 10px;
 			border-radius: 10px;
 		}
 

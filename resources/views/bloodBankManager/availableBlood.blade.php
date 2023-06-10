@@ -52,6 +52,10 @@
                 @endforeach
             </tbody>
         </table>
+        <!-- Pagination links -->
+        <div class="pagination">
+            {{ $data->appends(Request::all())->links() }}
+        </div>
     </div>
     @include('sweetalert::alert')
 </body>

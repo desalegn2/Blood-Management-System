@@ -77,13 +77,11 @@
                         <a href="#approve{{$request->id}}" data-bs-toggle="modal" class="btn btn-info"> Approve</a>
                         @include('bloodBankManager.requestModal')
                     </td>
-
-
                 </tr>
                 @endforeach
             </tbody>
-        </table>
-
+        </table> {{ $bloodRequests->appends(Request::all())->links() }}
+       
     </div>
     @include('sweetalert::alert')
 </body>

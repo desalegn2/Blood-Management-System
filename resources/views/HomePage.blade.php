@@ -40,9 +40,6 @@
             text-align: center;
         }
 
-
-
-
         .card-heading {
             margin-top: 0;
         }
