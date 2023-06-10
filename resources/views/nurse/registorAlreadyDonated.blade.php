@@ -311,7 +311,7 @@
 
             @csrf
             <h1>Blood Donor Enrollment Form</h1>
-            @foreach($donor as $data)
+          
             <fieldset>
                 @if(session('success'))
                 <div class="alert alert-success">
@@ -353,6 +353,12 @@
                     <div><label>Gender</label>
                         <h5>: {{$data->gender}}</h5>
                     </div>
+                    <div><label> Reservation Date</label>
+                        <h5>: {{$data->reservationdate}}
+                    </div>
+                    <div><label> Donation Center</label>
+                        <h5>:{{$data->center}}
+                    </div>
                 </div>
             </fieldset>
             <fieldset>
@@ -389,6 +395,13 @@
                         <div><label> Blood Group</label>
                             <h5>: {{$data->bloodtype}}
                         </div>
+                        <div><label>Last Donation Date</label>
+                            <h5>:{{$lastDonationDate}}
+                        </div>
+
+                        <div><label>Number of donation</label>
+                            <h5>: {{$frequency}}
+                        </div>
 
                         <div><input type="hidden" name="nurse_id" value="{{ Auth::user()->id }}" required></div>
                         <div><input type="hidden" name="donor_id" value="{{$data->donor_id}}" required></div>
@@ -420,8 +433,7 @@
                     </div>
                 </div>
             </fieldset>
-            @endforeach
-
+           
         </form>
 
 

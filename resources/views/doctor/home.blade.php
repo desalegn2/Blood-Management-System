@@ -19,20 +19,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css" integrity="sha512-rO7BTsTmR9YNS+2kszOsZTKBszvgvFK34MnKj+n3x8yDkBOyv4vj4g4n/x6N8WUrGLz4skGrlrs+Fw5w6UxL6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-0r1NlKDCGIn2N+axvA8ygN1zbd0U5if6PfKj77FSCZwEa00P4D89j4f4Ux4HbFZB1Y9Y22VZp3qZ3OwUXvvLAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
 
-  th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
 
-  th {
-    background-color: #f2f2f2;
-  }
+        th {
+            background-color: #f2f2f2;
+        }
 
         /* =========== Google Fonts ============ */
         @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
@@ -296,7 +297,7 @@
                 left: initial;
             }
         }
-</style>
+    </style>
 </head>
 
 <body>
@@ -464,38 +465,40 @@
             </div>
         </section>
     </div>
-    <h3 style="background-color: #1795ce;">Blood in Other Hospital</h3>
+    <div style="margin-top: 30px;">
+        <h3 style="background-color: #1795ce;">Blood in Other Hospital</h3>
 
-    <table style="background-color: #fff;">
-    <thead>
-        <tr>
-            <th>Hospital Name</th>
-            <th>A+</th>
-            <th>A-</th>
-            <th>B+</th>
-            <th>B-</th>
-            <th>AB+</th>
-            <th>AB-</th>
-            <th>O+</th>
-            <th>O-</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($distributes as $distribute)
-            <tr>
-                <td>{{ $distribute->hospitalname }}</td>
-                <td>{{ $distribute->aplus }}</td>
-                <td>{{ $distribute->aminus }}</td>
-                <td>{{ $distribute->bplus }}</td>
-                <td>{{ $distribute->bminus }}</td>
-                <td>{{ $distribute->abplus }}</td>
-                <td>{{ $distribute->abminus }}</td>
-                <td>{{ $distribute->oplus }}</td>
-                <td>{{ $distribute->ominus }}</td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
+        <table style="background-color: #fff;">
+            <thead>
+                <tr>
+                    <th>Hospital Name</th>
+                    <th>A+</th>
+                    <th>A-</th>
+                    <th>B+</th>
+                    <th>B-</th>
+                    <th>AB+</th>
+                    <th>AB-</th>
+                    <th>O+</th>
+                    <th>O-</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($distributes as $distribute)
+                <tr>
+                    <td>{{ $distribute->hospitalname }}</td>
+                    <td>{{ $distribute->aplus }}</td>
+                    <td>{{ $distribute->aminus }}</td>
+                    <td>{{ $distribute->bplus }}</td>
+                    <td>{{ $distribute->bminus }}</td>
+                    <td>{{ $distribute->abplus }}</td>
+                    <td>{{ $distribute->abminus }}</td>
+                    <td>{{ $distribute->oplus }}</td>
+                    <td>{{ $distribute->ominus }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>

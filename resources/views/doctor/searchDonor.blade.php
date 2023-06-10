@@ -12,6 +12,46 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .content-header {
+            margin-top: 50px;
+        }
+
+        .container-fluid {
+            margin-top: 30px;
+        }
+
+        .display-4 {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .select2 {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-row .btn {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -27,35 +67,29 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-10 offset-md-1">
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label> Blood Group</label>
-                                    <select class="select2" style="width: 100%;" name="bloodtype">
-                                        <option value="">BloodType</option>
-                                        <option>A+</Abbr></option>
-                                        <option>A-</Abbr></option>
-                                        <option>B+</Abbr></option>
-                                        <option>B-</Abbr></option>
-                                        <option>AB+</Abbr></option>
-                                        <option>AB-</Abbr></option>
-                                        <option>O+</Abbr></option>
-                                        <option>O-</Abbr></option>
-                                    </select>
-                                </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bloodtype">Blood Group:</label>
+                                <select class="select2" id="bloodtype" name="bloodtype">
+                                    <option value="">BloodType</option>
+                                    <option>A+</option>
+                                    <option>A-</option>
+                                    <option>B+</option>
+                                    <option>B-</option>
+                                    <option>AB+</option>
+                                    <option>AB-</option>
+                                    <option>O+</option>
+                                    <option>O-</option>
+                                </select>
                             </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label>city:</label>
-                                    <input type="text" class="select2" style="width: 100%;" name="city">
-                                </div>
+                            <div class="form-group">
+                                <label for="city">City:</label>
+                                <input type="text" class="select2" id="city" name="city" required>
                             </div>
-                            <div class="col-4">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-lg btn-default">
-                                        <i class="fa fa-search"></i>Search
-                                    </button>
-                                </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-default">
+                                    <i class="fa fa-search"></i>Search
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -68,4 +102,5 @@
 </body>
 
 </html>
+
 @endsection

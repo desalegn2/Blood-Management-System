@@ -201,24 +201,6 @@ class botController extends Controller
                      ከ 50 ኪ.ግ በታች የሆነ ደመለገስ አይችልም ። ሌሎች ችግሮች ደግሞ በምርመራ ይጣራሉ።'
             );
         });
-        // $botman->hears('{message}', function ($botman, $message) {
-
-
-        //     if ($message == 'hi') {
-        //         $this->askName($botman);
-        //     }    
-
-        // elseif ($message == 'መቸ መለገስ ይቻላል') {
-
-        //         $botman->reply("");
-        //     {
-
-        //         }
-
-        // else {
-        //         $botman->reply("I'm sorry, I don't understand your question ....");
-        //     }
-        // });
 
         $botman->listen();
     }

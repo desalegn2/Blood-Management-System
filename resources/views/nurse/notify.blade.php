@@ -109,7 +109,6 @@
                 <div class="pagination">
                 {{ $data->appends(Request::all())->links() }}
                 </div>
-
             </div>
         </div>
     </div>

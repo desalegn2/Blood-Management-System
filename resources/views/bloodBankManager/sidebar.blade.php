@@ -209,11 +209,9 @@
     <body id="body-pd">
         <header class="header" id="header">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-
-            <div class="header_img"> <img src="{{asset('assets/imgs/aboutus.png')}}" alt=""> </div>
+            <!-- <div class="header_img"> <img src="{{asset('assets/imgs/aboutus.png')}}" alt=""> </div> -->
         </header>
         <div class="l-navbar" id="nav-bar">
-
             <nav class="nav">
                 <div> <a href="{{url('/bbmanager/profile',Auth::user()->id)}}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Profile</span> </a>
                     <div class="nav_list">
@@ -225,7 +223,6 @@
                         <!-- <a href="{{url('/bbmanager/donorhistory')}}" class="nav_link"> <span class="bx bx-user nav_icon"></span><span class="bx nav_name">Donor History</span> </a> -->
                         <a href="{{url('/bbmanager/feedback')}}" class="nav_link{{ Request::is('bbmanager/feedback') ? ' active' : '' }}"> <span class="bx bx-message-square-edit nav_icon"></span><span class="bx nav_name">Feedback</span> </a>
                         <a href="{{url('/bbmanager/addhospital')}}" class="nav_link{{ Request::is('bbmanager/addhospital') ? ' active' : '' }}"> <box-icon name='plus-medical'></box-icon><span class="bx nav_name">Add Hospital</span> </a>
-
                         <a href="{{url('/bbmanager/referral')}}" class="nav_link{{ Request::is('bbmanager/referral') ? ' active' : '' }}"> <span class="bx bx-link-external nav_icon"></span><span class="bx nav_name">Referral</span> </a>
                     </div>
                 </div> <a href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -242,21 +239,15 @@
         <div class="bg-grey">
             @yield('content')
         </div>
-
         @include('bloodBankManager.footer')
-
-        <!--Container Main end-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
-
                 const showNavbar = (toggleId, navId, bodyId, headerId) => {
                     const toggle = document.getElementById(toggleId),
                         nav = document.getElementById(navId),
                         bodypd = document.getElementById(bodyId),
                         headerpd = document.getElementById(headerId)
-
                     // Validate that all variables exist
                     if (toggle && nav && bodypd && headerpd) {
                         toggle.addEventListener('click', () => {
@@ -273,8 +264,6 @@
                 }
 
                 showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header')
-
-                /*===== LINK ACTIVE =====*/
                 const linkColor = document.querySelectorAll('.nav_link')
 
                 function colorLink() {
@@ -284,12 +273,8 @@
                     }
                 }
                 linkColor.forEach(l => l.addEventListener('click', colorLink))
-
-                // Your code to run since DOM is loaded and ready
             });
         </script>
-
-       
     </body>
 
 </html>

@@ -162,18 +162,24 @@ class hospitalController extends Controller
         $var->save();
         return redirect()->back()->with('success', 'Task Added Successfully!');
     }
-    public function mypost($id)
+    public function myPost($id)
     {
-        $isExist = hospitalPosts::select("*")
-            ->where("user_id", $id)
+        $isExist = seekerModel::select("*")
+            ->where("hospital_id", $id)
             ->exists();
         if ($isExist) {
-            $data = hospitalPosts::where('user_id', "=", $id)->get();
+            $data = seekerModel::where('hospital_id', "=", $id)->get();
             //$data = hospitalRequestModel::where('user_id', 'LIKE', '%' . $id . '%')->get();
             return view('healthinstitute.mypost', compact('data'));
         } else {
-            return redirect('healthinstitute/post_seeker');
+            return redirect('healthinstitute/posts');
         }
+    }
+    function deletepost($id)
+    {
+        $res = seekerModel::find($id);
+        $res->delete();
+        return redirect()->back();
     }
 
     function viewblood()
@@ -205,14 +211,6 @@ class hospitalController extends Controller
                  SUM(CASE WHEN bloodgroup = "O-" THEN volume ELSE 0 END) AS ominus')
             ->first();
         return view('healthinstitute.healthinstituteHome', compact('stockInfo', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
-    }
-
-    function deletepost($id)
-    {
-        $res = hospitalPosts::find($id);
-        $res->delete();
-
-        return redirect()->back();
     }
 
     function Profile()

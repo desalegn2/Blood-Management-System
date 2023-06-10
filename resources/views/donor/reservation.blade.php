@@ -56,7 +56,7 @@
             background-color: #3e8e41;
         }
 
-        #alert-danger {
+        #text-danger {
             color: red;
             background-color: #F6F1F1;
             border-color: #000000;
@@ -87,12 +87,19 @@
 
         <div class="form-container">
             <h1>Send Reservation to Donate</h1>
-            @if (session('error'))
-            <div id="alert-danger" class="alert alert-danger">
+            @if ($errors->has('health'))
+            <span class="text-danger">
                 <strong>ህይወትን ለማዳን ደም ለመለገስ ላሳዩት ፍላጎት እና ቁርጠኝነት እናመሰግናለን። <br>
                     ነገር ግን ተላላፊ በሽታ ካለባቸዉ ግለሰቦች የደም ልገሳን መቀበል አንችልም <br>
                     ምክንያቱም ለለጋሹም ሆነ ለተቀባዩ አደጋ ያስከትላል. <br>
-                    የደም ልገ ሳን አስፈላጊነት ግንዛቤ በማስጨበጥ እና ሌሎችም እንዲለግሱ በማበረታታት የዓላማችንን ድጋፍ እንድትቀጥሉ እናሳስባለን። </strong>
+                    የደም ልገ ሳን አስፈላጊነት ግንዛቤ በማስጨበጥ እና ሌሎችም እንዲለግሱ
+                    በማበረታታት የዓላማችንን ድጋፍ እንድትቀጥሉ እናሳስባለን። </strong>
+            </span>
+            @endif
+
+            @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
             </div>
             @endif
 
@@ -107,17 +114,11 @@
                         <select name="health">
                             <option value="">Choose health status</option>
                             <option value="normal">Normal</option>
+                            <option value="Idon'tknow">I don't Know</option>
                             <option value="hiv">Have HIV</option>
                             <option value="hepatite">Have Hepatitis</option>
                         </select>
-
-                        <div style="color: red;">
-                            @error('health')
-                            <strong>{{ $message }}</strong>
-                            @enderror
-                        </div>
                     </div>
-
                     <div>
                         <label for="center">Center:</label><br>
                         <select name="center">
@@ -133,7 +134,8 @@
                             @enderror
                         </div>
                     </div>
-
+                    ld{{$lastDonationDate}}
+                    <input type="hidden" name="lastDonationDate" value="{{$lastDonationDate}}">
                     <div>
                         <label for="reservationdate">Donation Date:</label>
                         <input type="date" id="reservationdate" name="reservationdate" min="{{ date('Y-m-d') }}">
@@ -143,9 +145,7 @@
                             @enderror
                         </div>
                     </div>
-
                 </div>
-
                 <button type="submit" class="submit-button">Send</button>
             </form>
         </div>

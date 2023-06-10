@@ -46,7 +46,6 @@
                     <td>{{ $stock->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
                     <td>
                         <a href="#distribute{{$stock->id,}}" data-bs-toggle="modal" class="btn btn-info"><i class='fa fa-edit'></i> Distribute</a>
-
                         @include('bloodBankManager.distModal')
                     </td>
                 </tr>

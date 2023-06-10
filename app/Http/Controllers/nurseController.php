@@ -172,9 +172,16 @@ class nurseController extends Controller
         $donor = reservationModel::join('donors', 'reservation.donor_id', '=', 'donors.donor_id')
             ->where('reservation.id', $id)
             ->select('reservation.*', 'donors.*')
-            ->get();
-        //$donors = Donor::find($id);
-        return view('nurse.registorAlreadyDonated', ['donor' => $donor]);
+            ->get()
+            ->first();
+        $donor_id = $donor->donor_id;
+        $frequency = donationModel::all()->where('donor_id', '=', $donor_id)->count('donor_id');
+        $lastDonationDate = donationModel::where('donor_id', $donor_id)
+            ->orderBy('created_at', 'desc')
+            ->pluck('created_at')
+            ->first();
+
+        return view('nurse.registorAlreadyDonated', ['data' => $donor, 'frequency' => $frequency, 'lastDonationDate' => $lastDonationDate]);
     }
 
     function accept($id)
@@ -252,7 +259,7 @@ class nurseController extends Controller
             ->exists();
         if ($isExist) {
             $donors = Donor::find($donor_id);
-            return view('nurse.registorAlreadyDonated', ['data' => $donors]);
+            return view('nurse.registorAlreadyDonated', compact('data'));
         }
     }
     function notifys()

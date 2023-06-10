@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Donor;
 use App\Models\centorModel;
 use App\Models\donationModel;
+use Carbon\Carbon;
 
 class donorController extends Controller
 {
@@ -220,8 +221,14 @@ class donorController extends Controller
 
     function ReservationForm()
     {
+        $user = Auth::user();
+        $donor_id = $user->id;
+        $lastDonationDate = donationModel::where('donor_id', $donor_id)
+            ->orderBy('created_at', 'desc')
+            ->pluck('created_at')
+            ->first();
         $data = centorModel::all();
-        return view('donor.reservation', ['data' => $data]);
+        return view('donor.reservation', ['data' => $data, 'lastDonationDate' => $lastDonationDate]);
     }
     function reservation(Request $req)
     {
@@ -230,28 +237,71 @@ class donorController extends Controller
             'center' => 'required|string|max:255',
             'reservationdate' => 'required|date_format:Y-m-d|after_or_equal:today'
         ]);
-        if ($req->health == "hiv" || $req->health == 'hepatite') {
-            $message = 'ህይወትን ለማዳን ደም ለመለገስ ላሳዩት ፍላጎት እና ቁርጠኝነት እናመሰግናለን። ነገር ግን ተላላፊ በሽታ ካለባቸዉ ግለሰቦች የደም ልገሳን መቀበል አንችልም ምክንያቱም ለለጋሹም ሆነ ለተቀባዩ አደጋ ያስከትላል.የደም ልገ ሳን አስፈላጊነት ግንዛቤ በማስጨበጥ እና ሌሎችም እንዲለግሱ በማበረታታት የዓላማችንን ድጋፍ እንድትቀጥሉ እናሳስባለን።';
+
+
+
+        $lastDonationDate = $req->lastDonationDate;
+
+        if (empty($lastDonationDate)) {
+            if ($req->health == "hiv" || $req->health == 'hepatite') {
+                $message = 'ህይወትን ለማዳን ደም ለመለገስ ላሳዩት ፍላጎት እና ቁርጠኝነት እናመሰግናለን። 
+                ነገር ግን ተላላፊ በሽታ ካለባቸዉ ግለሰቦች የደም ልገሳን መቀበል አንችልም 
+                ምክንያቱም ለለጋሹም ሆነ ለተቀባዩ አደጋ ያስከትላል.
+                የደም ልገ ሳን አስፈላጊነት ግንዛቤ በማስጨበጥ እና ሌሎችም እንዲለግሱ
+                በማበረታታት የዓላማችንን ድጋፍ እንድትቀጥሉ እናሳስባለን።';
+                return redirect()->back()->with('error', $message);
+            } else {
+                $reservation = new ReservationModel;
+                $reservation->donor_id = $req->user_id;
+                $reservation->reservationdate = $req->reservationdate;
+                $reservation->center = $req->center;
+                $reservation->save();
+
+                if ($reservation) {
+                    $isExist = ReferralModel::where("referred_id", $req->user_id)->exists();
+
+                    if ($isExist) {
+                        $referral = ReferralModel::where("referred_id", $req->user_id)->first();
+                        $referral->status = "Send Reservation";
+                        $referral->save();
+                        return redirect()->back()->with('success', 'Thank you for your donation!');
+                    } else {
+                        return redirect()->back()->with('success', 'Thank you for your donation!');
+                    }
+                }
+            }
+        }
+
+        $diffInDays = Carbon::parse($lastDonationDate)->diffInDays(Carbon::now());
+        if ($diffInDays <= 55) {
+            $message = 'Your last donation date is less than 55 days ago.';
             return redirect()->back()->with('error', $message);
         } else {
+            if ($req->health == "hiv" || $req->health == 'hepatite') {
+                $message = 'ህይወትን ለማዳን ደም ለመለገስ ላሳዩት ፍላጎት እና ቁርጠኝነት እናመሰግናለን። 
+                ነገር ግን ተላላፊ በሽታ ካለባቸዉ ግለሰቦች የደም ልገሳን መቀበል አንችልም 
+                ምክንያቱም ለለጋሹም ሆነ ለተቀባዩ አደጋ ያስከትላል.
+                የደም ልገ ሳን አስፈላጊነት ግንዛቤ በማስጨበጥ እና ሌሎችም እንዲለግሱ
+                በማበረታታት የዓላማችንን ድጋፍ እንድትቀጥሉ እናሳስባለን።';
+                return redirect()->back()->with('error', $message);
+            } else {
+                $reservation = new ReservationModel;
+                $reservation->donor_id = $req->user_id;
+                $reservation->reservationdate = $req->reservationdate;
+                $reservation->center = $req->center;
+                $reservation->save();
 
-            $var = new reservationModel;
-            $var->donor_id = $req->user_id;
-            $var->reservationdate = $req->reservationdate;
-            $var->center = $req->center;
-            $var->save();
-            if ($var) {
-                $isExist = referralModel::select("*")
+                if ($reservation) {
+                    $isExist = ReferralModel::where("referred_id", $req->user_id)->exists();
 
-                    ->where("referred_id", $req->user_id)
-                    ->exists();
-                if ($isExist) {
-                    $res = referralModel::where("referred_id", $req->user_id)->first();
-                    $res->status = "Send Reservation";
-                    $res->save();
-                    return redirect()->back()->with('success', 'Thank you for your donation!');
-                } else {
-                    return redirect()->back()->with('success', 'Thank you for your donation!');
+                    if ($isExist) {
+                        $referral = ReferralModel::where("referred_id", $req->user_id)->first();
+                        $referral->status = "Send Reservation";
+                        $referral->save();
+                        return redirect()->back()->with('success', 'Thank you for your donation!');
+                    } else {
+                        return redirect()->back()->with('success', 'Thank you for your donation!');
+                    }
                 }
             }
         }

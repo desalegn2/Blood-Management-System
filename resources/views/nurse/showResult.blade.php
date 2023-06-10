@@ -50,13 +50,13 @@
 <body>
 
     <div class="container">
-
         <h1 class="page-header text-center"></h1>
         <div class="row">
         </div>
         <div class="row mt-5">
             <div class="col-md-12 col-md-offset-1">
                 <h5>Labratory Rwsult</h5>
+                <a style="float: right; margin-bottom:10px;" href="{{ URL::previous() }}" class="btn btn-primary btn-sm float-end">Back</a>
                 <table class="table table-bordered table-responsive table-striped">
                     <thead>
                         <tr>

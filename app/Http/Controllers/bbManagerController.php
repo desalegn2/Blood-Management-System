@@ -25,6 +25,7 @@ use App\Models\Donor;
 use App\Models\hospitalModel;
 use App\Models\BloodRequest;
 use App\Models\staffModel;
+use App\Models\centorModel;
 
 class bbManagerController extends Controller
 {
@@ -45,13 +46,21 @@ class bbManagerController extends Controller
             $var->image = $filename;
         }
         $var->save();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Information is added !');;
     }
-
+    
+    function addCenters(Request $req)
+    {
+        $var = new centorModel;
+        $var->centor_name = $req->centorName;
+        $var->address = $req->address;
+        $var->maximum_donation = $req->maximum_donation;
+        $var->save();
+        return redirect()->back()->with('success', 'Center is added !');
+    }
     function addHospital(CreateaccountRequest $req)
     {
         try {
-
             $user = User::create([
                 'email' => $req->email,
                 'password' => Hash::make($req->password),
@@ -75,16 +84,11 @@ class bbManagerController extends Controller
             ], 400);
         }
     }
-
     function requests()
     {
-
         $bloodRequests = BloodRequest::with('hospital', 'bloodRequestItems')->get();
-
         return view('bloodBankManager.request', ['bloodRequests' => $bloodRequests]);
     }
-
-
     function Approve(Request $req, $id)
     {
         $data = BloodRequest::find($id);
@@ -92,24 +96,15 @@ class bbManagerController extends Controller
         $user = Auth::user();
         $staff_id = $user->id;
         $approvedby = staffModel::find($staff_id);
-
         $name = $approvedby->firstname;
         $status = $req->status;
-
         $data->status = $status;
         $data->approved_by = $name;
-
         $data->save();
         return redirect()->back();
     }
 
-    function deleteRequest($id)
-    {
-        $res = hospitalRequestModel::find($id);
-        $res->delete();
-
-        return redirect()->back()->with('success', 'Message Delete Successfully!');
-    }
+    
     function view()
     {
         $bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB-', 'AB+', 'O-', 'O+'];
