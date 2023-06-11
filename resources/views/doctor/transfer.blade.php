@@ -40,6 +40,7 @@
                     <th>blood broup</th>
                     <th>RH- Factor</th>
                     <th>volume</th>
+                    <th>Expiry Date</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -49,6 +50,8 @@
                     <td>{{$dist->bloodgroup}}</td>
                     <td>{{$dist->rh}}</td>
                     <td>{{$dist->volume}}</td>
+                    <td>{{$dist->expitariondate}}</td>
+                    <td scope="row">{{ \Carbon\Carbon::parse($dist->created_at)->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
                     <td>
                         <a href="#transfer{{$dist->id}}" data-bs-toggle="modal" class="btn btn-info">Transfer</a>
                         @include('doctor.transferModal')
@@ -57,6 +60,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $distributes->appends(Request::all())->links() }}
     </div>
     @include('sweetalert::alert')
 </body>

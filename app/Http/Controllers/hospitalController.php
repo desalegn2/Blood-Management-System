@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\hospitalRequestModel;
-use App\Models\technicianOrderModel;
 use Illuminate\Support\Facades\Notification;
-use App\Models\hospitalPosts;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -105,7 +102,7 @@ class hospitalController extends Controller
             ->exists();
 
         if ($isExist) {
-            $data = BloodRequest::with('hospital', 'bloodRequestItems')->where('hospital_id', "=", $id)->get();
+            $data = BloodRequest::with('hospital', 'bloodRequestItems')->where('hospital_id', "=", $id)->paginate(5);
             //$data = BloodRequest::where('hospital_id', "=", $id)->orderBy('created_at', 'desc')->get();
             //$data = hospitalRequestModel::where('user_id', 'LIKE', '%' . $id . '%')->get();
             return view('healthinstitute.viewRequest', compact('data'));
@@ -121,14 +118,6 @@ class hospitalController extends Controller
         $res->save();
         return redirect()->back();
     }
-
-
-
-    // function findDonor(Request $req)
-    // {
-    //     $data = addBloodModel::all();
-    //     return view('healthinstitute.findDonor', ['data' => $data]);
-    // }
 
     function postSeeker(Request $req)
     {
@@ -168,7 +157,7 @@ class hospitalController extends Controller
             ->where("hospital_id", $id)
             ->exists();
         if ($isExist) {
-            $data = seekerModel::where('hospital_id', "=", $id)->get();
+            $data = seekerModel::where('hospital_id', "=", $id)->paginate(6);
             //$data = hospitalRequestModel::where('user_id', 'LIKE', '%' . $id . '%')->get();
             return view('healthinstitute.mypost', compact('data'));
         } else {
@@ -184,15 +173,16 @@ class hospitalController extends Controller
 
     function viewblood()
     {
-        $aplus = bloodStock::where('bloodgroup', 'A+')->where('status', '=', 'accept')->sum('volume');
-        $aminus = bloodStock::where('bloodgroup', 'A-')->where('status', '=', 'accept')->sum('volume');
-        $oplus = bloodStock::where('bloodgroup', 'O+')->where('status', '=', 'accept')->sum('volume');
-        $ominus = bloodStock::where('bloodgroup', 'O-')->where('status', '=', 'accept')->sum('volume');
-        $bplus = bloodStock::where('bloodgroup', 'B+')->where('status', '=', 'accept')->sum('volume');
-        $bminus = bloodStock::where('bloodgroup', 'B-')->where('status', '=', 'accept')->sum('volume');
-        $abplus = bloodStock::where('bloodgroup', 'AB+')->where('status', '=', 'accept')->sum('volume');
-        $abminus = bloodStock::where('bloodgroup', 'AB-')->where('status', '=', 'accept')->sum('volume');
+        $date = \Carbon\Carbon::today()->subDays(25);
 
+        $aplus = bloodStock::whereDate('created_at', '>=', $date)->where('bloodgroup', 'A+')->where('status', '=', 'accept')->sum('volume');
+        $aminus = bloodStock::whereDate('created_at', '>=', $date)->where('bloodgroup', 'A-')->where('status', '=', 'accept')->sum('volume');
+        $ominus = bloodStock::whereDate('created_at', '>=', $date)->whereDate('created_at', '<=', \Carbon\Carbon::today())->where('bloodgroup', 'O-')->where('status', '=', 'accept')->sum('volume');
+        $oplus = bloodStock::whereDate('created_at', '>=', $date)->where('bloodgroup', 'O+')->where('status', '=', 'accept')->sum('volume');
+        $bplus = bloodStock::whereDate('created_at', '>=', $date)->where('bloodgroup', 'B+')->where('status', '=', 'accept')->sum('volume');
+        $bminus = bloodStock::whereDate('created_at', '>=', $date)->where('bloodgroup', 'B-')->where('status', '=', 'accept')->sum('volume');
+        $abplus = bloodStock::whereDate('created_at', '>=', $date)->where('bloodgroup', 'AB+')->where('status', '=', 'accept')->sum('volume');
+        $abminus = bloodStock::whereDate('created_at', '>=', $date)->where('bloodgroup', 'AB-')->where('status', '=', 'accept')->sum('volume');
         $user = Auth::user();
         $id = $user->id;
 

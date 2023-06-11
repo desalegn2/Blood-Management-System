@@ -106,7 +106,7 @@ class techController extends Controller
             $fname = $donor->firstname;
             $lname = $donor->lastname;
             $frequency = donationModel::all()->where('donor_id', '=', $request->donor_id)->count('donor_id');
-           $date=$request->donationdate;
+            $date = $request->donationdate;
             $details = [
                 'greeting' => "ውድ ደም ለጋሻችን $fname $lname ደም ለወገንወ ስለለገሱ እናመሰግናለን",
                 'body' => "በ $date ቀን ለ $frequency ኛ ጊዜ የለገሱት የደን አይነት ዉጤት $request->bloodgroup ነው",
@@ -129,7 +129,7 @@ class techController extends Controller
 
     function view()
     {
-        $blood = bloodStock::all()->where('status', '=', 'accept');
+        $blood = bloodStock::where('status', '=', 'accept')->paginate(5);
         return view('technitian.viewStoredBlood', ['blood' => $blood]);
     }
 
@@ -141,31 +141,31 @@ class techController extends Controller
     }
     function ExpiredBlood()
     {
-        $date = \Carbon\Carbon::today()->subDays(1);
-        $blood = bloodStock::where('created_at', '<=', $date)->where('status', 'accept')->get();
+        $date = \Carbon\Carbon::today()->subDays(25);
+        $blood = bloodStock::where('created_at', '<=', $date)->where('status', 'accept')->paginate(5);
         return view('technitian.expired', compact('blood'));
     }
 
 
     function viewblood()
     {
-        //$bloods = bloodStock::paginate(10);
-        $bloods = bloodStock::where('status', '=', 'accept')->paginate(10);
-
-        $date = \Carbon\Carbon::today()->subDays(5);
+        $date = \Carbon\Carbon::today()->subDays(25);
         $notification = bloodStock::where('created_at', '<=', $date)->where('status', '=', 'accept')->count();
-        //   $notification = bloodStock::where('created_at', '<=', $date && 'status' ,'=','accept')->count();
 
-        $aplus = bloodStock::where('bloodgroup', 'A+')->where('status', '=', 'accept')->sum('volume');
-        $aminus = bloodStock::where('bloodgroup', 'A-')->where('status', '=', 'accept')->sum('volume');
-        $oplus = bloodStock::where('bloodgroup', 'O+')->where('status', '=', 'accept')->sum('volume');
-        $ominus = bloodStock::where('bloodgroup', 'O-')->where('status', '=', 'accept')->sum('volume');
-        $bplus = bloodStock::where('bloodgroup', 'B+')->where('status', '=', 'accept')->sum('volume');
-        $bminus = bloodStock::where('bloodgroup', 'B-')->where('status', '=', 'accept')->sum('volume');
-        $abplus = bloodStock::where('bloodgroup', 'AB+')->where('status', '=', 'accept')->sum('volume');
-        $abminus = bloodStock::where('bloodgroup', 'AB-')->where('status', '=', 'accept')->sum('volume');
+        $aplus = bloodStock::where('created_at', '>=', $date)->where('bloodgroup', 'A+')->where('status', '=', 'accept')->sum('volume');
+        $aminus = bloodStock::where('created_at', '>=', $date)->where('bloodgroup', 'A-')->where('status', '=', 'accept')->sum('volume');
+        $ominus = bloodStock::whereDate('created_at', '>=', $date)->whereDate('created_at', '<=', \Carbon\Carbon::today())->where('bloodgroup', 'O-')->where('status', '=', 'accept')->sum('volume');
+        $oplus = bloodStock::where('created_at', '>=', $date)->where('bloodgroup', 'O+')->where('status', '=', 'accept')->sum('volume');
+        $bplus = bloodStock::where('created_at', '>=', $date)->where('bloodgroup', 'B+')->where('status', '=', 'accept')->sum('volume');
+        $bminus = bloodStock::where('created_at', '>=', $date)->where('bloodgroup', 'B-')->where('status', '=', 'accept')->sum('volume');
+        $abplus = bloodStock::where('created_at', '>=', $date)->where('bloodgroup', 'AB+')->where('status', '=', 'accept')->sum('volume');
+        $abminus = bloodStock::where('created_at', '>=', $date)->where('bloodgroup', 'AB-')->where('status', '=', 'accept')->sum('volume');
 
-        return view('technitian.technitanHome', compact('bloods', 'notification', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
+        //for pie chart
+        $bloodTypes = ['A+', 'A-', 'O+', 'O-', 'B+', 'B-', 'AB+', 'AB-'];
+        $volumes = [$aplus, $aminus, $oplus, $ominus, $bplus, $bminus, $abplus, $abminus];
+
+        return view('technitian.technitanHome', compact('bloodTypes','volumes','notification', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
     function handling()
     {

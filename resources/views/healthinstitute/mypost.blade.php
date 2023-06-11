@@ -116,7 +116,7 @@
 
             @foreach ($data as $x)
             <div class="col-md-6 col-lg-4 item">
-                <div class="box"><img style="width: 230px; height:280px" src="{{asset('uploads/registers/'.$x->photo)}}">
+                <div class="box"><img style="width: 200px; height:230px" src="{{asset('uploads/registers/'.$x->photo)}}">
                     <h3 class="name">Full Name:{{$x->patientname}} {{$x->lastname}}</h3>
                     <p class="title">Email:{{$x->email}}</p>
                     <p class="description">Phone:{{$x->phone}}</p>
@@ -132,6 +132,7 @@
             @endforeach
 
         </div>
+        {{ $data->appends(Request::all())->links() }}
 
     </div>
 </body>

@@ -14,7 +14,6 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        
         .blood-request-table {
             border-collapse: collapse;
             width: 100%;
@@ -68,8 +67,8 @@
                         @endforeach
                     </td>
                     <td>
-                    <a href="#accept{{$history->id}}" data-bs-toggle="modal" class="btn btn-info">Accept</a>
-                                @include('healthinstitute.accept')
+                        <a href="#accept{{$history->id}}" data-bs-toggle="modal" class="btn btn-info">Accept</a>
+                        @include('healthinstitute.accept')
                     </td>
 
 
@@ -77,7 +76,7 @@
                 @endforeach
             </tbody>
         </table>
-
+        {{ $data->appends(Request::all())->links() }}
     </div>
     @include('sweetalert::alert')
 </body>

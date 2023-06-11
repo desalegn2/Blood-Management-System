@@ -26,137 +26,18 @@
     <style>
         /* =========== Google Fonts ============ */
         @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
-
-        .grey-bg {
-            background-color: #F5F7FA;
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            grid-gap: 20px;
-        }
-
-        .grid1,
-        .grid2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-gap: 10px;
+        .piechart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .item {
-            background-color: white;
-            padding: 20px;
+            width: 500px;
             text-align: center;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-
-            .grid1,
-            .grid2 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        * {
-            font-family: "Ubuntu", sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --blue: #2a2185;
-            --white: #fff;
-            --gray: #f5f5f5;
-            --black1: #222;
-            --black2: #999;
-        }
-
-        body {
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-
-
-        /* ====================== Responsive Design ========================== */
-        @media (max-width: 991px) {
-            .navigation {
-                left: -300px;
-            }
-
-            .navigation.active {
-                width: 300px;
-                left: 0;
-            }
-
-            .main {
-                width: 100%;
-                left: 0;
-            }
-
-            .main.active {
-                left: 300px;
-            }
-
-            .cardBox {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .details {
-                grid-template-columns: 1fr;
-            }
-
-            .recentOrders {
-                overflow-x: auto;
-            }
-
-            .status.inProgress {
-                white-space: nowrap;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .cardBox {
-                grid-template-columns: repeat(1, 1fr);
-            }
-
-            .cardHeader h2 {
-                font-size: 20px;
-            }
-
-            .user {
-                min-width: 40px;
-            }
-
-            .navigation {
-                width: 100%;
-                left: -100%;
-                z-index: 1000;
-            }
-
-            .navigation.active {
-                width: 100%;
-                left: 0;
-            }
-
-            .toggle {
-                z-index: 10001;
-            }
-
-            .main.active .toggle {
-                color: #fff;
-                position: fixed;
-                right: 0;
-                left: initial;
-            }
-        }
     </style>
 </head>
 
@@ -325,7 +206,7 @@
         </section>
 
     </div>
-    <div class="container">
+    <div class="piechart">
         <div class="grid1">
             <div class="item" style="width: 500px;">
                 <p>Percentage Of Blood Type</p>

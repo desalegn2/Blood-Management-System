@@ -56,7 +56,7 @@
                 @endforeach
             </tbody>
         </table>
-
+        {{ $blood->appends(Request::all())->links() }}
     </div>
 
 </body>

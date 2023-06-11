@@ -49,10 +49,10 @@
                             <td>{{$bloods->packno}}</td>
                             <td scope="row">{{ $bloods->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
                             <td>
-                                @if($bloods->created_at->diffInDays(\Carbon\Carbon::now()) >15)
+                                @if($bloods->created_at->diffInDays(\Carbon\Carbon::now()) >25)
                                 Expired
                                 @else
-                                {{$bloods->created_at->diffInDays(\Carbon\Carbon::now()) - 15}} Days left
+                                {{$bloods->created_at->diffInDays(\Carbon\Carbon::now()) - 25}} Days left
                                 @endif
                             </td>
                             <td>
@@ -68,6 +68,7 @@
                         @endif
                     </tbody>
                 </table>
+                {{ $blood->appends(Request::all())->links() }}
             </div>
         </div>
     </div>

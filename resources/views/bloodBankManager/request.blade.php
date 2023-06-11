@@ -15,7 +15,6 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        
         .blood-request-table {
             border-collapse: collapse;
             width: 100%;
@@ -80,8 +79,9 @@
                 </tr>
                 @endforeach
             </tbody>
-        </table> {{ $bloodRequests->appends(Request::all())->links() }}
-       
+        </table>
+        {{ $bloodRequests->appends(Request::all())->links() }}
+
     </div>
     @include('sweetalert::alert')
 </body>
