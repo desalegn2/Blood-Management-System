@@ -8,12 +8,16 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+
 use App\Models\bloodStock;
 use App\Models\Doctor;
 use App\Models\BloodRequestItem;
 use App\Models\BloodRequest;
 use App\Models\hospitalModel;
 use App\Models\seekerModel;
+use App\Models\distributeBloodModel;
 
 class hospitalController extends Controller
 {
@@ -62,13 +66,26 @@ class hospitalController extends Controller
                     'gender' => $req->gender,
                     'phone' => $req->phone,
                 ]);
-                return redirect()->back()->with('success', 'Doctor Add is Done!');
+                // Generate the login link
+                $loginLink = url('http://127.0.0.1:8000/login');
+                // Default password
+                $password = '123456@ab';
+                // Send the login link and default password to the email address
+                Mail::raw("Here is your login link: $loginLink \nDefault Password: $password", function ($message) use ($req) {
+                    $message->to($req->email)->subject('Login Link and Default Password');
+                });
+                return redirect()->back()->with('success', 'Doctor Add is Done! Login link has been sent to the email address.');
             }
         } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Something went wrong in bbManagerController.addHospital',
-                'error' => $e->getMessage()
-            ], 400);
+            // Check if the exception is related to a network connection error
+            if (strpos($e->getMessage(), 'Connection could not be established') !== false) {
+                // Network connection error occurred
+
+                // Display a short error message to the user
+                Session::flash('error', 'Failed to establish a network connection. Please check your internet connection.');
+
+                return redirect()->back();
+            }
         }
     }
 
@@ -190,6 +207,7 @@ class hospitalController extends Controller
             ->join('bloodstock', 'distribute.stock_id', '=', 'bloodstock.id')
             ->join('hospitals', 'distribute.hospital_id', '=', 'hospitals.hospital_id')
             ->where('hospitals.hospital_id', $id)
+            ->where('distribute.status', 'available')
             ->selectRaw('
                  SUM(CASE WHEN bloodgroup = "A+" THEN volume ELSE 0 END) AS aplus,
                  SUM(CASE WHEN bloodgroup = "A-" THEN volume ELSE 0 END) AS aminus,
@@ -201,6 +219,29 @@ class hospitalController extends Controller
                  SUM(CASE WHEN bloodgroup = "O-" THEN volume ELSE 0 END) AS ominus')
             ->first();
         return view('healthinstitute.healthinstituteHome', compact('stockInfo', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
+    }
+
+    function bloodStore()
+    {
+        $user = Auth::user();
+        $id = $user->id;
+
+        $stockInfo = DB::table('distribute')
+            ->join('bloodstock', 'distribute.stock_id', '=', 'bloodstock.id')
+            ->join('hospitals', 'distribute.hospital_id', '=', 'hospitals.hospital_id')
+            ->select('distribute.hospital_id', 'distribute.id', 'bloodstock.bloodgroup', 'bloodstock.volume', 'bloodstock.rh', 'bloodstock.expitariondate', 'bloodstock.created_at')
+            ->where('hospitals.hospital_id', $id)
+            ->where('distribute.status', 'available')
+            ->paginate(5);
+
+        return view('healthinstitute.bloodStores', compact('stockInfo'));
+    }
+
+    function discaredExpiredBlood($id)
+    {
+        distributeBloodModel::where("id", $id)
+            ->update(["status" => "expired"]);
+        return redirect()->back()->with('success', 'Blood is set as Expired!');
     }
 
     function Profile()

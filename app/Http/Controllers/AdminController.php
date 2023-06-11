@@ -4,42 +4,38 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\addBloodModel;
-use App\Models\discardBloodModel;
-use App\Models\distributeBloodModel;
-//use App\Models\donorRequest;
-use App\Models\donorRequestModel;
-use App\Models\adminsend;
-use App\Models\hospitalRequestModel;
-use App\Http\Requests\CreateaccountRequest;
 use Illuminate\Support\Facades\Hash;
-use App\Models\aaa;
-use App\Models\feedbackModel;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use App\Models\staffModel;
-
 
 class AdminController extends Controller
 {
     public function searchUser(Request $req)
     {
         $a = $req->users;
-        $members = User::where('name', $a)->orWhere('email', $a)->orWhere('role', $a)->paginate(10);
+        $members = User::where('role', $a)->paginate(5);
         return view('admin.manageuser', compact('members'));
     }
     public function getUser()
     {
-        $members = User::paginate(5);
+        $members = User::whereIn('role', [0, 3, 4, 5, 6])->paginate(5);
+
         return view('admin.manageuser', compact('members'));
     }
-
 
     function register(Request $req)
     {
         $req->validate([
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+                'regex:/^(?=.*[a-z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]+$/'
+            ],
             'email' => 'required|string|email|max:255|unique:users',
             'role' => ['required', 'int', 'max:6'],
-            'password' => 'required|string|min:8|confirmed',
-
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'phone' => 'required|numeric|digits:10',
@@ -63,36 +59,27 @@ class AdminController extends Controller
                     'photo' => '0.png',
 
                 ]);
-                return redirect()->back()->with('success', 'Task Added Successfully!');
+                // Generate the login link
+                $loginLink = url('http://127.0.0.1:8000/login');
+                // Default password
+                $password = '123456@ab';
+                // Send the login link and default password to the email address
+                Mail::raw("Here is your login link: $loginLink \nDefault Password: $password", function ($message) use ($req) {
+                    $message->to($req->email)->subject('Login Link and Default Password');
+                });
+                return redirect()->back()->with('success', 'Staff Add is Done! Login link has been sent to the email address.');
             }
-            
         } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Something went wrong in AdminController.register',
-                'error' => $e->getMessage()
-            ], 400);
+            // Check if the exception is related to a network connection error
+            if (strpos($e->getMessage(), 'Connection could not be established') !== false) {
+                // Network connection error occurred
+
+                // Display a short error message to the user
+                Session::flash('error', 'Failed to establish a network connection. Please check your internet connection.');
+                return redirect()->back();
+            }
         }
     }
-    function feedbacks()
-
-    {
-        $feedback = User::join('feedbacks', 'feedbacks.user_id', '=', 'users.id')
-            ->get(['feedbacks.*', 'users.*']);
-        //$feedback = feedbackModel::all();
-        return view('admin.feedback', ['feedback' => $feedback]);
-    }
-
-    function read($id)
-    {
-        $donors = hospitalRequestModel::find($id);
-        $donors->readat = "read";
-        $donors->save();
-        return redirect()->back();
-    }
-
-
-
-
 
     public function updateNurse(Request $request, $id)
     {
@@ -129,39 +116,22 @@ class AdminController extends Controller
     function bloodavailability()
     {
         $numberof_user = User::count();
+
         $numberof_donor = User::where('role', 2)->count();
         $numberof_nurse = User::where('role', 3)->count();
         $numberof_manager = User::where('role', 0)->count();
         $numberof_tech = User::where('role', 4)->count();
         $numberof_hi = User::where('role', 5)->count();
-        $numberof_encoder = User::where('role', 6)->count();
+        $numberof_doctor = User::where('role', 6)->count();
         $numberof_blocked = User::where('isBlocked', 1)->count();
 
         $date = \Carbon\Carbon::today()->subDays(1);
         $stats = User::where('created_at', '>=', $date)->get();
 
         $user = User::paginate(10);
-        return view('admin.dashboard', compact('numberof_user', 'user', 'stats', 'numberof_blocked', 'numberof_encoder', 'numberof_donor', 'numberof_nurse', 'numberof_manager', 'numberof_tech', 'numberof_hi'));
+        return view('admin.dashboard', compact('numberof_user', 'user', 'stats', 'numberof_blocked', 'numberof_doctor', 'numberof_donor', 'numberof_nurse', 'numberof_manager', 'numberof_tech', 'numberof_hi'));
     }
 
-    function send(Request $req)
-    {
-        try {
-            $var = new adminsend;
-            $var->hospitalname = $req->hospitalname;
-            $var->date = $req->date;
-            $var->phone = $req->phone;
-            $var->email = $req->email;
-            $var->bloodgroup = $req->bloodgroup;
-            $var->volume = $req->volume;
-            $var->reason = $req->reason;
-            $var->save();
-            return redirect('admin/hospitalrequest')->with('success', 'Task Added Successfully!');
-        } catch (\Exception $e) {
-
-            return redirect('admin/add')->with('success', $e->getMessage());
-        }
-    }
 
     public function index()
     {

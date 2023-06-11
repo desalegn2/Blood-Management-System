@@ -23,9 +23,8 @@
                 <div style="float: right;">
                     <select name="users" required>
                         <option value="">Choose User Type</option>
-                        <option value="1">Donor</option>
                         <option value="3">Nurse</option>
-                        <option value="6">Encoder</option>
+                        <option value="6">Doctor</option>
                         <option value="4">Technician</option>
                         <option value="0">Manager</option>
                         <option value="5">Health Institute</option>
@@ -46,7 +45,6 @@
             <div class="col-md-12 col-md-offset-1">
                 <table class="table table-bordered table-responsive table-striped">
                     <thead>
-                        <th>Fisrtname</th>
                         <th>Email</th>
                         <th>Role</th>
                         <th>Action</th>
@@ -56,13 +54,11 @@
                         @if(count($members))
                         @foreach($members as $member)
                         <tr>
-                            <td>{{$member->name}}</td>
                             <td>{{$member->email}}</td>
                             <td>{{$member->role}}</td>
                             <td>
-                                <a href="#edit{{$member->id}}" data-bs-toggle="modal" class="btn btn-success"><i class='fa fa-edit'></i> Edit</a>
+                                <!-- <a href="#edit{{$member->id}}" data-bs-toggle="modal" class="btn btn-success"><i class='fa fa-edit'></i> Edit</a> -->
                                 <a href="#delete{{$member->id}}" data-bs-toggle="modal" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</a>
-
                             </td>
                             <td>
                                 <form action="{{ url('admin.block', $member->id) }}" method="POST">

@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Nurse Page</title>
+    <title>Admin Page</title>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 
@@ -233,7 +233,7 @@
             </nav>
         </div>
         <!--Container Main start-->
-        <div class="height-100 bg-light">
+        <div class="height-100">
             @yield('content')
         </div>
         <!--Container Main end-->

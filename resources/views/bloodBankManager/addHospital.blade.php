@@ -82,6 +82,13 @@
                 {{ session('success') }}
             </div>
             @endif
+
+            @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
+
             <form action="add_hospital" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="role" value="5">
@@ -107,9 +114,9 @@
 
                     <div>
                         <label for="">Manager First Name:</label>
-                        <input type="text" id="" name="managerfname">
+                        <input type="text" id="" name="manager_fname">
                         <div style="color: red;">
-                            @error('managerfname')
+                            @error('manager_fname')
                             <strong>{{ $message }}</strong>
                             @enderror
                         </div>
@@ -125,9 +132,9 @@
                     </div>
                     <div>
                         <label for="lastname">Manager Last Name:</label>
-                        <input type="text" id="" name="managerlname">
+                        <input type="text" id="" name="manager_lname">
                         <div style="color: red;">
-                            @error('managerlname')
+                            @error('manager_lname')
                             <strong>{{ $message }}</strong>
                             @enderror
                         </div>

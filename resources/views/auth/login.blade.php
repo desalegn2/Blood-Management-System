@@ -48,6 +48,13 @@
                                 {{ session('error') }}
                             </div>
                             @endif
+
+                            @if(session('warning'))
+                            <div class="alert alert-danger">
+                                {{ session('warning') }}
+                            </div>
+                            @endif
+                            
                             <div class="form-outline mb-4">
                                 <input type="email" id="email" name="email" class="form-control form-control-lg" />
                                 <label class="form-label" for="email">Email address</label>

@@ -192,6 +192,9 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         Route::view('/healthinstitute/adddoctor', 'healthinstitute.addDoctor');
         Route::post('/healthinstitute/add_doctor', [hospitalController::class, 'addDoctors']);
+
+        Route::get('/healthinstitute/bloods', [hospitalController::class, 'bloodStore']);
+        Route::get('/healthinstitute/expire/{id}', [hospitalController::class, 'discaredExpiredBlood']);
     });
 
     Route::middleware(['auth', 'user-role:bbmanager'])->group(function () {

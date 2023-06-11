@@ -198,8 +198,6 @@
     <body id="body-pd">
         <header class="header" id="header">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-
-            <img class="header_img" src="{{asset('uploads/registers/'. Auth::user()->photo )}}" alt="">
         </header>
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">

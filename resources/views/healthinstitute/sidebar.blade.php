@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Manager Page</title>
+    <title>Health Institute Page</title>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 
@@ -227,6 +227,7 @@
                             <span class="bx nav_name">Our Post</span>
                         </a>
                         <a href="{{url('/healthinstitute/adddoctor')}}" class="nav_link{{ Request::is('healthinstitute/adddoctor') ? ' active' : '' }}"><span class="bx bx-user-plus nav_icon"></span><span class="bx nav_name">Add Doctor</span></a>
+                        <a href="{{url('/healthinstitute/bloods')}}" class="nav_link{{ Request::is('healthinstitute/bloods') ? ' active' : '' }}"> <span class="bx bx-droplet nav_icon"></span><span class="bx nav_name">Blood Store</span> </a>
                     </div>
                 </div> <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" class="nav_link">
@@ -246,7 +247,6 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
-
                 const showNavbar = (toggleId, navId, bodyId, headerId) => {
                     const toggle = document.getElementById(toggleId),
                         nav = document.getElementById(navId),
@@ -264,7 +264,6 @@
 
                 showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header')
                 const linkColor = document.querySelectorAll('.nav_link')
-
                 function colorLink() {
                     if (linkColor) {
                         linkColor.forEach(l => l.classList.remove('active'))

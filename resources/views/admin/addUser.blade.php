@@ -73,6 +73,12 @@
 
         <div class="form-container">
             <h1>Add Blood Bank Staff</h1>
+
+            @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
             <form action="add" method="post" enctype="multipart/form-data">
                 @csrf
                 <div><input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required></div>
@@ -145,10 +151,6 @@
                         <label for="password_confirmation">Confirm Password:</label>
                         <input type="password" id="password_confirmation" name="password_confirmation" required>
                     </div>
-                    <!-- <div>
-                        <label for="photo">Photo:</label>
-                        <input type="file" id="photo" name="photo" required>
-                    </div> -->
                     <div>
                         <label for="role">Staff Type:</label>
                         <select class="form-control" id="role" name="role">

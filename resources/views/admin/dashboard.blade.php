@@ -339,19 +339,14 @@
 
 <body>
 
-
-    <!-- ======================= Cards ================== -->
-
-
-
     <div class="grey-bg container-fluid mt-5">
-        <form action="{{url('/admin/search_user')}}" method="get">
+        <!-- <form action="{{url('/admin/search_user')}}" method="get">
             @csrf
             <div style="float: right;">
                 <input type="text" name="users" style="width: 200px;" placeholder="enter name ,email" required>
                 <input type="submit" value="Search">
             </div>
-        </form>
+        </form> -->
 
         <section id="stats-subtitle">
             <div class="row">
@@ -360,12 +355,12 @@
 
                 </div>
             </div>
-
             <div class="row">
+
                 <div class="col-xl-6 col-md-12">
                     <div class="card overflow-hidden">
                         <div class="card-content">
-                            <div class="card-body cleartfix" style="background-color: #03C988;">
+                            <div class="card-body cleartfix" style="background-color: #8EA7E9;">
                                 <div class="media align-items-stretch">
                                     <div class="align-self-center">
                                         <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
@@ -387,7 +382,7 @@
                 <div class="col-xl-6 col-md-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body cleartfix" style="background-color: #03C988;">
+                            <div class="card-body cleartfix" style="background-color: #8EA7E9;">
                                 <div class="media align-items-stretch">
                                     <div class="align-self-center">
                                         <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
@@ -412,7 +407,7 @@
                 <div class="col-xl-6 col-md-12">
                     <div class="card overflow-hidden">
                         <div class="card-content">
-                            <div class="card-body cleartfix" style="background-color: #03C988;">
+                            <div class="card-body cleartfix" style="background-color: #8EA7E9;">
                                 <div class="media align-items-stretch">
                                     <div class="align-self-center">
                                         <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
@@ -435,17 +430,17 @@
 
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body cleartfix" style="background-color: #03C988;">
+                            <div class="card-body cleartfix" style="background-color: #8EA7E9;">
                                 <div class="media align-items-stretch">
                                     <div class="align-self-center">
                                         <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
                                     </div>
                                     <div class="media-body">
-                                        <h4>Total Encoder</h4>
+                                        <h4>Total Doctor</h4>
                                         <span></span>
                                     </div>
                                     <div class="align-self-center">
-                                        <h1>{{$numberof_encoder}}</h1>
+                                        <h1>{{$numberof_doctor}}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -457,7 +452,7 @@
                 <div class="col-xl-6 col-md-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body cleartfix" style="background-color: #03C988;">
+                            <div class="card-body cleartfix" style="background-color: #8EA7E9;">
                                 <div class="media align-items-stretch">
                                     <div class="align-self-center">
                                         <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
@@ -478,7 +473,7 @@
                 <div class="col-xl-6 col-md-12">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-body cleartfix" style="background-color: #03C988;">
+                            <div class="card-body cleartfix" style="background-color: #8EA7E9;">
                                 <div class="media align-items-stretch">
                                     <div class="align-self-center">
                                         <ion-icon name="people-outline" style="float: left; font-size: 80px; color: blue;"></ion-icon>
@@ -519,61 +514,7 @@
             </div>
         </section>
     </div>
-    <!-- ================ Order Details List ================= -->
-    <div class="details">
-        <div class="recentOrders">
-            <div class="cardHeader">
-                <h2>{{$numberof_user}} Total user</h2>
-
-            </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <td>Full Name</td>
-                        <td>Role</td>
-                        <td>Email</td>
-                        <td>Joined Date</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($user as $u)
-                    <tr>
-                        <td>{{$u->name}}</td>
-                        <td>{{$u->role}}</td>
-                        <td>{{$u->email}}</td>
-                        <td scope="row">{{ $u->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            {{$user->links()}}
-        </div>
-        <!-- ================= New Customers ================ -->
-        <div class="recentCustomers">
-            <div class="cardHeader">
-                <h2>Recent User Joined</h2>
-            </div>
-            @foreach($stats as $stat)
-            <table>
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx"><img src="{{asset('uploads/registers/'.$stat->photo)}}" alt=""></div>
-                    </td>
-                    <td>
-                        <h4>{{$stat->name}} <br> <span>{{$stat->role}}</span></h4>
-                    </td>
-
-                </tr>
-
-            </table>
-            @endforeach
-        </div>
-    </div>
-
-
-
-
+ 
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use \Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use App\Notifications\sendNotification;
 use App\Models\feedbackModel;
 use App\Models\bbinformatiomModel;
@@ -71,20 +73,33 @@ class bbManagerController extends Controller
                 hospitalModel::create([
                     'hospital_id' => $user->id,
                     'hospitalname' => $req->hospitalname,
-                    'manager_fname' => $req->managerfname,
-                    'manager_lname' => $req->managerlname,
+                    'manager_fname' => $req->manager_fname,
+                    'manager_lname' => $req->manager_lname,
                     'gender' => $req->gender,
                     'phone' => $req->phone,
                 ]);
-                return redirect()->back()->with('success', 'Hospital Add is Done!');
+                // Generate the login link
+                $loginLink = url('http://127.0.0.1:8000/login');
+                // Default password
+                $password = '123456@ab';
+                // Send the login link and default password to the email address
+                Mail::raw("Here is your login link: $loginLink \nDefault Password: $password", function ($message) use ($req) {
+                    $message->to($req->email)->subject('Login Link and Default Password');
+                });
+                return redirect()->back()->with('success', 'Hospital Add is Done! Login link has been sent to the email address.');
             }
         } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Something went wrong in bbManagerController.addHospital',
-                'error' => $e->getMessage()
-            ], 400);
+            // Check if the exception is related to a network connection error
+            if (strpos($e->getMessage(), 'Connection could not be established') !== false) {
+                // Network connection error occurred
+
+                // Display a short error message to the user
+                Session::flash('error', 'Failed to establish a network connection. Please check your internet connection.');
+                return redirect()->back();
+            }
         }
     }
+
     function requests()
     {
         $bloodRequests = BloodRequest::with('hospital', 'bloodRequestItems')->paginate(5);
@@ -165,18 +180,13 @@ class bbManagerController extends Controller
     }
 
     function oneDayCollection(Request $request)
-
     {
-
         $user = Auth::user();
         $id = $user->id;
         $name = staffModel::where('staff_id', $id)->first();
         $fname = $name->firstname;
         $lname = $name->lastname;
-
         $date = $request->startdate;
-
-
         //  $data = donationModel::whereDate('created_at', $date)->get();
         $total = donationModel::whereDate('created_at', $date)->sum('volume');
         $data = DB::table('donation')

@@ -59,7 +59,7 @@ class LoginController extends Controller
                     Auth::logout();
                     return
                         redirect()->route('login')
-                        ->with('warning', 'User has been blocked please contanct administrator.');
+                        ->with('warning', 'You are  blocked user please contanct administrator.');
                 }
                 return redirect()->route('bbmanager.home');
             }
@@ -70,7 +70,7 @@ class LoginController extends Controller
                     Auth::logout();
                     return
                         redirect()->route('login')
-                        ->with('warning', 'User has been blocked please contanct administrator.');
+                        ->with('warning', 'You are  blocked user please contanct administrator.');
                 }
                 return redirect()->route('donor.home');
             }
@@ -79,7 +79,7 @@ class LoginController extends Controller
                     Auth::logout();
                     return
                         redirect()->route('login')
-                        ->with('warning', 'User has been blocked please contanct administrator.');
+                        ->with('warning', 'You are  blocked user please contanct administrator.');
                 }
                 return redirect()->route('nurse.home');
             } else if (auth()->user()->role == 'technitian') {
@@ -87,7 +87,7 @@ class LoginController extends Controller
                     Auth::logout();
                     return
                         redirect()->route('login')
-                        ->with('warning', 'User has been blocked please contanct administrator.');
+                        ->with('warning', 'You are  blocked user please contanct administrator.');
                 }
                 return redirect()->route('technitian.home');
             }
@@ -96,7 +96,7 @@ class LoginController extends Controller
                     Auth::logout();
                     return
                         redirect()->route('login')
-                        ->with('warning', 'User has been blocked please contanct administrator.');
+                        ->with('warning', 'You are  blocked user please contanct administrator.');
                 }
                 return redirect()->route('healthinstitute.home');
             }
@@ -105,7 +105,7 @@ class LoginController extends Controller
                     Auth::logout();
                     return
                         redirect()->route('login')
-                        ->with('warning', 'User has been blocked please contanct administrator.');
+                        ->with('warning', 'You are  blocked user please contanct administrator.');
                 }
                 return redirect()->route('doctor.home');
             }
