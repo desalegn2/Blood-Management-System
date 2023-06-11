@@ -13,18 +13,53 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
+        .chart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
 
+        .chart-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        #barChart {
+            max-width: 900px;
+            width: 100%;
+            height: 450px;
+            margin: 0 auto;
+        }
+
+        .line-container {
+            position: relative;
+            margin: 20px;
+        }
+
+
+        #donationsChart {
+            width: 1000px;
+            height: 500px;
+            margin: 0 auto;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container" id="div1" style="margin-top: 50px;">
+    <div class="" id="div1" style="margin-top: 50px; margin-bottom:50px;">
         <h1 class="page-header text-center">Analysis</h1>
+        <div class="row" style="float: right; margin-right:50px;">
+            <div class="col-md-12 col-md-offset-1">
+                <h2> <a href="" class="btn btn-primary btn-block">{{ __('Expired') }}</a>
+            </div>
+        </div>
+        <br><br>
         <form action="{{url('/bbmanager/report')}}" method="get">
             @csrf
             <div style="float: right;">
                 <h6>Generate Report</h6>
-                <select name="reporttype" id="selection" required>
+                <select name="reporttype" id="selection" style="padding:6px;" required>
                     <option value="">Choose Report Type</option>
                     <option value="collection">Blood Collection Report</option>
                     <option value="distribution">Blood Distribute Report</option>
@@ -33,18 +68,12 @@
                 <input type="submit" value="OK" class="btn btn-primary btn-block">
             </div>
         </form>
-        <!-- <div class="row">
-            <div class="col-md-12 col-md-offset-1">
-                <h2> <a href="{{ url()->previous() }}" class="btn btn-primary btn-block">{{ __('Back') }}</a>
-                    
-            </div>
-        </div> -->
+        
     </div>
-    <div>
-        <h5>Analysis Of Donor Data</h5>
-        <canvas id="barChart" width="400" height="200"></canvas>
+    <div class="line-container">
+        <h5 class="chart-title">Analysis Of Donor Data</h5>
+        <canvas id="barChart"></canvas>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
@@ -86,7 +115,6 @@
             }
         });
     </script>
-
     <div>
         <h5>Analysis Of Donation Rate</h5>
         <canvas id="donationsChart" width="400" height="200"></canvas>
@@ -155,13 +183,7 @@
             });
         });
     </script>
-    <!-- <script>
-        function myfunction() {
-            // var element = document.body;
-            // element.classList.toggle("dark");
-            document.getElementById("div1").style.backgroundColor = "black";
-        }
-    </script> -->
+
 </body>
 
 </html>

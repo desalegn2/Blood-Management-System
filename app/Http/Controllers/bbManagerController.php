@@ -120,7 +120,6 @@ class bbManagerController extends Controller
         return redirect()->back();
     }
 
-
     function view()
     {
         $bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB-', 'AB+', 'O-', 'O+'];
