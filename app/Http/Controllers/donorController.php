@@ -328,13 +328,14 @@ class donorController extends Controller
     function viewSeeer()
 
     {
-        // $date = \Carbon\Carbon::today()->subDays(3);
+        $date = \Carbon\Carbon::today()->subDays(3);
         // $views = User::join('seeker', 'seeker.hospital_id', '=', 'hospitals.hospital_id')
         //     ->where('seeker.created_at', '>=', $date)
         //     ->get(['seeker.*', 'hospitals.hospitalname']);
         $views = DB::table('seeker')
             ->join('hospitals', 'seeker.hospital_id', '=', 'hospitals.hospital_id')
             ->select('seeker.*', 'hospitals.hospitalname')
+            ->where('seeker.created_at', '>=', $date)
             ->get();
         return view('donor.viewseeker', compact('views'));
     }
