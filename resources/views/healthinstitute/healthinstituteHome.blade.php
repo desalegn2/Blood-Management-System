@@ -293,7 +293,10 @@
         <section id="minimal-statistics">
             <div class="row">
                 <div class="col-12 mt-3 mb-1">
-
+                <a href="{{url('/healthinstitute/expiredblood')}}" style="float: right;">
+                        <i style="margin-top: 0;" class="fa fa-bell"></i>
+                        <span style="margin-top: 0;" class="badge text-bg-secondary"> {{$expired}}Expired Pack</span>
+                    </a>
                     <h4 class="text-uppercase">Total Blood In Blood Bank Stock</h4>
                 </div>
             </div>

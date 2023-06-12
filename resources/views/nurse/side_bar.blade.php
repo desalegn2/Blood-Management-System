@@ -194,11 +194,9 @@
     </style>
 </head>
 
-<body>
     <body id="body-pd">
         <header class="header" id="header">
-            <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-            <div class="header_img"> <img src="{{asset('assets/imgs/aboutus.png')}}" alt=""> </div>
+            <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div> 
         </header>
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
@@ -230,7 +228,7 @@
             </nav>
         </div>
         <!--Container Main start-->
-        <div class="height-100 bg-light">
+        <div>
             @yield('content')
         </div>
         <!--Container Main end-->

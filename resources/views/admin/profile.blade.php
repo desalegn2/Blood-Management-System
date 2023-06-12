@@ -85,38 +85,6 @@
             @foreach ($data as $dataprofil)
 
             <div class="row gutters-sm">
-
-                <div class="col-md-4 mb-3">
-                    <form action=" {{url('/admin/updatephoto',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex flex-column align-items-center text-center">
-                                    <img src="{{asset('uploads/registers/'.$dataprofil->photo)}}" alt="Admin" class="rounded-circle" width="230" height="230">
-
-                                    <div class="mt-3">
-                                        <h4> {{$dataprofil->name}}</h4>
-                                        <p class="text-secondary mb-1">Bahir Dar Blood Bank Admin</p>
-                                        <p class="text-muted font-size-sm"></p>
-
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Photo</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <input type="file" name="photo" required>
-                                        <input type="submit" value="save">
-                                    </div>
-                                </div>
-                                <hr>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
                 <div class="col-md-8">
                     <div class="card mb-3">
                         <div class="card-body">
@@ -132,23 +100,12 @@
                                 @csrf
 
                                 <hr>
-
-
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0"> User ID</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <input type="text" name=" user_id" value=" {{ Auth::user()->id }}" readonly>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Full name</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="name" value="{{$dataprofil->name}}" required>
                                     </div>
                                 </div>
                                 <hr>
@@ -163,19 +120,11 @@
                                 </div>
 
                                 <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Phone</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="phone" value="{{$dataprofil->phone}}" required>
-                                    </div>
-                                </div>
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-sm-12">
                                         <input type="submit" value="edit">
                                     </div>
-                                </div>
+                                </div> -->
 
                         </div>
                     </div>

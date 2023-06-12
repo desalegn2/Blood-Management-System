@@ -36,9 +36,10 @@
                         <th>Blood Group</th>
                         <th>Volume</th>
                         <th>Pack Number</th>
+                        <th>RH</th>
                         <th>Duration</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        
                     </thead>
                     <tbody>
                         @if(count($blood))
@@ -47,6 +48,7 @@
                             <td>{{$bloods->bloodgroup}}</td>
                             <td>{{$bloods->volume}}</td>
                             <td>{{$bloods->packno}}</td>
+                            <td>{{$bloods->rh}}</td>
                             <td scope="row">{{ $bloods->created_at->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
                             <td>
                                 @if($bloods->created_at->diffInDays(\Carbon\Carbon::now()) >25)
@@ -54,10 +56,6 @@
                                 @else
                                 {{$bloods->created_at->diffInDays(\Carbon\Carbon::now()) - 25}} Days left
                                 @endif
-                            </td>
-                            <td>
-                                <a href="#discard{{$bloods->id}}" data-bs-toggle="modal" class="btn btn-info"><i class='fa fa-delete'></i> Discard</a>
-                                @include('technitian.discardModal')
                             </td>
                         </tr>
                         @endforeach

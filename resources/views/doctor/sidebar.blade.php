@@ -233,7 +233,7 @@
                 </form>
             </nav>
         </div>
-        <div class="height-100">
+        <div>
             @yield('content')
         </div>
         @include('doctor.footer')

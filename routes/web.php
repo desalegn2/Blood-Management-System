@@ -195,6 +195,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         Route::get('/healthinstitute/bloods', [hospitalController::class, 'bloodStore']);
         Route::get('/healthinstitute/expire/{id}', [hospitalController::class, 'discaredExpiredBlood']);
+        Route::get('/healthinstitute/expiredblood', [hospitalController::class, 'fetchExpiredBlood']);
+        
     });
 
     Route::middleware(['auth', 'user-role:bbmanager'])->group(function () {

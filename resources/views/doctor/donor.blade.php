@@ -69,7 +69,7 @@
 
 <body>
 
-    <h1>Blood Donor List</h1>
+    <h1 style="margin-top: 50px;">Blood Donor List</h1>
     <div class="donor-list">
         @foreach($data as $dat)
         <div class="donor-card">

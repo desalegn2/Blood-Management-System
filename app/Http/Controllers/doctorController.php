@@ -21,12 +21,14 @@ class doctorController extends Controller
 {
     function viewblood()
     {
+        $date = \Carbon\Carbon::today()->subDays(25);
         $user = Auth::user();
         $id = $user->id;
         $stockInfo = DB::table('distribute')
             ->join('bloodstock', 'distribute.stock_id', '=', 'bloodstock.id')
             ->join('doctors', 'distribute.hospital_id', '=', 'doctors.hospital_id')
             ->where('doctors.doctor_id', $id)
+            ->whereDate('bloodstock.created_at', '>=', $date)
             ->where('distribute.status', 'available')
             ->selectRaw('
                  SUM(CASE WHEN bloodgroup = "A+" THEN volume ELSE 0 END) AS aplus,
@@ -52,6 +54,7 @@ class doctorController extends Controller
                  SUM(CASE WHEN bloodgroup = "O+" THEN volume ELSE 0 END) AS oplus,
                  SUM(CASE WHEN bloodgroup = "O-" THEN volume ELSE 0 END) AS ominus')
             ->where('distribute.status', 'available')
+            ->whereDate('bloodstock.created_at', '>=', $date)
             ->groupBy('hospitals.hospitalname')
             ->get();
 
@@ -59,14 +62,16 @@ class doctorController extends Controller
     }
     function BloodTransfer()
     {
+        $date = \Carbon\Carbon::today()->subDays(25);
         $user = Auth::user();
         $id = $user->id;
 
         $distributes = DB::table('distribute')
             ->join('bloodstock', 'distribute.stock_id', '=', 'bloodstock.id')
             ->join('doctors', 'distribute.hospital_id', '=', 'doctors.hospital_id')
-            ->select('distribute.hospital_id', 'bloodstock.id', 'bloodstock.bloodgroup', 'bloodstock.volume', 'bloodstock.rh', 'bloodstock.expitariondate','bloodstock.created_at')
+            ->select('distribute.hospital_id', 'bloodstock.id', 'bloodstock.bloodgroup', 'bloodstock.volume', 'bloodstock.rh', 'bloodstock.expitariondate', 'bloodstock.created_at')
             ->where('doctors.doctor_id', '=', $id)
+            ->whereDate('bloodstock.created_at', '>=', $date)
             ->where('distribute.status', 'available')
             ->paginate(5);
         return view('doctor.transfer', compact('distributes'));

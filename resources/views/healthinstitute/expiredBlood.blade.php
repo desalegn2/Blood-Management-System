@@ -40,7 +40,6 @@
                     <th>RH- Factor</th>
                     <th>volume</th>
                     <th>Expiry Date</th>
-                    <th>Duration</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,6 +50,10 @@
                     <td>{{$blood->volume}}</td>
                     <td>{{$blood->expitariondate}}</td>
                     <td scope="row">{{ \Carbon\Carbon::parse($blood->created_at)->diffInDays(\Carbon\Carbon::now()) }} Days ago</td>
+                    <td>
+                        <a href="#discard{{$blood->id}}" data-bs-toggle="modal" class="btn btn-info">Discard</a>
+                        @include('healthinstitute.storeModal')
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

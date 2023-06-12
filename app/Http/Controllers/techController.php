@@ -54,9 +54,9 @@ class techController extends Controller
         $validator->after(function ($validator) use ($request) {
             $status = $request->input('status');
             $diseases = $request->input('diseases');
-            if ($status === 'discard' && $diseases === 'none') {
+            if ($status === 'discard' && ($diseases === 'none' || $diseases === 'None' || $diseases === 'NONE')) {
                 $validator->errors()->add('diseases', 'The diseases field is required when status is discard.');
-            } elseif ($status === 'accept' && $diseases !== 'none') {
+            } elseif ($status === 'accept' && ($diseases !== 'none' && $diseases !== 'None' && $diseases !== 'NONE')) {
                 $validator->errors()->add('diseases', 'The diseases field must be "none" when status is accept.');
             }
         });
@@ -129,7 +129,9 @@ class techController extends Controller
 
     function view()
     {
-        $blood = bloodStock::where('status', '=', 'accept')->paginate(5);
+        $date = \Carbon\Carbon::today()->subDays(25);
+        // $data = bloodTest::where('created_at', $date)->with('bloodStocks')->paginate(5);
+        $blood = bloodStock::where('created_at', '>=', $date)->where('status', '=', 'accept')->paginate(5);
         return view('technitian.viewStoredBlood', ['blood' => $blood]);
     }
 
@@ -151,7 +153,6 @@ class techController extends Controller
     {
         $date = \Carbon\Carbon::today()->subDays(25);
         $notification = bloodStock::where('created_at', '<=', $date)->where('status', '=', 'accept')->count();
-
         $aplus = bloodStock::where('created_at', '>=', $date)->where('bloodgroup', 'A+')->where('status', '=', 'accept')->sum('volume');
         $aminus = bloodStock::where('created_at', '>=', $date)->where('bloodgroup', 'A-')->where('status', '=', 'accept')->sum('volume');
         $ominus = bloodStock::whereDate('created_at', '>=', $date)->whereDate('created_at', '<=', \Carbon\Carbon::today())->where('bloodgroup', 'O-')->where('status', '=', 'accept')->sum('volume');
@@ -160,20 +161,16 @@ class techController extends Controller
         $bminus = bloodStock::where('created_at', '>=', $date)->where('bloodgroup', 'B-')->where('status', '=', 'accept')->sum('volume');
         $abplus = bloodStock::where('created_at', '>=', $date)->where('bloodgroup', 'AB+')->where('status', '=', 'accept')->sum('volume');
         $abminus = bloodStock::where('created_at', '>=', $date)->where('bloodgroup', 'AB-')->where('status', '=', 'accept')->sum('volume');
-
         //for pie chart
         $bloodTypes = ['A+', 'A-', 'O+', 'O-', 'B+', 'B-', 'AB+', 'AB-'];
         $volumes = [$aplus, $aminus, $oplus, $ominus, $bplus, $bminus, $abplus, $abminus];
-
-        return view('technitian.technitanHome', compact('bloodTypes','volumes','notification', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
+        return view('technitian.technitanHome', compact('bloodTypes', 'volumes', 'notification', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
     function handling()
     {
         //$dist = addBloodModel::all()->where('status', '=', 'notexpired');
         return view('technitian.handling');
     }
-
-
     function Profile()
     {
         $user = Auth::user();

@@ -55,11 +55,7 @@ class nurseController extends Controller
         $donors_enrolled = Donor::count();
         $male = Donor::where('gender', 'male')->count();
         $female = Donor::where('gender', 'female')->count();
-        //$donor = donationModel::count();
-        //  $donors_enrolled = enrollementModel::distinct()->count('fullname');
-
-        //  $a = enrollementModel::where('bloodtype', 'A-')->distinct()->count('fullname');
-
+ 
         $aplus = Donor::where('bloodtype', 'A+')->count();
         $aminus = Donor::where('bloodtype', 'A-')->count();
         $bplus = Donor::where('bloodtype', 'B+')->count();

@@ -122,7 +122,7 @@
                     <div>
                         <label for="center">Center:</label><br>
                         <select name="center">
-                            <option value="">Choose Hospital</option>
+                            <option value="">Choose Centor</option>
                             @foreach($data as $dat)
                             <option value="{{$dat->centor_name}}">{{$dat->centor_name}}</option>
                             @endforeach

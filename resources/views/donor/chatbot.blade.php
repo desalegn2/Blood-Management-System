@@ -58,8 +58,8 @@
 <body>
     @include('donor.chatbotnav')
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/chatbot_style.css') }}">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/chatbot_style.css') }}"> -->
 
     <div class="card-container">
         <h2 class="card-title">Bahir Dar Blood Bank Chat Bot</h2>

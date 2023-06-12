@@ -191,6 +191,16 @@ class hospitalController extends Controller
     function viewblood()
     {
         $date = \Carbon\Carbon::today()->subDays(25);
+        $user = Auth::user();
+        $id = $user->id;
+
+        $expired = DB::table('distribute')
+            ->join('bloodstock', 'distribute.stock_id', '=', 'bloodstock.id')
+            ->join('hospitals', 'distribute.hospital_id', '=', 'hospitals.hospital_id')
+            ->whereDate('bloodstock.created_at', '<=', $date)
+            ->where('hospitals.hospital_id', $id)
+            ->where('distribute.status', 'available')
+            ->count();
 
         $aplus = bloodStock::whereDate('created_at', '>=', $date)->where('bloodgroup', 'A+')->where('status', '=', 'accept')->sum('volume');
         $aminus = bloodStock::whereDate('created_at', '>=', $date)->where('bloodgroup', 'A-')->where('status', '=', 'accept')->sum('volume');
@@ -207,6 +217,7 @@ class hospitalController extends Controller
             ->join('bloodstock', 'distribute.stock_id', '=', 'bloodstock.id')
             ->join('hospitals', 'distribute.hospital_id', '=', 'hospitals.hospital_id')
             ->where('hospitals.hospital_id', $id)
+            ->whereDate('bloodstock.created_at', '>=', $date)
             ->where('distribute.status', 'available')
             ->selectRaw('
                  SUM(CASE WHEN bloodgroup = "A+" THEN volume ELSE 0 END) AS aplus,
@@ -218,7 +229,7 @@ class hospitalController extends Controller
                  SUM(CASE WHEN bloodgroup = "O+" THEN volume ELSE 0 END) AS oplus,
                  SUM(CASE WHEN bloodgroup = "O-" THEN volume ELSE 0 END) AS ominus')
             ->first();
-        return view('healthinstitute.healthinstituteHome', compact('stockInfo', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
+        return view('healthinstitute.healthinstituteHome', compact('expired', 'stockInfo', 'aplus', 'aminus', 'oplus', 'ominus', 'bplus', 'bminus', 'abplus', 'abminus',));
     }
 
     function bloodStore()
@@ -233,8 +244,22 @@ class hospitalController extends Controller
             ->where('hospitals.hospital_id', $id)
             ->where('distribute.status', 'available')
             ->paginate(5);
-
         return view('healthinstitute.bloodStores', compact('stockInfo'));
+    }
+    function fetchExpiredBlood()
+    {
+        $date = \Carbon\Carbon::today()->subDays(25);
+        $user = Auth::user();
+        $id = $user->id;
+        $stockInfo = DB::table('distribute')
+            ->join('bloodstock', 'distribute.stock_id', '=', 'bloodstock.id')
+            ->join('hospitals', 'distribute.hospital_id', '=', 'hospitals.hospital_id')
+            ->select('distribute.hospital_id', 'distribute.id', 'bloodstock.bloodgroup', 'bloodstock.volume', 'bloodstock.rh', 'bloodstock.expitariondate', 'bloodstock.created_at')
+            ->where('hospitals.hospital_id', $id)
+            ->whereDate('bloodstock.created_at', '<=', $date)
+            ->where('distribute.status', 'available')
+            ->paginate(5);
+        return view('healthinstitute.expiredBlood', compact('stockInfo'));
     }
 
     function discaredExpiredBlood($id)
