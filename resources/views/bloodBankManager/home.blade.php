@@ -217,10 +217,6 @@
         
     </div>
 
-    <!-- <div style="width: 500px; border:#222 solid; float:right; margin-top:30px;">
-        <p>Percentage of blood type</p>
-        <canvas id="myChart"></canvas>
-    </div> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1"></script>
 
     <!-- chart js cdn -->

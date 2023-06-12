@@ -13,6 +13,13 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
+        .chart-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            margin-left: 150px;
+        }
+
         .chart-container {
             display: flex;
             flex-direction: column;
@@ -37,8 +44,13 @@
             margin: 20px;
         }
 
-
         #donationsChart {
+            width: 1000px;
+            height: 500px;
+            margin: 0 auto;
+        }
+
+        #expirationChart {
             width: 1000px;
             height: 500px;
             margin: 0 auto;
@@ -51,7 +63,7 @@
         <h1 class="page-header text-center">Analysis</h1>
         <div class="row" style="float: right; margin-right:50px;">
             <div class="col-md-12 col-md-offset-1">
-                <h2> <a href="" class="btn btn-primary btn-block">{{ __('Expired') }}</a>
+
             </div>
         </div>
         <br><br>
@@ -68,7 +80,7 @@
                 <input type="submit" value="OK" class="btn btn-primary btn-block">
             </div>
         </form>
-        
+
     </div>
     <div class="line-container">
         <h5 class="chart-title">Analysis Of Donor Data</h5>
@@ -116,7 +128,7 @@
         });
     </script>
     <div>
-        <h5>Analysis Of Donation Rate</h5>
+        <h5 class="chart-title">Analysis Of Blood Collection Rate</h5>
         <canvas id="donationsChart" width="400" height="200"></canvas>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
@@ -183,6 +195,78 @@
             });
         });
     </script>
+    <div>
+        <h5 class="chart-title">Analysis Of Expired Blood</h5>
+        <canvas id="expirationChart"></canvas>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctx = document.getElementById('expirationChart').getContext('2d');
+            var expiration = @json($expiration);
+            var expirationTwo = @json($expiration_two);
+
+            // Combine data from both tables into a single array
+            var allExpiration = [...expiration, ...expirationTwo];
+
+            // Group expiration by month and count the number of expiration in each month
+            var monthlyExpiration = {};
+            allExpiration.forEach(function(expiration) {
+                var month = moment(expiration.created_at).format('YYYY-MM');
+                if (monthlyExpiration[month]) {
+                    monthlyExpiration[month]++;
+                } else {
+                    monthlyExpiration[month] = 1;
+                }
+            });
+
+            console.log(monthlyExpiration); // Check the monthly expiration object
+
+            var data = {
+                labels: Object.keys(monthlyExpiration),
+                datasets: [{
+                    label: 'Number of Expiration',
+                    data: Object.values(monthlyExpiration),
+                    borderColor: 'blue',
+                    fill: true
+                }]
+            };
+
+            var options = {
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'month',
+                            displayFormats: {
+                                month: 'MMM YYYY'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Month'
+                        }
+                    },
+                    y: {
+                        suggestedMin: 0,
+                        suggestedMax: Math.max(...Object.values(monthlyExpiration)) + 5,
+                        title: {
+                            display: true,
+                            text: 'Number of Expiration'
+                        }
+                    }
+                }
+            };
+
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: data,
+                options: options
+            });
+        });
+    </script>
+
+
 
 </body>
 

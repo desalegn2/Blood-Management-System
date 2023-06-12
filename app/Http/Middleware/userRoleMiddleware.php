@@ -20,17 +20,6 @@ class userRoleMiddleware
         if (auth()->user()->role == $roleType) {
             return $next($request);
         }
-        //  else if (auth()->user()->role == 'admin') {
-        //     return redirect()->route('admin.home');
-        // } else if (auth()->user()->role == 'donor') {
-        //     return redirect()->route('donor.home');
-        // } else if (auth()->user()->role == 'nurse') {
-        //     return redirect()->route('nurse.home');
-        // } else if (auth()->user()->role == 'technitian') {
-        //     return redirect()->route('technitian.home');
-        // } else if (auth()->user()->role == 'healthinstitute') {
-        //     return redirect()->route('healthinstitute.home');
-        // } 
         return response()->json(["you are not allowed to access this page First you must login"]);
     }
 }

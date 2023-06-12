@@ -178,7 +178,6 @@
 </head>
 
 <body>
-
     <footer>
         <div class="footer" id="footer">
             <div class="con">
@@ -186,30 +185,23 @@
                     <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
                         <img class='mt-4' style="border-radius:59%; width: 100px; height:100px; float: center;" src="{{asset('assets/imgs/bblogo3.png')}}" alt="">
                         <a href="#">
-
-                            <!-- Bahir Dar Blood Bank -->
                         </a>
                     </div>
                     <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
                         <h3> About Us</h3>
                         <ul>
                             <li> <a href="{{url('donor/aboutus')}}"> about us </a> </li>
-                            <li> <a href="{{url('donor/feedback')}}">FeedBack</a> </li>
-
+                            <li> <a href="{{url('/donor/news')}}">FeedBack</a> </li>
                         </ul>
                     </div>
                     <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
                         <h3> Want To Donate</h3>
                         <ul>
-                            <li> <a href="#">Blood Donation Camp </a> </li>
-                            <li> <a href="#">About Blood Donation </a> </li>
-
+                            <li> <a href="{{ url('/donor/reservationform') }}">Blood Donation </a> </li>
                         </ul>
                     </div>
-
                     <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
                         <h3> Contact Us </h3>
-
                         <ul class="social" style="display:flex; justify-content: center; align-items: center; gap: 1rem;">
                             <li> <a href="https://www.facebook.com/bdrbloodbank" value=""> <i class=" fa fa-facebook"> </i> </a> </li>
                             <li> <a href="#"> <i class="fa fa-twitter"> </i> </a> </li>
@@ -218,18 +210,11 @@
                             <li> <a href="#"> <i class="fa fa-telegram"> </i> </a> </li>
                         </ul>
                         <br> <br> <br>
-                        <h1 style="color:white;">+058 2207515</h1>
-
+                        <h1 style="color:white;">+251 582207515</h1>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
-
-
-
     </footer>
 </body>
 

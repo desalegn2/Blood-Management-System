@@ -32,7 +32,6 @@ use Carbon\Carbon;
 
 class bbManagerController extends Controller
 {
-
     function addInfo(Request $req)
     {
         $var = new bbinformatiomModel;
@@ -123,7 +122,6 @@ class bbManagerController extends Controller
     function view()
     {
         $bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB-', 'AB+', 'O-', 'O+'];
-
         $donorCounts = [
             Donor::where('bloodtype', 'A+')->count(),
             Donor::where('bloodtype', 'A-')->count(),
@@ -136,10 +134,11 @@ class bbManagerController extends Controller
         ];
 
         $donations = donationModel::all();
+        $expiration = distributeBloodModel::where('status','expired')->get();
+        $expiration_two = bloodStock::where('status','expired')->get();
 
-        return view('bloodBankManager.generatePdf', compact('bloodTypes', 'donorCounts', 'donations'));
-    }
-    //Report
+        return view('bloodBankManager.generatePdf', compact('bloodTypes', 'donorCounts', 'donations','expiration','expiration_two'));
+    } 
     function ReturnReportpage(Request $req)
     {
         if ($req->reporttype == 'collection') {
@@ -486,3 +485,4 @@ class bbManagerController extends Controller
         return view('bloodBankManager.referralProgram', compact('referrals'));
     }
 }
+
