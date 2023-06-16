@@ -18,7 +18,7 @@ class botController extends Controller
             // $this->askName($bot); ደም ለግሽ ምን እጠቀማለው
         });
         ////////////////////////////////////
-        $botman->hears('.*what is.*blood.*|.*blood.*is.*|.*list.*blood content.*', function ($bot) {
+        $botman->hears('.*blood.*|.*blood.*is.*|.*list.*blood content.*', function ($bot) {
             $bot->reply('Blood is a fluid connective tissue that circulates throughout the body of animals,
             including humans.
              It plays a vital role in transporting oxygen and nutrients to cells and
@@ -49,7 +49,7 @@ class botController extends Controller
                  They also look for a protein called the Rh factor. They classify your blood 
                 type as positive (+) if you have this protein and negative (-) if you don’t.');
         });
-        $botman->hears('.*what is.*blood type A+.*|.*blood type.*A+.*|.*what is.*A+.*|.*A+.*|.*A+.*is.*|.*A+.*IS.*|.*A+.*means.*', function ($bot) {
+        $botman->hears('.*A+.*', function ($bot) {
             $bot->reply('A+ blood type is a blood type that is characterized by the presence of
                       both the A antigen and the Rh factor protein on the surface of red blood cells.
                        This means that people with A+ blood type have antibodies against the B antigen 
@@ -62,7 +62,7 @@ class botController extends Controller
                        and there are many other factors that need to be taken into consideration when a blood transfusion
                  is needed.');
         });
-        $botman->hears('.*what is.*blood type A-.*|.*blood type.*A-.*|.*what is.*A-.*|.*A-.*|.*A-.*is.*|.*A-.*IS.*|.*A-.*means.*', function ($bot) {
+        $botman->hears('.*A-.*', function ($bot) {
             $bot->reply('A- blood type is a blood type that is characterized by the absence of the Rh factor protein on the surface
                           of red blood cells,
                          and the presence of the A antigen. This means that people with A- blood type 
@@ -95,7 +95,7 @@ class botController extends Controller
                        cells and to allow for complete recovery before donating blood again.');
         });
 
-        $botman->hears('.*what is.*blood type B-.*|.*blood type.*B-.*|.*what is.*B-.*|.*B-.*|.*B-.*is.*|.*B-.*IS.*|.*B-.*means.*', function ($bot) {
+        $botman->hears('.*B-.*', function ($bot) {
             $bot->reply('Blood type B- is a specific type of blood that is 
                       determined by the presence of certain antigens on the surface of
                       red blood cells. Individuals with blood type B- have
@@ -107,15 +107,15 @@ class botController extends Controller
                       type in case of a medical emergency or blood transfusion');
         });
 
-        $botman->hears('.*what is.*blood type B+.*|.*blood type.*B+.*|.*what is.*B+.*|.*B+.*|.*B+.*is.*|.*B+.*IS.*|.*B+.*means.*', function ($bot) {
-            $bot->reply('B+ is a blood type characterized by the presence of the B
-                         antigen on the surface of red blood cells,
-                         as well as the presence of the Rh factor (also known as the D antigen).
-                         People with B+ blood can receive blood transfusions from donors with B+ 
-                         or O+ blood types. They can donate blood to people with B+ and AB+ blood types.');
-        });
+        // $botman->hears('.*B+.*', function ($bot) {
+        //     $bot->reply('B+ is a blood type characterized by the presence of the B
+        //                  antigen on the surface of red blood cells,
+        //                  as well as the presence of the Rh factor (also known as the D antigen).
+        //                  People with B+ blood can receive blood transfusions from donors with B+ 
+        //                  or O+ blood types. They can donate blood to people with B+ and AB+ blood types.');
+        // });
 
-        $botman->hears('.*what is.*blood type AB+.*|.*blood type.*AB+.*|.*what is.*AB+.*|.*AB+.*|.*AB+.*is.*|.*AB+.*IS.*|.*AB+.*means.*', function ($bot) {
+        $botman->hears('.*AB+.*', function ($bot) {
             $bot->reply('Blood type AB+ is one of the blood types in the ABO blood group system. 
                          It is a relatively rare blood type, found in approximately 3-5% of the population.
                          Here is a breakdown of what the blood type AB+ represents:
@@ -125,7 +125,7 @@ class botController extends Controller
                           The "+" symbol indicates the presence of the Rh (Rhesus) antigen on the red blood cells. 
                           Individuals with the Rh antigen are Rh-positive, while those without it are Rh-negative.');
         });
-        $botman->hears('.*what is.*blood type AB-.*|.*blood type.*AB-.*|.*what is.*AB-.*|.*AB-.*|.*AB-.*is.*|.*AB-.*IS.*|.*AB-.*means.*', function ($bot) {
+        $botman->hears('.*AB-.*', function ($bot) {
             $bot->reply('Blood type AB- is a blood type that belongs to the ABO blood group system and has the Rh (Rhesus)
                           factor negative.
                            Here is a breakdown of what the blood type AB- represents:
@@ -136,14 +136,14 @@ class botController extends Controller
                           while those with it are Rh-positive.
                           Therefore, individuals with blood type AB- have both A and B antigens on their red blood cells but do not have the Rh antigen.');
         });
-        $botman->hears('.*what is.*blood type O+.*|.*blood type.*O+.*|.*what is.*O+.*|.*O+.*|.*O+.*is.*|.*O+.*IS.*|.*O+.*means.*', function ($bot) {
-            $bot->reply('B+ is a blood type characterized by the presence of the B
-                         antigen on the surface of red blood cells,
-                         as well as the presence of the Rh factor (also known as the D antigen).
-                         People with B+ blood can receive blood transfusions from donors with B+ 
-                         or O+ blood types. They can donate blood to people with B+ and AB+ blood types.');
-        });
-        $botman->hears('.*what is.*blood type O-.*|.*blood type.*O-.*|.*what is.*O-.*|.*O-.*|.*O-.*is.*|.*O-.*IS.*|.*O-.*means.*', function ($bot) {
+        // $botman->hears('.*O+.*|.*oplus.*', function ($bot) {
+        //     $bot->reply('O+ is a blood type characterized by the presence of the O
+        //                  antigen on the surface of red blood cells,
+        //                  as well as the presence of the Rh factor (also known as the D antigen).
+        //                  People with B+ blood can receive blood transfusions from donors with B+ 
+        //                  or O+ blood types. They can donate blood to people with B+ and AB+ blood types.');
+        // });
+        $botman->hears('.*O-.*', function ($bot) {
             $bot->reply('Blood type O- refers to a specific blood type that lacks both A and B antigens on the surface of 
                        red blood cells and also lacks the Rh factor. This makes it a universal donor, as it can be 
                        transfused to people with any blood type without causing an adverse reaction. However, people 
@@ -340,7 +340,7 @@ class botController extends Controller
                     . የሚቀጥለውን ቀጠሮዎን ያቅዱ።');
         });
 
-        $botman->hears('.*የደም ልገሳ ምን ያህል ጊዜ ይወስዳል?.*|.*ደም ልገሳ ምን ያህል ጊዜ .*|.*ደም ለመስጠት ስንት ሰዓት .*|.*ደም ለመለገስ ስንት ሰዓት.*', function ($bot) {
+        $botman->hears('.*የደም ልገሳ ምን ያህል ጊዜ ይወስዳል?.*|.*ደም ልገሳ ምን ያህል ጊዜ .*|.*ደም ለመስጠት ስንት ሰዓት .*|.*መለገስ.* ሰዓት.*', function ($bot) {
             $bot->reply('አጠቃላይ ሂደቱ አንድ ሰዓት እና 15 ደቂቃ ያህል ይወስዳል; የአንድ ሊትር ሙሉ የደም ክፍል ትክክለኛ ልገሳ 
                      ከስምንት እስከ 10 ደቂቃ ይወስዳል። ይሁን እንጂ ከለጋሹ የጤና ታሪክ እና በደም አንፃፊ ላይ መገኘትን ጨምሮ በተለያዩ ሁኔታዎች ላይ 
                      በመመርኮዝ በእያንዳንዱ ሰው ጊዜ በትንሹ ይለያያል።');

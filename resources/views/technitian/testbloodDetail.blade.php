@@ -12,7 +12,7 @@
 
     <style>
         .gradient-custom {
-            
+
             overflow-y: scroll;
         }
 
@@ -49,6 +49,12 @@
                     <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                         <div class="card-body p-4 p-md-5">
                             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Blood Registration</h3>
+
+                            @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                            @endif
 
                             <form action="{{ route('technitian.stock') }}" method="post">
                                 @csrf

@@ -15,6 +15,36 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination .page-item {
+            margin: 0 5px;
+            list-style: none;
+            display: inline-block;
+        }
+
+        .pagination .page-item a {
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            color: #333;
+            border-radius: 3px;
+        }
+
+        .pagination .page-item.active a {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .pagination .page-item.disabled a {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
         .blood-request-table {
             border-collapse: collapse;
             width: 100%;
@@ -39,7 +69,6 @@
     <div id="page-wrap" style="margin-top:60px;">
 
         <h1>Incoming Blood Request</h1>
-
         <table class="blood-request-table">
             <thead>
                 <tr>

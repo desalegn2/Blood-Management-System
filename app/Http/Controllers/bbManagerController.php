@@ -101,7 +101,8 @@ class bbManagerController extends Controller
 
     function requests()
     {
-        $bloodRequests = BloodRequest::with('hospital', 'bloodRequestItems')->paginate(5);
+        $bloodRequests = BloodRequest::where('accepted',0)->with('hospital', 'bloodRequestItems')->paginate(5);
+
         return view('bloodBankManager.request', ['bloodRequests' => $bloodRequests]);
     }
     function Approve(Request $req, $id)
@@ -296,12 +297,23 @@ class bbManagerController extends Controller
 
     function Bloods()
     {
+        $date = \Carbon\Carbon::today()->subDays(25);
         $hospital = hospitalModel::all();
-        $data = bloodStock::where('status', '=', 'accept')->paginate(5);
+        $data = bloodStock::whereDate('created_at', '>=', $date)->where('status', '=', 'accept')->paginate(5);
 
         return view('bloodBankManager.availableBlood', compact('hospital', 'data'));
     }
 
+    function selectBlood(Request $req)
+    {
+        $blood=$req->bloodgroup;
+        $date = \Carbon\Carbon::today()->subDays(25);
+        $hospital = hospitalModel::all();
+        $data = bloodStock::whereDate('created_at', '>=', $date)->where('bloodgroup', '=', $blood)->where('status', '=', 'accept')->paginate(5);
+
+        return view('bloodBankManager.availableBlood', compact('hospital', 'data'));
+    }
+    
 
     function DonorHistory()
     {

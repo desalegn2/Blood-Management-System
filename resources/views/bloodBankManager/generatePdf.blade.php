@@ -19,37 +19,31 @@
             margin-bottom: 10px;
             margin-left: 150px;
         }
-
         .chart-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-top: 20px;
         }
-
         .chart-title {
             font-size: 18px;
             margin-bottom: 10px;
         }
-
         #barChart {
             max-width: 900px;
             width: 100%;
             height: 450px;
             margin: 0 auto;
         }
-
         .line-container {
             position: relative;
             margin: 20px;
         }
-
         #donationsChart {
             width: 1000px;
             height: 500px;
             margin: 0 auto;
         }
-
         #expirationChart {
             width: 1000px;
             height: 500px;
@@ -63,7 +57,6 @@
         <h1 class="page-header text-center">Analysis</h1>
         <div class="row" style="float: right; margin-right:50px;">
             <div class="col-md-12 col-md-offset-1">
-
             </div>
         </div>
         <br><br>
@@ -80,7 +73,6 @@
                 <input type="submit" value="OK" class="btn btn-primary btn-block">
             </div>
         </form>
-
     </div>
     <div class="line-container">
         <h5 class="chart-title">Analysis Of Donor Data</h5>
@@ -132,7 +124,6 @@
         <canvas id="donationsChart" width="400" height="200"></canvas>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
     <script>
@@ -199,7 +190,6 @@
         <h5 class="chart-title">Analysis Of Expired Blood</h5>
         <canvas id="expirationChart"></canvas>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var ctx = document.getElementById('expirationChart').getContext('2d');
@@ -265,9 +255,6 @@
             });
         });
     </script>
-
-
-
 </body>
 
 </html>

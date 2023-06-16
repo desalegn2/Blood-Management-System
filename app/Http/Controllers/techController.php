@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use App\Models\donationModel;
 use App\Models\bloodTest;
@@ -119,10 +121,14 @@ class techController extends Controller
 
                 return redirect()->back()->with('success', 'Task Added Successfully! and Result are sent to donor');
             } catch (\Exception $e) {
-                return response()->json([
-                    'message' => 'Something went wrong in bbManagerController.sendnotification',
-                    'error' => $e->getMessage()
-                ], 400);
+                // Check if the exception is related to a network connection error
+                if (strpos($e->getMessage(), 'Connection could not be established') !== false) {
+                    // Network connection error occurred
+
+                    // Display a short error message to the user
+                    Session::flash('error', 'Failed to establish a network connection. Please check your internet connection.');
+                    return redirect()->back();
+                }
             }
         }
     }

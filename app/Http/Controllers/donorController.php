@@ -130,7 +130,7 @@ class donorController extends Controller
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'occupation' => 'required|string|max:255',
-            'phone' => 'required|numeric|digits:10',
+            'phone' => ['required', 'regex:/^(9|7)\d{8}$/'],
             'gender' => 'required|string|max:25',
             'bloodtype' => 'required|string|max:25',
             'age' => 'required|numeric|min:17|max:65',
@@ -161,7 +161,7 @@ class donorController extends Controller
             $donor->donor_id = $var->id;
             $donor->firstname = $req->firstname;
             $donor->lastname = $req->lastname;
-            $donor->photo = $req->hasfile('photo') ? $var->filename : '0.png';
+            $donor->photo = '0.png';
             $donor->occupation = $req->occupation;
             $donor->phone = $req->phone;
             $donor->gender = $req->gender;
@@ -328,7 +328,7 @@ class donorController extends Controller
     function viewSeeer()
 
     {
-        $date = \Carbon\Carbon::today()->subDays(3);
+        $date = \Carbon\Carbon::today()->subDays(10);
         // $views = User::join('seeker', 'seeker.hospital_id', '=', 'hospitals.hospital_id')
         //     ->where('seeker.created_at', '>=', $date)
         //     ->get(['seeker.*', 'hospitals.hospitalname']);

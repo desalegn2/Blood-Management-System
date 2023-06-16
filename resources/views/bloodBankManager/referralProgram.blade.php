@@ -22,12 +22,10 @@
             padding: 8px;
             text-align: left;
             border: 1px solid #ddd;
-
         }
 
         th {
             background-color: #f2f2f2;
-
         }
     </style>
 </head>
@@ -43,8 +41,8 @@
                 <thead>
                     <tr>
                         <th>Referring User</th>
-                        <th>Referred User</th>
-                        <th>Email</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
                         <th>Status</th>
                         <th>Number of Referrals</th>
                         <th>Number of Donors</th>
@@ -53,7 +51,7 @@
                 <tbody>
                     @foreach ($referrals->groupBy('id') as $referral)
                     <tr>
-                        <td rowspan="{{ count($referral[0]->referredUsers) }}">{{ $referral[0]->firstname  }} {{ $referral[0]->lastname  }}</td>
+                        <td rowspan="{{ count($referral[0]->referredUsers) }}">{{ $referral[0]->firstname  }} {{ $referral[0]->lastname  }}<br><br> <b>{{ $referral[0]->phone  }}</b></td>
                         @foreach ($referral[0]->referredUsers as $key => $referredUser)
                         @if ($key > 0)
                     </tr>
@@ -74,7 +72,6 @@
             {{ $referrals->appends(Request::all())->links() }}
         </div>
     </div>
-
 </body>
 
 </html>

@@ -240,6 +240,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         Route::get('/bbmanager/bloods', [bbManagerController::class, 'Bloods']);
         Route::post('/bbmanager/distribute/{id}', [bbManagerController::class, 'Distribute']);
+        Route::get('/bbmanager/choosebloodtype', [bbManagerController::class, 'selectBlood']);
+
 
         // Route::get('/bbmanager/read/{id}', [bbManagerController::class, 'Read']);
         //  Route::get('/bbmanager/approve/{id}', [bbManagerController::class, 'Approve']);
