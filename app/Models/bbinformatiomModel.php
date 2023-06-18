@@ -9,7 +9,6 @@ class bbinformatiomModel extends Model
 {
     use HasFactory;
     public $table = "bloodbankinfo";
-
     protected $fillable = [
         'user_id',
         'title',

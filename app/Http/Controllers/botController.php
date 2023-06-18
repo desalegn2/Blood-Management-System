@@ -13,7 +13,6 @@ class botController extends Controller
         $botman = app('botman');
 
         $botman->hears('.*hi.*|.*hello.*|.*ሰላም.*|.*HI.*|.*Hello.*|.*selam.*', function ($bot) {
-
             $bot->reply('ሀሎ ምን ልርዳወት ?');
             // $this->askName($bot); ደም ለግሽ ምን እጠቀማለው
         });
@@ -107,14 +106,7 @@ class botController extends Controller
                       type in case of a medical emergency or blood transfusion');
         });
 
-        // $botman->hears('.*B+.*', function ($bot) {
-        //     $bot->reply('B+ is a blood type characterized by the presence of the B
-        //                  antigen on the surface of red blood cells,
-        //                  as well as the presence of the Rh factor (also known as the D antigen).
-        //                  People with B+ blood can receive blood transfusions from donors with B+ 
-        //                  or O+ blood types. They can donate blood to people with B+ and AB+ blood types.');
-        // });
-
+    
         $botman->hears('.*AB+.*', function ($bot) {
             $bot->reply('Blood type AB+ is one of the blood types in the ABO blood group system. 
                          It is a relatively rare blood type, found in approximately 3-5% of the population.
@@ -136,13 +128,7 @@ class botController extends Controller
                           while those with it are Rh-positive.
                           Therefore, individuals with blood type AB- have both A and B antigens on their red blood cells but do not have the Rh antigen.');
         });
-        // $botman->hears('.*O+.*|.*oplus.*', function ($bot) {
-        //     $bot->reply('O+ is a blood type characterized by the presence of the O
-        //                  antigen on the surface of red blood cells,
-        //                  as well as the presence of the Rh factor (also known as the D antigen).
-        //                  People with B+ blood can receive blood transfusions from donors with B+ 
-        //                  or O+ blood types. They can donate blood to people with B+ and AB+ blood types.');
-        // });
+       
         $botman->hears('.*O-.*', function ($bot) {
             $bot->reply('Blood type O- refers to a specific blood type that lacks both A and B antigens on the surface of 
                        red blood cells and also lacks the Rh factor. This makes it a universal donor, as it can be 
