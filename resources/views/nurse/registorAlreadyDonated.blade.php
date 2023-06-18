@@ -305,13 +305,9 @@
 <body>
 
     <div class="main-block mt-5 ml-5">
-
-
         <form action="{{url('/nurse/enrolldonor')}}" method="post" enctype="multipart/form-data">
-
             @csrf
             <h1>Blood Donor Enrollment Form</h1>
-          
             <fieldset>
                 @if(session('success'))
                 <div class="alert alert-success">
@@ -433,12 +429,8 @@
                     </div>
                 </div>
             </fieldset>
-           
         </form>
-
-
     </div>
-
 </body>
 
 </html>

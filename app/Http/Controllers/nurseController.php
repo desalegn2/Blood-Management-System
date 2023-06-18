@@ -231,23 +231,6 @@ class nurseController extends Controller
         }
     }
 
-    function listofDonor()
-    {
-        // $data = donationModel::paginate(5);
-
-        $data = donationModel::join('donors', 'donation.donor_id', '=', 'donors.donor_id')
-            ->select('donors.*', 'donation.created_at')
-            ->paginate(5);
-
-        return view('nurse.listOfRegistor', compact('data'));
-    }
-    function searchDonor(Request $req)
-    {
-        $a = $req->fullname;
-        $data = donationModel::where('fullname', $a)->orWhere('phone', $a)->orWhere('email', $a)->paginate(5);
-        return view('nurse.listOfRegistor', compact('data'));
-    }
-
     function getDonor($donor_id)
     {
         $isExist = Donor::select("*")

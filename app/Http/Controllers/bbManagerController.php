@@ -266,35 +266,6 @@ class bbManagerController extends Controller
         return $pdf->download('oneDayDistribution.pdf');
     }
 
-    function ReportRequest(Request $request)
-    {
-        $startDate = $request->startdate;
-        $endDate = $request->enddate;
-        $data = BloodRequest::whereBetween('created_at', [$startDate, $endDate])->get();
-        $total = BloodRequest::whereBetween('created_at', [$startDate, $endDate])->sum('volume');
-
-        $mytime = \Carbon\Carbon::now();
-        $pdf = PDF::setOptions([
-            'defaultFont' => 'sans-serif',
-            'isHtml5ParserEnabled' => true,
-            'isRemoteEnabled' => true,
-            'chroot' => public_path('uploads/registers'),
-        ])->loadView('bloodBankManager.pdf.generateRequest', compact('data', 'total', 'mytime', 'startDate', 'endDate'));
-        return $pdf->download('Request_Data.pdf');
-    }
-    function oneDayRequest(Request $request)
-    {
-        $startDate = $request->startdate;
-        $data = BloodRequest::whereDate('created_at', $startDate)->get();
-        $total = BloodRequest::whereDate('created_at', $startDate)->sum('volume');
-        $pdf = PDF::setOptions([
-            'defaultFont' => 'sans-serif',
-            'isHtml5ParserEnabled' => true,
-            'isRemoteEnabled' => true,
-        ])->loadView('bloodBankManager.pdf.oneDayRequest', compact('data', 'startDate', 'total'));
-        return $pdf->download('oneDayReport.pdf');
-    }
-
     function Bloods()
     {
         $date = \Carbon\Carbon::today()->subDays(25);
@@ -313,76 +284,7 @@ class bbManagerController extends Controller
 
         return view('bloodBankManager.availableBlood', compact('hospital', 'data'));
     }
-    
-
-    function DonorHistory()
-    {
-        $data = bloodStock::paginate(5);
-
-        return view('bloodBankManager.donorHistory', ['data' => $data]);
-    }
-    function sendResult(Request $req, $id)
-    {
-        //$id = $req->id;
-        $greeting = $req->greeting;
-        $body = $req->body;
-        $acttext = $req->acttext;
-        $actionurl = $req->actionurl;
-        $lastline = $req->lastline;
-        $details = [
-            'greeting' => $greeting,
-            'body' => $body,
-            'acttext' => $acttext,
-            'actionurl' => $actionurl,
-            'lastline' => $lastline,
-        ];
-        try {
-
-            $message = User::find($id);
-            \Notification::send($message, new sendNotification($details));
-
-            return redirect()->back()->with('success', 'Message send Successfully! to', $message);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Something went wrong in bbManagerController.sendnotification',
-                'error' => $e->getMessage()
-            ], 400);
-        }
-    }
-    function bloodJorny()
-    {
-        $data = distributeBloodModel::with(['hospital', 'stock'])->paginate(5);
-        //$data = distributeBloodModel::paginate(5);
-        return view('bloodBankManager.bloodJorny', ['data' => $data]);
-    }
-    function sendBloodJorny(Request $req, $id)
-    {
-        $greeting = $req->greeting;
-        $body = $req->body;
-        $acttext = $req->acttext;
-        $actionurl = $req->actionurl;
-        $lastline = $req->lastline;
-        $details = [
-            'greeting' => $greeting,
-            'body' => $body,
-            'acttext' => $acttext,
-            'actionurl' => $actionurl,
-            'lastline' => $lastline,
-        ];
-        try {
-
-            $message = User::find($id);
-            \Notification::send($message, new sendNotification($details));
-
-            return redirect()->back()->with('success', 'Message send Successfully! to', $message);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Something went wrong in bbManagerController.sendnotification',
-                'error' => $e->getMessage()
-            ], 400);
-        }
-    }
-
+   
     function feedbacks()
 
     {
@@ -467,7 +369,6 @@ class bbManagerController extends Controller
             return redirect()->back()->with('warning', 'password not match with old!');
         }
     }
-
 
     function HomePage()
     {

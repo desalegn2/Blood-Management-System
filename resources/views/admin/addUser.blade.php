@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        /* Style for the form container */
         .form-container {
 
             padding: 20px;
@@ -17,6 +16,7 @@
             margin: 20px auto;
             max-width: 800px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
         }
 
         /* Style for the form grid */
@@ -73,7 +73,6 @@
 
         <div class="form-container">
             <h1>Add Blood Bank Staff</h1>
-
             @if (session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}

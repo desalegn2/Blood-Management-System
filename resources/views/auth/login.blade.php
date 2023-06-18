@@ -82,9 +82,7 @@
                             <p class="small mb-5 pb-lg-2"><a class="text-muted" href="{{ route('password.request') }}">Forgot password?</a></p>
                             <p>Don't have an account? <a href="create_account" class="link-info">Register here</a></p>
                         </form>
-
                     </div>
-
                 </div>
                 <div class="col-sm-6 px-0 d-none d-sm-block">
                     <img src="{{asset('assets/imgs/bblogo.jpg')}}" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">

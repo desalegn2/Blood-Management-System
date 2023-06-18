@@ -81,14 +81,7 @@ class AdminController extends Controller
         }
     }
 
-    public function updateNurse(Request $request, $id)
-    {
-        $member = User::find($id);
-        $input = $request->all();
-        $member->fill($input)->save();
-
-        return redirect()->back();
-    }
+   
 
     function deleteNurse($id)
     {
@@ -98,20 +91,6 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    function userNotification()
-    {
-        $notification = User::where('readat', 'unread')->count();
-        return view('admin.navbar', ['notification' => $notification]);
-    }
-    function aa()
-    {
-        $numberof_message = User::count();
-
-        // $numberof_message = User::where('role', '0')->count();
-        // dd($numberof_message);
-        return view('admin.navbar')->with('numberof_message', $numberof_message);
-        // return view('admin.navbar', ['numberof_message' => $numberof_message]);
-    }
 
     function bloodavailability()
     {
@@ -133,13 +112,7 @@ class AdminController extends Controller
     }
 
 
-    public function index()
-    {
-        $users = User::where('role', '0')->orWhere('role', '1')->orWhere('role', '3')->orWhere('role', '4')->orWhere('role', '5')->orWhere('role', '6')->get();
-
-        return view('admin.block_user', ['users' => $users]);
-        //dd($users);
-    }
+ 
     public function blocks(Request $request, $id)
     {
         $user = User::find($id);

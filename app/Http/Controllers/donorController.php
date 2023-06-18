@@ -242,6 +242,33 @@ class donorController extends Controller
 
         $lastDonationDate = $req->lastDonationDate;
 
+        function sendBloodJorny(Request $req, $id)
+        {
+            $greeting = $req->greeting;
+            $body = $req->body;
+            $acttext = $req->acttext;
+            $actionurl = $req->actionurl;
+            $lastline = $req->lastline;
+            $details = [
+                'greeting' => $greeting,
+                'body' => $body,
+                'acttext' => $acttext,
+                'actionurl' => $actionurl,
+                'lastline' => $lastline,
+            ];
+            try {
+    
+                $message = User::find($id);
+                \Notification::send($message, new sendNotification($details));
+    
+                return redirect()->back()->with('success', 'Message send Successfully! to', $message);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'message' => 'Something went wrong in bbManagerController.sendnotification',
+                    'error' => $e->getMessage()
+                ], 400);
+            }
+        }
         if (empty($lastDonationDate)) {
             if ($req->health == "hiv" || $req->health == 'hepatite') {
                 $message = 'ህይወትን ለማዳን ደም ለመለገስ ላሳዩት ፍላጎት እና ቁርጠኝነት እናመሰግናለን። 

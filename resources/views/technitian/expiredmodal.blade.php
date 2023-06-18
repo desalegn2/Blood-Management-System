@@ -39,7 +39,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>/* Style for the form container */
 
 <!-- Delete Modal -->
 <div class="modal fade" id="delete{{$bloods->id}}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">

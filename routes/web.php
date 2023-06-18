@@ -14,30 +14,18 @@ use App\Http\Controllers\doctorController;
 use App\Http\Controllers\donorController;
 use Illuminate\Support\Facades\Auth;
 
-// Route::get('/', function () {
-//     return view('HomePage');
-// });
-
 Route::match(['get', 'post'], 'botman', [botController::class, 'handle']);
 
 Route::view('create_account', 'createAccount');
-//Route::post('create_acc', [donorController::class, 'createAccount']);
 Route::post('/create_acc', [donorController::class, 'createAccount'])->name('create_acc');
-
 
 Route::get('create_account_r/{referral_code}', [donorController::class, 'createAccount_Reffered']);
 Route::post('create_account_referred', [donorController::class, 'Account_Reffered']);
 
 Route::view('about', 'aboutus');
-Route::view('aa', 'aaa');
 Route::get('/', [donorController::class, 'landingPage']);
 
-Route::get('bb', function () {
-    return view('index');
-});
-
 Route::group(['middleware' => 'prevent-back-history'], function () {
-
     Auth::routes(['verify' => true]);
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -58,7 +46,6 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::post('/donor/updatephoto/{id}', [donorController::class, 'updatephoto']);
         Route::post('/donor/changepassword', [donorController::class, 'changepassword']);
 
-        //Route::view('/donor/view', 'donor.viewP');
         Route::get('/donor/seeker', [donorController::class, 'viewSeeer']);
 
         Route::get('donor/news', [donorController::class, 'viewNews']);
@@ -78,16 +65,12 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('/admin/alluser', [AdminController::class, 'getUser']);
         Route::patch('/admin/updateuser/{id}', [AdminController::class, 'updateTech']);
         Route::delete('/admin/deleteuser/{id}', [AdminController::class, 'deleteTech']);
-        Route::view('/admin/user', 'admin.block_user');
         Route::post('/ admin.block/{id}', [AdminController::class, 'blocks']);
 
         Route::get('/admin/user', [AdminController::class, 'index']);
-
-
         Route::view('/admin/add', 'admin.addUser');
         Route::post('/admin/add', [AdminController::class, 'register']);
 
-        Route::get('/admin/users/{id}', [hospitalRequestController::class, 'show']);
         //profile
         Route::get('/admin/profile/{id}', [AdminController::class, 'Profile']);
         Route::post('/admin/updateprofile/{id}', [AdminController::class, 'updateProfile']);
