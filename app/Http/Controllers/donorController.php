@@ -237,38 +237,7 @@ class donorController extends Controller
             'center' => 'required|string|max:255',
             'reservationdate' => 'required|date_format:Y-m-d|after_or_equal:today'
         ]);
-
-
-
         $lastDonationDate = $req->lastDonationDate;
-
-        function sendBloodJorny(Request $req, $id)
-        {
-            $greeting = $req->greeting;
-            $body = $req->body;
-            $acttext = $req->acttext;
-            $actionurl = $req->actionurl;
-            $lastline = $req->lastline;
-            $details = [
-                'greeting' => $greeting,
-                'body' => $body,
-                'acttext' => $acttext,
-                'actionurl' => $actionurl,
-                'lastline' => $lastline,
-            ];
-            try {
-    
-                $message = User::find($id);
-                \Notification::send($message, new sendNotification($details));
-    
-                return redirect()->back()->with('success', 'Message send Successfully! to', $message);
-            } catch (\Exception $e) {
-                return response()->json([
-                    'message' => 'Something went wrong in bbManagerController.sendnotification',
-                    'error' => $e->getMessage()
-                ], 400);
-            }
-        }
         if (empty($lastDonationDate)) {
             if ($req->health == "hiv" || $req->health == 'hepatite') {
                 $message = 'ህይወትን ለማዳን ደም ለመለገስ ላሳዩት ፍላጎት እና ቁርጠኝነት እናመሰግናለን። 
@@ -356,9 +325,7 @@ class donorController extends Controller
 
     {
         $date = \Carbon\Carbon::today()->subDays(10);
-        // $views = User::join('seeker', 'seeker.hospital_id', '=', 'hospitals.hospital_id')
-        //     ->where('seeker.created_at', '>=', $date)
-        //     ->get(['seeker.*', 'hospitals.hospitalname']);
+
         $views = DB::table('seeker')
             ->join('hospitals', 'seeker.hospital_id', '=', 'hospitals.hospital_id')
             ->select('seeker.*', 'hospitals.hospitalname')
@@ -392,7 +359,7 @@ class donorController extends Controller
     function updatephoto(Request $req, int $id)
     {
 
-        $var = Donor::all()->where('donor_id', '=', $id);
+        $var = Donor::all()->where('donor_id', '=', $id)->first();
         if ($req->hasfile('photo')) {
             $file = $req->file('photo');
             $extention = $file->getClientOriginalExtension();

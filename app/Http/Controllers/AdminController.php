@@ -153,21 +153,7 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'your Profile,Changed');
     }
 
-    function updatephoto(Request $req, int $id)
-    {
 
-        $var = User::all()->where('id', '=', $id);
-        if ($req->hasfile('photo')) {
-            $file = $req->file('photo');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
-            $file->move('uploads/registers', $filename);
-            $var->photo = $filename;
-        }
-        User::where("id", $id)
-            ->update(["photo" => $filename]);
-        return redirect()->back()->with('success', 'your Image,Changed');
-    }
     function changepassword(Request $req)
     {
         # Validation

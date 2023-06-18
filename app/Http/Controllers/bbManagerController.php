@@ -50,7 +50,6 @@ class bbManagerController extends Controller
         $var->save();
         return redirect()->back()->with('success', 'Information is added !');;
     }
-
     function addCenters(Request $req)
     {
         $var = new centorModel;
@@ -338,7 +337,8 @@ class bbManagerController extends Controller
     function updatephoto(Request $req, int $id)
     {
 
-        $var = staffModel::all()->where('staff_id', '=', $id);
+        $var = staffModel::all()->where('staff_id', '=', $id)->first();
+        
         if ($req->hasfile('photo')) {
             $file = $req->file('photo');
             $extention = $file->getClientOriginalExtension();

@@ -169,7 +169,7 @@ class doctorController extends Controller
 
     function updatephoto(Request $req, int $id)
     {
-        $var = Doctor::all()->where('doctor_id', '=', $id);
+        $var = Doctor::all()->where('doctor_id', '=', $id)->first();
         if ($req->hasfile('photo')) {
             $file = $req->file('photo');
             $extention = $file->getClientOriginalExtension();

@@ -201,7 +201,7 @@ class techController extends Controller
     function updatephoto(Request $req, int $id)
     {
 
-        $var = staffModel::all()->where('staff_id', '=', $id);
+        $var = staffModel::all()->where('staff_id', '=', $id)->first();
         if ($req->hasfile('photo')) {
             $file = $req->file('photo');
             $extention = $file->getClientOriginalExtension();

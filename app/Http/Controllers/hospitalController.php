@@ -293,7 +293,7 @@ class hospitalController extends Controller
     function updatephoto(Request $req, int $id)
     {
 
-        $var = hospitalModel::all()->where('hospital_id', '=', $id);
+        $var = hospitalModel::all()->where('hospital_id', '=', $id)->first();
         if ($req->hasfile('photo')) {
             $file = $req->file('photo');
             $extention = $file->getClientOriginalExtension();
